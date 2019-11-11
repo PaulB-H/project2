@@ -1,4 +1,4 @@
-// Defining Vriables
+// Defining Variables
 
 planner_page = new Array();
 page_to_write = new Array();
@@ -27,7 +27,20 @@ function today() {
         `<div class="col-12 card ${setTimeBlockColour(
           currentTime.getHours(),
           i
-        )}" id="time-block"><div class="row"><p class="inline_time"> ${dspTime} </p><textarea class="card time-block col" id="event" name="${i}" type="text" value="" placeholder="Free Time Slot" onchange="post_event()"></textarea><div id="btn_box"><div><button id="save_btn" class="saveBtn col" value="${i}" onclick="save_event()">Save</button></div><div><button id="delete_btn" class="saveBtn col" value="${i}" onclick="delete_event()">Delete</button></div></div>`
+        )}" id="time-block">
+          <div class="col" style="display:flex">
+            <div class="col-sm-1">
+              <p class="inline_time"> ${dspTime} </p>
+            </div>
+            <div class = "col-10 event_style">
+              <textarea spellcheck="true" class="card time-block col" id="event" name="${i}" type="text" value="" placeholder="Free Time Slot" onchange="post_event()"></textarea>
+            </div>
+            <div id="btn_box" class = "col-1" style="display:flex">
+              <div><button id="save_btn" class="saveBtn col" value="${i}" onclick="save_event()">Save</button></div>
+              <div><button id="delete_btn" class="saveBtn col" value="${i}" onclick="delete_event()">Delete</button></div>
+            </div>
+          </div>
+        </div>`
       ).appendTo("#day-view");
       planner_page[i] = {
         hour: i,
@@ -45,7 +58,7 @@ function today() {
             i
           )}" style="font-style:italic" id="time-block">${dspTime}<textarea class="card time-block" id="event" name="${i}" type="text" value="${
             planner_page[i].event
-          }" placeholder="Free Time Slot" onchange="post_event()"></textarea><button id="save_btn" class="saveBtn" value="${i}" onclick="save_event()">Save Entry</button></div>`
+          }" placeholder="Free Time Slot" onchange="post_event()"><ul><li>Kevin</li><li>Paul</li><li>Steven</li></ul></textarea><button id="save_btn" class="saveBtn" value="${i}" onclick="save_event()">Save Entry</button></div>`
         ).appendTo("#day-view");
       } else {
         $(
@@ -86,8 +99,11 @@ function post_event() {
   planner_page[event.target.name].event = event.target.value;
 }
 
-function save_event() {
+async function save_event() {
   event.preventDefault();
+  await db.query(
+    `update fh_calendar set hr${event.target.value} = ${event.target.value} where userid = ? and createdat = ?`
+  );
   page_to_write[event.target.value].event =
     planner_page[event.target.value].event;
   localStorage.setItem("myDay", JSON.stringify(page_to_write));

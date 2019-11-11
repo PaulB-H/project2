@@ -1,7 +1,12 @@
 const express = require("express");
 const mysql = require("mysql");
 
-const app = express();
+var app = express();
+var port = process.env.PORT || 3000;
+
+// Sets up the Express app to handle data parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(express.static("./public"));
 
@@ -53,9 +58,16 @@ async function showChatSenders(target) {
   );
 }
 
+async function showChatSenders(target) {
+  return await db.query(
+    "select sendtoid, username from fh_hubchat inner join fh_users on sentbyid = fh_users.id where sendtbyid = ?",
+    [target]
+  );
+}
+
 async function showChatMessages(sender, target) {
   return await db.query(
-    "select sentbyid, createdAt, chatmessage from fh_hubchat where sentbyid = ? and sendtoid = ?",
+    "select sendtoid, sentbyid, createdAt, chatmessage from fh_hubchat where sentbyid = ? and sendtoid = ?",
     [sender, target]
   );
 }
@@ -78,3 +90,9 @@ async function updateCalendarEntry(userid, start_date, hour, newvalue) {
     );
   }
 }
+
+Starts the server to begin listening
+=============================================================
+app.listen(port, function() {
+  console.log("App listening on PORT " + PORT);
+});

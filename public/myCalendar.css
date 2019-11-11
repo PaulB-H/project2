@@ -89,9 +89,15 @@ textarea {
   height: auto;
 }
 
+.event_style {
+  height: auto;
+  min-height: 30px;
+  height: auto !important; /* for IE as it does not support min-height */
+  height: 30px; /* for IE as it does not support min-height */
+}
+
 #btn_frame {
   width: 25%;
-  /* padding: 2vw; */
   justify-content: space-between;
 }
 
