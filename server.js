@@ -33,6 +33,7 @@ class Database {
   }
 }
 
+//adding JAWSDB connection if else
 if (process.env.JAWSDB_URL) {
   connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
