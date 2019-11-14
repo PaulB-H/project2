@@ -27,12 +27,29 @@
   </head>
 
   <body>
-    <header class="jumbotron">
-      <div class="row" style="justify-content: space-around">
-        <h6 id="chat-window"></h6>
+    <header class="jumbotron"></header>
+    <div class="container col-sm-6" id="chatterbox">
+      <h1>ChatterBox</h1>
+      <div
+        id="chat-window"
+        class="row"
+        style="justify-content: space-around; background-color:rgb(72, 163, 163)"
+      >
+        <div class="col-sm-4" id="comm_list"></div>
+        <div id="comm_thread">
+          <textarea
+            rows="4"
+            cols="50"
+            spellcheck="true"
+            class="card time-block col"
+            style="background-color:lemonchiffon"
+            id="msg_editor"
+            value=""
+          >
+          </textarea>
+        </div>
       </div>
-    </header>
-    <div class="container col" id="chatterbox"></div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>

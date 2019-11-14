@@ -1,115 +1,88 @@
+let selDate = moment(Date()).format("YYYY-MM-DD");
+localStorage.setItem("currentUser", 1);
+
 // Defining Variables
 
-planner_page = new Array();
-page_to_write = new Array();
-
 function today() {
-  let myTime = new Date();
   let dspTime;
+  $.ajax({
+    url: `/calendar/load/${selDate}`,
+    type: "GET",
+    cache: false,
+    success: function(result) {
+      console.log("success reached");
+      var keyNames = Object.keys(result[0]);
+      let time_slots = new Date();
+      let slot_cntr = -1;
+      let calDate = moment(selDate).format("LL");
 
-  if (!localStorage.myDay) {
-    var newPage = true;
-  } else {
-    var newPage = false;
-    planner_page = JSON.parse(localStorage.getItem("myDay"));
-    page_to_write = JSON.parse(localStorage.getItem("myDay"));
-  }
-
-  $("#day-view").empty();
-  for (i = 0; i < 24; i++) {
-    let currentTime = new Date();
-    let act_hour = i + 1;
-    myTime.setHours(i, 0, 0, 0);
-    dspTime = myTime.toLocaleString([], { hour: "2-digit", minute: "2-digit" });
-
-    if (newPage) {
       $(
-        `<div class="col-12 card ${setTimeBlockColour(
-          currentTime.getHours(),
-          i
-        )}" id="time-block">
-          <div class="col" style="display:flex">
-            <div class="col-sm-1">
-              <p class="inline_time"> ${dspTime} </p>
-            </div>
-            <div class = "col-10 event_style">
-              <textarea spellcheck="true" class="card time-block col" id="event" name="${i}" type="text" value="" placeholder="Free Time Slot" onchange="post_event()"></textarea>
-            </div>
-            <div id="btn_box" class = "col-1" style="display:flex">
-              <div><button id="save_btn" class="saveBtn col" value="${i}" onclick="save_event()">Save</button></div>
-              <div><button id="delete_btn" class="saveBtn col" value="${i}" onclick="delete_event()">Delete</button></div>
-            </div>
-          </div>
-        </div>`
+        `<div class = "col-12" style="display:flex; justify-content:space-between">
+                
+        <div id="calendar_date">${calDate}</div>
+                <div><button id="save_btn" class="saveBtn col" value="${
+                  result[0]["userid"]
+                }" onclick="save_event()">Save</button></div>
+              </div>`
       ).appendTo("#day-view");
-      planner_page[i] = {
-        hour: i,
-        event: $("#event input[name=time-slot]").val()
-      };
-      page_to_write[i] = {
-        hour: i,
-        event: $("#event input[name=time-slot]").val()
-      };
-    } else {
-      if (planner_page[i].event) {
-        $(
-          `<div class="card ${setTimeBlockColour(
-            currentTime.getHours(),
-            i
-          )}" style="font-style:italic" id="time-block">${dspTime}<textarea class="card time-block" id="event" name="${i}" type="text" value="${
-            planner_page[i].event
-          }" placeholder="Free Time Slot" onchange="post_event()"><ul><li>Kevin</li><li>Paul</li><li>Steven</li></ul></textarea><button id="save_btn" class="saveBtn" value="${i}" onclick="save_event()">Save Entry</button></div>`
-        ).appendTo("#day-view");
-      } else {
-        $(
-          `<div class="card ${setTimeBlockColour(
-            currentTime.getHours(),
-            i
-          )}" id="time-block">${dspTime}<textarea class="card time-block" id="event" name="${i}" type="text" value="" placeholder="Free Time Slot" onchange="post_event()"></textarea><button id="save_btn" class="saveBtn" value="${i}" onclick="save_event()">Save Entry</button></div>`
-        ).appendTo("#day-view");
-      }
+      keyNames.forEach(element => {
+        time_slots.setHours(slot_cntr, 0, 0, 0);
+        dspTime = time_slots.toLocaleString([], {
+          hour: "2-digit",
+          minute: "2-digit"
+        });
+
+        if (element !== "myDate" && element != "userid") {
+          $(
+            `<div class="col-12 card" id="time-block">
+                    <div class="col" style="display:flex">
+                      <div class="col-sm-1">
+                        <p class="inline_time"> ${dspTime} </p>
+                      </div>
+                      <div class = "col-10 event_style">
+                        <textarea spellcheck="true" class="card time-block col" id="event${element}" value="" placeholder="Free Time Slot">${
+              result[0][element]
+            }</textarea>
+                      </div>
+                      <div>
+                        <button id="save_btn" class="saveBtn col" value="${
+                          result[0]["userid"]
+                        }" onclick="save_event()">Save</button>
+                      </div>
+                    </div>
+            </div>`
+          ).appendTo("#day-view");
+        }
+        slot_cntr++;
+      });
+    },
+    error: function(err) {
+      console.log(err);
+    },
+    complete: function() {
+      console.log("Got here");
     }
-  }
-  rightNow = setInterval(showCurrentDate, 1000);
-}
-
-function setTimeBlockColour(currentHour, timeBlockHour) {
-  if (
-    currentHour > timeBlockHour &&
-    (timeBlockHour >= 9 && timeBlockHour <= 17)
-  ) {
-    return "past";
-  } else if (timeBlockHour < 9) {
-    return "nonworkhour";
-  } else if (currentHour == timeBlockHour) {
-    return "present";
-  } else if (currentHour < timeBlockHour && timeBlockHour <= 17) {
-    return "future";
-  } else if (timeBlockHour > 17) {
-    return "nonworkhour";
-  }
-}
-
-function showCurrentDate() {
-  $("#calendar-header").html(moment().format("MMMM Do YYYY, h:mm:ss a"));
-}
-
-function post_event() {
-  event.preventDefault();
-  planner_page[event.target.name].event = event.target.value;
+  });
 }
 
 async function save_event() {
   event.preventDefault();
-  await db.query(
-    `update fh_calendar set hr${event.target.value} = ${event.target.value} where userid = ? and createdat = ?`
-  );
-  page_to_write[event.target.value].event =
-    planner_page[event.target.value].event;
-  localStorage.setItem("myDay", JSON.stringify(page_to_write));
-
-  planner_page = JSON.parse(localStorage.getItem("myDay"));
-  page_to_write = JSON.parse(localStorage.getItem("myDay"));
+  let calDay = [
+    moment($("#calendar_date")[0].innerText).format("YYYY-MM-DD"),
+    event.target.value
+  ];
+  console.log("saving day information");
+  for (i = 2; i < 26; i++) {
+    calDay[i] = $(`#eventhr${i}`).val();
+  }
+  $.ajax({
+    url: `/calendar/save`,
+    type: "POST",
+    data: { calDay },
+    success: function(data) {
+      console.log("Committed", data);
+    }
+  });
 }
 
 $(document).ready(today);
