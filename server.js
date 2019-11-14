@@ -9,7 +9,7 @@ var port = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 class Database {
   constructor(config) {
@@ -45,8 +45,8 @@ const db = new Database({
 });
 // }
 
-app.get("/calendar", async function(req, res) {
-  res.sendFile(path.join(__dirname + "/public/myCalendar.html"));
+app.get("/", async function(req, res) {
+  res.sendFile(path.join(__dirname + "/public/frontEnd/index.html"));
 });
 
 async function validUserName(username) {

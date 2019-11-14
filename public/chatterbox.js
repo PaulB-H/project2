@@ -65,16 +65,11 @@ async function showStrangers() {
     cache: false,
     success: function(result) {
       console.log(result);
-      // for (i = 0; i < result.length; i++) {
-      //   $(`<div class="msgBox ${setMessageJustify(
-      //     currUser,
-      //     result[i].sentbyid
-      //   )}" style="margin: 1em">
-      //       <span>${moment(result[i].createdAt).format("LLLL")}</span>
-      //       <div style="background-color:white">${
-      //         result[i].chatmessage
-      //       }</div></div>`).appendTo("#comm_thread");
-      // }
+      for (i = 0; i < result.length; i++) {
+        $(`<div class="msgBox" style="margin: 1em">
+            <span>${result[i].username}</span>
+           </div>`).appendTo(".content_plate2");
+      }
     }
   });
 }

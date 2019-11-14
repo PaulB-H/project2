@@ -1,152 +1,179 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title></title>
-	<!-- Viewport -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Style -->
-	<link rel="stylesheet" type="text/css" href="fithub.css">
-	<link rel="stylesheet" type="text/css" href="fithub_1280px.css">
-	<link rel="stylesheet" type="text/css" href="fithub_425px.css">
-</head>
-<body>
+  <head>
+    <title></title>
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Style -->
+    <link rel="stylesheet" type="text/css" href="/frontEnd/fithub.css" />
+    <link rel="stylesheet" type="text/css" href="/frontEnd/fithub_1280px.css" />
+    <link rel="stylesheet" type="text/css" href="/frontEnd/fithub_425px.css" />
+  </head>
+  <body>
+    <div class="wrap_fithub">
+      <div class="wrap_findbar">
+        <div class="catbar">
+          <div class="wrap_catbox catbox_trainers">
+            <div class="catbox_plate">
+              <div></div>
+              <div>Trainers</div>
+            </div>
+            <div class="catbox_arrow"></div>
+          </div>
+          <div class="wrap_catbox catbox_routines">
+            <div class="catbox_plate">
+              <div></div>
+              <div>Routines</div>
+            </div>
+            <div class="catbox_arrow"></div>
+          </div>
+          <div class="wrap_catbox catbox_mealPlans">
+            <div class="catbox_plate">
+              <div></div>
+              <div>Meals</div>
+            </div>
+            <div class="catbox_arrow"></div>
+          </div>
+          <div class="wrap_catbox catbox_events">
+            <div class="catbox_plate">
+              <div></div>
+              <div>Events</div>
+            </div>
+            <div class="catbox_arrow"></div>
+          </div>
+        </div>
 
-	<div class="wrap_fithub">
-		
-		<div class="wrap_findbar">
+        <div>
+          <div class="wrap_findables">
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+          </div>
 
-			<div class="catbar">
-				<div class="wrap_catbox catbox_trainers">
-					<div class="catbox_plate">
-						<div></div>
-						<div>Trainers</div>
-					</div>
-					<div class="catbox_arrow"></div>
-				</div>
-				<div class="wrap_catbox catbox_routines">
-					<div class="catbox_plate">
-						<div></div>
-						<div>Routines</div>
-					</div>
-					<div class="catbox_arrow"></div>
-				</div>
-				<div class="wrap_catbox catbox_mealPlans">
-					<div class="catbox_plate">
-						<div></div>
-						<div>Meals</div>
-					</div>
-					<div class="catbox_arrow"></div>
-				</div>
-				<div class="wrap_catbox catbox_events">
-					<div class="catbox_plate">
-						<div></div>
-						<div>Events</div>
-					</div>
-					<div class="catbox_arrow"></div>
-				</div>
-			</div>
+          <div class="wrap_findables find_meals">
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+            <div class="findable"></div>
+          </div>
+        </div>
+      </div>
+      <!-- END wrap_findbar -->
 
-			<div>
-				<div class="wrap_findables">
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-				</div>
+      <div class="scrollbar_findables"></div>
 
-				<div class="wrap_findables find_meals">
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-					<div class='findable'></div>
-				</div>
-			</div>
+      <div class="wrap_context">
+        <div class="content_plate1">
+          <!-- ChatterBox Section -->
+          <div class="container col-sm-6" id="chatterbox">
+            <h1>ChatterBox</h1>
+            <div
+              id="ChatterBox"
+              class="row"
+              style="height: 100%; min-height: fit-content; justify-content: space-around; background-color: lightsteelblue"
+            >
+              <div class="col-sm-4" id="comm_list"></div>
+              <div id="chat-window">
+                <div
+                  style="overflow-y: auto; display: flex;flex-direction: column"
+                  id="comm_thread"
+                ></div>
+                <div>
+                  <textarea
+                    rows="4"
+                    cols="50"
+                    spellcheck="true"
+                    class="card time-block col"
+                    style="background-color:lemonchiffon"
+                    id="msg_editor"
+                    value=""
+                  >
+                  </textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content_plate2"></div>
+        <div class="content_plate"></div>
+      </div>
 
-		</div>
-		<!-- END wrap_findbar -->
+      <!-- <div class="scrollbar_context"></div> -->
 
-		<div class="scrollbar_findables"></div>
+      <div class="wrap_userbar">
+        <div class="userblock"></div>
 
-		<div class="wrap_context">
-			<div class="content_plate"></div>
-			<div class="content_plate"></div>
-			<div class="content_plate"></div>
-		</div>
+        <div class="wrap_pins">
+          <div class="pinnedItem"></div>
+          <div class="pinnedItem"></div>
+          <div class="pinnedItem"></div>
+          <div class="pinnedItem"></div>
+          <div class="pinnedItem"></div>
+          <div class="pinnedItem"></div>
+          <div class="pinnedItem"></div>
+          <div class="pinnedItem"></div>
+          <div class="pinnedItem"></div>
+          <div class="pinnedItem"></div>
+          <div class="pinnedItem"></div>
+        </div>
 
-		<!-- <div class="scrollbar_context"></div> -->
+        <div class="catbar_user_small">
+          <div class="wrap_catbox_small catbox_trainers">
+            <div class="catbox_plate_small">
+              <div>Trainers</div>
+              <div></div>
+            </div>
+            <div class="catbox_arrow_small"></div>
+          </div>
+          <div class="wrap_catbox_small catbox_routines">
+            <div class="catbox_plate_small">
+              <div>Routines</div>
+              <div></div>
+            </div>
+            <div class="catbox_arrow_small"></div>
+          </div>
+          <div class="wrap_catbox_small catbox_mealPlans">
+            <div class="catbox_plate_small">
+              <div>Meals</div>
+              <div></div>
+            </div>
+            <div class="catbox_arrow_small"></div>
+          </div>
+          <div class="wrap_catbox_small catbox_events">
+            <div class="catbox_plate_small">
+              <div>Events</div>
+              <div></div>
+            </div>
+            <div class="catbox_arrow_small"></div>
+          </div>
+        </div>
+      </div>
+      <!-- END wrap_userbar -->
 
-		<div class="wrap_userbar">
-			
-			<div class="userblock"></div>
-			
-			<div class="wrap_pins">
-				<div class="pinnedItem"></div>
-				<div class="pinnedItem"></div>
-				<div class="pinnedItem"></div>
-				<div class="pinnedItem"></div>
-				<div class="pinnedItem"></div>
-				<div class="pinnedItem"></div>
-				<div class="pinnedItem"></div>
-				<div class="pinnedItem"></div>
-				<div class="pinnedItem"></div>
-				<div class="pinnedItem"></div>
-				<div class="pinnedItem"></div>
-			</div>
-			
-			<div class="catbar_user_small">
-				<div class="wrap_catbox_small catbox_trainers">
-					<div class="catbox_plate_small">
-						<div>Trainers</div>
-						<div></div>
-					</div>
-					<div class="catbox_arrow_small"></div>
-				</div>
-				<div class="wrap_catbox_small catbox_routines">
-					<div class="catbox_plate_small">
-						<div>Routines</div>
-						<div></div>
-					</div>
-					<div class="catbox_arrow_small"></div>
-				</div>
-				<div class="wrap_catbox_small catbox_mealPlans">
-					<div class="catbox_plate_small">
-						<div>Meals</div>
-						<div></div>
-					</div>
-					<div class="catbox_arrow_small"></div>
-				</div>
-				<div class="wrap_catbox_small catbox_events">
-					<div class="catbox_plate_small">
-						<div>Events</div>
-						<div></div>
-					</div>
-					<div class="catbox_arrow_small"></div>
-				</div>
-			</div>
-		</div>
-		<!-- END wrap_userbar -->
+      <div class="scrollbar_user"></div>
+    </div>
 
-		<div class="scrollbar_user"></div>
-	</div>
-
-
-	<!-- Scripts -->
-	<!-- <script type="text/javascript" src="fithub.js"></script> -->
-</body>
+    <!-- Scripts -->
+    <!-- <script type="text/javascript" src="fithub.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./chatterbox.js"></script>
+  </body>
 </html>
