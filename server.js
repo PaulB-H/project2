@@ -33,17 +33,17 @@ class Database {
   }
 }
 
-// if (process.env.JAWSDB_URL) {
-//   connection = mysql.createConnection(process.env.JAWSDB_URL);
-// } else {
-const db = new Database({
-  host: "localhost",
-  port: 3306,
-  user: "root",
-  password: "IamTheBoxGhost1971",
-  database: "fitness_hub_db"
-});
-// }
+if (process.env.JAWSDB_URL) {
+  connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+  const db = new Database({
+    host: "localhost",
+    port: 3306,
+    user: "root",
+    password: "IamTheBoxGhost1971",
+    database: "fitness_hub_db"
+  });
+}
 
 app.get("/", async function(req, res) {
   res.sendFile(path.join(__dirname + "/public/frontEnd/index.html"));
