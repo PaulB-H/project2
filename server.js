@@ -272,15 +272,6 @@ async function getDay(inDate) {
   );
 }
 
-async function createCalendar(userid, start_date, daycount) {
-  for (i = 0; i < daycount; i++) {
-    await db.query(
-      `insert into fh_calendar(userid, createdAt) values(?, ${start_date + i})`,
-      [userid]
-    );
-  }
-}
-
 async function updateCalendarEntry(userid, start_date, hour, newvalue) {
   await db.query(
     `update fh_calendar set hr${hour} = ${newvalue} where userid = ${userid} and  ${start_date +
