@@ -93,13 +93,13 @@ async function showUserList(col_name, col_value) {
 }
 
 //  Calendar Section
-app.get("/calendar/load/:inDate", async function(req, res) {
+app.get("/calendar/load/:inDate/currUser", async function(req, res) {
   res.setHeader("Last-Modified", new Date() - 1);
   let result = await db.query(
     `select userid,  hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24 from fh_calendar where DATE(createdat) = DATE(?) and userid = ?
     union
      select 1, "" hr1, "" hr2, "" hr3, "" hr4, "" hr5, "" hr6, "" hr7, "" hr8, "" hr9, "" hr10, "" hr11, "" hr12, "" hr13, "" hr14, "" hr15, "" hr16, "" hr17, "" hr18, "" hr19, "" hr20, "" hr21, "" hr22, "" hr23, "" hr24 where 0 = (select count(*) from fh_calendar where DATE(createdat) = CURDATE())`,
-    [req.params.inDate, localStorage.currentUser]
+    [req.params.inDate, currUser]
   );
   res.send(result);
 });
@@ -181,7 +181,7 @@ app.get(`/hubchat`, async function(rep, res) {
 });
 
 // Messaging module section
-app.get(`/hubchat/messengers/:currUserID`, async function(req, res) {
+app.get(`/hubchat/messengers/:currUser`, async function(req, res) {
   let result = await db.query(
     `select distinct chat.id, usr.username
        from
@@ -194,20 +194,41 @@ app.get(`/hubchat/messengers/:currUserID`, async function(req, res) {
        ) as chat
        inner join fh_users usr on chat.id = usr.id
        order by chat.createdat desc`,
-    [req.params.currUserID, req.params.currUserID]
+    [req.params.currUser, req.params.currUser]
   );
   res.send(result);
 });
 
-app.get(`/hubchat/chatter/:currUserID`, async function(req, res) {
-  console.log(req.params.currUserID);
+app.get(`/hubchat/chatter/:currUser/:correspondent`, async function(req, res) {
   let result = await db.query(
-    `select * from fh_hubchat where (sentbyid = 2 and sendtoid = ?) or (sentbyid = ? and sendtoid = 2)`,
-    [req.params.currUserID, req.params.currUserID]
+    `select * from fh_hubchat where (sentbyid = ? and sendtoid = ?) or (sentbyid = ? and sendtoid = ?)`,
+    [
+      req.params.currUser,
+      req.params.correspondent,
+      req.params.correspondent,
+      req.params.currUser
+    ]
   );
   res.send(result);
 });
 
+app.get(`/hubchat/chatter/strangers/:currUser`, async function(req, res) {
+  let result = await db.query(
+    `select distinct usr.id, usr.username
+     from fh_users usr
+     where usr.id not in
+       (
+        select sendtoid as id from fh_hubchat 
+        where sentbyid = ?
+        union
+        select sentbyid as id from fh_hubchat 
+        where sendtoid = ?
+       )
+       order by usr.username asc`,
+    [req.params.currUser, req.params.currUser]
+  );
+  res.send(result);
+});
 // app.get(
 //   `/hubchat/load/${sessionStorage.getItem("currentUser")}`,
 //   async function(rep, res) {

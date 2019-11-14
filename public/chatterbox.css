@@ -1,0 +1,19 @@
+.fromMe {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  background-color: lightslategrey;
+}
+
+.toMe {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  background-color: lightgray;
+}
+
+#correspondents {
+  background-color: white;
+}

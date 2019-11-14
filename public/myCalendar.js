@@ -6,11 +6,12 @@ localStorage.setItem("currentUser", 1);
 function today() {
   let dspTime;
   $.ajax({
-    url: `/calendar/load/${selDate}`,
+    url: `/calendar/load/${selDate}/${localStorage.get("currentUser")}`,
     type: "GET",
     cache: false,
     success: function(result) {
       console.log("success reached");
+      console.log(result);
       var keyNames = Object.keys(result[0]);
       let time_slots = new Date();
       let slot_cntr = -1;

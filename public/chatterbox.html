@@ -18,8 +18,8 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
       rel="stylesheet"
     />
-    <!-- <link rel="stylesheet" href="./chatterbox.css" /> -->
-    <title>Work Day Scheduler</title>
+    <link rel="stylesheet" href="./chatterbox.css" />
+    <title>ChatterBox Messenger</title>
     <script
       src="https://cdn.tiny.cloud/1/7sa3dgl8w92cdqjripyl49adw6fw3xpez8mwhfm40as12itn/tinymce/5/tinymce.min.js"
       referrerpolicy="origin"
@@ -31,22 +31,28 @@
     <div class="container col-sm-6" id="chatterbox">
       <h1>ChatterBox</h1>
       <div
-        id="chat-window"
+        id="ChatterBox"
         class="row"
-        style="justify-content: space-around; background-color:rgb(72, 163, 163)"
+        style="height: 100%; min-height: fit-content; justify-content: space-around; background-color: lightsteelblue"
       >
         <div class="col-sm-4" id="comm_list"></div>
-        <div id="comm_thread">
-          <textarea
-            rows="4"
-            cols="50"
-            spellcheck="true"
-            class="card time-block col"
-            style="background-color:lemonchiffon"
-            id="msg_editor"
-            value=""
-          >
-          </textarea>
+        <div id="chat-window">
+          <div
+            style="overflow-y: auto; display: flex;flex-direction: column"
+            id="comm_thread"
+          ></div>
+          <div>
+            <textarea
+              rows="4"
+              cols="50"
+              spellcheck="true"
+              class="card time-block col"
+              style="background-color:lemonchiffon"
+              id="msg_editor"
+              value=""
+            >
+            </textarea>
+          </div>
         </div>
       </div>
     </div>
