@@ -32,26 +32,41 @@
       <h1>ChatterBox</h1>
       <div
         id="ChatterBox"
-        class="row"
-        style="height: 100%; min-height: fit-content; justify-content: space-around; background-color: lightsteelblue"
+        class="col"
+        style="justify-content: space-around; background-color: lightsteelblue"
       >
-        <div class="col-sm-4" id="comm_list"></div>
-        <div id="chat-window">
+        <div class="row">
           <div
+            class="col-sm-4"
+            id="comm_list"
             style="overflow-y: auto; display: flex;flex-direction: column"
-            id="comm_thread"
-          ></div>
-          <div>
-            <textarea
-              rows="4"
-              cols="50"
-              spellcheck="true"
-              class="card time-block col"
-              style="background-color:lemonchiffon"
-              id="msg_editor"
-              value=""
-            >
-            </textarea>
+          >
+            <div
+              id="contacts"
+              style="overflow-y: auto; display: flex;flex-direction: column"
+            ></div>
+            <div
+              id="strangers"
+              style="overflow-y: auto; display: flex;flex-direction: column"
+            ></div>
+          </div>
+          <div id="chat-window" class="col-sm-8">
+            <div
+              style="overflow-y: auto; display: flex;flex-direction: column"
+              id="comm_thread"
+            ></div>
+            <div>
+              <textarea
+                rows="4"
+                cols="50"
+                spellcheck="true"
+                class="card time-block col"
+                style="background-color:lemonchiffon"
+                id="msg_editor"
+                value=""
+              >
+              </textarea>
+            </div>
           </div>
         </div>
       </div>

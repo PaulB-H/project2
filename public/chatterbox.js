@@ -6,19 +6,16 @@ async function myMessages() {
     success: function(result) {
       console.log("success reached");
       $(
-        `<span>
-          <h5 style="text-align: right"><button id="newchat_btn" class="newchatBtn col" onclick="showStrangers()">Start New Chat</button></h5>
-        </span>`
-      ).appendTo("#comm_list");
+        `<button id="newchat_btn" class="newchatBtn col" onclick="showStrangers()">Start New Chat</button>`
+      ).appendTo("#strangers");
       for (i = 0; i < result.length; i++) {
-        console.log(result[i].username);
         $(
-          `<div id="correspondents" style="margin:1em">
-            <button id="comm_btn" class="commBtn col" value="${result[i].id}" onclick="showConversation(${result[i].id}, '${result[i].username}')">
+          `<div>
+            <button id="comm_btn" class="correspondents commBtn col" value="${result[i].id}" onclick="showConversation(${result[i].id}, '${result[i].username}')">
              ${result[i].username}
             </button>
           </div>`
-        ).appendTo("#comm_list");
+        ).appendTo("#contacts");
       }
     }
   });
@@ -30,7 +27,6 @@ async function showConversation(correspondent, correspondentName) {
     type: "GET",
     cache: false,
     success: function(result) {
-      console.log(correspondentName);
       $("#comm_thread").empty();
       $(
         `<span><h5 style="text-align: center">${correspondentName}</h5></span>`
@@ -50,7 +46,6 @@ async function showConversation(correspondent, correspondentName) {
 }
 
 function setMessageJustify(currUser, correspondent) {
-  console.log(currUser + " - " + correspondent);
   if (currUser == correspondent) {
     return "fromMe";
   } else {
@@ -73,6 +68,20 @@ async function showStrangers() {
     }
   });
 }
+
+// Listeners
+$("#msg_editor").on("onkeydown", function() {
+  if (event.which == 13) {
+    console.log("Enter pressed ");
+    $.ajax({
+      url: `/hubchat/chatter/save/${currUser}`,
+      type: "POST",
+      success: function(result) {
+        console.log(result);
+      }
+    });
+  }
+});
 
 const currUser = localStorage.getItem("currentUser");
 $(document).ready(myMessages);

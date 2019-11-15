@@ -4,6 +4,7 @@ const path = require("path");
 
 var app = express();
 var port = process.env.PORT || 3000;
+var db;
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -37,7 +38,7 @@ class Database {
 if (process.env.JAWSDB_URL) {
   connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
-  const db = new Database({
+  db = new Database({
     host: "localhost",
     port: 3306,
     user: "root",

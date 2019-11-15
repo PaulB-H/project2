@@ -8,6 +8,11 @@
     <link rel="stylesheet" type="text/css" href="/frontEnd/fithub.css" />
     <link rel="stylesheet" type="text/css" href="/frontEnd/fithub_1280px.css" />
     <link rel="stylesheet" type="text/css" href="/frontEnd/fithub_425px.css" />
+    <link rel="stylesheet" type="text/css" href="./chatterbox.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
   </head>
   <body>
     <div class="wrap_fithub">
@@ -82,30 +87,52 @@
       <div class="wrap_context">
         <div class="content_plate1">
           <!-- ChatterBox Section -->
-          <div class="container col-sm-6" id="chatterbox">
+          <div class="container col" id="chatterbox">
             <h1>ChatterBox</h1>
             <div
               id="ChatterBox"
               class="row"
               style="height: 100%; min-height: fit-content; justify-content: space-around; background-color: lightsteelblue"
             >
-              <div class="col-sm-4" id="comm_list"></div>
-              <div id="chat-window">
-                <div
-                  style="overflow-y: auto; display: flex;flex-direction: column"
-                  id="comm_thread"
-                ></div>
-                <div>
-                  <textarea
-                    rows="4"
-                    cols="50"
-                    spellcheck="true"
-                    class="card time-block col"
-                    style="background-color:lemonchiffon"
-                    id="msg_editor"
-                    value=""
-                  >
-                  </textarea>
+				<div class="row">
+						<div
+							class="col-sm-6"
+							id="comm_list"
+						>
+							<div class="row" style=background-color:lightblue; overflow-y: auto; display: flex;flex-direction: column">	
+								<div
+										class="col-sm-6"  
+										id="contacts"
+										style="overflow-y: auto; display: flex;flex-direction: column"
+									>
+								</div>
+								<div
+									class="col-sm-6"  
+									id="strangers"
+									style="overflow-y: auto; display: flex;flex-direction: column"
+								>
+								</div>
+							</div>
+						</div>
+						<div id="chat-window" class="col-sm-6">
+							<div
+							style="overflow-y: auto; display: flex;flex-direction: column"
+							id="comm_thread"
+							></div>
+							<textarea
+							rows="4"
+							cols="50"
+							spellcheck="true"
+							class="card time-block col"
+							style="background-color:lemonchiffon"
+							id="msg_editor"
+							value=""
+							>
+							</textarea>
+							<div><button id="save_btn" class="saveBtn col" value="" onclick="save_message()">Save</button></div>
+						</div>
+					</div>
+			</div>
                 </div>
               </div>
             </div>
