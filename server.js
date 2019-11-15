@@ -231,17 +231,19 @@ app.get(`/hubchat/chatter/strangers/:currUser`, async function(req, res) {
   );
   res.send(result);
 });
-// app.get(
-//   `/hubchat/load/${sessionStorage.getItem("currentUser")}`,
-//   async function(rep, res) {
-//     let result = db.query(
-//       `select sendtoid, sentbyid, createdat, chatmessage from fh_hubchat
-//        where sentbyid = ${sessionStorage.getItem("currentUser")}
-//        or sendtoid = ${sessionStorage.getItem("currentUser")}
-//        order by createdat desc`
-//     );
-//   }
-// );
+
+app.post(`/hubchat/chatter/save/:userName/:msgText`, async function(req, res) {
+  console.log(currUser + " - " + req.params.msgText);
+  let writeTo = await db.query(`select id from fh_users where username = ?`, [
+    req.params.userName
+  ]);
+  console.log(writeTo);
+  let result = await db.query(
+    `insert into fh_hubchat(sendtoid, sentbyid, chatmessage)
+       values(?, ?, ?)`,
+    [1, currUser, req.params.msgText]
+  );
+});
 
 async function showChatMessages(sender, target) {
   return await db.query(

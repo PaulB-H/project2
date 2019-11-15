@@ -29,14 +29,14 @@ async function showConversation(correspondent, correspondentName) {
     success: function(result) {
       $("#comm_thread").empty();
       $(
-        `<span><h5 style="text-align: center">${correspondentName}</h5></span>`
+        `<span><h5 id="chatWith" style="text-align: center">${correspondentName}</h5></span>`
       ).appendTo("#comm_thread");
       for (i = 0; i < result.length; i++) {
         $(`<div class="msgBox ${setMessageJustify(
           currUser,
           result[i].sentbyid
         )}" style="margin: 1em">
-            <span>${moment(result[i].createdAt).format("LLLL")}</span>
+            <span>${moment(result[i].createdat).format("LLLL")}</span>
             <div style="background-color:white">${
               result[i].chatmessage
             }</div></div>`).appendTo("#comm_thread");
@@ -69,19 +69,18 @@ async function showStrangers() {
   });
 }
 
-// Listeners
-$("#msg_editor").on("onkeydown", function() {
-  if (event.which == 13) {
-    console.log("Enter pressed ");
-    $.ajax({
-      url: `/hubchat/chatter/save/${currUser}`,
-      type: "POST",
-      success: function(result) {
-        console.log(result);
-      }
-    });
-  }
-});
+async function saveMessage() {
+  $.ajax({
+    url: `/hubchat/chatter/save/${$("#chatWith").text()}/${$(
+      "#msg_editor"
+    ).val()}`,
+    type: "POST",
+    data: {},
+    success: function(result) {
+      console.log(result);
+    }
+  });
+}
 
 const currUser = localStorage.getItem("currentUser");
 $(document).ready(myMessages);
