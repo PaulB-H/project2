@@ -5,6 +5,10 @@ const fh = {};
 
 
 
+let scrollbar_findables = document.querySelector('scrollbar_findables');
+	
+
+
 
 /**********************************
 DEVELOPMENT DEVELOPMENT DEVELOPMENT 

@@ -32,6 +32,7 @@
 	--purple_mealPlans: 	rgb(170,143,193);
 	--green_events_back:	rgb(80,227,194);
 	--green_events_font:	rgb(18,200,136);
+	--grey_footer:          rgb(176,192,205);
 
 	--shadow_opac10: 		0 1px 10px 0 rgba(0,0,0, 0.1);
 	--shadow_opac05: 		0 1px 10px 0 rgba(0,0,0, 0.05);
@@ -49,22 +50,29 @@ body {
 
 .wrap_fithub {
 	position: 	relative;
-	display: 	flex;
+	/*display: 	flex;*/
 	height: 	100vh;
 	/*height: 	568px;*/
 
 	/*border: 3px solid red;*/
 }
 
+.innerwrap_fithub {
+	width: 100%;
+	display: flex;
+}
+
 .wrap_findbar {
 	/*15*/
-	width: 			19.4%;
+	/*width: 			19.4%;*/
+	width: 			24.3%;
 	/*height: 		87.2%;*/
 	height: 		627px;
 	position: 		relative;
 	top: 			46px;
 	/*left: 3.9%;*/
-	margin-left: 	5.4%;
+	/*margin-left: 	5.4%;*/
+	margin-left: 	4.6%;
 	
 	
 	/*13*/
@@ -79,12 +87,12 @@ body {
 	/*width: 646px;*/
 	width: 45%;
 	/*height: 646px;*/
-	height: 100%;
+	height: 100vh;
 
 	/*width = 14.9cm*/
 
 	margin-left: 68px;
-	margin-left: 4%;
+	margin-left: 3.6%;
 
 	overflow-y: scroll;
 
@@ -97,9 +105,9 @@ body {
 }
 
 .wrap_userbar {
-	width: 			14%;
+	width: 			17.9%;
 	height: 		624px;
-	margin-left: 	5.2%;
+	margin-left: 	3.6%;
 	position: 		relative;
 	top: 			56px;
 	top: 			46px;
@@ -109,7 +117,7 @@ body {
 }
 
 .wrap_findbar .wrap_catbox:nth-of-type(1){
-	margin-left: 4px;
+	/*margin-left: 4px;*/
 }
 
 .wrap_findbar .wrap_catbox:not(:nth-of-type(1)){
@@ -122,15 +130,16 @@ body {
 	/*width: 			120%;*/
 	/*height: 		90px;*/
 	/*width: 			134.3%;*/
-	width: 			127%;
+	/*width: 			127%;*/
+	width: 			100%;
 	/*height: 		14.6%;*/
 	height: 		92px;
 
-	position: 		relative;
+	/*position: 		relative;*/
 
 /*top: 46px;*/
 
-	left: 			-13.5%;
+	/*left: 			-13.5%;*/
 	font-family: 	Kohinoor Telugu;
 	font-size: 		12px;
 	font-weight: 	600;
@@ -154,8 +163,8 @@ body {
 
 .catbox_plate {
 	/*width: 			80px;*/
-	/*height: 		80px;*/
-	width: 100%;
+	height: 		80px;
+	/*width: 100%;*/
 	/*height: 100%;*/
 	border-radius: 	10px;
 
@@ -165,14 +174,15 @@ body {
 }
 
 .catbox_plate > div:nth-of-type(1) {
-	height: 					40px;
-	/*height: 					50%;*/
+	/*height: 					40px;*/
+	height: 					50%;
 	border-top-right-radius: 	10px;
 	border-top-left-radius: 	10px;
 }
 
 .catbox_plate > div:nth-of-type(2) {
-	height: 					40px;
+	/*height: 					40px;*/
+	height: 					50%;
 	border-bottom-right-radius: 10px;
 	border-bottom-left-radius:	10px;
 	background-color: 			white;
@@ -258,8 +268,9 @@ body {
 }
 
 .find_meals {
+	display: none;
 	/*border: 1px solid red;*/
-};
+}
 
 .wrap_findables::-webkit-scrollbar {
     display: none;
@@ -268,9 +279,9 @@ body {
 .findable {
 	/*width: 280px;*/
 	/*width: 93.9%;*/
-	width: 100%;
+	width: 80%;
 	height: 100px;
-	/*margin-left: 4px;*/
+	margin-left: 10%;
 	background-color: white;
 	border-radius: 10px;
 	box-shadow: var(--shadow_opac05);
@@ -286,7 +297,7 @@ body {
 	height: 499px;
 	/*margin-top: 183px;*/
 	margin-top: 171px;
-	margin-left: 18px;
+	margin-left: -1.3%;
 	border-radius: 4px;
 	border: 1px solid black;
 
@@ -336,9 +347,10 @@ body {
 }
 
 .pinnedItem {
-	width: 100%;
+	width: 79.1%;
 	height: 100px;
 	margin-top: 6px;
+	margin-left: 10%;
 	border-radius: 10px;
 	background-color: white;
 	/*box-shadow: var(--shadow_opac05);*/
@@ -351,10 +363,10 @@ body {
 
 .catbar_user_small {
 	display: flex;
-	width: 134.3%;
+	width: 100%;
 	height: 69px;
-	position: relative;
-	left: -17.2%;
+	/*position: relative;*/
+	/*left: -17.2%;*/
 	margin-top: 32px;
 	font-family: Kohinoor Telugu;
 	font-size: 10px;
@@ -364,7 +376,7 @@ body {
 }
 
 .wrap_catbox_small {
-	width: 22.2%;
+	width: 23.2%;
 	height: 60px;
 	margin-top: 7px;
 	text-align: 	center;
@@ -375,7 +387,7 @@ body {
 }
 
 .wrap_catbox_small:nth-of-type(1) {
-	margin-left: 6px;
+	/*margin-left: 6px;*/
 }
 
 .wrap_catbox_small:not(:nth-of-type(1)) {
@@ -468,12 +480,15 @@ body {
 	width: 4px;
 	height: 399px;
 	margin-top: 171px;
-	margin-left: 18px;
+	margin-left: -0.75%;
 	border-radius: 4px;
 
 	border: 1px solid black;
 }
 
+.footer {
+	display: none;
+}
 
 
 

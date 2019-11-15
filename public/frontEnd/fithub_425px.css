@@ -5,38 +5,62 @@ phones / 425px
 
 
 	.wrap_fithub {
+		/*width: 840px;*/
+		/*height: 568px;*/
 		/*width: 960px;*/
-		width: 840px;
-		height: 568px;
-		/*overflow-y: hidden; */
+
+		overflow: hidden;
 		
 		/*border: 2px solid blue;*/
 	}
 
 
+.innerwrap_fithub {
+	/*width: 840px;*/
+	/*width: 960px;*/
+	width: 300%;
+	display: flex;
+
+	/*border: 3px solid red;*/
+}
+
+
+
+
+
+
 	.wrap_findbar {
-		width: 230px;
+		width: 33.33%;
+		/*width: calc(33% - 20px);*/
 		/*height: 590px;*/
 		height: 523px;
 		position: relative;
 		left: 0;
 
 		border: none;
+		
 		/*border: 1px solid black;*/
-
-
-		margin-left: 20px;
+		
+		/*margin-left: 20px;*/
 		/*margin-left: -208px;*/
 		/*margin-left: -438px;*/
+
+		margin-left: 0;
+	}
+
+	.wrap_findbar {
+		margin-left: 2%;
 	}
 
 	.wrap_context {
 
 		/*display: none;*/
 
-		width: 259px;
-		margin-left: 18px;
+		width: 33.33%;
+		height: 100vh;
+		margin-left: 0%;
 		padding-bottom: 53px;
+		transform: translate(-14%);
 
 		/*border: 1px solid black;*/
 	}
@@ -45,16 +69,22 @@ phones / 425px
 		
 		/*display: none;*/
 
-		width: 227px;
+		width: 33.33%;
 		height: 523px;
-		margin-left: 18px;
+		margin-left: 0%;
+		transform: translateX(-24%);
+
+		/*border: 1px solid black;*/
 	}
 
 
 	.scrollbar_findables {
 		width: 4px;
-		height: 368px;
-		margin-left: 16px;
+		height: 52vh;
+		position: relative;
+		left: -6.4%;
+		margin-top: 139px;
+		margin-left: 0%;
 		padding-left: 2px;
 
 		/*display: none;*/
@@ -69,43 +99,53 @@ phones / 425px
 
 		height: 262px;
 		margin-top: 148px;
+		margin-left: 0;
+		position: relative;
+		left: -14.9%;
 	}
 
 
 	.catbar {
 		display: flex;
 		justify-content: center;
-		width: 250px;
+		width: 82%;
+		height: 62px;
 		left: 0;
 
 		/*border: 1px solid red;*/
 	}
 
 	.wrap_catbox {
-		width: 58px;
-		height: 58px;
+		width: 24%;
+		/*height: 58px;*/
 	}
 
 	.wrap_findbar .wrap_catbox:nth-of-type(1) {
 		margin-left: 0;
 	}
 
+	.wrap_findbar .wrap_catbox:not(:nth-of-type(1)) {
+		margin-left: 6px;
+	}
+
 	.catbox_arrow {
 		width: 10px;
 		height: 10px;
-		top: -3px;
+		top: -5px;
 	}
 
 	.wrap_findables {
 		/*width: 230px;*/
 		/*width: 100%;*/
 		height: 421px;
+		margin-top: 30px;
 
 		/*border: 1px solid green;*/
 	}
 
 	.findable {
-		/*width: 230px;*/
+		width: 75%;
+		margin-left: 0;
 	}
 
 
@@ -113,7 +153,7 @@ phones / 425px
 
 	.content_plate {
 		/*width: 200px;*/
-		width: 100%;
+		width: 85%;
 		/*background-color: blue;*/
 	}
 
@@ -121,6 +161,11 @@ phones / 425px
 
 	.wrap_pins {
 		height: 262px;
+	}
+
+	.pinnedItem {
+		width: 73%;
+		margin-left: 0;
 	}
 
 	.userblock {
@@ -131,7 +176,7 @@ phones / 425px
 	}
 
 	.catbar_user_small {
-		width: 254px;
+		width: 81%;
 		left: 0;
 
 
@@ -143,9 +188,53 @@ phones / 425px
 	}
 
 	.wrap_catbox_small {
-		width: 58px;
-		height: 58px;
+		/*width: 58px;*/
+		/*height: 58px;*/
+
+		width: 23%;
 	}
+
+
+	.footer {
+		display: flex;
+		width: 100%;
+		height: 44px;
+		position: absolute;
+		bottom: 0;
+		border-top-left-radius: 16px;
+		border-top-right-radius: 16px;
+
+		font-family: Kohinoor Telugu;
+		font-size: 16px;
+		font-weight: 600;
+		color: white;
+		text-align: center;
+		line-height: 44px;
+
+		background-color: var(--grey_footer);
+	}
+
+	.pageBtn {
+		height:  100%;
+		width: 33.33%;
+	}
+
+	.pageBtn_find {
+		border-top-left-radius: 16px;
+
+		/*border: 1px solid black;*/
+	}
+
+	.pageBtn_content {
+		/*border: 1px solid blue;*/
+	}
+
+	.pageBtn_profile {
+		border-top-right-radius: 16px;
+
+		/*border: 1px solid red;*/
+	}
+
 
 
 
