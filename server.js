@@ -61,47 +61,79 @@ async function validUserName(username) {
   }
 }
 
-async function createUser(userObj) {
-  result = await db.query(`insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, fitness_goals, istrainer)
-  values(${userObj.username}, ${userObj.first_name}, ${userObj.last_name}, ${userObj.address_line1}, ${userObj.address_line2}, ${userObj.city}, ${userObj.postal_code}, ${userObj.cellphone}, ${userObj.email}, ${userObj.fitness_goals}, ${userObj.istrainer})`);
-
-  return await db.query(
-    `select id from fh_users where username = ${userObj.username}`
+app.post(`api/user/:userObj`, async function(req, res) {
+  let newUser = await db.query(
+    `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, fitness_goals, istrainer)
+  values(? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      req.params.userObj.username,
+      req.params.userObj.first_name,
+      req.params.userObj.last_name,
+      req.params.userObj.address_line1,
+      req.params.userObj.address_line2,
+      req.params.userObj.city,
+      req.params.userObj.postal_code,
+      req.params.userObj.cellphone,
+      req.params.userObj.email,
+      req.params.userObj.fitness_goals,
+      req.params.userObj.istrainer
+    ]
   );
-}
 
-async function updateUser(userObj) {
-  result = await db.query(`update fh_users set username = IFNULL(${
-    userObj.username
-  }, username),
-    first_name = IFNULL(${userObj.first_name}, first_name), 
-    last_name = IFNULL(${userObj.last_name}, last_name), 
-    address_line1 = IFNULL(${userObj.address_line1}, address_line1), 
-    address_line2 = IFNULL(${userObj.address_line2}, address_line2), 
-    city = IFNULL(${userObj.city}, city), 
-    postal_code = IFNULL(${userObj.postal_code}, postal_code), 
-    cellphone = IFNULL(${userObj.cellphone}, cellphone), 
-    email = IFNULL(${userObj.email}, email), 
-    fitness_goals = IFNULL(${userObj.fitness_goals}, fitness_goals), 
-    istrainer = IFNULL(${userObj.istrainer}, istrainer)i
-    where id = ${localStorage.getItem("currentUser")}`);
-}
-
-async function showUserList(col_name, col_value) {
-  return await db.query("select id, username from fh_users where ? = ?", [
-    col_name,
-    col_value
+  let result = await db.query(`select id from fh_users where username = ?`, [
+    req.params.userObj.username
   ]);
-}
+
+  res.send(result);
+});
+
+app.post(`/api/user/:currUser`, async function(req, res) {
+  let result = await db.query(
+    `update fh_users set username = IFNULL(?, username),
+    first_name = IFNULL(?, first_name), 
+    last_name = IFNULL(?, last_name), 
+    address_line1 = IFNULL(?, address_line1), 
+    address_line2 = IFNULL(?, address_line2), 
+    city = IFNULL(?, city), 
+    postal_code = IFNULL(?, postal_code), 
+    cellphone = IFNULL(?, cellphone), 
+    email = IFNULL(?, email), 
+    fitness_goals = IFNULL(?, fitness_goals), 
+    istrainer = IFNULL(?, istrainer)i
+    where id = ?`,
+    [
+      req.params.userObj.username,
+      req.params.userObj.first_name,
+      req.params.userObj.last_name,
+      req.params.userObj.address_line1,
+      req.params.userObj.address_line2,
+      req.params.userObj.city,
+      req.params.userObj.postal_code,
+      req.params.userObj.cellphone,
+      req.params.userObj.email,
+      req.params.userObj.fitness_goals,
+      req.params.userObj.istrainer,
+      req.params.currUser
+    ]
+  );
+  res.send(result);
+});
+
+app.get(`api/users`, async function(req, res) {
+  let result = await db.query(
+    `select id, username from fh_users where istrainer = 1`
+  );
+  res.send(result);
+});
 
 //  Calendar Section
-app.get("/calendar/load/:inDate/currUser", async function(req, res) {
+app.get(`/calendar/load/:inDate/:currUser`, async function(req, res) {
   res.setHeader("Last-Modified", new Date() - 1);
   let result = await db.query(
     `select userid,  hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24 from fh_calendar where DATE(createdat) = DATE(?) and userid = ?
     union
      select 1, "" hr1, "" hr2, "" hr3, "" hr4, "" hr5, "" hr6, "" hr7, "" hr8, "" hr9, "" hr10, "" hr11, "" hr12, "" hr13, "" hr14, "" hr15, "" hr16, "" hr17, "" hr18, "" hr19, "" hr20, "" hr21, "" hr22, "" hr23, "" hr24 where 0 = (select count(*) from fh_calendar where DATE(createdat) = CURDATE())`,
-    [req.params.inDate, currUser]
+    [req.params.inDate, req.params.currUser]
   );
   res.send(result);
 });
@@ -183,7 +215,7 @@ app.get(`/hubchat`, async function(rep, res) {
 });
 
 // Messaging module section
-app.get(`/hubchat/messengers/:currUser`, async function(req, res) {
+app.get(`/hubchat/chatter/messengers/:currUser`, async function(req, res) {
   let result = await db.query(
     `select distinct chat.id, usr.username
        from
@@ -197,19 +229,6 @@ app.get(`/hubchat/messengers/:currUser`, async function(req, res) {
        inner join fh_users usr on chat.id = usr.id
        order by chat.createdat desc`,
     [req.params.currUser, req.params.currUser]
-  );
-  res.send(result);
-});
-
-app.get(`/hubchat/chatter/:currUser/:correspondent`, async function(req, res) {
-  let result = await db.query(
-    `select * from fh_hubchat where (sentbyid = ? and sendtoid = ?) or (sentbyid = ? and sendtoid = ?)`,
-    [
-      req.params.currUser,
-      req.params.correspondent,
-      req.params.correspondent,
-      req.params.currUser
-    ]
   );
   res.send(result);
 });
@@ -232,17 +251,38 @@ app.get(`/hubchat/chatter/strangers/:currUser`, async function(req, res) {
   res.send(result);
 });
 
-app.post(`/hubchat/chatter/save/:userName/:msgText`, async function(req, res) {
-  console.log(currUser + " - " + req.params.msgText);
+app.get(`/hubchat/chatter/:currUser/:correspondent`, async function(req, res) {
+  let result = await db.query(
+    `select * from fh_hubchat where (sentbyid = ? and sendtoid = ?) or (sentbyid = ? and sendtoid = ?)`,
+    [
+      req.params.currUser,
+      req.params.correspondent,
+      req.params.correspondent,
+      req.params.currUser
+    ]
+  );
+  res.send(result);
+});
+
+app.post(`/hubchat/chatter/save/:currUser/:userName/:msgText`, async function(
+  req,
+  res
+) {
   let writeTo = await db.query(`select id from fh_users where username = ?`, [
     req.params.userName
   ]);
-  console.log(writeTo);
-  let result = await db.query(
-    `insert into fh_hubchat(sendtoid, sentbyid, chatmessage)
-       values(?, ?, ?)`,
-    [1, currUser, req.params.msgText]
+
+  let writeRec = await db.query(
+    `insert into fh_hubchat(sendtoid, sentbyid, chatmessage, new_flg)
+       values(?, ?, ?, ?)`,
+    [writeTo[0].id, req.params.currUser, req.params.msgText, 1]
   );
+
+  let result = await db.query(`select * from fh_hubchat where id = ?`, [
+    writeRec.insertId
+  ]);
+
+  res.send(result);
 });
 
 async function showChatMessages(sender, target) {

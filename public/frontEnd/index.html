@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/frontEnd/fithub_1280px.css" />
     <link rel="stylesheet" type="text/css" href="/frontEnd/fithub_425px.css" />
     <link rel="stylesheet" type="text/css" href="./chatterbox.css" />
+    <link rel="stylesheet" type="text/css" href="./myCalendar.css" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -92,14 +93,14 @@
             <div
               id="ChatterBox"
               class="row"
-              style="height: 100%; min-height: fit-content; justify-content: space-around; background-color: lightsteelblue"
+              style="height: 100vh; min-height: fit-content; background-color: lightsteelblue"
             >
-				<div class="row">
+				<div class="row" style="width:100%">
 						<div
 							class="col-sm-6"
 							id="comm_list"
 						>
-							<div class="row" style=background-color:lightblue; overflow-y: auto; display: flex;flex-direction: column">	
+							<div class="row" style="overflow-y: auto; display: flex;flex-direction: row">	
 								<div
 										class="col-sm-6"  
 										id="contacts"
@@ -116,20 +117,10 @@
 						</div>
 						<div id="chat-window" class="col-sm-6">
 							<div
-							style="overflow-y: auto; display: flex;flex-direction: column"
+							style="height:75vh; overflow: scroll; display: flex;flex-direction: column"
 							id="comm_thread"
-							></div>
-							<textarea
-							rows="4"
-							cols="50"
-							spellcheck="true"
-							class="card time-block col"
-							style="background-color:lemonchiffon"
-							id="msg_editor"
-							value=""
 							>
-							</textarea>
-							<div><button id="save_btn" class="saveBtn col" value="" onclick=saveMessage()>Save Message</button></div>
+							
 						</div>
 					</div>
 			</div>
@@ -138,7 +129,10 @@
             </div>
           </div>
         </div>
-        <div class="content_plate2"></div>
+        <div class="content_plate2">
+            <h1>Calendar</h1>
+			<div class="container col" id="day-view"></div>
+		</div>
         <div class="content_plate"></div>
       </div>
 
@@ -202,5 +196,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./chatterbox.js"></script>
+    <script src="./myCalendar.js"></script>
   </body>
 </html>
