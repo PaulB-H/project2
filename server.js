@@ -1,6 +1,7 @@
 const express = require("express");
 const mysql = require("mysql");
 const path = require("path");
+const fs = require("fs");
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -139,14 +140,11 @@ app.get(`/calendar/load/:inDate/:currUser`, async function(req, res) {
 });
 
 app.post("/calendar/save", async function(req, res) {
-  console.log(req.params.inDate);
-  console.log(req.body.calDay[12]);
   let check_new = await db.query(
     `select count(*) as dayExists from fh_calendar where DATE(createdat) = ? and userid = ?`,
     [req.body.calDay[0], req.body.calDay[1]]
   );
   if (check_new[0].dayExists == 0) {
-    console.log(req.body.calDay);
     result = await db.query(
       `insert into fh_calendar (userid, hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24)
        values("${req.body.calDay[1]}", 
@@ -176,7 +174,6 @@ app.post("/calendar/save", async function(req, res) {
        "${req.body.calDay[25]}")`
     );
   } else {
-    console.log("Update Record");
     result = await db.query(
       `update fh_calendar set hr1 = "${req.body.calDay[2]}", 
       hr2 = "${req.body.calDay[3]}", 
@@ -285,43 +282,51 @@ app.post(`/hubchat/chatter/save/:currUser/:userName/:msgText`, async function(
   res.send(result);
 });
 
-async function showChatMessages(sender, target) {
-  return await db.query(
-    "select sendtoid, sentbyid, createdat, chatmessage from fh_hubchat where sentbyid = ? and sendtoid = ? order by createdat desc",
-    [sender, target]
-  );
-}
+// Routine Module section
+app.get(`/routine/:currUser`, async function(req, res) {
+  let result = await db.query(`select * from fh_routine_hdr where userid = ?`, [
+    req.params.currUser
+  ]);
+  res.send(result);
+});
 
-async function myInbox(userid) {
-  return await db.query(
-    `select hc.sentbyid, usr.username from fh_hubchat hc inner join fh_users usr on sendtoid = usr.id where hc.sendtoid = ?`,
-    [userid]
+app.get(`/routine/newroutine/:currUser`, async function(req, res) {
+  let result = await db.query(
+    `select CONCAT("Routine", count(*)+1) as routine_name from fh_routine_hdr where userid = ?`,
+    [req.params.currUser]
   );
-  console.log(result);
-}
-async function myOutbox(userid) {
-  return await db.query(
-    `select hc.sendtoid, usr.username from fh_hubchat hc inner join fh_users usr on sentbyid = usr.id where hc.sentbyid = ?`,
-    [userid]
-  );
-  console.log(result);
-}
+  res.send(result);
+});
 
-async function getDay(inDate) {
-  result = await db.query(
-    `select * from fh_calendar where DATE(createdat) = DATE(?)`[
-      req.params.inDate
-    ]
+app.post(`/routine/save/:currUser/:routineName/:exercise`, async function(
+  req,
+  res
+) {
+  var chkInsOrUpd = await db.query(
+    `select count(id) as rec_count from fh_routine_hdr where userid = ? and routine_name = ?`,
+    [req.params.currUser, req.params.routineName]
   );
-}
 
-async function updateCalendarEntry(userid, start_date, hour, newvalue) {
-  await db.query(
-    `update fh_calendar set hr${hour} = ${newvalue} where userid = ${userid} and  ${start_date +
-      i})`,
-    [userid]
+  if (chkInsOrUpd[0].rec_count == 0) {
+    var writeHdr = await db.query(
+      `insert into fh_routine_hdr(userid, routine_name) values(?, ?)`,
+      [req.params.currUser, req.params.routineName]
+    );
+  }
+
+  var writeDtl = await db.query(
+    `insert into fh_routine_dtl(routine_id, routine_details, target_muscle, img1_path, img2_path)
+    values(?, ?, ?, ?, ?)`,
+    [writeHdr.insertId, req.params.exercise, "", "", ""]
   );
-}
+
+  let writeRec = {
+    title: req.params.routineName,
+    exercise: req.params.exercise
+  };
+
+  res.send(writeRec);
+});
 
 // Starts the server to begin listening
 // =============================================================

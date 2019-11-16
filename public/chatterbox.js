@@ -115,7 +115,6 @@ async function showStrangers() {
 }
 
 async function saveMessage() {
-  console.log("Checking SAVE " + $("#msg_editor").val());
   if (
     $("#msg_editor")
       .val()

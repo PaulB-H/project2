@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/frontEnd/fithub_425px.css" />
     <link rel="stylesheet" type="text/css" href="./chatterbox.css" />
     <link rel="stylesheet" type="text/css" href="./myCalendar.css" />
+    <link rel="stylesheet" type="text/css" href="./myRoutines.css" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -88,7 +89,7 @@
       <div class="wrap_context">
         <div class="content_plate1">
           <!-- ChatterBox Section -->
-          <div class="container col" id="chatterbox">
+		<div class="container col" id="chatterbox">
             <h1>ChatterBox</h1>
             <div
               id="ChatterBox"
@@ -96,44 +97,95 @@
               style="height: 100vh; min-height: fit-content; background-color: lightsteelblue"
             >
 				<div class="row" style="width:100%">
+					<div
+						class="col-sm-6"
+						id="comm_list"
+					>
+						<div class="row" style="overflow-y: auto; display: flex;flex-direction: row">	
+							<div
+									class="col-sm-6"  
+									id="contacts"
+									style="overflow-y: auto; display: flex;flex-direction: column"
+								>
+							</div>
+							<div
+								class="col-sm-6"  
+								id="strangers"
+								style="overflow-y: auto; display: flex;flex-direction: column"
+							>
+							</div>
+						</div>
+					</div>
+					<div id="chat-window" class="col-sm-6">
+						<div
+							style="height:75vh; overflow: scroll; display: flex;flex-direction: column"
+							id="comm_thread"
+						>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+            </div>
+          <!-- </div>
+        </div> -->
+        <div class="content_plate2">
+            <h1>Calendar</h1>
+			<div class="container col" id="day-view"></div>
+		</div>
+        <div class="content_plate3">
+          <!-- Routine Builder Section -->
+          <div class="container col" id="routine_builder">
+            <h1>Routine Manager</h1>
+            <div
+              id="Kinetics"
+              class="row"
+              style="height: 100vh; min-height: fit-content; background-color: lightsteelblue"
+            >
+				<div class="row" style="width:100%">
 						<div
 							class="col-sm-6"
-							id="comm_list"
+							id="routineManager"
+							style="display: flex;flex-direction: column"
 						>
 							<div class="row" style="overflow-y: auto; display: flex;flex-direction: row">	
 								<div
-										class="col-sm-6"  
-										id="contacts"
+										class="col-sm-9"  
+										id="myRoutines"
 										style="overflow-y: auto; display: flex;flex-direction: column"
 									>
+										<!-- <div
+										style="height:75vh; overflow: scroll; display: flex;flex-direction: column"
+										id="routine_element"
+										>
+										</div> -->
 								</div>
 								<div
-									class="col-sm-6"  
-									id="strangers"
-									style="overflow-y: auto; display: flex;flex-direction: column"
+									class="col-sm-3"  
+									id="initRoutine"
 								>
+									<button id="newroutine_btn" class="saveBtn col" onclick="ignition()">New Routine</button>
+								</div>
+								<div class="col" style="background-color: white; color: black">
+									<div id="exercise">This is the test area for the exercise element</div>
+									<div><button id="save_btn" class="routineBtn col" onclick="saveExercise()">Save Exercise</button></div>
 								</div>
 							</div>
 						</div>
-						<div id="chat-window" class="col-sm-6">
+						<div id="routine-window" class="col-sm-6">
 							<div
 							style="height:75vh; overflow: scroll; display: flex;flex-direction: column"
-							id="comm_thread"
+							id="routine_details"
 							>
-							
+							</div>
 						</div>
-					</div>
 			</div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="content_plate2">
-            <h1>Calendar</h1>
-			<div class="container col" id="day-view"></div>
 		</div>
-        <div class="content_plate"></div>
       </div>
 
       <!-- <div class="scrollbar_context"></div> -->
@@ -197,5 +249,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./chatterbox.js"></script>
     <script src="./myCalendar.js"></script>
+    <script src="./myRoutines.js"></script>
   </body>
 </html>

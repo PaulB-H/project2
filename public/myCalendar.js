@@ -33,7 +33,7 @@ function today() {
 
         if (element !== "myDate" && element != "userid") {
           $(
-            `<div class="col-12 card" id="time-block">
+            `<div class="col-12 card" id="time-block"  style="width:100%">
                     <div class="col" style="display:flex">
                       <div class="col-sm-2">
                         <p class="inline_time"> ${dspTime} </p>
