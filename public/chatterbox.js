@@ -1,6 +1,32 @@
 async function myMessages() {
+  $("#contacts").empty();
   $.ajax({
-    url: `/hubchat/messengers/${currUser}`,
+    url: `/hubchat/chatter/messengers/${currUser}`,
+    type: "GET",
+    cache: false,
+    success: function(result) {
+      console.log("success reached");
+      // $(
+      //   `<button id="newchat_btn" class="newchatBtn col" onclick="showStrangers()">Start New Chat</button>`
+      // ).appendTo("#strangers");
+      for (i = 0; i < result.length; i++) {
+        $(
+          `<div>
+            <button class="correspondents saveBtn col" value="${result[i].id}" onclick="showConversation(${result[i].id}, '${result[i].username}')">
+             ${result[i].username}
+            </button>
+          </div>`
+        ).appendTo("#contacts");
+      }
+      getStrangers();
+    }
+  });
+}
+
+async function getStrangers() {
+  $("#strangers").empty();
+  $.ajax({
+    url: `/hubchat/chatter/strangers/${currUser}`,
     type: "GET",
     cache: false,
     success: function(result) {
@@ -11,11 +37,11 @@ async function myMessages() {
       for (i = 0; i < result.length; i++) {
         $(
           `<div>
-            <button id="comm_btn" class="correspondents commBtn col" value="${result[i].id}" onclick="showConversation(${result[i].id}, '${result[i].username}')">
+            <button class="correspondents saveBtn col" value="${result[i].id}" onclick="showConversation(${result[i].id}, '${result[i].username}')">
              ${result[i].username}
             </button>
           </div>`
-        ).appendTo("#contacts");
+        ).appendTo("#strangers");
       }
     }
   });
@@ -28,9 +54,12 @@ async function showConversation(correspondent, correspondentName) {
     cache: false,
     success: function(result) {
       $("#comm_thread").empty();
+      $("#chatWith").empty();
       $(
         `<span><h5 id="chatWith" style="text-align: center">${correspondentName}</h5></span>`
-      ).appendTo("#comm_thread");
+      ).prependTo("#chat-window");
+
+      // function writeMessages() {
       for (i = 0; i < result.length; i++) {
         $(`<div class="msgBox ${setMessageJustify(
           currUser,
@@ -41,6 +70,22 @@ async function showConversation(correspondent, correspondentName) {
               result[i].chatmessage
             }</div></div>`).appendTo("#comm_thread");
       }
+      // };
+      // let hndler = await writeMessages();
+
+      $(`<div style="position:absolute; bottom: -40; right: 0">
+								<textarea
+								rows="4"
+								cols="50"
+								spellcheck="true"
+								class="card time-block col"
+								style="background-color:lemonchiffon"
+								id="msg_editor"
+								value=""
+								>
+								</textarea>
+								<div><button id="save_btn" class="saveBtn col" value="" onclick=saveMessage()>Save Message</button></div>
+							</div>`).appendTo("#chat-window");
     }
   });
 }
@@ -70,16 +115,32 @@ async function showStrangers() {
 }
 
 async function saveMessage() {
-  $.ajax({
-    url: `/hubchat/chatter/save/${$("#chatWith").text()}/${$(
-      "#msg_editor"
-    ).val()}`,
-    type: "POST",
-    data: {},
-    success: function(result) {
-      console.log(result);
-    }
-  });
+  if (
+    $("#msg_editor")
+      .val()
+      .trim().length > 0
+  ) {
+    $.ajax({
+      url: `/hubchat/chatter/save/${currUser}/${$("#chatWith").text()}/${$(
+        "#msg_editor"
+      ).val()}`,
+      type: "POST",
+      data: {},
+      success: function(result) {
+        $(`<div class="msgBox ${setMessageJustify(
+          currUser,
+          result[0].sentbyid
+        )}" style="margin: 1em">
+              <span>${moment(result[0].createdat).format("LLLL")}</span>
+              <div style="background-color:white">${
+                result[0].chatmessage
+              }</div></div>`).appendTo("#comm_thread");
+        $("#msg_editor").val("");
+        myMessages();
+        showStrangers();
+      }
+    });
+  }
 }
 
 const currUser = localStorage.getItem("currentUser");
