@@ -132,8 +132,14 @@ fh.func.apiCall_exercises = function(){
 
 // let healthQuery = {healthInputVal}
 
+// HTML for searchQuery Input
+		// <div class="excludeRow">
+		// 		<p>Terms to exclude: </p>
+		// 		<input class="userExclusion" type="text">
+		// </div>
 
-// HTML for Recipe section
+
+// HTML for Exclusion Input 
 		// <div class="excludeRow">
 		// 		<p>Terms to exclude: </p>
 		// 		<input class="userExclusion" type="text">
@@ -158,10 +164,10 @@ fh.func.apiCall_exercises = function(){
 // 
 
 // fh.func.addListener_click_listRecepies Proper = function(){
-
+//
 // 	let findRecipesButton = document.querySelector('.findRecipesButton');
 // 		findRecipesButton.addEventListener('click', function(){
-
+//
 // 			console.log('clicked findRecipesButton proper');
 // 		});
 // };
