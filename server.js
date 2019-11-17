@@ -63,6 +63,7 @@ async function validUserName(username) {
 }
 
 app.post(`api/user`, async function(req, res) {
+  console.log(req);
   let newUser = await db.query(
     `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, fitness_goals, istrainer)
   values(? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
@@ -131,10 +132,8 @@ app.get(`api/users`, async function(req, res) {
 app.get(`/calendar/load/:inDate/:currUser`, async function(req, res) {
   res.setHeader("Last-Modified", new Date() - 1);
   let result = await db.query(
-    `select userid,  hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24 from fh_calendar where DATE(createdat) = DATE(?) and userid = ?
-    union
-     select 1, "" hr1, "" hr2, "" hr3, "" hr4, "" hr5, "" hr6, "" hr7, "" hr8, "" hr9, "" hr10, "" hr11, "" hr12, "" hr13, "" hr14, "" hr15, "" hr16, "" hr17, "" hr18, "" hr19, "" hr20, "" hr21, "" hr22, "" hr23, "" hr24 where 0 = (select count(*) from fh_calendar where DATE(createdat) = CURDATE())`,
-    [req.params.inDate, req.params.currUser]
+    `select userid, createdat as myDate, hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24 from fh_calendar where userid = ? and DATE(createdat) = DATE(?)`,
+    [req.params.currUser, req.params.inDate]
   );
   res.send(result);
 });
@@ -146,8 +145,9 @@ app.post("/calendar/save", async function(req, res) {
   );
   if (check_new[0].dayExists == 0) {
     result = await db.query(
-      `insert into fh_calendar (userid, hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24)
-       values("${req.body.calDay[1]}", 
+      `insert into fh_calendar (createdat, userid, hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24)
+       values("${req.body.calDay[0]}", 
+       "${req.body.calDay[1]}", 
        "${req.body.calDay[2]}", 
        "${req.body.calDay[3]}",
        "${req.body.calDay[4]}",
