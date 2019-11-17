@@ -1,11 +1,17 @@
-let selDate = moment(Date()).format("YYYY-MM-DD");
+let selDate = $("#selDate");
+// let dateControl = document.querySelector("#selDate");
+selDate.value = new Date();
+$("#selDate").val(new Date());
+$("#selDate").innerText = new Date();
+console.log("Testing " + selDate);
 
 // Defining Variables
 
 function today() {
   let dspTime;
+  console.log(selDate.value);
   $.ajax({
-    url: `/calendar/load/${selDate}/${currUser}`,
+    url: `/calendar/load/${selDate.value}/${currUser}`,
     type: "GET",
     cache: false,
     success: function(result) {
@@ -30,7 +36,6 @@ function today() {
           hour: "2-digit",
           minute: "2-digit"
         });
-
         if (element !== "myDate" && element != "userid") {
           $(
             `<div class="col-12 card" id="time-block"  style="width:100%">

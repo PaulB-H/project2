@@ -22,26 +22,24 @@ async function myRoutines() {
   });
 }
 
-async function showRoutineDetails(routineId) {
-  // $("routine_hdr").empty();
-  // $(
-  //   `<span><h5 id="routine_hdr" style="text-align: center">${routineName}</h5></span>`
-  // ).prependTo("#routine-window");
+async function showRoutineDetails(routineId, routineName) {
+  $("#routine_hdr").empty();
+  $("#routine_details").empty();
+  $(
+    `<span><h5 id="routine_hdr" style="text-align: center">${routineName}</h5></span>`
+  ).prependTo("#routine-window");
+
   $.ajax({
-    url: `/routine/${currUser}/${routineId}`,
+    url: `/routine/details/${routineId}`,
     type: "GET",
     cache: false,
     success: function(result) {
       // function writeMessages() {
       for (i = 0; i < result.length; i++) {
-        $(`<div class="msgBox ${setMessageJustify(
-          currUser,
-          result[i].sentbyid
-        )}" style="margin: 1em">
-            <span>${moment(result[i].createdat).format("LLLL")}</span>
-            <div style="background-color:white">${
-              result[i].routineEntries
-            }</div></div>`).appendTo("#comm_thread");
+        $(`<div class="routineBox" style="margin: 1em">
+            <div style="background-color:white">${result[i].routine_details}</div>
+            <div
+          </div>`).appendTo("#routine_details");
       }
     }
   });
@@ -73,7 +71,6 @@ async function saveExercise() {
       type: "POST",
       data: {},
       success: function(result) {
-        console.log(result);
         $(`<div class="msgBox" style="margin: 1em">
               <div style="background-color:white">${result[0].title}</div></div>`).appendTo(
           "#myRoutines"

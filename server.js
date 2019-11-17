@@ -62,7 +62,7 @@ async function validUserName(username) {
   }
 }
 
-app.post(`api/user/:userObj`, async function(req, res) {
+app.post(`api/user`, async function(req, res) {
   let newUser = await db.query(
     `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, fitness_goals, istrainer)
   values(? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
@@ -287,6 +287,14 @@ app.get(`/routine/:currUser`, async function(req, res) {
   let result = await db.query(`select * from fh_routine_hdr where userid = ?`, [
     req.params.currUser
   ]);
+  res.send(result);
+});
+
+app.get(`/routine/details/:routineId`, async function(req, res) {
+  let result = await db.query(
+    `select * from fh_routine_dtl where routine_id = ? order by createdat`,
+    [req.params.routineId]
+  );
   res.send(result);
 });
 
