@@ -21,7 +21,7 @@
 	<link rel="stylesheet" type="text/css" href="./chatterbox.css" />
     <link rel="stylesheet" type="text/css" href="./myCalendar.css" />
     <link rel="stylesheet" type="text/css" href="./myRoutines.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/> -->
 </head>
 <body>
 
@@ -42,7 +42,7 @@
 					<div class="wrap_catbox catbox_routines">
 						<div class="catbox_plate">
 							<div></div>
-							<div>Routines</div>
+							<div>Exercises</div>
 						</div>
 						<div class="catbox_arrow"></div>
 					</div>
@@ -97,7 +97,8 @@
 
 			<div class="wrap_context">
 				
-				<div class="content_plate">
+				<!-- REGISTRATION FORM -->
+				<!-- <div class="content_plate">
 					<form action="api/user"  method="POST">
 						First name:<br/>
 						<input type="text" name="firstname"><br/>
@@ -123,10 +124,10 @@
 						<textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
 						<input type="submit" value="Submit">
 					</form>
-				</div>
+				</div> -->
 
 				<!-- Chatterbox -->
-				<div class="content_plate content_plate1">
+				<!-- <div class="content_plate content_plate1">
 					<div class="container col" id="chatterbox">
 						<h1>ChatterBox</h1>
 						<div id="ChatterBox" class="row" style="height: 100vh; min-height: fit-content; background-color: lightsteelblue">
@@ -143,16 +144,16 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
-				<div class="content_plate content_plate2">
+				<!-- <div class="content_plate content_plate2">
 						<span style = "justify-content:space-between">Calendar
 						<input type="date" id="selDate" name="selDate" value="">
 						<div class="container col" id="day-view"></div>
-				</div>
+				</div> -->
 				
-				<div class="content_plate">
-					 <!-- Routine Builder Section -->
+				<!-- Routine Builder Section -->
+				<!-- <div class="content_plate">
 					 <div class="container col" id="routine_builder">
 						<h1>Routine Manager</h1>
 						<div id="Kinetics" class="row" style="height: 100vh; min-height: fit-content; background-color: lightsteelblue">
@@ -160,7 +161,7 @@
 								<div class="col-sm-6" id="routineManager" style="display: flex;flex-direction: column">
 									<div class="row" style="overflow-y: auto; display: flex;flex-direction: row">	
 										<div class="col-sm-8" id="myRoutines" style="overflow-y: auto; display: flex;flex-direction: column">
-											<!-- <div id="routine_element" style="height:75vh; overflow: scroll; display: flex;flex-direction: column"></div> -->
+											<div id="routine_element" style="height:75vh; overflow: scroll; display: flex;flex-direction: column"></div>
 										</div>
 										<div class="col-sm-4" id="initRoutine">
 											<button id="newroutine_btn" class="saveBtn col" onclick="ignition()">New Routine</button>
@@ -179,7 +180,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 			</div>
 			<!-- End wrap_context -->
@@ -187,8 +188,25 @@
 			<!-- <div class="scrollbar_context"></div> -->
 
 			<div class="wrap_userbar">
+
+				<div class="wrap_login">
+					<p class="loginMessage">Welcome to active wellness</p>
+					<p class="loginTitle">Welcome to FitHub</p>
+					<div class="loginPanel">
+						<div class="loginRow">
+							<p>Email :</p>
+							<input class="loginEmail" type="text">
+						</div>
+						<div class="loginRow">
+							<p>Pass :</p>
+							<input class="loginPass" type="text">
+						</div>
+						<div class="loginButton">Login</div>
+						<div class="init_createAccountButton">Create Account</div>
+					</div>
+				</div>
 				
-				<div class="userblock">
+				<div class="userblock displayNone">
 					
 					<input class="field" type="text" name="">
 					<input class="field" type="text" name="">

@@ -27,11 +27,13 @@
 	/*--boxShadow_2: 0 0.75px 0.75px 0.5px rgba(0,0,0,0.2);*/
 
 	
-	--blue_trainers: 		rgb(74,144,226);
-	--orange_routines: 		rgb(255,99,71);
-	--purple_mealPlans: 	rgb(170,143,193);
-	--green_events_back:	rgb(80,227,194);
-	--green_events_font:	rgb(18,200,136);
+	--blue_main: 		    rgb(74,144,226);
+	--pink_main: 			rgb(255,94,113);
+	--purple_main: 			rgb(170,143,193);
+	--green_main:		    rgb(80,227,194);
+	--green_smallFont:		rgb(18,200,136);
+	--greyBlue: 			rgb(106, 138, 164);
+
 	--grey_footer:          rgb(176,192,205);
 
 	--shadow_opac10: 		0 1px 10px 0 rgba(0,0,0, 0.1);
@@ -104,6 +106,7 @@ width: 19.8%;
 	margin-left: 68px;
 	margin-left: 3.6%;
 	overflow-y: scroll;
+	overflow-x: hidden;
 
 	/*border: 1px solid blue;*/
 }
@@ -198,35 +201,35 @@ height: 60px;
 }
 
 .catbox_trainers > .catbox_plate > div:nth-of-type(1) {
-	background-color: var(--blue_trainers);
+	background-color: var(--blue_main);
 }
 
 .catbox_trainers > .catbox_plate > div:nth-of-type(2) {
-	color: var(--blue_trainers);
+	color: var(--blue_main);
 }
 
 .catbox_routines > .catbox_plate > div:nth-of-type(1) {
-	background-color: var(--orange_routines);
+	background-color: var(--green_main);
 }
 
 .catbox_routines > .catbox_plate > div:nth-of-type(2) {
-	color: var(--orange_routines);
+	color: var(--green_smallFont);
 }
 
 .catbox_mealPlans > .catbox_plate > div:nth-of-type(1) {
-	background-color: var(--purple_mealPlans);
+	background-color: var(--purple_main);
 }
 
 .catbox_mealPlans > .catbox_plate > div:nth-of-type(2) {
-	color: var(--purple_mealPlans);
+	color: var(--purple_main);
 }
 
 .catbox_events > .catbox_plate > div:nth-of-type(1) {
-	background-color: var(--green_events_back);
+	background-color: var(--pink_main);
 }
 
 .catbox_events > .catbox_plate > div:nth-of-type(2) {
-	color: var(--green_events_font);
+	color: var(--pink_main);
 }
 
 .catbox_arrow {
@@ -246,19 +249,19 @@ height: 12px;
 }
 
 .catbox_trainers > .catbox_arrow {
-	background-color: var(--blue_trainers);
+	background-color: var(--blue_main);
 }
 
 .catbox_routines > .catbox_arrow {
-	background-color: var(--orange_routines);
+	background-color: var(--green_main);
 }
 
 .catbox_mealPlans > .catbox_arrow {
-	background-color: var(--purple_mealPlans);
+	background-color: var(--purple_main);
 }
 
 .catbox_events > .catbox_arrow {
-	background-color: var(--green_events_back);
+	background-color: var(--pink_main);
 }
 
 
@@ -278,7 +281,7 @@ height: 12px;
 	margin-top: 16px;
 	margin-left: 10%;
 	border-radius: 4px;
-	background-color: var(--grey_footer);
+	background-color: var(--green_main);
 
 	color: white;
 	line-height: 28px;
@@ -302,6 +305,9 @@ height: 12px;
 	/*height: 350px;*/
 	z-index: 2;
 	box-shadow: var(--shadow_harsh_1);
+	border-radius: 4px;
+	border: 1px solid var(--green_main);
+	
 
 	background-color: white;
 	/*border: 1px solid red;*/
@@ -424,6 +430,8 @@ height: 12px;
 	border: 1px solid black;
 }
 
+
+
 .userblock {
 	width: 100%;
 	/*height: 124px;*/
@@ -432,19 +440,7 @@ height: 12px;
 	border: 1px solid blue;
 }
 
-.field {
-	height: 32px;
 
-	border: 1px solid black;
-}
-
-.loginButton {
-	height: 40px;
-
-
-	background-color: blue;
-	color: white;
-}
 
 .wrap_pins {
 	width: 100%;
@@ -529,35 +525,35 @@ height: 12px;
 }
 
 .catbox_trainers > .catbox_plate_small > div:nth-of-type(1) {
-	color: var(--blue_trainers);
+	color: var(--blue_main);
 }
 
 .catbox_trainers > .catbox_plate_small > div:nth-of-type(2) {
-	background-color: var(--blue_trainers);
+	background-color: var(--blue_main);
 }
 
 .catbox_routines > .catbox_plate_small > div:nth-of-type(1) {
-	color: var(--orange_routines);
+	color: var(--green_smallFont);
 }
 
 .catbox_routines > .catbox_plate_small > div:nth-of-type(2) {
-	background-color: var(--orange_routines);
+	background-color: var(--green_main);
 }
 
 .catbox_mealPlans > .catbox_plate_small > div:nth-of-type(1) {
-	color: var(--purple_mealPlans);
+	color: var(--purple_main);
 }
 
 .catbox_mealPlans > .catbox_plate_small > div:nth-of-type(2) {
-	background-color: var(--purple_mealPlans);
+	background-color: var(--purple_main);
 }
 
 .catbox_events > .catbox_plate_small > div:nth-of-type(1) {
-	color: var(--green_events_font);
+	color: var(--pink_main);
 }
 
 .catbox_events > .catbox_plate_small > div:nth-of-type(2) {
-	background-color: var(--green_events_back);
+	background-color: var(--pink_main);
 }
 
 .catbox_arrow_small {
@@ -573,19 +569,19 @@ height: 12px;
 }
 
 .catbox_trainers .catbox_arrow_small {
-	background-color: var(--blue_trainers);
+	background-color: var(--blue_main);
 }
 
 .catbox_routines .catbox_arrow_small {
-	background-color: var(--orange_routines);
+	background-color: var(--purple_main);
 }
 
 .catbox_mealPlans .catbox_arrow_small {
-	background-color: var(--purple_mealPlans);
+	background-color: var(--purple_main);
 }
 
 .catbox_events .catbox_arrow_small {
-	background-color: var(--green_events_back);
+	background-color: var(--green_main);
 }
 
 .scrollbar_user {
@@ -636,6 +632,103 @@ height: 12px;
 	/* border: 1px solid blue; */
 }
 
+
+
+.wrap_login {
+	font-family: Kohinoor Telugu;
+	position: relative;
+}
+
+.loginMessage {
+	width: 90%;
+	margin-top: 87px;
+	font-size: 18px;
+	font-weight: 800;
+	color: var(--greyBlue);
+	letter-spacing: -0.6px;
+	line-height: 16px;
+	text-align: center;;
+}
+
+.loginTitle {
+	width: 90%;
+	margin-top: 17px;
+	font-size: 26px;
+	font-weight: 800;
+	color: var(--green_main);
+	letter-spacing: -0.87px;
+	line-height: 26px;
+	text-align: center;;
+}
+
+.loginPanel {
+	position: relative;
+	margin-top: 28px;
+	padding-top: 56px;
+	width: 90%;
+	height: 338px;
+	background-color: white;
+	box-shadow: var(--shadow_opac10);
+	border-radius: 10px;
+}
+
+.loginRow {
+	position: relative;
+	height: 32px;
+	display: flex;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--greyBlue);
+
+	/* border: 1px solid black; */
+}
+
+.loginRow:nth-of-type(2) {
+	margin-top: 6px;
+}
+
+.loginRow > p {
+	position: absolute;
+	right: 73.3%;
+	width: 44px;;
+	/* width: 19%; */
+	line-height: 32px;
+	text-align: right;
+	letter-spacing: -0.32px;
+}
+
+.loginRow > input {
+	position: absolute;
+	right: 8.8%;
+	width: 62.5%;
+	height: 100%;
+	border-radius: 4px;
+	background-color: rgb(246, 247, 251);
+	border: 1px solid var(--green_main);
+	position: absolute;
+}
+
+.loginButton,
+.init_createAccountButton {
+	height: 32px;
+	width: 82%;
+	margin: 10px auto 0;
+	background-color: var(--green_main);
+	border-radius: 4px;
+	color: white;
+	font-weight: 800;
+	text-align: center;
+	line-height: 32px;
+}
+
+.loginButton {
+	margin: 10px auto 0;
+}
+
+.init_createAccountButton {
+	margin: 6px auto 0;
+	background-color: var(--greyBlue);
+}
 
 
 

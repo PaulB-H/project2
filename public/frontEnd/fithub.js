@@ -491,9 +491,6 @@ fh.func.click_findableExercise = function(me){
 				contentPlate.appendChild(exerciseImagesFlex);	
 					exerciseImagesFlex.appendChild(exercise_image);
 					exerciseImagesFlex.appendChild(exercise_image_2);
-
-				
-
 			};
 
 
