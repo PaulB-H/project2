@@ -131,7 +131,7 @@ app.post(`/api/user/:currUser`, async function(req, res) {
 app.post(`/api/users`, async function(req, res) {
   console.log(req.body);
   let result = await db.query(
-    `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, trainerid, cellphone, email, fitness_goals, istrainer, trainer_bio)
+    `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, fitness_goals, istrainer, trainer_bio)
     values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       req.body.email,
@@ -141,10 +141,10 @@ app.post(`/api/users`, async function(req, res) {
       req.body.address_line2,
       req.body.city,
       req.body.postal_code,
-      Number(req.body.istrainer),
       req.body.cellphone,
       req.body.email,
       req.body.fitness_goals,
+      req.body.istrainer,
       req.body.trainer_bio
     ]
   );
