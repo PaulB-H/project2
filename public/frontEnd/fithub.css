@@ -12,7 +12,7 @@
 
 	/* text */
 	user-select: none;
-
+	
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: antialiased;
 	font-smoothing: antialiased;
@@ -37,6 +37,7 @@
 	--shadow_opac10: 		0 1px 10px 0 rgba(0,0,0, 0.1);
 	--shadow_opac05: 		0 1px 10px 0 rgba(0,0,0, 0.05);
 	--shadow_opac05_small: 	0 1px 5px  0 rgba(0,0,0, 0.05);
+	--shadow_harsh_1:       0 1px 1px  0 rgba(0,0,0, 0.2);
 }
 
 ::-webkit-scrollbar {
@@ -46,6 +47,30 @@
 body {
 	/*light-mode*/
 	background-color: rgb(246,247,251);
+	/*background-color: rgb(234,240,246);*/
+}
+
+
+
+
+.displayNone {
+	display: none;
+}
+
+.displayBlock {
+	display: block;
+}
+
+.displayFlex {
+	display: flex;
+}
+
+
+
+
+
+.footer {
+	display: none;
 }
 
 .wrap_fithub {
@@ -63,39 +88,22 @@ body {
 }
 
 .wrap_findbar {
-	/*15*/
-	/*width: 			19.4%;*/
-	width: 			24.3%;
-	/*height: 		87.2%;*/
+	/*width: 			24.3%;*/
+width: 19.8%;
 	height: 		627px;
 	position: 		relative;
 	top: 			46px;
-	/*left: 3.9%;*/
-	/*margin-left: 	5.4%;*/
 	margin-left: 	4.6%;
-	
-	
-	/*13*/
-	/*width: 258px;*/
-
 
 	/*border: 1px solid black;*/
 }
 
 .wrap_context {
-	/*15*/
-	/*width: 646px;*/
 	width: 45%;
-	/*height: 646px;*/
 	height: 100vh;
-
-	/*width = 14.9cm*/
-
 	margin-left: 68px;
 	margin-left: 3.6%;
-
 	overflow-y: scroll;
-
 
 	/*border: 1px solid blue;*/
 }
@@ -112,12 +120,13 @@ body {
 	top: 			56px;
 	top: 			46px;
 
-	
+
 	/*border: 1px solid black;*/
 }
 
 .wrap_findbar .wrap_catbox:nth-of-type(1){
 	/*margin-left: 4px;*/
+margin-left: 6px;
 }
 
 .wrap_findbar .wrap_catbox:not(:nth-of-type(1)){
@@ -133,7 +142,8 @@ body {
 	/*width: 			127%;*/
 	width: 			100%;
 	/*height: 		14.6%;*/
-	height: 		92px;
+	/*height: 		92px;*/
+	height: 		70px;
 
 	/*position: 		relative;*/
 
@@ -141,7 +151,8 @@ body {
 
 	/*left: 			-13.5%;*/
 	font-family: 	Kohinoor Telugu;
-	font-size: 		12px;
+	/*font-size: 		12px;*/
+font-size: 10px;
 	font-weight: 	600;
 	text-align: 	center;
 	line-height: 	40px;
@@ -156,18 +167,16 @@ body {
 	width: 22.4%;
 	height: 100%;
 	text-align: 	center;
-	line-height: 	40px;
+	/*line-height: 	40px;*/
+line-height: 30px;
 
 	/*border: 1px solid blue;*/
 }
 
 .catbox_plate {
-	/*width: 			80px;*/
-	height: 		80px;
-	/*width: 100%;*/
-	/*height: 100%;*/
+	/*height: 		80px;*/
+height: 60px;
 	border-radius: 	10px;
-
 	box-shadow: var(--shadow_opac10);
 
 	/*border: 1px solid green;*/
@@ -221,8 +230,10 @@ body {
 }
 
 .catbox_arrow {
-	width:  			14px;
-	height:   			14px;
+	/*width:  			14px;*/
+	/*height:   			14px;*/
+width: 12px;
+height: 12px;
 	position: 			relative;
 	top:      			-7px;
 	left:             	calc(50% - 7px);
@@ -250,6 +261,66 @@ body {
 	background-color: var(--green_events_back);
 }
 
+
+
+.wrap_dropdown_findbar {
+	position: relative;
+	font-family: Kohinoor Telugu;
+	font-size: 12px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.dropdown_findbar {
+	position: relative;
+	width: 80%;
+	height: 28px;
+	margin-top: 16px;
+	margin-left: 10%;
+	border-radius: 4px;
+	background-color: var(--grey_footer);
+
+	color: white;
+	line-height: 28px;
+}
+
+.dropdownArrow_findbar {
+	display: block;
+	position: absolute;
+	top: 44%;
+	right: 12%;
+	width: 20px;
+	height: 20px;
+	background-image: url("dropArrow_white.svg");
+}
+
+.dropdownMenu {
+	position: absolute;
+	top: 120%;
+	width: 80%;
+	margin-left: 10%;
+	/*height: 350px;*/
+	z-index: 2;
+	box-shadow: var(--shadow_harsh_1);
+
+	background-color: white;
+	/*border: 1px solid red;*/
+}
+
+.dropdownMenu > div {
+	height: 30px;
+	line-height: 30px;
+	color: black;
+}
+
+.dropdownMenu > div:nth-child(even) {
+	background-color: rgb(234,240,246);
+	/*background-color: rgb(246,247,251);*/
+}
+
+
+
+
 .wrap_findables {
 	width: 100%;
 	height: 500px;
@@ -257,9 +328,7 @@ body {
 	/*position: relative;*/
 	position: absolute;
 
-	/*margin w/ no filterbar*/
-	/*margin-top: 44px;*/
-	margin-top: 32px;
+	margin-top: 10px;
 
 	overflow-y: scroll;
 
@@ -280,15 +349,41 @@ body {
 	/*width: 280px;*/
 	/*width: 93.9%;*/
 	width: 80%;
-	height: 100px;
+	/*height: 100px;*/
 	margin-left: 10%;
 	background-color: white;
 	border-radius: 10px;
 	box-shadow: var(--shadow_opac05);
+
+	font-family: Kohinoor Telugu;
+	font-weight: 500;
 }
 
 .findable:not(:nth-of-type(1)){
 	margin-top: 8px;
+}
+
+.findable > p {
+	width: 80%;
+    margin: 0 auto 0;
+    text-align: center;
+	font-size: 12px;
+	padding-top: 5%;
+	padding-bottom: 5%;
+
+	/*border: 1px solid red;*/
+}
+
+.findable > div {
+	width: 80%;
+	height: 40px;
+	overflow-y: hidden;
+
+
+
+	font-size: 10px;
+
+	border: 1px solid blue;
 }
 
 .scrollbar_findables {
@@ -310,11 +405,13 @@ body {
 
 .content_plate {
 	width: 100%;
-	height: 624px;
+	/* height: 624px; */
 	margin-top: 46px;
+	padding-bottom: 10%;
 	background-color: white;
 	border-radius: 10px;
 	box-shadow: var(--shadow_opac05);
+	font-family: Kohinoor Telugu;
 }
 
 .scrollbar_context {
@@ -329,9 +426,24 @@ body {
 
 .userblock {
 	width: 100%;
-	height: 124px;
+	/*height: 124px;*/
+	height: 87vh;
 
-	/*border: 1px solid blue;*/
+	border: 1px solid blue;
+}
+
+.field {
+	height: 32px;
+
+	border: 1px solid black;
+}
+
+.loginButton {
+	height: 40px;
+
+
+	background-color: blue;
+	color: white;
 }
 
 .wrap_pins {
@@ -486,9 +598,48 @@ body {
 	border: 1px solid black;
 }
 
-.footer {
-	display: none;
+
+
+.cplate_exerciseName {
+	width: 80%;
+	margin: 0 auto 0;
+	/*text-align: center;*/
+	padding-top: 32px;
+	font-size: 30px;
+    font-weight: 700;
+    line-height: 40px;
 }
+
+.cplate_exerciseDesc {
+	width: 80%;
+	font-size: 14px;
+	margin: 0 auto 0;
+	padding-top: 32px;
+}
+
+
+.exerciseImagesFlex {
+	display: flex;
+	width: 80%;
+	position: relative;
+	left: 27%;
+	padding-top: 5%;
+}
+
+.exercise_image,
+.exercise_image_2 {
+	width: 35%;
+	height: 150px;
+	background-repeat: no-repeat;
+	background-size: contain;
+
+	/* border: 1px solid blue; */
+}
+
+
+
+
+
 
 
 

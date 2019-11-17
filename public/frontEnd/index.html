@@ -4,10 +4,20 @@
 	<title></title>
 	<!-- Viewport -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<!-- Style -->
-	<link rel="stylesheet" type="text/css" href="fithub.css">
+
+	<!-- LOCAL LOCAL LOCAL -->
+	<!-- <link rel="stylesheet" type="text/css" href="fithub.css">
 	<link rel="stylesheet" type="text/css" href="fithub_1280px.css">
-	<link rel="stylesheet" type="text/css" href="fithub_425px.css">
+	<link rel="stylesheet" type="text/css" href="fithub_425px.css"> -->
+	
+	<!-- SERVER SERVER SERVER -->
+	<link rel="stylesheet" type="text/css" href="/frontEnd/fithub.css" />
+    <link rel="stylesheet" type="text/css" href="/frontEnd/fithub_1280px.css" />
+    <link rel="stylesheet" type="text/css" href="/frontEnd/fithub_425px.css" />
+    <link rel="stylesheet" type="text/css" href="./chatterbox.css"/>
+
 </head>
 <body>
 
@@ -48,103 +58,112 @@
 					</div>
 				</div>
 
-				<div>
-					<div class="wrap_findables">
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
+				<div class="wrap_dropdown_findbar">
+					
+					<div class="dropdown_findbar">
+						<span>Biceps</span>
+						<span class="dropdownArrow_findbar"></span>
 					</div>
 
-					<div class="wrap_findables find_meals">
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
-						<div class='findable'></div>
+					<div class="dropdownMenu drop_exercises displayNone">
+						<div><span>Biceps</span></div>
+						<div><span>Shoulders</span></div>
+						<div><span>Obliques</span></div>
+						<div><span>Chest</span></div>
+						<div><span>Quads</span></div>
+						<div><span>Abs</span></div>
+						<div><span>Lower Neck</span></div>
+						<div><span>Triceps</span></div>
+						<div><span>Outer Back</span></div>
+						<div><span>Butt</span></div>
+						<div><span>Hamstring</span></div>
+						<div><span>Calves</span></div>
 					</div>
 				</div>
 
+				<div class="wrap_findables">
+
+					<div class="findables_exercises">
+						<!-- <div class='findable'></div> -->
+					</div>
+
+
+				</div>
+				
 			</div>
 			<!-- END wrap_findbar -->
 
 			<div class="scrollbar_findables"></div>
 
 			<div class="wrap_context">
-				<div class="content_plate"></div>
-				<div class="content_plate"></div>
-				<div class="content_plate"></div>
+				<!-- <div class="content_plate"></div> -->
+				<!-- <div class="content_plate"></div> -->
+				<!-- <div class="content_plate"></div> -->
 			</div>
 
 			<!-- <div class="scrollbar_context"></div> -->
 
 			<div class="wrap_userbar">
 				
-				<div class="userblock"></div>
-				
-				<div class="wrap_pins">
-					<div class="pinnedItem"></div>
-					<div class="pinnedItem"></div>
-					<div class="pinnedItem"></div>
-					<div class="pinnedItem"></div>
-					<div class="pinnedItem"></div>
-					<div class="pinnedItem"></div>
-					<div class="pinnedItem"></div>
-					<div class="pinnedItem"></div>
-					<div class="pinnedItem"></div>
-					<div class="pinnedItem"></div>
-					<div class="pinnedItem"></div>
+				<div class="userblock">
+					
+					<input class="field" type="text" name="">
+					<input class="field" type="text" name="">
+					<div class="loginButton">Login</div>
 				</div>
 				
-				<div class="catbar_user_small">
-					<div class="wrap_catbox_small catbox_trainers">
-						<div class="catbox_plate_small">
-							<div>Trainers</div>
-							<div></div>
-						</div>
-						<div class="catbox_arrow_small"></div>
+				<div class="pinblock displayNone">
+					
+					<div class="wrap_pins">
+						<div class="pinnedItem"></div>
+						<div class="pinnedItem"></div>
+						<div class="pinnedItem"></div>
+						<div class="pinnedItem"></div>
+						<div class="pinnedItem"></div>
+						<div class="pinnedItem"></div>
+						<div class="pinnedItem"></div>
+						<div class="pinnedItem"></div>
+						<div class="pinnedItem"></div>
+						<div class="pinnedItem"></div>
+						<div class="pinnedItem"></div>
 					</div>
-					<div class="wrap_catbox_small catbox_routines">
-						<div class="catbox_plate_small">
-							<div>Routines</div>
-							<div></div>
+					
+					<div class="catbar_user_small">
+						<div class="wrap_catbox_small catbox_trainers">
+							<div class="catbox_plate_small">
+								<div>Trainers</div>
+								<div></div>
+							</div>
+							<div class="catbox_arrow_small"></div>
 						</div>
-						<div class="catbox_arrow_small"></div>
-					</div>
-					<div class="wrap_catbox_small catbox_mealPlans">
-						<div class="catbox_plate_small">
-							<div>Meals</div>
-							<div></div>
+						<div class="wrap_catbox_small catbox_routines">
+							<div class="catbox_plate_small">
+								<div>Routines</div>
+								<div></div>
+							</div>
+							<div class="catbox_arrow_small"></div>
 						</div>
-						<div class="catbox_arrow_small"></div>
-					</div>
-					<div class="wrap_catbox_small catbox_events">
-						<div class="catbox_plate_small">
-							<div>Events</div>
-							<div></div>
+						<div class="wrap_catbox_small catbox_mealPlans">
+							<div class="catbox_plate_small">
+								<div>Meals</div>
+								<div></div>
+							</div>
+							<div class="catbox_arrow_small"></div>
 						</div>
-						<div class="catbox_arrow_small"></div>
+						<div class="wrap_catbox_small catbox_events">
+							<div class="catbox_plate_small">
+								<div>Events</div>
+								<div></div>
+							</div>
+							<div class="catbox_arrow_small"></div>
+						</div>
 					</div>
 				</div>
+				<!-- END pinblock -->
 			</div>
 			<!-- END wrap_userbar -->
 
-			<div class="scrollbar_user"></div>
+			<div class="scrollbar_user displayNone"></div>
 
 		</div>
 		<!-- END innerwrap_fithub -->
@@ -160,6 +179,6 @@
 
 
 	<!-- Scripts -->
-	<!-- <script type="text/javascript" src="fithub.js"></script> -->
+	<script type="text/javascript" src="/frontEnd/fithub.js"></script>
 </body>
 </html>

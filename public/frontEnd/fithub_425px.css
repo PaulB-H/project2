@@ -83,7 +83,7 @@ phones / 425px
 		height: 52vh;
 		position: relative;
 		left: -6.4%;
-		margin-top: 139px;
+		margin-top: 182px;
 		margin-left: 0%;
 		padding-left: 2px;
 
@@ -236,6 +236,14 @@ phones / 425px
 	}
 
 
+
+	.dropdown_findbar {
+		margin-left: 0;
+	}
+
+	.dropdownMenu {
+		margin-left: 0;
+	}
 
 
 }
