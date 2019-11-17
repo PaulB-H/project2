@@ -98,7 +98,7 @@
 			<div class="wrap_context">
 				
 				<div class="content_plate">
-					<form action="api/user"  method="POST">
+					<form action="/api/users"  method="POST">
 						First name:<br/>
 						<input type="text" name="firstname"><br/>
 						Last name:<br/>
@@ -155,7 +155,7 @@
 					 <!-- Routine Builder Section -->
 					 <div class="container col" id="routine_builder">
 						<h1>Routine Manager</h1>
-						<div id="Kinetics" class="row" style="height: 100vh; min-height: fit-content; background-color: lightsteelblue">
+						<div id="Kinetics" class="row" style="height: 100vh; min-height: fit-content; background-color: lightsteelblue; border-block-color: blue;">
 							<div class="row" style="width:100%">
 								<div class="col-sm-6" id="routineManager" style="display: flex;flex-direction: column">
 									<div class="row" style="overflow-y: auto; display: flex;flex-direction: row">	
@@ -171,10 +171,10 @@
 												<button id="save_btn" class="routineBtn col" onclick="saveExercise()">Save Exercise</button>
 											</div>
 										</div>
-										<div id="routine-window" class="col-sm-6">
-											<div id="routine_details" style="height:75vh; overflow: scroll; display: flex;flex-direction: column"></div>
-										</div>
 									</div>
+								</div>
+								<div id="routine-window" class="col-sm-6">
+									<div id="routine_details" style="height:75vh; overflow: scroll; display: flex;flex-direction: column"></div>
 								</div>
 							</div>
 						</div>

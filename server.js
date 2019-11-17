@@ -121,10 +121,27 @@ app.post(`/api/user/:currUser`, async function(req, res) {
   res.send(result);
 });
 
-app.get(`api/users`, async function(req, res) {
+app.post(`/api/users`, async function(req, res) {
+  console.log(req.body);
   let result = await db.query(
-    `select id, username from fh_users where istrainer = 1`
+    `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, trainerid, cellphone, email, fitness_goals, istrainer, trainer_bio)
+    values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      req.body.email,
+      req.body.firstname,
+      req.body.lastname,
+      req.body.address_line1,
+      req.body.address_line2,
+      req.body.city,
+      req.body.postal_code,
+      Number(req.body.istrainer),
+      req.body.cellphone,
+      req.body.email,
+      req.body.fitness_goals,
+      req.body.trainer_bio
+    ]
   );
+  console.log(result);
   res.send(result);
 });
 
@@ -319,6 +336,23 @@ app.post(`/routine/save/:currUser/:routineName/:exercise`, async function(
     var writeHdr = await db.query(
       `insert into fh_routine_hdr(userid, routine_name) values(?, ?)`,
       [req.params.currUser, req.params.routineName]
+    );
+
+    var writeDtl = await db.query(
+      `insert into fh_routine_dtl(routine_id, routine_details, target_muscle, img1_path, img2_path)
+    values(?, ?, ?, ?, ?)`,
+      [writeHdr.insertId, req.params.exercise, "", "", ""]
+    );
+  } else {
+    var writeHdr = await db.query(
+      `select id from fh_routine_hdr where userid = ? and routine_name = ?`,
+      [req.params.currUser, req.params.routineName]
+    );
+
+    var writeDtl = await db.query(
+      `insert into fh_routine_dtl(routine_id, routine_details, target_muscle, img1_path, img2_path)
+    values(?, ?, ?, ?, ?)`,
+      [writeHdr[0].id, req.params.exercise, "", "", ""]
     );
   }
 
