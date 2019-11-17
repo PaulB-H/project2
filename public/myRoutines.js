@@ -1,8 +1,5 @@
 async function myRoutines() {
   $("#myRoutines").empty();
-  // $(
-  //   `<button id="newroutine_btn" class="saveBtn col" onclick="ignition()">New Routine</button>`
-  // ).appendTo("#initRoutine");
   $.ajax({
     url: `/routine/${currUser}`,
     type: "GET",
@@ -56,7 +53,7 @@ async function ignition() {
         `<span id="routine_hdr"><h5 style="text-align: center">${result[0].routine_name}</h5></span>`
       ).prependTo("#routine-window");
     }
-  });
+  }).then(saveExercise());
 }
 
 async function saveExercise() {
@@ -71,6 +68,7 @@ async function saveExercise() {
       type: "POST",
       data: {},
       success: function(result) {
+        console.log(result[0]);
         $(`<div class="msgBox" style="margin: 1em">
               <div style="background-color:white">${result[0].title}</div></div>`).appendTo(
           "#myRoutines"
