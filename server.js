@@ -1,10 +1,17 @@
 const express = require("express");
-const mysql = require("mysql");
-const path = require("path");
-const fs = require("fs");
+const mysql   = require("mysql");
+const path    = require("path");
+const fs      = require("fs");
+const dotenv  = require('dotenv');
 
-var app = express();
-var port = process.env.PORT || 3000;
+// maybe like this??  
+// const dotenv = require(‘dotenv’).config();
+// const dotenv = require('dotenv')
+// I COMMENTED THE ABOVE OUT FOR NOW, IT WAS ERRING
+
+
+var app   = express();
+var port  = process.env.PORT || 3000;
 var db;
 
 // Sets up the Express app to handle data parsing

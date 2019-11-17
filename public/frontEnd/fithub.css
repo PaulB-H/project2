@@ -34,7 +34,8 @@
 	--shadow_opac05_small: 	0 1px 5px  0 rgba(0,0,0, 0.05);
 	--shadow_harsh_1:       0 1px 1px  0 rgba(0,0,0, 0.2);
 
-	--fontFamily_main:  	'Kohinoor Telugu';
+	--fontFamily_main:  	'Kohinoor Telugu', 'Montserrat', sans-serif;
+
 }
 
 ::-webkit-scrollbar {
@@ -62,6 +63,13 @@ body {
 	display: flex;
 }
 
+.color_greenMain {
+	color: var(--green_main);
+}
+
+.color_greyBlue {
+	color: var(--greyBlue);
+}
 
 
 
@@ -82,6 +90,7 @@ body {
 .innerwrap_fithub {
 	width: 100%;
 	display: flex;
+	scrollbar-width: none;
 }
 
 .wrap_findbar {
@@ -596,7 +605,7 @@ height: 12px;
 	margin-top: 87px;
 	font-size: 18px;
 	font-weight: 800;
-	color: var(--greyBlue);
+	/* color: var(--greyBlue); */
 	letter-spacing: -0.6px;
 	line-height: 16px;
 	text-align: center;;
@@ -607,7 +616,7 @@ height: 12px;
 	margin-top: 17px;
 	font-size: 26px;
 	font-weight: 800;
-	color: var(--green_main);
+	/* color: var(--green_main); */
 	letter-spacing: -0.87px;
 	line-height: 26px;
 	text-align: center;;
@@ -656,15 +665,17 @@ height: 12px;
 	border-radius: 4px;
 	background-color: rgb(246, 247, 251);
 	border: 1px solid var(--green_main);
-	position: absolute;
+	font-size: 13px;
+	padding-left: 5%;
 }
 
 .loginButton,
-.init_createAccountButton {
+.init_createAccountButton,
+.final_createAccountButton,
+.back_loginButton {
 	height: 32px;
 	width: 82%;
 	margin: 10px auto 0;
-	background-color: var(--green_main);
 	border-radius: 4px;
 	color: white;
 	font-weight: 800;
@@ -672,19 +683,21 @@ height: 12px;
 	line-height: 32px;
 }
 
-.loginButton {
+.loginButton,
+.final_createAccountButton {
 	margin: 10px auto 0;
+	background-color: var(--green_main);
 }
 
-.init_createAccountButton {
+.init_createAccountButton,
+.back_loginButton {
 	margin: 6px auto 0;
 	background-color: var(--greyBlue);
 }
 
 
 
-
-
+/* .color_greenMain */
 
 
 
