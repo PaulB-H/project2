@@ -3,8 +3,15 @@ let selDate = $("#selDate");
 selDate.value = new Date();
 $("#selDate").val(new Date());
 $("#selDate").innerText = new Date();
-console.log("Testing " + selDate);
 
+// document.getElementsByName("istrainer").addEventListener("change", function() {
+//   if (document.getElementsByName("istrainer").checked) {
+//     document.getElementsByName("trainer_bio").style.display = "block";
+//     document.getElementsByName("fitness_goals").style.display = "none";
+//   }
+// });
+
+// isTrainer.addEventListener;
 // Defining Variables
 
 function today() {
