@@ -117,9 +117,9 @@
 						Email:<br/>
 						<input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30" name="email"><br/>
 						Password:<br/>
-						<input type="password" id="password" name="pwd"><br/>
+						<input type="text" id="password" name="password"><br/>
 						Personal Trainer:<br/>
-						<input type="checkbox" name="istrainer" value="1"><br/>
+						<input type="checkbox" name="istrainer" onchange="toggleInfo(this)" value=""><br/>
 						Fitness Goals:<br/>
 						<textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33"></textarea><br/>
 						Trainer Bio:<br/>
@@ -134,21 +134,20 @@
 						<h1>Trainer</h1>
 						<div id="Trainer" class="row" style="height: 100vh; min-height: fit-content; background-color: lightsteelblue">
 							<div class="row" style="width:100%">
-								<div class="col-sm-5" id="bioscreen"></div>
-								<div class="col-sm-7" id="client_list">
-									<div class="row" style="overflow-y: auto; display: flex;flex-direction: row">	
-										<div class="col-sm-6" id="myClients"  style="height:75vh; overflow: scroll; display: flex;flex-direction: column"></div>
-										<div class="col-sm-6" id="potentialClients"></div>
-									</div>
-									<!-- <div class="col-sm-12" id="clientBio" style="background-color: white; overflow-y: auto; display: flex;flex-direction: column"></div> -->
+								<div class="col-sm-6" id="bioscreen" style="height:60vh"></div>
+								<div class="col-sm-6" id="client_list" style="height:60vh">
+									<!-- <div class="row" style="overflow-y: auto; display: flex;flex-direction: row">	 -->
+										<div class="col" id="potentialClients" style="height:60vh; overflow: scroll; display: flex;flex-direction: column"></div>
+									<!-- </div> -->
 								</div>
+								<div class="col-sm-12" id="clientBio" style="background-color: white; overflow-y: auto; display: flex;flex-direction: column"></div>
 							</div>
 						</div>
 					</div>
 				</div>
 
 				<!-- Chatterbox -->
-				<!-- <div class="content_plate content_plate1">
+				<div class="content_plate content_plate1">
 					<div class="container col" id="chatterbox">
 						<h1>ChatterBox</h1>
 						<div id="ChatterBox" class="row" style="height: 100vh; min-height: fit-content; background-color: lightsteelblue">
@@ -165,16 +164,16 @@
 							</div>
 						</div>
 					</div>
-				</div> -->
+				</div>
 
-				<!-- <div class="content_plate content_plate2">
+				<div class="content_plate content_plate2">
 						<span style = "justify-content:space-between">Calendar
 						<input type="date" id="selDate" name="selDate" value="">
 						<div class="container col" id="day-view"></div>
-				</div> -->
+				</div>
 				
 				<!-- Routine Builder Section -->
-				<!-- <div class="content_plate">
+				<div class="content_plate">
 					 <div class="container col" id="routine_builder">
 						<h1>Routine Manager</h1>
 						<div id="Kinetics" class="row" style="height: 100vh; min-height: fit-content; background-color: lightsteelblue; border-block-color: blue;">
@@ -201,7 +200,7 @@
 							</div>
 						</div>
 					</div>
-				</div> -->
+				</div>
 
 			</div>
 			<!-- End wrap_context -->
@@ -307,6 +306,18 @@
     <script src="./chatterbox.js"></script>
     <script src="./myCalendar.js"></script>
     <script src="./myRoutines.js"></script>
-    <script src="./trainer.js"></script>
+	<script src="./trainer.js"></script>
+	<script>
+		function toggleInfo(checkbox) {
+			console.log("Trying to toggle "+checkbox.value);
+			if(checkbox.checked == true){
+				document.getElementById("#fitness_goals").css("display", "none");
+				document.getElementById("#trainer_bio").css("display", "block");
+			}else{
+				document.getElementById("#fitness_goals").css("display", "block");
+				document.getElementById("#trainer_bio").css("display", "none");
+		}
+		}
+	</script>
 </body>
 </html>

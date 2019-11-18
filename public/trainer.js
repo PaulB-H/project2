@@ -1,19 +1,31 @@
 async function myClients() {
+  showClientProfile(currUser);
   $("#myClients").empty();
+  $(
+    `<div>
+      <button class="clients myBtn col" value="${currUser}" onclick="showClientProfile(${currUser})">
+        My Profile
+      </button>
+    </div>`
+  ).appendTo("#bioscreen");
   $.ajax({
     url: `/api/trainer/client/${currUser}`,
     type: "GET",
     cache: false,
     success: function(result) {
       console.log("success reached");
+      $(
+        `<button id="newclient_btn" class="newchatBtn" onclick="">List of Potential Clients</button>`
+      ).appendTo("#potentialClients");
       for (i = 0; i < result.length; i++) {
         $(
-          `<div>
-            <button class="clients saveBtn col" value="${result[i].id}" onclick="showClientList(${result[i].id}, '${result[i].username}')">
+          `<div class="col">
+            <button><button class=delBtn value="${result[i].id}" onclick="delClient(${result[i].id})">X</button>
+            <button class="clients saveBtn" style="width:${result[i].username.length}" value="${result[i].id}" onclick="showClientProfile(${result[i].id})">
              ${result[i].username}
             </button>
           </div>`
-        ).appendTo("#myClients");
+        ).appendTo("#bioscreen");
       }
       getPotentialClients();
     }
@@ -29,12 +41,13 @@ async function getPotentialClients() {
     success: function(result) {
       console.log("success reached");
       $(
-        `<button id="newclient_btn" class="newchatBtn col" onclick="showStrangers()">List of Potential Clients</button>`
+        `<button id="newclient_btn" class="newchatBtn" onclick="showStrangers()">List of Potential Clients</button>`
       ).appendTo("#potentialClients");
       for (i = 0; i < result.length; i++) {
         $(
-          `<div>
-            <button class="correspondents saveBtn col" value="${result[i].id}" onclick="showConversation(${result[i].id}, '${result[i].username}')">
+          `<div class="col">
+            <button class=addBtn value="${result[i].id}" onclick="getClient(${result[i].id})">A</button>
+            <button class="correspondent saveBtn" style="width:${result[i].username.length}" value="${result[i].id}" onclick="showClientProfile(${result[i].id})">
              ${result[i].username}
             </button>
           </div>`
@@ -44,48 +57,51 @@ async function getPotentialClients() {
   });
 }
 
-// async function showClientList(correspondent, correspondentName) {
-//   $.ajax({
-//     url: `/hubchat/chatter/${currUser}/${correspondent}`,
-//     type: "GET",
-//     cache: false,
-//     success: function(result) {
-//       $("#comm_thread").empty();
-//       $("#chatWith").empty();
-//       $(
-//         `<span><h5 id="chatWith" style="text-align: center">${correspondentName}</h5></span>`
-//       ).prependTo("#chat-window");
-
-//       // function writeMessages() {
-//       for (i = 0; i < result.length; i++) {
-//         $(`<div class="msgBox ${setMessageJustify(
-//           currUser,
-//           result[i].sentbyid
-//         )}" style="margin: 1em">
-//             <span>${moment(result[i].createdat).format("LLLL")}</span>
-//             <div style="background-color:white">${
-//               result[i].chatmessage
-//             }</div></div>`).appendTo("#comm_thread");
-//       }
-//       // };
-//       // let hndler = await writeMessages();
-
-//       $(`<div style="position:absolute; bottom: -40; right: 0">
-// 								<textarea
-// 								rows="4"
-// 								cols="50"
-// 								spellcheck="true"
-// 								class="card time-block col"
-// 								style="background-color:lemonchiffon"
-// 								id="msg_editor"
-// 								value=""
-// 								>
-// 								</textarea>
-// 								<div><button id="save_btn" class="saveBtn col" value="" onclick=saveMessage()>Save Message</button></div>
-// 							</div>`).appendTo("#chat-window");
-//     }
-//   });
-// }
+async function showClientProfile(userId) {
+  $("#clientBio").empty();
+  console.log("Getting Bio");
+  $.ajax({
+    url: `/api/trainer/clientinfo/${userId}`,
+    type: "GET",
+    cache: false,
+    success: function(result) {
+      console.log(result);
+      if (userId !== currUser) {
+        $(`<div style="position:relative; top: 0">
+            <form action="/api/users"  method="POST" target="hidden-form">
+              First name: <input type="text" name="firstname" value="${result[0].first_name}" readonly><br/>
+              Last name:  <input type="text" name="lastname" value="${result[0].last_name}" readonly><br/>
+              Address:<br/>
+              <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}" readonly><br/>
+              <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}" readonly><br/>
+              City: <input type="text" name="city" value="${result[0].city}" readonly><br/>
+              Postal Code: <input type="text" name="postal_code" value="${result[0].postal_code}" readonly><br/>
+              Contact No.: <input type="tel" id="rd_only_rd_only_phone" name="cellphone" value="${result[0].cellphone}" readonly><br/>
+              Email: <input type="email" id="rd_only_email" value="${result[0].email}" readonly><br/>
+              Fitness Goals:<br/>
+              <textarea id="rd_only_fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}" readonly></textarea><br/>
+            </form>
+          </div>`).appendTo("#clientBio");
+      } else {
+        $(`<div style="position:relative; top:0">
+            <form action="/api/users"  method="POST" target="hidden-form">
+              First Name: <input type="text" name="firstname" value="${result[0].first_name}"><br/>
+              Last Name: <input type="text" name="lastname" value="${result[0].last_name}"><br/>
+              Address:<br/>
+              <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}"><br/>
+              <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}"><br/>
+              City: <input type="text" name="city" value="${result[0].city}"><br/>
+              Postal Code: <input type="text" name="postal_code" value="${result[0].postal_code}"><br/>
+              Contact No.: <input type="tel" id="rd_only_rd_only_phone" name="cellphone" value="${result[0].cellphone}"><br/>
+              Email: <input type="email" id="rd_only_email" value="${result[0].email}"><br/>
+              Fitness Goals:<br/>
+              <textarea id="rd_only_fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea>
+            </form>
+          </div>`).appendTo("#clientBio");
+      }
+    }
+  });
+}
 
 // function setMessageJustify(currUser, correspondent) {
 //   if (currUser == correspondent) {

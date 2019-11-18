@@ -78,8 +78,15 @@ app.get(`/api/trainer/client/:currUser`, async function(req, res) {
 
 app.get(`/api/trainer/potentials`, async function(req, res) {
   let result = await db.query(
-    `select id, username from fh_users where trainerid is null`
+    `select id, username from fh_users where trainerid is null and email is not null`
   );
+  res.send(result);
+});
+
+app.get(`/api/trainer/clientinfo/:userId`, async function(req, res) {
+  let result = await db.query(`select * from fh_users where id = ?`, [
+    req.params.userId
+  ]);
   res.send(result);
 });
 
@@ -118,7 +125,7 @@ app.post(`/api/user/:currUser/:userObj`, async function(req, res) {
 app.post(`/api/users`, async function(req, res) {
   console.log(req.body);
   let result = await db.query(
-    `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, password, fitness_goals, istrainer, trainer_bio)
+    `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, user_password, fitness_goals, istrainer, trainer_bio)
     values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       req.body.email,
