@@ -174,6 +174,32 @@ fh.func.apiCall_exercises = function(){
 
 // const recipeURL = `https://api.edamam.com/search?q=${userQuery}&excluded=${userExclusion}&health=${userHealth}&app_id=${app_id}&app_key=${app_key}`;
 
+
+//			SCRIPT SIDE TO SEND REQUEST TO ENDPOINT AND CREATE RECIPE OBJECT
+// fh.func.createObj_recipe = (url, myArray, flag)=>{
+	
+// 	return new Promise((resolve, reject)=>{
+//
+// 		fetch(url)
+// 		.then((resp)=>resp.json())
+// 		.then((data)=>{
+//
+// 			// console.log(data, 'data');
+//				
+// 			for(let i = 0; i < 10; i++){
+//
+// 				let obj = {};
+// 					obj.name = data.hits[i].label;
+//					obj.ingredients = data.hits[i].ingredientLines;
+// 					obj.desc = data.results[i].description;
+// 					obj.img  = [];
+// 				let url_forImage = `${data.hits[i].image}`;
+// 				
+// 			};
+// 		})
+// 	});
+// };
+
 // Get the recipe title for the first recipe from the returned array:
 // data.hits[i].label
 
@@ -195,6 +221,27 @@ fh.func.apiCall_exercises = function(){
 // View recipe instructions on original website:
 // (Users will have to click this if they want to be able to see the instructions, API does not include that)
 // data.hits[1].url
+
+			// ENDPOINT TO PIN / SAVE RECIPE 
+// app.post(`api/pinned`, async function(req, res) {
+// 	console.log(req);
+// 	let newUser = await db.query(
+// 	  `insert into fh_recipePins(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, fitness_goals, istrainer)
+// 	values(? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+// 	  [
+// 		req.params.recipeObj.username,
+// 		req.params.recipeObj.first_name,
+// 		req.params.recipeObj.last_name,
+// 		req.params.recipeObj.address_line1,
+// 		req.params.recipeObj.address_line2,
+// 		req.params.recipeObj.city,
+// 		req.params.recipeObj.postal_code,
+// 		req.params.recipeObj.cellphone,
+// 		req.params.recipeObj.email,
+// 		req.params.recipeObj.fitness_goals,
+// 		req.params.recipeObj.istrainer
+// 	  ]
+// 	);
 
 			// RECIPE API END
 
@@ -624,6 +671,29 @@ fh.func.addListener_click_loginButtonProper = function(){
 		loginButton.addEventListener('click', function(){
 
 			console.log('clicked login button proper');
+
+			// get inputs from fields
+			// create object
+			// attempt to post
+			let email = document.querySelector('.loginEmail').value;
+			let pass  = document.querySelector('.loginPass').value;
+
+			let newUserObj = {};
+				newUserObj.email = email;
+				newUserObj.pass  = pass;
+
+
+			// let url = 'api/user';
+			// let url = 'http://localhost:3000/api/user';
+
+			
+			// fetch(url)
+			// .then((resp)=>resp.json())
+			// .then((data)=>{
+
+			// 	console.log();
+			// });
+
 		});
 };
 
@@ -635,6 +705,33 @@ fh.func.addListener_click_createAccountProper = function(){
 		final_createAccountButton.addEventListener('click', function(){
 
 			console.log('clicked create account button proper');
+
+			let email = document.querySelector('.loginEmail').value;
+			let pass  = document.querySelector('.loginPass').value;
+
+
+			let newUserObj = {};
+				newUserObj.email = email;
+				newUserObj.pass  = pass;
+				newUserObj       = JSON.stringify(newUserObj);
+
+
+			// let url = 'http://localhost:3000/api/user';
+			let url = 'http://localhost:3000/api/users';
+
+			fetch(url, {
+				method: 'POST',
+				headers: {
+					'Accept':       'application/json, text/plain, */*',
+					'Content-type': 'application/json'
+				},
+				body: newUserObj
+			})
+			.then( (resp) => resp.json() )
+			.then(function(data){
+
+				console.log(data, "DATA");
+			})
 		});
 };
 
