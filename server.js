@@ -62,34 +62,22 @@ async function validUserName(username) {
   }
 }
 
-app.post(`api/user`, async function(req, res) {
-  console.log(req);
-  let newUser = await db.query(
-    `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, fitness_goals, istrainer)
-  values(? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    [
-      req.params.userObj.username,
-      req.params.userObj.first_name,
-      req.params.userObj.last_name,
-      req.params.userObj.address_line1,
-      req.params.userObj.address_line2,
-      req.params.userObj.city,
-      req.params.userObj.postal_code,
-      req.params.userObj.cellphone,
-      req.params.userObj.email,
-      req.params.userObj.fitness_goals,
-      req.params.userObj.istrainer
-    ]
+app.get(`/api/trainer/client/:currUser`, async function(req, res) {
+  let result = await db.query(
+    `select id, username from fh_users where trainerid = ?`,
+    [req.params.currUser]
   );
-
-  let result = await db.query(`select id from fh_users where username = ?`, [
-    req.params.userObj.username
-  ]);
-
   res.send(result);
 });
 
-app.post(`/api/user/:currUser`, async function(req, res) {
+app.get(`/api/trainer/potentials`, async function(req, res) {
+  let result = await db.query(
+    `select id, username from fh_users where trainerid is null`
+  );
+  res.send(result);
+});
+
+app.post(`/api/user/:currUser/:userObj`, async function(req, res) {
   let result = await db.query(
     `update fh_users set username = IFNULL(?, username),
     first_name = IFNULL(?, first_name), 
@@ -124,8 +112,8 @@ app.post(`/api/user/:currUser`, async function(req, res) {
 app.post(`/api/users`, async function(req, res) {
   console.log(req.body);
   let result = await db.query(
-    `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, fitness_goals, istrainer, trainer_bio)
-    values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, password, fitness_goals, istrainer, trainer_bio)
+    values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       req.body.email,
       req.body.firstname,
@@ -136,12 +124,19 @@ app.post(`/api/users`, async function(req, res) {
       req.body.postal_code,
       req.body.cellphone,
       req.body.email,
+      req.body.password,
       req.body.fitness_goals,
       req.body.istrainer,
       req.body.trainer_bio
     ]
   );
-  console.log(result);
+  res.send(result);
+});
+
+app.get(`/api/users/trainers`, async function() {
+  let result = await db.query(
+    `select id, username from fh_users where istrainer = 1`
+  );
   res.send(result);
 });
 
