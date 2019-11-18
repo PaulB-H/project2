@@ -4,12 +4,6 @@ const path    = require("path");
 const fs      = require("fs");
 const dotenv  = require('dotenv');
 
-// maybe like this??  
-// const dotenv = require(‘dotenv’).config();
-// const dotenv = require('dotenv')
-// I COMMENTED THE ABOVE OUT FOR NOW, IT WAS ERRING
-
-
 var app   = express();
 var port  = process.env.PORT || 3000;
 var db;
@@ -49,8 +43,10 @@ if (process.env.JAWSDB_URL) {
   db = new Database({
     host: "localhost",
     port: 3306,
+    // user: "root",
+    // password: "IamTheBoxGhost1971",
     user: "root",
-    password: "IamTheBoxGhost1971",
+    password: "steven123",
     database: "fitness_hub_db"
   });
 }
@@ -114,6 +110,7 @@ app.post(`/api/user/:currUser/:userObj`, async function(req, res) {
     ]
   );
   res.send(result);
+  // res.end();
 });
 
 app.post(`/api/users`, async function(req, res) {
@@ -139,6 +136,7 @@ app.post(`/api/users`, async function(req, res) {
   );
   res.send(result);
 });
+
 
 app.get(`/api/users/trainers`, async function() {
   let result = await db.query(

@@ -163,7 +163,7 @@ fh.func.apiCall_exercises = function(){
 		// </div>
 // 
 
-// fh.func.addListener_click_listRecepies Proper = function(){
+// fh.func.addListener_click_listRecepiesProper = function(){
 //
 // 	let findRecipesButton = document.querySelector('.findRecipesButton');
 // 		findRecipesButton.addEventListener('click', function(){
@@ -608,11 +608,25 @@ fh.func.click_findableExercise = function(me){
 						`background-image: url("${exercise.img[1]}");`
 					);
 
-
 				contentPlate.appendChild(exerciseImagesFlex);	
 					exerciseImagesFlex.appendChild(exercise_image);
 					exerciseImagesFlex.appendChild(exercise_image_2);
 			};
+
+
+			let wrap_routineAddControls           = document.createElement('div');
+				wrap_routineAddControls.className = 'wrap_routineAddControls';
+
+			let addToNewRoutineButton           = document.createElement('div');
+				addToNewRoutineButton.className = 'addToNewRoutineButton';
+				addToNewRoutineButton.innerHTML = 'Add to New Routine';
+				addToNewRoutineButton.addEventListener('click', function(){
+
+					
+				});
+			
+			contentPlate.appendChild(wrap_routineAddControls);
+				wrap_routineAddControls.appendChild(addToNewRoutineButton);
 
 
 			// append to DOM
@@ -712,7 +726,7 @@ fh.func.addListener_click_createAccountProper = function(){
 
 			let newUserObj = {};
 				newUserObj.email = email;
-				newUserObj.pass  = pass;
+				newUserObj.pwd   = pass;
 				newUserObj       = JSON.stringify(newUserObj);
 
 
@@ -752,8 +766,8 @@ fh.func.addListener_click_loginButtonBack = function(){
 				loginTitle.innerHTML = "Welcome to FitHub";
 				loginTitle.classList.add('color_greenMain');
 				loginTitle.classList.remove('color_greyBlue');
-			
-				
+
+
 			// displayNone the two buttons (final_createAccountButton and back_loginButton)
 			let final_createAccountButton = document.querySelector('.final_createAccountButton');
 				final_createAccountButton.classList.add('displayNone');
@@ -800,28 +814,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 	
 
 	fh.func.addListener_click_body();
+
+
+
+	fh.func.preventDefault_registrationForm();
 });
-
-
-/*
-
-userMuscle is following id
-
-Front Muscles
--------------
-Shoulders 2
-Obliques 14
-Chest 4
-Quads 10
-Abs 6
-
-Rear Muscles
-------------
-Lower Neck 9
-Triceps 5
-Outer-Back 12
-Butt 8
-Hamstring 11
-Calves 7
-
-*/

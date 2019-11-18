@@ -103,7 +103,9 @@
 			<div class="wrap_context">
 				
 				<div class="content_plate">
-					<form action="/api/users"  method="POST">
+					
+					<IFRAME style="display:none" name="hidden-form"></IFRAME>
+					<form class="registrationForm" action="/api/users"  method="POST" target="hidden-form">
 						First name:<br/>
 						<input type="text" name="firstname"><br/>
 						Last name:<br/>
@@ -129,9 +131,9 @@
 						<textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
 						<input type="submit" value="Submit">
 					</form>
-				</div>
+				</div>	
 
-				<!-- Trainer -->
+									<!-- Trainer -->
 				<div class="content_plate content_plate0">
 					<div class="container col" id="trainerbox">
 						<h1>Trainer</h1>
