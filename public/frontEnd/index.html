@@ -21,15 +21,8 @@
 	<link rel="stylesheet" type="text/css" href="./chatterbox.css" />
     <link rel="stylesheet" type="text/css" href="./myCalendar.css" />
     <link rel="stylesheet" type="text/css" href="./myRoutines.css" />
-<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="./trainer.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
-=======
-	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/> -->
-	
-	<!-- Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
->>>>>>> b145cc45dee0ed4e850852e15bdde9ee9621f917
 </head>
 <body>
 
@@ -106,7 +99,8 @@
 			<div class="wrap_context">
 				
 				<div class="content_plate">
-					<form action="/api/users"  method="POST">
+					<IFRAME style="display:none" name="hidden-form"></IFRAME>
+					<form action="/api/users"  method="POST" target="hidden-form">
 						First name:<br/>
 						<input type="text" name="firstname"><br/>
 						Last name:<br/>
@@ -123,7 +117,7 @@
 						Email:<br/>
 						<input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30" name="email"><br/>
 						Password:<br/>
-						<input type="password" id="password" name="pwd">
+						<input type="password" id="password" name="pwd"><br/>
 						Personal Trainer:<br/>
 						<input type="checkbox" name="istrainer" value="1"><br/>
 						Fitness Goals:<br/>

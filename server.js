@@ -1,17 +1,16 @@
 const express = require("express");
-const mysql   = require("mysql");
-const path    = require("path");
-const fs      = require("fs");
-const dotenv  = require('dotenv');
+const mysql = require("mysql");
+const path = require("path");
+const fs = require("fs");
+const dotenv = require("dotenv");
 
-// maybe like this??  
+// maybe like this??
 // const dotenv = require(‘dotenv’).config();
 // const dotenv = require('dotenv')
 // I COMMENTED THE ABOVE OUT FOR NOW, IT WAS ERRING
 
-
-var app   = express();
-var port  = process.env.PORT || 3000;
+var app = express();
+var port = process.env.PORT || 3000;
 var db;
 
 // Sets up the Express app to handle data parsing
@@ -113,7 +112,7 @@ app.post(`/api/user/:currUser/:userObj`, async function(req, res) {
       req.params.currUser
     ]
   );
-  res.send(result);
+  res.send();
 });
 
 app.post(`/api/users`, async function(req, res) {
@@ -137,7 +136,7 @@ app.post(`/api/users`, async function(req, res) {
       req.body.trainer_bio
     ]
   );
-  res.send(result);
+  res.send();
 });
 
 app.get(`/api/users/trainers`, async function() {
