@@ -265,6 +265,7 @@ height: 12px;
 	margin-left: 10%;
 	border-radius: 4px;
 	background-color: var(--green_main);
+	box-shadow: var(--shadow_opac10);
 
 	color: white;
 	line-height: 28px;
@@ -381,6 +382,7 @@ height: 12px;
 }
 
 .content_plate {
+	position: relative;
 	width: 100%;
 	margin-top: 46px;
 	padding-bottom: 10%;
@@ -695,9 +697,32 @@ height: 12px;
 	background-color: var(--greyBlue);
 }
 
+.wrap_routineAddControls {
+	display: flex;
+	position: relative;
+	width: 90%;
+	height: 32px;
+	margin-top: 32px;
+	left: 10%;
 
+	border: 1px solid red;
+}
 
-/* .color_greenMain */
+.addToNewRoutineButton {
+	height: 100%;
+	width: 33%;
+	position: absolute;
+	left: 0;
+	border-radius: 4px;
+	background-color: var(--green_main);
+	text-align: center;
+	line-height: 32px;
+	color: white;
+	font-weight: 600;
+	box-shadow: var(--shadow_opac10);
+
+	/* border: 1px solid blue; */
+}	
 
 
 

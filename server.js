@@ -4,6 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const dotenv = require("dotenv");
 
+<<<<<<< HEAD
 // maybe like this??
 // const dotenv = require(‘dotenv’).config();
 // const dotenv = require('dotenv')
@@ -11,6 +12,10 @@ const dotenv = require("dotenv");
 
 var app = express();
 var port = process.env.PORT || 3000;
+=======
+var app   = express();
+var port  = process.env.PORT || 3000;
+>>>>>>> fbaaaee080b5a9aaa0c07a7af3248d44fde8f580
 var db;
 
 // Sets up the Express app to handle data parsing
@@ -48,8 +53,10 @@ if (process.env.JAWSDB_URL) {
   db = new Database({
     host: "localhost",
     port: 3306,
+    // user: "root",
+    // password: "IamTheBoxGhost1971",
     user: "root",
-    password: "IamTheBoxGhost1971",
+    password: "steven123",
     database: "fitness_hub_db"
   });
 }
@@ -119,7 +126,12 @@ app.post(`/api/user/:currUser/:userObj`, async function(req, res) {
       req.params.currUser
     ]
   );
+<<<<<<< HEAD
   res.send();
+=======
+  res.send(result);
+  // res.end();
+>>>>>>> fbaaaee080b5a9aaa0c07a7af3248d44fde8f580
 });
 
 app.post(`/api/users`, async function(req, res) {
@@ -145,6 +157,7 @@ app.post(`/api/users`, async function(req, res) {
   );
   res.send();
 });
+
 
 app.get(`/api/users/trainers`, async function() {
   let result = await db.query(
