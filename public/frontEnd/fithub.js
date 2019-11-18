@@ -123,6 +123,127 @@ fh.func.apiCall_exercises = function(){
 
 };
 
+			// RECIPE API START
+
+// let userQuery = {queryInputVal}
+	// Need input box for queryInputVal
+// let userExclusion = {exclusionInputVal}
+	// Need input box for exclusionInputVal
+
+// let healthQuery = {healthInputVal}
+
+// HTML for searchQuery Input
+		// <div class="excludeRow">
+		// 		<p>Terms to exclude: </p>
+		// 		<input class="userExclusion" type="text">
+		// </div>
+
+
+// HTML for Exclusion Input 
+		// <div class="excludeRow">
+		// 		<p>Terms to exclude: </p>
+		// 		<input class="userExclusion" type="text">
+		// </div>
+
+	// Dropdown for these options
+		// <div class="dropdownMenu healthQuery displayNone">
+		// 		<div><span>alcohol-free</span></div>
+		// 		<div><span>crustacean-free</span></div>
+		// 		<div><span>egg-free</span></div>
+		// 		<div><span>fish-free</span></div>
+		// 		<div><span>gluten-free</span></div>
+		// 		<div><span>kosher</span></div>
+		// 		<div><span>peanut-free</span></div>
+		// 		<div><span>pecatarian</span></div>
+		// 		<div><span>pork-free</span></div>
+		// 		<div><span>shellfish-free</span></div>
+		// 		<div><span>tree-nut-free</span></div>
+		// 		<div><span>vegetarian</span></div>
+		// 		<div><span>vegan</span></div>
+		// </div>
+// 
+
+// fh.func.addListener_click_listRecepies Proper = function(){
+//
+// 	let findRecipesButton = document.querySelector('.findRecipesButton');
+// 		findRecipesButton.addEventListener('click', function(){
+//
+// 			console.log('clicked findRecipesButton proper');
+// 		});
+// };
+
+// const recipeURL = `https://api.edamam.com/search?q=${userQuery}&excluded=${userExclusion}&health=${userHealth}&app_id=${app_id}&app_key=${app_key}`;
+
+
+//			SCRIPT SIDE TO SEND REQUEST TO ENDPOINT AND CREATE RECIPE OBJECT
+// fh.func.createObj_recipe = (url, myArray, flag)=>{
+	
+// 	return new Promise((resolve, reject)=>{
+//
+// 		fetch(url)
+// 		.then((resp)=>resp.json())
+// 		.then((data)=>{
+//
+// 			// console.log(data, 'data');
+//				
+// 			for(let i = 0; i < 10; i++){
+//
+// 				let obj = {};
+// 					obj.name = data.hits[i].label;
+//					obj.ingredients = data.hits[i].ingredientLines;
+// 					obj.desc = data.results[i].description;
+// 					obj.img  = [];
+// 				let url_forImage = `${data.hits[i].image}`;
+// 				
+// 			};
+// 		})
+// 	});
+// };
+
+// Get the recipe title for the first recipe from the returned array:
+// data.hits[i].label
+
+// Picture of recipe:
+// data.hits[i].image
+
+// Ingredient list array
+// data.hits[i].ingredientLines
+
+// Servings
+// data[i].yield
+
+// Calories
+// data[i].calories
+
+// Time to make in minutes:
+// data.[i].totalTime
+
+// View recipe instructions on original website:
+// (Users will have to click this if they want to be able to see the instructions, API does not include that)
+// data.hits[1].url
+
+			// ENDPOINT TO PIN / SAVE RECIPE 
+// app.post(`api/pinned`, async function(req, res) {
+// 	console.log(req);
+// 	let newUser = await db.query(
+// 	  `insert into fh_recipePins(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, fitness_goals, istrainer)
+// 	values(? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+// 	  [
+// 		req.params.recipeObj.username,
+// 		req.params.recipeObj.first_name,
+// 		req.params.recipeObj.last_name,
+// 		req.params.recipeObj.address_line1,
+// 		req.params.recipeObj.address_line2,
+// 		req.params.recipeObj.city,
+// 		req.params.recipeObj.postal_code,
+// 		req.params.recipeObj.cellphone,
+// 		req.params.recipeObj.email,
+// 		req.params.recipeObj.fitness_goals,
+// 		req.params.recipeObj.istrainer
+// 	  ]
+// 	);
+
+			// RECIPE API END
 
 
 fh.func.createObj_exercise = (url, myArray, flag)=>{
@@ -491,9 +612,6 @@ fh.func.click_findableExercise = function(me){
 				contentPlate.appendChild(exerciseImagesFlex);	
 					exerciseImagesFlex.appendChild(exercise_image);
 					exerciseImagesFlex.appendChild(exercise_image_2);
-
-				
-
 			};
 
 
@@ -507,6 +625,158 @@ fh.func.click_findableExercise = function(me){
 
 
 
+fh.func.addListener_click_initCreateAccountButton = function(){
+
+	let init_createAccountButton = document.querySelector('.init_createAccountButton');
+		init_createAccountButton.addEventListener('click', function(){
+
+			// Change color and text of login message and title
+			let loginMessage           = document.querySelector('.loginMessage');
+				loginMessage.innerHTML = "You're on you way";
+				loginMessage.classList.add('color_greenMain');
+				loginMessage.classList.remove('color_greyBlue');
+
+			let loginTitle           = document.querySelector('.loginTitle');
+				loginTitle.innerHTML = "Create Account";
+				loginTitle.classList.add('color_greyBlue');
+				loginTitle.classList.remove('color_greenMain');
+
+
+			// displayNone the two buttons (loginButton and init_createAccountButton)
+			let loginButton = document.querySelector('.loginButton');
+				loginButton.classList.add('displayNone');
+				loginButton.classList.remove('displayBlock');
+
+			let init_createAccountButton = document.querySelector('.init_createAccountButton');
+				init_createAccountButton.classList.add('displayNone');
+				init_createAccountButton.classList.remove('displayBlock');
+
+
+			// display the final_createAccountButton and back_loginButton
+			let final_createAccountButton = document.querySelector('.final_createAccountButton');
+				final_createAccountButton.classList.add('displayBlock');
+				final_createAccountButton.classList.remove('displayNone');
+
+			let back_loginButton = document.querySelector('.back_loginButton');
+				back_loginButton.classList.add('displayBlock');
+				back_loginButton.classList.remove('displayNone');
+		});
+};
+
+
+
+fh.func.addListener_click_loginButtonProper = function(){
+
+	let loginButton = document.querySelector('.loginButton');
+		loginButton.addEventListener('click', function(){
+
+			console.log('clicked login button proper');
+
+			// get inputs from fields
+			// create object
+			// attempt to post
+			let email = document.querySelector('.loginEmail').value;
+			let pass  = document.querySelector('.loginPass').value;
+
+			let newUserObj = {};
+				newUserObj.email = email;
+				newUserObj.pass  = pass;
+
+
+			// let url = 'api/user';
+			// let url = 'http://localhost:3000/api/user';
+
+			
+			// fetch(url)
+			// .then((resp)=>resp.json())
+			// .then((data)=>{
+
+			// 	console.log();
+			// });
+
+		});
+};
+
+
+
+fh.func.addListener_click_createAccountProper = function(){
+
+	let final_createAccountButton = document.querySelector('.final_createAccountButton');
+		final_createAccountButton.addEventListener('click', function(){
+
+			console.log('clicked create account button proper');
+
+			let email = document.querySelector('.loginEmail').value;
+			let pass  = document.querySelector('.loginPass').value;
+
+
+			let newUserObj = {};
+				newUserObj.email = email;
+				newUserObj.pass  = pass;
+				newUserObj       = JSON.stringify(newUserObj);
+
+
+			// let url = 'http://localhost:3000/api/user';
+			let url = 'http://localhost:3000/api/users';
+
+			fetch(url, {
+				method: 'POST',
+				headers: {
+					'Accept':       'application/json, text/plain, */*',
+					'Content-type': 'application/json'
+				},
+				body: newUserObj
+			})
+			.then( (resp) => resp.json() )
+			.then(function(data){
+
+				console.log(data, "DATA");
+			})
+		});
+};
+
+
+
+fh.func.addListener_click_loginButtonBack = function(){
+
+	let back_loginButton = document.querySelector('.back_loginButton');
+		back_loginButton.addEventListener('click', function(){
+
+			// Change color and text of login message and title
+			let loginMessage           = document.querySelector('.loginMessage');
+				loginMessage.innerHTML = "Welcome to active wellness";
+				loginMessage.classList.add('color_greyBlue');
+				loginMessage.classList.remove('color_greenMain');
+
+			let loginTitle           = document.querySelector('.loginTitle');
+				loginTitle.innerHTML = "Welcome to FitHub";
+				loginTitle.classList.add('color_greenMain');
+				loginTitle.classList.remove('color_greyBlue');
+			
+				
+			// displayNone the two buttons (final_createAccountButton and back_loginButton)
+			let final_createAccountButton = document.querySelector('.final_createAccountButton');
+				final_createAccountButton.classList.add('displayNone');
+				final_createAccountButton.classList.remove('displayBlock');
+
+			let back_loginButton = document.querySelector('.back_loginButton');
+				back_loginButton.classList.add('displayNone');
+				back_loginButton.classList.remove('displayBlock');
+
+
+			// display the loginButton button and init_createAccountButton
+			let loginButton = document.querySelector('.loginButton');
+				loginButton.classList.add('displayBlock');
+				loginButton.classList.remove('displayNone');
+
+			let init_createAccountButton = document.querySelector('.init_createAccountButton');
+				init_createAccountButton.classList.add('displayBlock');
+				init_createAccountButton.classList.remove('displayNone'); 
+		}); 
+};
+
+
+
 
 
 
@@ -514,13 +784,22 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     // console.log('DOM fully loaded and parsed');
 
-	fh.func.apiCall_exercises();
 
+	// Exercises call, dropdown event, dropdownItem events, append biceps first
+	fh.func.apiCall_exercises();
 	fh.func.addListener_click_dropdownFindExercise();
 	fh.func.addListener_click_eachItemInExercisesDropdownMenu();
-	fh.func.addListener_click_body();
-
 	fh.func.init_routinesBicepsInFindbar();
+	
+
+	// Login/Registration Panel Events
+	fh.func.addListener_click_initCreateAccountButton();
+	fh.func.addListener_click_loginButtonProper();
+	fh.func.addListener_click_createAccountProper();
+	fh.func.addListener_click_loginButtonBack();
+	
+
+	fh.func.addListener_click_body();
 });
 
 
