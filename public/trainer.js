@@ -59,7 +59,6 @@ async function getPotentialClients() {
 
 async function showClientProfile(userId) {
   $("#clientBio").empty();
-  console.log("Getting Bio");
   $.ajax({
     url: `/api/trainer/clientinfo/${userId}`,
     type: "GET",
@@ -99,6 +98,30 @@ async function showClientProfile(userId) {
             </form>
           </div>`).appendTo("#clientBio");
       }
+    }
+  });
+}
+
+async function delClient(userId) {
+  $.ajax({
+    url: `/api/trainer/delclient/${userId}`,
+    type: "POST",
+    cache: false,
+    success: function(result) {
+      getPotentialClients();
+      showClientProfile(currUser);
+    }
+  });
+}
+
+async function getClient(userId) {
+  $.ajax({
+    url: `/api/trainer/getclient/${currUser}/${userId}`,
+    type: "POST",
+    cache: false,
+    success: function(result) {
+      getPotentialClients();
+      showClientProfile(currUser);
     }
   });
 }

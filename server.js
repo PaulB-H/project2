@@ -4,18 +4,8 @@ const path = require("path");
 const fs = require("fs");
 const dotenv = require("dotenv");
 
-<<<<<<< HEAD
-// maybe like this??
-// const dotenv = require(‘dotenv’).config();
-// const dotenv = require('dotenv')
-// I COMMENTED THE ABOVE OUT FOR NOW, IT WAS ERRING
-
 var app = express();
 var port = process.env.PORT || 3000;
-=======
-var app   = express();
-var port  = process.env.PORT || 3000;
->>>>>>> fbaaaee080b5a9aaa0c07a7af3248d44fde8f580
 var db;
 
 // Sets up the Express app to handle data parsing
@@ -48,15 +38,15 @@ class Database {
 
 //adding JAWSDB connection if else
 if (process.env.JAWSDB_URL) {
-  connection = mysql.createConnection(process.env.JAWSDB_URL);
+  db = new Database(process.env.JAWSDB_URL);
 } else {
   db = new Database({
     host: "localhost",
     port: 3306,
-    // user: "root",
-    // password: "IamTheBoxGhost1971",
     user: "root",
-    password: "steven123",
+    password: "IamTheBoxGhost1971",
+    // user: "root",
+    // password: "steven123",
     database: "fitness_hub_db"
   });
 }
@@ -75,10 +65,27 @@ async function validUserName(username) {
   }
 }
 
+// Trainer section
 app.get(`/api/trainer/client/:currUser`, async function(req, res) {
   let result = await db.query(
     `select id, username from fh_users where trainerid = ?`,
     [req.params.currUser]
+  );
+  res.send(result);
+});
+
+app.post(`/api/delclient/:userId`, async function(req, res) {
+  let result = await db.query(
+    `update fh_users set trainerid = "" where id = ?`,
+    [req.params.userId]
+  );
+  res.send(result);
+});
+
+app.post(`/api/getclient/:currUser/:userId`, async function(req, res) {
+  let result = await db.query(
+    `update fh_users set trainerid = ? where id = ?`,
+    [req.params.currUser, req.params.userId]
   );
   res.send(result);
 });
@@ -126,12 +133,8 @@ app.post(`/api/user/:currUser/:userObj`, async function(req, res) {
       req.params.currUser
     ]
   );
-<<<<<<< HEAD
-  res.send();
-=======
   res.send(result);
   // res.end();
->>>>>>> fbaaaee080b5a9aaa0c07a7af3248d44fde8f580
 });
 
 app.post(`/api/users`, async function(req, res) {
@@ -157,7 +160,6 @@ app.post(`/api/users`, async function(req, res) {
   );
   res.send();
 });
-
 
 app.get(`/api/users/trainers`, async function() {
   let result = await db.query(
