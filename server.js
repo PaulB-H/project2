@@ -92,7 +92,7 @@ app.post(`/api/trainer/getclient/:currUser/:userId`, async function(req, res) {
 
 app.get(`/api/trainer/potentials`, async function(req, res) {
   let result = await db.query(
-    `select id, username from fh_users where trainerid is null and email is not null`
+    `select id, username from fh_users where (trainerid is null or trainerid = 0) and email is not null`
   );
   res.send(result);
 });
