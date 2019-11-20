@@ -1,6 +1,6 @@
 async function myClients() {
   showClientProfile(currUser);
-  $("#myClients").empty();
+  $("#bioscreen").empty();
   $(
     `<div>
       <button class="clients myBtn col" value="${currUser}" onclick="showClientProfile(${currUser})">
@@ -109,6 +109,7 @@ async function delClient(userId) {
     cache: false,
     success: function(result) {
       getPotentialClients();
+      myClients();
       showClientProfile(currUser);
     }
   });
@@ -121,6 +122,7 @@ async function getClient(userId) {
     cache: false,
     success: function(result) {
       getPotentialClients();
+      myClients();
       showClientProfile(currUser);
     }
   });

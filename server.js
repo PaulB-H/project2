@@ -74,15 +74,15 @@ app.get(`/api/trainer/client/:currUser`, async function(req, res) {
   res.send(result);
 });
 
-app.post(`/api/delclient/:userId`, async function(req, res) {
+app.post(`/api/trainer/delclient/:userId`, async function(req, res) {
   let result = await db.query(
-    `update fh_users set trainerid = "" where id = ?`,
+    `update fh_users set trainerid = 0 where id = ?`,
     [req.params.userId]
   );
   res.send(result);
 });
 
-app.post(`/api/getclient/:currUser/:userId`, async function(req, res) {
+app.post(`/api/trainer/getclient/:currUser/:userId`, async function(req, res) {
   let result = await db.query(
     `update fh_users set trainerid = ? where id = ?`,
     [req.params.currUser, req.params.userId]
