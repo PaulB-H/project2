@@ -75,6 +75,7 @@ app.get(`/api/trainer/client/:currUser`, async function(req, res) {
 });
 
 app.post(`/api/trainer/delclient/:userId`, async function(req, res) {
+  console.log(req.params.userId);
   let result = await db.query(
     `update fh_users set trainerid = 0 where id = ?`,
     [req.params.userId]
