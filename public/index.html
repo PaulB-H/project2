@@ -114,6 +114,8 @@
 						<input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30" name="email"><br/>
 						Password:<br/>
 						<input type="text" id="password" name="password"><br/>
+						Seeking Trainer:<br/>
+						<input type="checkbox" name="seeking_trnr" onchange="toggleInfo(this)" value=""><br/>
 						Personal Trainer:<br/>
 						<input type="checkbox" name="istrainer" onchange="toggleInfo(this)" value=""><br/>
 						Fitness Goals:<br/>
@@ -132,7 +134,7 @@
 								<div class="col-sm-6" id="bioscreen" style="height:60vh"></div>
 								<div class="col-sm-6" id="client_list" style="height:60vh">
 									<!-- <div class="row" style="overflow-y: auto; display: flex;flex-direction: row">	 -->
-										<div class="col" id="potentialClients" style="height:60vh; overflow: scroll; display: flex;flex-direction: column"></div>
+										<div class="col" id="potentialClients" style="overflow: scroll; display: flex;flex-direction: column"></div>
 									<!-- </div> -->
 								</div>
 								<div class="col-sm-12" id="clientBio" style="background-color: white; overflow-y: auto; display: flex;flex-direction: column"></div>

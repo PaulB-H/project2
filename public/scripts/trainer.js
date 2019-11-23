@@ -19,12 +19,18 @@ async function myClients() {
       ).appendTo("#potentialClients");
       for (i = 0; i < result.length; i++) {
         $(
-          `<div class="col">
-            <button><button class=delBtn value="${result[i].id}" onclick="delClient(${result[i].id})">X</button>
-            <button class="clients saveBtn" style="width:${result[i].username.length}" value="${result[i].id}" onclick="showClientProfile(${result[i].id})">
-             ${result[i].username}
+          `<div class="col" style="display:flex">
+            <button class="clients saveBtn" style="width:${
+              result[i].username.length
+            }" value="${result[i].id}" onclick="showClientProfile(${
+            result[i].id
+          })">
+             ${result[i].last_name + ", " + result[i].first_name}
             </button>
-          </div>`
+             <button><button class=delBtn value="${
+               result[i].id
+             }" onclick="delClient(${result[i].id})">X</button>
+         </div>`
         ).appendTo("#bioscreen");
       }
       getPotentialClients();
@@ -46,9 +52,15 @@ async function getPotentialClients() {
       for (i = 0; i < result.length; i++) {
         $(
           `<div class="col">
-            <button class=addBtn value="${result[i].id}" onclick="getClient(${result[i].id})">A</button>
-            <button class="correspondent saveBtn" style="width:${result[i].username.length}" value="${result[i].id}" onclick="showClientProfile(${result[i].id})">
-             ${result[i].username}
+            <button class=addBtn value="${result[i].id}" onclick="getClient(${
+            result[i].id
+          })">A</button>
+            <button class="correspondent saveBtn" style="width:${
+              result[i].username.length
+            }" value="${result[i].id}" onclick="showClientProfile(${
+            result[i].id
+          })">
+             ${result[i].last_name + ", " + result[i].first_name}
             </button>
           </div>`
         ).appendTo("#potentialClients");
@@ -64,8 +76,8 @@ async function showClientProfile(userId) {
     type: "GET",
     cache: false,
     success: function(result) {
-      console.log(result);
-      if (userId !== currUser) {
+      console.log(userId, currUser);
+      if (Number(userId) !== Number(currUser)) {
         $(`<div style="position:relative; top: 0">
             <form action="/api/users"  method="POST" target="hidden-form">
               First name: <input type="text" name="firstname" value="${result[0].first_name}" readonly><br/>
