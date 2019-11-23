@@ -33,6 +33,7 @@
 	--shadow_opac05: 		0 1px 10px 0 rgba(0,0,0, 0.05);
 	--shadow_opac05_small: 	0 1px 5px  0 rgba(0,0,0, 0.05);
 	--shadow_harsh_1:       0 1px 1px  0 rgba(0,0,0, 0.2);
+	--shadow_deleteX:       0 0.5px 0.5px 0.25px rgba(0,0,0,0.2);
 
 	--fontFamily_main:  	'Kohinoor Telugu', 'Montserrat', sans-serif;
 
@@ -266,6 +267,7 @@ height: 12px;
 	border-radius: 4px;
 	background-color: var(--green_main);
 	box-shadow: var(--shadow_opac10);
+	cursor: pointer;
 
 	color: white;
 	line-height: 28px;
@@ -342,6 +344,7 @@ height: 12px;
 	border-radius: 10px;
 	box-shadow: var(--shadow_opac05);
 	font-weight: 500;
+	cursor: pointer;
 }
 
 .findable:not(:nth-of-type(1)){
@@ -720,11 +723,93 @@ height: 12px;
 	color: white;
 	font-weight: 600;
 	box-shadow: var(--shadow_opac10);
+	cursor: pointer;
 
 	/* border: 1px solid blue; */
 }	
 
 
+/************
+Routine Block
+*************/
+.saveRoutineBlock {
+	position: relative;
+	width: 90%;
+	height: 500px;
+	margin-top: 87px;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: var(--shadow_opac10);
+}
+
+.saveButton_stagedRoutine {
+	height: 32px;
+    width: 80%;
+    margin: 46px auto 0;
+    position: relative;
+    top: 46px;
+    border-radius: 4px;
+    background-color: var(--green_main);
+    text-align: center;
+    line-height: 32px;
+    color: white;
+    font-weight: 600;
+    box-shadow: var(--shadow_opac10);
+    cursor: pointer;
+}
+
+.name_stagedRoutine {
+	height: 32px;
+	width: 80%;
+	position: relative;
+	top: 60px;
+	margin: 0 auto 0;
+	/*padding-left: 15%;*/
+	text-align: center;
+	border-radius: 4px;
+	border: 1px solid var(--green_main);
+}
+
+.name_stagedRoutine::placeholder {
+	font-size: 13px;
+}
+
+.pasteExercises {
+	position: relative;
+	top: 80px;
+	max-height: 350px;
+	overflow-y: scroll;
+
+	/*border: 1px solid blue;*/
+}
+
+.exerciseItem_staged_wrap {
+	display: flex;
+}
+
+.exerciseItem_staged_p {
+	width: 70%;
+	margin-left: 10%;
+	font-size: 12px;
+	cursor: pointer;
+
+	/*border: 1px solid red;*/
+}
+
+.deleteButton_staged {
+	width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    background-image: url(icon_deleteX.svg);
+    background-size: 10px;
+    background-position: center;
+    box-shadow: var(--shadow_deleteX);
+}
+
+.inputFlash {
+	
+}
 
 
 
