@@ -68,11 +68,13 @@
 
 .saveBtn {
   border-left: 1px solid black;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
   background-color: #06aed5;
+  padding-left: 5px;
+  padding-right: 5px;
   color: white;
-  width: 6vw;
+  /* width: 6vw; */
   top: 0;
   float: right;
 }

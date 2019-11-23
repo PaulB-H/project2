@@ -32,7 +32,7 @@ async function getStrangers() {
     success: function(result) {
       console.log("success reached");
       $(
-        `<button id="newchat_btn" class="newchatBtn col" onclick="showStrangers()">Start New Chat</button>`
+        `<button id="newchat_btn" class="newchatBtn" onclick="showStrangers()">Start New Chat</button>`
       ).appendTo("#strangers");
       for (i = 0; i < result.length; i++) {
         $(
@@ -70,8 +70,6 @@ async function showConversation(correspondent, correspondentName) {
               result[i].chatmessage
             }</div></div>`).appendTo("#comm_thread");
       }
-      // };
-      // let hndler = await writeMessages();
 
       $(`<div style="position:absolute; bottom: -40; right: 0">
 								<textarea
@@ -84,7 +82,7 @@ async function showConversation(correspondent, correspondentName) {
 								value=""
 								>
 								</textarea>
-								<div><button id="save_btn" class="saveBtn col" value="" onclick=saveMessage()>Save Message</button></div>
+								<div><button id="save_btn" class="saveBtn" value="" onclick=saveMessage()>Save Message</button></div>
 							</div>`).appendTo("#chat-window");
     }
   });

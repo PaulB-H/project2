@@ -19,25 +19,23 @@
 }
 
 :root {
-	/*--blue_1:      rgb(74,144,226);*/
-	/*--grey_1:      rgb(247,247,247);*/
-	/*--grey_button: rgb(176,192,205);*/
 	
-	/*--boxShadow_1: 0 0.5px 0.5px 0.25px rgba(0,0,0,0.2);*/
-	/*--boxShadow_2: 0 0.75px 0.75px 0.5px rgba(0,0,0,0.2);*/
+	--blue_main: 		    rgb(74,144,226);
+	--pink_main: 			rgb(255,94,113);
+	--purple_main: 			rgb(170,143,193);
+	--green_main:		    rgb(80,227,194);
+	--green_smallFont:		rgb(18,200,136);
+	--greyBlue: 			rgb(106, 138, 164);
 
-	
-	--blue_trainers: 		rgb(74,144,226);
-	--orange_routines: 		rgb(255,99,71);
-	--purple_mealPlans: 	rgb(170,143,193);
-	--green_events_back:	rgb(80,227,194);
-	--green_events_font:	rgb(18,200,136);
 	--grey_footer:          rgb(176,192,205);
 
 	--shadow_opac10: 		0 1px 10px 0 rgba(0,0,0, 0.1);
 	--shadow_opac05: 		0 1px 10px 0 rgba(0,0,0, 0.05);
 	--shadow_opac05_small: 	0 1px 5px  0 rgba(0,0,0, 0.05);
 	--shadow_harsh_1:       0 1px 1px  0 rgba(0,0,0, 0.2);
+
+	--fontFamily_main:  	'Kohinoor Telugu', 'Montserrat', sans-serif;
+
 }
 
 ::-webkit-scrollbar {
@@ -45,9 +43,9 @@
 }
 
 body {
-	/*light-mode*/
-	background-color: rgb(246,247,251);
 	/*background-color: rgb(234,240,246);*/
+	background-color: rgb(246,247,251);
+	font-family: var(--fontFamily_main);
 }
 
 
@@ -65,6 +63,13 @@ body {
 	display: flex;
 }
 
+.color_greenMain {
+	color: var(--green_main);
+}
+
+.color_greyBlue {
+	color: var(--greyBlue);
+}
 
 
 
@@ -85,6 +90,7 @@ body {
 .innerwrap_fithub {
 	width: 100%;
 	display: flex;
+	scrollbar-width: none;
 }
 
 .wrap_findbar {
@@ -104,6 +110,7 @@ width: 19.8%;
 	margin-left: 68px;
 	margin-left: 3.6%;
 	overflow-y: scroll;
+	overflow-x: hidden;
 
 	/*border: 1px solid blue;*/
 }
@@ -135,47 +142,27 @@ margin-left: 6px;
 
 .catbar {
 	display: 		flex;
-
-	/*width: 			120%;*/
-	/*height: 		90px;*/
-	/*width: 			134.3%;*/
-	/*width: 			127%;*/
 	width: 			100%;
-	/*height: 		14.6%;*/
-	/*height: 		92px;*/
 	height: 		70px;
-
-	/*position: 		relative;*/
-
-/*top: 46px;*/
-
-	/*left: 			-13.5%;*/
-	font-family: 	Kohinoor Telugu;
-	/*font-size: 		12px;*/
-font-size: 10px;
+	font-size: 10px;
 	font-weight: 	600;
 	text-align: 	center;
 	line-height: 	40px;
-
 
 	/*border: 1px solid red;*/
 }
 
 .wrap_catbox {
-	/*width: 	80px;*/
-	/*width: 19.8%;*/
 	width: 22.4%;
 	height: 100%;
-	text-align: 	center;
-	/*line-height: 	40px;*/
-line-height: 30px;
+	text-align: center;
+	line-height: 30px;
 
 	/*border: 1px solid blue;*/
 }
 
 .catbox_plate {
-	/*height: 		80px;*/
-height: 60px;
+	height: 60px;
 	border-radius: 	10px;
 	box-shadow: var(--shadow_opac10);
 
@@ -198,35 +185,35 @@ height: 60px;
 }
 
 .catbox_trainers > .catbox_plate > div:nth-of-type(1) {
-	background-color: var(--blue_trainers);
+	background-color: var(--blue_main);
 }
 
 .catbox_trainers > .catbox_plate > div:nth-of-type(2) {
-	color: var(--blue_trainers);
+	color: var(--blue_main);
 }
 
 .catbox_routines > .catbox_plate > div:nth-of-type(1) {
-	background-color: var(--orange_routines);
+	background-color: var(--green_main);
 }
 
 .catbox_routines > .catbox_plate > div:nth-of-type(2) {
-	color: var(--orange_routines);
+	color: var(--green_smallFont);
 }
 
 .catbox_mealPlans > .catbox_plate > div:nth-of-type(1) {
-	background-color: var(--purple_mealPlans);
+	background-color: var(--purple_main);
 }
 
 .catbox_mealPlans > .catbox_plate > div:nth-of-type(2) {
-	color: var(--purple_mealPlans);
+	color: var(--purple_main);
 }
 
 .catbox_events > .catbox_plate > div:nth-of-type(1) {
-	background-color: var(--green_events_back);
+	background-color: var(--pink_main);
 }
 
 .catbox_events > .catbox_plate > div:nth-of-type(2) {
-	color: var(--green_events_font);
+	color: var(--pink_main);
 }
 
 .catbox_arrow {
@@ -246,26 +233,25 @@ height: 12px;
 }
 
 .catbox_trainers > .catbox_arrow {
-	background-color: var(--blue_trainers);
+	background-color: var(--blue_main);
 }
 
 .catbox_routines > .catbox_arrow {
-	background-color: var(--orange_routines);
+	background-color: var(--green_main);
 }
 
 .catbox_mealPlans > .catbox_arrow {
-	background-color: var(--purple_mealPlans);
+	background-color: var(--purple_main);
 }
 
 .catbox_events > .catbox_arrow {
-	background-color: var(--green_events_back);
+	background-color: var(--pink_main);
 }
 
 
 
 .wrap_dropdown_findbar {
 	position: relative;
-	font-family: Kohinoor Telugu;
 	font-size: 12px;
 	font-weight: 600;
 	text-align: center;
@@ -278,7 +264,8 @@ height: 12px;
 	margin-top: 16px;
 	margin-left: 10%;
 	border-radius: 4px;
-	background-color: var(--grey_footer);
+	background-color: var(--green_main);
+	box-shadow: var(--shadow_opac10);
 
 	color: white;
 	line-height: 28px;
@@ -302,6 +289,9 @@ height: 12px;
 	/*height: 350px;*/
 	z-index: 2;
 	box-shadow: var(--shadow_harsh_1);
+	border-radius: 4px;
+	border: 1px solid var(--green_main);
+	
 
 	background-color: white;
 	/*border: 1px solid red;*/
@@ -346,16 +336,11 @@ height: 12px;
 }
 
 .findable {
-	/*width: 280px;*/
-	/*width: 93.9%;*/
 	width: 80%;
-	/*height: 100px;*/
 	margin-left: 10%;
 	background-color: white;
 	border-radius: 10px;
 	box-shadow: var(--shadow_opac05);
-
-	font-family: Kohinoor Telugu;
 	font-weight: 500;
 }
 
@@ -377,26 +362,19 @@ height: 12px;
 .findable > div {
 	width: 80%;
 	height: 40px;
-	overflow-y: hidden;
-
-
-
 	font-size: 10px;
+	overflow-y: hidden;
 
 	border: 1px solid blue;
 }
 
 .scrollbar_findables {
 	width: 4px;
-	/*height: 68.5%;*/
 	height: 499px;
-	/*margin-top: 183px;*/
 	margin-top: 171px;
 	margin-left: -1.3%;
 	border-radius: 4px;
 	border: 1px solid black;
-
-	/*background-color: red;*/
 }
 
 .scroll_green {
@@ -404,14 +382,13 @@ height: 12px;
 }
 
 .content_plate {
+	position: relative;
 	width: 100%;
-	/* height: 624px; */
 	margin-top: 46px;
 	padding-bottom: 10%;
 	background-color: white;
 	border-radius: 10px;
 	box-shadow: var(--shadow_opac05);
-	font-family: Kohinoor Telugu;
 }
 
 .scrollbar_context {
@@ -424,27 +401,16 @@ height: 12px;
 	border: 1px solid black;
 }
 
+
+
 .userblock {
 	width: 100%;
-	/*height: 124px;*/
 	height: 87vh;
 
 	border: 1px solid blue;
 }
 
-.field {
-	height: 32px;
 
-	border: 1px solid black;
-}
-
-.loginButton {
-	height: 40px;
-
-
-	background-color: blue;
-	color: white;
-}
 
 .wrap_pins {
 	width: 100%;
@@ -465,7 +431,6 @@ height: 12px;
 	margin-left: 10%;
 	border-radius: 10px;
 	background-color: white;
-	/*box-shadow: var(--shadow_opac05);*/
 	box-shadow: var(--shadow_opac05_small);
 }
 
@@ -477,10 +442,7 @@ height: 12px;
 	display: flex;
 	width: 100%;
 	height: 69px;
-	/*position: relative;*/
-	/*left: -17.2%;*/
 	margin-top: 32px;
-	font-family: Kohinoor Telugu;
 	font-size: 10px;
 	font-weight: 600;
 
@@ -493,7 +455,6 @@ height: 12px;
 	margin-top: 7px;
 	text-align: 	center;
 	line-height: 	30px;
-	/*background-color: green;*/
 
 	/*border: 1px solid green;*/
 }
@@ -529,35 +490,35 @@ height: 12px;
 }
 
 .catbox_trainers > .catbox_plate_small > div:nth-of-type(1) {
-	color: var(--blue_trainers);
+	color: var(--blue_main);
 }
 
 .catbox_trainers > .catbox_plate_small > div:nth-of-type(2) {
-	background-color: var(--blue_trainers);
+	background-color: var(--blue_main);
 }
 
 .catbox_routines > .catbox_plate_small > div:nth-of-type(1) {
-	color: var(--orange_routines);
+	color: var(--green_smallFont);
 }
 
 .catbox_routines > .catbox_plate_small > div:nth-of-type(2) {
-	background-color: var(--orange_routines);
+	background-color: var(--green_main);
 }
 
 .catbox_mealPlans > .catbox_plate_small > div:nth-of-type(1) {
-	color: var(--purple_mealPlans);
+	color: var(--purple_main);
 }
 
 .catbox_mealPlans > .catbox_plate_small > div:nth-of-type(2) {
-	background-color: var(--purple_mealPlans);
+	background-color: var(--purple_main);
 }
 
 .catbox_events > .catbox_plate_small > div:nth-of-type(1) {
-	color: var(--green_events_font);
+	color: var(--pink_main);
 }
 
 .catbox_events > .catbox_plate_small > div:nth-of-type(2) {
-	background-color: var(--green_events_back);
+	background-color: var(--pink_main);
 }
 
 .catbox_arrow_small {
@@ -573,19 +534,19 @@ height: 12px;
 }
 
 .catbox_trainers .catbox_arrow_small {
-	background-color: var(--blue_trainers);
+	background-color: var(--blue_main);
 }
 
 .catbox_routines .catbox_arrow_small {
-	background-color: var(--orange_routines);
+	background-color: var(--purple_main);
 }
 
 .catbox_mealPlans .catbox_arrow_small {
-	background-color: var(--purple_mealPlans);
+	background-color: var(--purple_main);
 }
 
 .catbox_events .catbox_arrow_small {
-	background-color: var(--green_events_back);
+	background-color: var(--green_main);
 }
 
 .scrollbar_user {
@@ -603,7 +564,6 @@ height: 12px;
 .cplate_exerciseName {
 	width: 80%;
 	margin: 0 auto 0;
-	/*text-align: center;*/
 	padding-top: 32px;
 	font-size: 30px;
     font-weight: 700;
@@ -638,9 +598,131 @@ height: 12px;
 
 
 
+.wrap_login {
+	position: relative;
+}
 
+.loginMessage {
+	width: 90%;
+	margin-top: 87px;
+	font-size: 18px;
+	font-weight: 800;
+	/* color: var(--greyBlue); */
+	letter-spacing: -0.6px;
+	line-height: 16px;
+	text-align: center;;
+}
 
+.loginTitle {
+	width: 90%;
+	margin-top: 17px;
+	font-size: 26px;
+	font-weight: 800;
+	/* color: var(--green_main); */
+	letter-spacing: -0.87px;
+	line-height: 26px;
+	text-align: center;;
+}
 
+.loginPanel {
+	position: relative;
+	margin-top: 28px;
+	padding-top: 56px;
+	width: 90%;
+	height: 338px;
+	background-color: white;
+	box-shadow: var(--shadow_opac10);
+	border-radius: 10px;
+}
+
+.loginRow {
+	position: relative;
+	height: 32px;
+	display: flex;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--greyBlue);
+
+	/* border: 1px solid black; */
+}
+
+.loginRow:nth-of-type(2) {
+	margin-top: 6px;
+}
+
+.loginRow > p {
+	position: absolute;
+	right: 73.3%;
+	width: 44px;;
+	line-height: 32px;
+	text-align: right;
+	letter-spacing: -0.32px;
+}
+
+.loginRow > input {
+	position: absolute;
+	right: 8.8%;
+	width: 62.5%;
+	height: 100%;
+	border-radius: 4px;
+	background-color: rgb(246, 247, 251);
+	border: 1px solid var(--green_main);
+	font-size: 13px;
+	padding-left: 5%;
+}
+
+.loginButton,
+.init_createAccountButton,
+.final_createAccountButton,
+.back_loginButton {
+	height: 32px;
+	width: 82%;
+	margin: 10px auto 0;
+	border-radius: 4px;
+	color: white;
+	font-weight: 800;
+	text-align: center;
+	line-height: 32px;
+}
+
+.loginButton,
+.final_createAccountButton {
+	margin: 10px auto 0;
+	background-color: var(--green_main);
+}
+
+.init_createAccountButton,
+.back_loginButton {
+	margin: 6px auto 0;
+	background-color: var(--greyBlue);
+}
+
+.wrap_routineAddControls {
+	display: flex;
+	position: relative;
+	width: 90%;
+	height: 32px;
+	margin-top: 32px;
+	left: 10%;
+
+	border: 1px solid red;
+}
+
+.addToNewRoutineButton {
+	height: 100%;
+	width: 33%;
+	position: absolute;
+	left: 0;
+	border-radius: 4px;
+	background-color: var(--green_main);
+	text-align: center;
+	line-height: 32px;
+	color: white;
+	font-weight: 600;
+	box-shadow: var(--shadow_opac10);
+
+	/* border: 1px solid blue; */
+}	
 
 
 

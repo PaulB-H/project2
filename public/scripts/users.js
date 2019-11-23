@@ -1,7 +1,7 @@
 async function getTrainers() {
   $(".find_trainers").empty();
   $.ajax({
-    url: `/api/users`,
+    url: `/api/users/`,
     type: "GET",
     cache: false,
     success: function(result) {

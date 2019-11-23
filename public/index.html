@@ -21,6 +21,11 @@
 	<link rel="stylesheet" type="text/css" href="./chatterbox.css" />
     <link rel="stylesheet" type="text/css" href="./myCalendar.css" />
     <link rel="stylesheet" type="text/css" href="./myRoutines.css" />
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/> -->
+	
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./trainer.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
 </head>
 <body>
@@ -42,7 +47,7 @@
 					<div class="wrap_catbox catbox_routines">
 						<div class="catbox_plate">
 							<div></div>
-							<div>Routines</div>
+							<div>Exercises</div>
 						</div>
 						<div class="catbox_arrow"></div>
 					</div>
@@ -98,14 +103,16 @@
 			<div class="wrap_context">
 				
 				<div class="content_plate">
-					<form action="api/user"  method="POST">
+					
+					<IFRAME style="display:none" name="hidden-form"></IFRAME>
+					<form class="registrationForm" action="/api/users"  method="POST" target="hidden-form">
 						First name:<br/>
 						<input type="text" name="firstname"><br/>
 						Last name:<br/>
 						<input type="text" name="lastname"><br/>
 						Address:<br/>
-						<input type="text" name="address_line1"><br/>
-						<input type="text" name="address_line2"><br/>
+						<input type="text" name="address_line1" placeholder="Address line 1"><br/>
+						<input type="text" name="address_line2" placeholder="Address line 1"><br/>
 						City:</br>
 						<input type="text" name="city"><br/>
 						Postal Code:<br/>
@@ -114,15 +121,34 @@
 						<input type="tel" id="phone" name="cellphone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br/>
 						Email:<br/>
 						<input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30" name="email"><br/>
+						Password:<br/>
+						<input type="text" id="password" name="password"><br/>
 						Personal Trainer:<br/>
-						<input type="checkbox" name="istrainer" value="1"><br/>
+						<input type="checkbox" name="istrainer" onchange="toggleInfo(this)" value=""><br/>
 						Fitness Goals:<br/>
-						<textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33"></textarea>
-						<input type="textarea" name="fitness_goals"><br/>
+						<textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33"></textarea><br/>
 						Trainer Bio:<br/>
 						<textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
 						<input type="submit" value="Submit">
 					</form>
+				</div>	
+
+									<!-- Trainer -->
+				<div class="content_plate content_plate0">
+					<div class="container col" id="trainerbox">
+						<h1>Trainer</h1>
+						<div id="Trainer" class="row" style="height: 100vh; min-height: fit-content; background-color: lightsteelblue">
+							<div class="row" style="width:100%">
+								<div class="col-sm-6" id="bioscreen" style="height:60vh"></div>
+								<div class="col-sm-6" id="client_list" style="height:60vh">
+									<!-- <div class="row" style="overflow-y: auto; display: flex;flex-direction: row">	 -->
+										<div class="col" id="potentialClients" style="height:60vh; overflow: scroll; display: flex;flex-direction: column"></div>
+									<!-- </div> -->
+								</div>
+								<div class="col-sm-12" id="clientBio" style="background-color: white; overflow-y: auto; display: flex;flex-direction: column"></div>
+							</div>
+						</div>
+					</div>
 				</div>
 
 				<!-- Chatterbox -->
@@ -151,16 +177,16 @@
 						<div class="container col" id="day-view"></div>
 				</div>
 				
+				<!-- Routine Builder Section -->
 				<div class="content_plate">
-					 <!-- Routine Builder Section -->
 					 <div class="container col" id="routine_builder">
 						<h1>Routine Manager</h1>
-						<div id="Kinetics" class="row" style="height: 100vh; min-height: fit-content; background-color: lightsteelblue">
+						<div id="Kinetics" class="row" style="height: 100vh; min-height: fit-content; background-color: lightsteelblue; border-block-color: blue;">
 							<div class="row" style="width:100%">
 								<div class="col-sm-6" id="routineManager" style="display: flex;flex-direction: column">
 									<div class="row" style="overflow-y: auto; display: flex;flex-direction: row">	
 										<div class="col-sm-8" id="myRoutines" style="overflow-y: auto; display: flex;flex-direction: column">
-											<!-- <div id="routine_element" style="height:75vh; overflow: scroll; display: flex;flex-direction: column"></div> -->
+											<div id="routine_element" style="height:75vh; overflow: scroll; display: flex;flex-direction: column"></div>
 										</div>
 										<div class="col-sm-4" id="initRoutine">
 											<button id="newroutine_btn" class="saveBtn col" onclick="ignition()">New Routine</button>
@@ -171,10 +197,10 @@
 												<button id="save_btn" class="routineBtn col" onclick="saveExercise()">Save Exercise</button>
 											</div>
 										</div>
-										<div id="routine-window" class="col-sm-6">
-											<div id="routine_details" style="height:75vh; overflow: scroll; display: flex;flex-direction: column"></div>
-										</div>
 									</div>
+								</div>
+								<div id="routine-window" class="col-sm-6">
+									<div id="routine_details" style="height:75vh; overflow: scroll; display: flex;flex-direction: column"></div>
 								</div>
 							</div>
 						</div>
@@ -187,14 +213,30 @@
 			<!-- <div class="scrollbar_context"></div> -->
 
 			<div class="wrap_userbar">
-				
-				<div class="userblock">
-					
-					<input class="field" type="text" name="">
-					<input class="field" type="text" name="">
-					<div class="loginButton">Login</div>
+
+				<div class="wrap_login">
+					<p class="loginMessage color_greyBlue">Welcome to active wellness</p>
+					<p class="loginTitle color_greenMain">Welcome to FitHub</p>
+					<div class="loginPanel">
+						<div class="loginRow">
+							<p>Email :</p>
+							<input class="loginEmail" type="text">
+						</div>
+						<div class="loginRow">
+							<p>Pass :</p>
+							<input class="loginPass" type="text">
+						</div>
+						<div class="loginButton">Login</div>
+						<div class="init_createAccountButton">Create Account</div>
+						<div class="final_createAccountButton displayNone">Create Account</div>
+						<div class="back_loginButton displayNone">Login</div>
+					</div>
 				</div>
 				
+
+				<div class="userblock displayNone"></div>
+				
+
 				<div class="pinblock displayNone">
 					
 					<div class="wrap_pins">
@@ -245,32 +287,6 @@
 				</div>
 				<!-- END pinblock -->
 			</div>
-        </div>
-			<form action="api/user"  method="POST">
-				First name:<br/>
-				<input type="text" name="firstname"><br/>
-				Last name:<br/>
-				<input type="text" name="lastname"><br/>
-				Address:<br/>
-				<input type="text" name="address_line1"><br/>
-				<input type="text" name="address_line2"><br/>
-				City:</br>
-				<input type="text" name="city"><br/>
-				Postal Code:<br/>
-				<input type="text" name="postal_code"><br/>
-				Contact No.:<br/>
-				<input type="tel" id="phone" name="cellphone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br/>
-				Email:<br/>
-				<input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30" name="email"><br/>
-				Personal Trainer:<br/>
-				<input type="checkbox" name="istrainer" value="1"><br/>
-				Fitness Goals:<br/>
-				<textarea id="fitness_goals" style="display: none" spellcheck="true" name="fitness_goals" rows="5" cols="33"></textarea>
-				Trainer Bio:<br/>
-				<textarea id="trainer_bio" style="display: none" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
-				<input type="submit" value="Submit">
-			</form>
-      </div>
   			<!-- END wrap_userbar -->
 
 			<div class="scrollbar_user displayNone"></div>
@@ -295,5 +311,18 @@
     <script src="./chatterbox.js"></script>
     <script src="./myCalendar.js"></script>
     <script src="./myRoutines.js"></script>
+	<script src="./trainer.js"></script>
+	<script>
+		function toggleInfo(checkbox) {
+			console.log("Trying to toggle "+checkbox.value);
+			if(checkbox.checked == true){
+				document.getElementById("#fitness_goals").css("display", "none");
+				document.getElementById("#trainer_bio").css("display", "block");
+			}else{
+				document.getElementById("#fitness_goals").css("display", "block");
+				document.getElementById("#trainer_bio").css("display", "none");
+		}
+		}
+	</script>
 </body>
 </html>

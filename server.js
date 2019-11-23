@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("mysql");
 const path = require("path");
 const fs = require("fs");
+const dotenv = require("dotenv");
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -37,13 +38,15 @@ class Database {
 
 //adding JAWSDB connection if else
 if (process.env.JAWSDB_URL) {
-  connection = mysql.createConnection(process.env.JAWSDB_URL);
+  db = new Database(process.env.JAWSDB_URL);
 } else {
   db = new Database({
     host: "localhost",
     port: 3306,
     user: "root",
     password: "IamTheBoxGhost1971",
+    // user: "root",
+    // password: "steven123",
     database: "fitness_hub_db"
   });
 }
@@ -62,33 +65,46 @@ async function validUserName(username) {
   }
 }
 
-app.post(`api/user`, async function(req, res) {
-  let newUser = await db.query(
-    `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, fitness_goals, istrainer)
-  values(? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    [
-      req.params.userObj.username,
-      req.params.userObj.first_name,
-      req.params.userObj.last_name,
-      req.params.userObj.address_line1,
-      req.params.userObj.address_line2,
-      req.params.userObj.city,
-      req.params.userObj.postal_code,
-      req.params.userObj.cellphone,
-      req.params.userObj.email,
-      req.params.userObj.fitness_goals,
-      req.params.userObj.istrainer
-    ]
+// Trainer section
+app.get(`/api/trainer/client/:currUser`, async function(req, res) {
+  let result = await db.query(
+    `select id, username from fh_users where trainerid = ?`,
+    [req.params.currUser]
   );
-
-  let result = await db.query(`select id from fh_users where username = ?`, [
-    req.params.userObj.username
-  ]);
-
   res.send(result);
 });
 
-app.post(`/api/user/:currUser`, async function(req, res) {
+app.post(`/api/trainer/delclient/:userId`, async function(req, res) {
+  let result = await db.query(
+    `update fh_users set trainerid = 0 where id = ?`,
+    [req.params.userId]
+  );
+  res.send(result);
+});
+
+app.post(`/api/trainer/getclient/:currUser/:userId`, async function(req, res) {
+  let result = await db.query(
+    `update fh_users set trainerid = ? where id = ?`,
+    [req.params.currUser, req.params.userId]
+  );
+  res.send(result);
+});
+
+app.get(`/api/trainer/potentials`, async function(req, res) {
+  let result = await db.query(
+    `select id, username from fh_users where trainerid is null and email is not null`
+  );
+  res.send(result);
+});
+
+app.get(`/api/trainer/clientinfo/:userId`, async function(req, res) {
+  let result = await db.query(`select * from fh_users where id = ?`, [
+    req.params.userId
+  ]);
+  res.send(result);
+});
+
+app.post(`/api/user/:currUser/:userObj`, async function(req, res) {
   let result = await db.query(
     `update fh_users set username = IFNULL(?, username),
     first_name = IFNULL(?, first_name), 
@@ -118,9 +134,34 @@ app.post(`/api/user/:currUser`, async function(req, res) {
     ]
   );
   res.send(result);
+  // res.end();
 });
 
-app.get(`api/users`, async function(req, res) {
+app.post(`/api/users`, async function(req, res) {
+  console.log(req.body);
+  let result = await db.query(
+    `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, user_password, fitness_goals, istrainer, trainer_bio)
+    values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      req.body.email,
+      req.body.firstname,
+      req.body.lastname,
+      req.body.address_line1,
+      req.body.address_line2,
+      req.body.city,
+      req.body.postal_code,
+      req.body.cellphone,
+      req.body.email,
+      req.body.password,
+      req.body.fitness_goals,
+      req.body.istrainer,
+      req.body.trainer_bio
+    ]
+  );
+  res.send();
+});
+
+app.get(`/api/users/trainers`, async function() {
   let result = await db.query(
     `select id, username from fh_users where istrainer = 1`
   );
@@ -131,10 +172,8 @@ app.get(`api/users`, async function(req, res) {
 app.get(`/calendar/load/:inDate/:currUser`, async function(req, res) {
   res.setHeader("Last-Modified", new Date() - 1);
   let result = await db.query(
-    `select userid,  hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24 from fh_calendar where DATE(createdat) = DATE(?) and userid = ?
-    union
-     select 1, "" hr1, "" hr2, "" hr3, "" hr4, "" hr5, "" hr6, "" hr7, "" hr8, "" hr9, "" hr10, "" hr11, "" hr12, "" hr13, "" hr14, "" hr15, "" hr16, "" hr17, "" hr18, "" hr19, "" hr20, "" hr21, "" hr22, "" hr23, "" hr24 where 0 = (select count(*) from fh_calendar where DATE(createdat) = CURDATE())`,
-    [req.params.inDate, req.params.currUser]
+    `select userid, createdat as myDate, hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24 from fh_calendar where userid = ? and DATE(createdat) = DATE(?)`,
+    [req.params.currUser, req.params.inDate]
   );
   res.send(result);
 });
@@ -146,8 +185,9 @@ app.post("/calendar/save", async function(req, res) {
   );
   if (check_new[0].dayExists == 0) {
     result = await db.query(
-      `insert into fh_calendar (userid, hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24)
-       values("${req.body.calDay[1]}", 
+      `insert into fh_calendar (createdat, userid, hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24)
+       values("${req.body.calDay[0]}", 
+       "${req.body.calDay[1]}", 
        "${req.body.calDay[2]}", 
        "${req.body.calDay[3]}",
        "${req.body.calDay[4]}",
@@ -319,6 +359,23 @@ app.post(`/routine/save/:currUser/:routineName/:exercise`, async function(
     var writeHdr = await db.query(
       `insert into fh_routine_hdr(userid, routine_name) values(?, ?)`,
       [req.params.currUser, req.params.routineName]
+    );
+
+    var writeDtl = await db.query(
+      `insert into fh_routine_dtl(routine_id, routine_details, target_muscle, img1_path, img2_path)
+    values(?, ?, ?, ?, ?)`,
+      [writeHdr.insertId, req.params.exercise, "", "", ""]
+    );
+  } else {
+    var writeHdr = await db.query(
+      `select id from fh_routine_hdr where userid = ? and routine_name = ?`,
+      [req.params.currUser, req.params.routineName]
+    );
+
+    var writeDtl = await db.query(
+      `insert into fh_routine_dtl(routine_id, routine_details, target_muscle, img1_path, img2_path)
+    values(?, ?, ?, ?, ?)`,
+      [writeHdr[0].id, req.params.exercise, "", "", ""]
     );
   }
 
