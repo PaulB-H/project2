@@ -12,6 +12,9 @@
 
 	/* text */
 	user-select: none;
+
+	/* Hide scrollbars for moz */
+	scrollbar-width: none;
 	
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: antialiased;
@@ -810,7 +813,6 @@ Routine Block
 .inputFlash {
 	
 }
-
 
 
 

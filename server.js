@@ -52,7 +52,7 @@ if (process.env.JAWSDB_URL) {
 }
 
 app.get("/", async function(req, res) {
-  res.sendFile(path.join(__dirname + "/public/frontEnd/index.html"));
+  res.sendFile(path.join(__dirname + "./public/index.html"));
 });
 
 async function validUserName(username) {
