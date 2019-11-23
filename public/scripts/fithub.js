@@ -548,8 +548,6 @@ fh.func.addListener_click_saveButtonStagedRoutine = function(){
 
   saveButton_stagedRoutine.addEventListener('click', function(){
 
-    console.log('clicked save button');
-
      let nameInput  = document.querySelector('.name_stagedRoutine');
      let inputValue = nameInput.value.trim();
 
@@ -557,6 +555,7 @@ fh.func.addListener_click_saveButtonStagedRoutine = function(){
      if(inputValue.length == 0){
 
         console.log('no name given, stop cancel save');
+
         return;
      }
      /* else package and save to DB, hide saveRoutineBlock */
@@ -565,8 +564,24 @@ fh.func.addListener_click_saveButtonStagedRoutine = function(){
         let routineObj = {};
         routineObj.routineName = inputValue;
         routineObj.exercises   = fh.user.routines_staged;
-
         console.log(routineObj, 'routineObj');
+
+
+        let url = `/routine/save/:currUser/:${routineObj}`;
+
+        fetch(url, {
+          method: "POST",
+          headers: {
+            "Accept":       "application/json, text/plain, */*",
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(routineObj)
+        })
+        .then((resp)=>resp.json())
+        .then((data)=>{
+
+          console.log(data, 'data');
+        });
      };
   });
 };
@@ -689,7 +704,7 @@ fh.func.click_findableExercise = function(me) {
             };
           };
 
-          /* No return from duplicate check, push to routines_staged array */
+          /* No above return from duplicate check, push to routines_staged array */
           fh.user.routines_staged.push(exObj);
 
           /*************************************************************
