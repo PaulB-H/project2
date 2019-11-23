@@ -51,10 +51,7 @@ async function getPotentialClients() {
       ).appendTo("#potentialClients");
       for (i = 0; i < result.length; i++) {
         $(
-          `<div class="col">
-            <button class=addBtn value="${result[i].id}" onclick="getClient(${
-            result[i].id
-          })">A</button>
+          `<div class="col" style="display:flex">
             <button class="correspondent saveBtn" style="width:${
               result[i].username.length
             }" value="${result[i].id}" onclick="showClientProfile(${
@@ -62,6 +59,9 @@ async function getPotentialClients() {
           })">
              ${result[i].last_name + ", " + result[i].first_name}
             </button>
+            <button class=addBtn value="${result[i].id}" onclick="getClient(${
+            result[i].id
+          })">A</button>
           </div>`
         ).appendTo("#potentialClients");
       }
