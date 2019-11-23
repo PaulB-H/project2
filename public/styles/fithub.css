@@ -283,7 +283,7 @@ height: 12px;
 	right: 12%;
 	width: 20px;
 	height: 20px;
-	background-image: url("dropArrow_white.svg");
+	background-image: url("../img/dropArrow_white.svg");
 }
 
 .dropdownMenu {
@@ -804,7 +804,7 @@ Routine Block
     height: 20px;
     border-radius: 20px;
     cursor: pointer;
-    background-image: url(icon_deleteX.svg);
+    background-image: url('../img/icon_deleteX.svg');
     background-size: 10px;
     background-position: center;
     box-shadow: var(--shadow_deleteX);
