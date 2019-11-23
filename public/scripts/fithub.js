@@ -700,14 +700,41 @@ fh.func.click_findableExercise = function(me) {
           let exerciseItem_staged_wrap = document.createElement('div');
               exerciseItem_staged_wrap.className = 'exerciseItem_staged_wrap';
 
-          // /* p element = name */
+          /* p element = name */
           let exerciseItem_staged_p = document.createElement('p');
           exerciseItem_staged_p.className = 'exerciseItem_staged_p';
           exerciseItem_staged_p.innerHTML = exObj.name;
 
-          // /* div element = deleteButton */
+          /* div element = deleteButton */
           let deleteButton_staged = document.createElement('div');
           deleteButton_staged.className = 'deleteButton_staged';
+          deleteButton_staged.addEventListener('click', function(){
+
+              let deleteTarget_name = this.previousElementSibling.innerHTML;
+
+              /* remove from staged array */
+              for(let i = 0; i < fh.user.routines_staged.length; i++){
+                 
+                  let stagedRoutineName = fh.user.routines_staged[i].name;
+                 
+                  if(deleteTarget_name == stagedRoutineName){
+                      fh.user.routines_staged.splice(i, 1);
+                  };
+              };
+
+              /* remove element from panel */
+              let exercisesInPanel = document.querySelectorAll('.exerciseItem_staged_wrap');
+              
+              for(let i = 0; i < exercisesInPanel.length; i++){
+              
+                  let exercise = exercisesInPanel[i];
+                  let exerciseName = exercise.children[0].innerHTML;
+                  
+                  if(deleteTarget_name == exerciseName){
+                      exercise.remove();
+                  };
+              };
+          });
 
           // /************
           // Append Pieces
