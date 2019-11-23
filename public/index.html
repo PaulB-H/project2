@@ -6,26 +6,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- Style -->
+	<link rel="stylesheet" type="text/css" href="./styles/fithub.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/fithub_1280px.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/fithub_425px.css" />
+	<link rel="stylesheet" type="text/css" href="./styles/chatterbox.css"/>
+	<link rel="stylesheet" type="text/css" href="./styles/trainer.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/myCalendar.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/myRoutines.css" />
 
-	<!-- LOCAL LOCAL LOCAL -->
-	<!-- <link rel="stylesheet" type="text/css" href="fithub.css">
-	<link rel="stylesheet" type="text/css" href="fithub_1280px.css">
-	<link rel="stylesheet" type="text/css" href="fithub_425px.css"> -->
-
-	<!-- SERVER SERVER SERVER -->
-	<link rel="stylesheet" type="text/css" href="/frontEnd/fithub.css" />
-    <link rel="stylesheet" type="text/css" href="/frontEnd/fithub_1280px.css" />
-    <link rel="stylesheet" type="text/css" href="/frontEnd/fithub_425px.css" />
-	<!--  -->
-	<link rel="stylesheet" type="text/css" href="./chatterbox.css"/>
-	<link rel="stylesheet" type="text/css" href="./chatterbox.css" />
-    <link rel="stylesheet" type="text/css" href="./myCalendar.css" />
-    <link rel="stylesheet" type="text/css" href="./myRoutines.css" />
-	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/> -->
-	
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./trainer.css" />
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
 </head>
 <body>
@@ -132,7 +123,6 @@
 						<input type="submit" value="Submit">
 					</form>
 				</div>	
-
 									<!-- Trainer -->
 				<div class="content_plate content_plate0">
 					<div class="container col" id="trainerbox">
@@ -304,14 +294,14 @@
 
 
 	<!-- Scripts -->
-	<script type="text/javascript" src="/frontEnd/fithub.js"></script>
+	<script type="text/javascript" src="./scripts/fithub.js"></script>
 	<!--  -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="./chatterbox.js"></script>
-    <script src="./myCalendar.js"></script>
-    <script src="./myRoutines.js"></script>
-	<script src="./trainer.js"></script>
+    <script src="./scripts/chatterbox.js"></script>
+    <script src="./scripts/myCalendar.js"></script>
+    <script src="./scripts/myRoutines.js"></script>
+	<script src="./scripts/trainer.js"></script>
 	<script>
 		function toggleInfo(checkbox) {
 			console.log("Trying to toggle "+checkbox.value);
@@ -321,7 +311,7 @@
 			}else{
 				document.getElementById("#fitness_goals").css("display", "block");
 				document.getElementById("#trainer_bio").css("display", "none");
-		}
+			}
 		}
 	</script>
 </body>
