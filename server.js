@@ -68,7 +68,7 @@ async function validUserName(username) {
 // Trainer section
 app.get(`/api/trainer/client/:currUser`, async function(req, res) {
   let result = await db.query(
-    `select id, username from fh_users where trainerid = ?`,
+    `select id, username, first_name, last_name from fh_users where trainerid = ? order by last_name, first_name asc`,
     [req.params.currUser]
   );
   res.send(result);
@@ -92,7 +92,7 @@ app.post(`/api/trainer/getclient/:currUser/:userId`, async function(req, res) {
 
 app.get(`/api/trainer/potentials`, async function(req, res) {
   let result = await db.query(
-    `select id, username from fh_users where trainerid is null and email is not null`
+    `select id, username, first_name, last_name from fh_users where not trainerid and email is not null and seeking_trainer order by last_name, first_name asc`
   );
   res.send(result);
 });
@@ -140,8 +140,8 @@ app.post(`/api/user/:currUser/:userObj`, async function(req, res) {
 app.post(`/api/users`, async function(req, res) {
   console.log(req.body);
   let result = await db.query(
-    `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, user_password, fitness_goals, istrainer, trainer_bio)
-    values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, user_password, fitness_goals, seeking_trainer, istrainer, trainer_bio)
+    values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       req.body.email,
       req.body.firstname,
@@ -154,6 +154,7 @@ app.post(`/api/users`, async function(req, res) {
       req.body.email,
       req.body.password,
       req.body.fitness_goals,
+      req.body.seeking_trnr,
       req.body.istrainer,
       req.body.trainer_bio
     ]
@@ -346,49 +347,31 @@ app.get(`/routine/newroutine/:currUser`, async function(req, res) {
   res.send(result);
 });
 
-app.post(`/routine/save/:currUser/:routineName/:exercise`, async function(
-  req,
-  res
-) {
+app.post(`/routine/save/:currUser/:routineArray`, async function(req, res) {
   var chkInsOrUpd = await db.query(
     `select count(id) as rec_count from fh_routine_hdr where userid = ? and routine_name = ?`,
     [req.params.currUser, req.params.routineName]
   );
 
-  if (chkInsOrUpd[0].rec_count == 0) {
-    var writeHdr = await db.query(
-      `insert into fh_routine_hdr(userid, routine_name) values(?, ?)`,
-      [req.params.currUser, req.params.routineName]
-    );
-
-    var writeDtl = await db.query(
-      `insert into fh_routine_dtl(routine_id, routine_details, target_muscle, img1_path, img2_path)
-    values(?, ?, ?, ?, ?)`,
-      [writeHdr.insertId, req.params.exercise, "", "", ""]
-    );
-  } else {
-    var writeHdr = await db.query(
-      `select id from fh_routine_hdr where userid = ? and routine_name = ?`,
-      [req.params.currUser, req.params.routineName]
-    );
-
-    var writeDtl = await db.query(
-      `insert into fh_routine_dtl(routine_id, routine_details, target_muscle, img1_path, img2_path)
-    values(?, ?, ?, ?, ?)`,
-      [writeHdr[0].id, req.params.exercise, "", "", ""]
-    );
-  }
-
-  var writeDtl = await db.query(
-    `insert into fh_routine_dtl(routine_id, routine_details, target_muscle, img1_path, img2_path)
-    values(?, ?, ?, ?, ?)`,
-    [writeHdr.insertId, req.params.exercise, "", "", ""]
+  // if (chkInsOrUpd[0].rec_count == 0) {
+  var writeHdr = await db.query(
+    `insert into fh_routine_hdr(userid, routine_name) values(?, ?)`,
+    [req.params.currUser, req.params.routineArray[0].routineName]
   );
 
-  let writeRec = {
-    title: req.params.routineName,
-    exercise: req.params.exercise
-  };
+  for (i = 0; i < req.params.routineArray.length; i++) {
+    var writeDtl = await db.query(
+      `insert into fh_routine_dtl(routine_id, exercise_name, exercise_desc, front_img_src, rear_img_src)
+    values(?, ?, ?, ?, ?)`,
+      [
+        writeHdr.insertId,
+        req.params.routineArray[0].exercises[i].exercise_name,
+        req.params.routineArray[0].exercises[i].exercise_desc,
+        req.params.routineArray[0].exercises[i].front_img_src,
+        req.params.routineArray[0].exercises[i].rear_img_src
+      ]
+    );
+  }
 
   res.send(writeRec);
 });
