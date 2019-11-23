@@ -84,8 +84,8 @@ async function showClientProfile(userId) {
       } else {
         $(`<div style="position:relative; top:0">
             <form action="/api/users"  method="POST" target="hidden-form">
-              First Name: <input type="text" name="firstname" value="${result[0].first_name}"><br/>
-              Last Name: <input type="text" name="lastname" value="${result[0].last_name}"><br/>
+              First Name: <input type="text" name="firstname" value="${result[0].firstname}"><br/>
+              Last Name: <input type="text" name="lastname" value="${result[0].lastname}"><br/>
               Address:<br/>
               <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}"><br/>
               <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}"><br/>
