@@ -348,33 +348,40 @@ app.get(`/routine/newroutine/:currUser`, async function(req, res) {
   res.send(result);
 });
 
-app.post(`/routine/save/:currUser/:routineArray`, async function(req, res) {
-  var chkInsOrUpd = await db.query(
-    `select count(id) as rec_count from fh_routine_hdr where userid = ? and routine_name = ?`,
-    [req.params.currUser, req.params.routineName]
-  );
+app.post(`/routine/save/:currUser`, async function(req, res) {
+  console.log(req.body);
 
-  // if (chkInsOrUpd[0].rec_count == 0) {
-  var writeHdr = await db.query(
+  let writeHdr = await db.query(
     `insert into fh_routine_hdr(userid, routine_name) values(?, ?)`,
-    [req.params.currUser, req.params.routineArray[0].routineName]
+    [req.params.currUser, req.body.routineName]
   );
+  // console.log(req.body.exercises.img.length);
+  let img_src1 = "";
+  let img_src2 = "";
+  for (i = 0; i < req.body.exercises.length; i++) {
+    console.log(`Loop ${i}`);
 
-  for (i = 0; i < req.params.routineArray.length; i++) {
-    var writeDtl = await db.query(
+    if (req.body.exercises[i].img) {
+      img_src1 = req.body.exercises[i].img[0];
+    }
+
+    if (req.body.exercises[i].img) {
+      img_src2 = req.body.exercises[i].img[0];
+    }
+    let writeDtl = await db.query(
       `insert into fh_routine_dtl(routine_id, exercise_name, exercise_desc, front_img_src, rear_img_src)
     values(?, ?, ?, ?, ?)`,
       [
         writeHdr.insertId,
-        req.params.routineArray[0].exercises[i].exercise_name,
-        req.params.routineArray[0].exercises[i].exercise_desc,
-        req.params.routineArray[0].exercises[i].front_img_src,
-        req.params.routineArray[0].exercises[i].rear_img_src
+        req.body.exercises[i].name,
+        req.body.exercises[i].desc,
+        img_src1,
+        img_src2
       ]
     );
-  }
 
-  res.send(writeRec);
+    res.send(true);
+  }
 });
 
 // Starts the server to begin listening
