@@ -100,7 +100,7 @@ async function showClientProfile(userId) {
       } else {
         $("#profile_header").innerText =
           result[0].first_name + " " + result[0].last_name + " - User";
-        $(`<div style="position:relative; top:0">
+        $(`<div class="trainerPanel" style="position:relative; top:0">
             <IFRAME style="display:none" name="hidden-form"></IFRAME>
             <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
               First Name: <input type="text" name="firstname" value="${result[0].first_name}"><br/>
@@ -114,10 +114,10 @@ async function showClientProfile(userId) {
               Email: <input type="email" id="email" value="${result[0].email}"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"
 							name="email"><br/>
               Password: <input type="text" id="password" name="password"><br />
-              Seeking Trainer: <input type="checkbox" name="seeking_trnr" onchange="toggleInfo(this)" value="${result[0].seeking_trainer}"><br />
-              Personal Trainer: <input type="checkbox" name="istrainer" onchange="toggleInfo(this)" value="${result[0].istrainer}"><br />
+              Seeking Trainer: <input type="checkbox" name="seeking_trnr" onchange="toggleInfo('seeking', ${result[0].seeking_trainer})" value="${result[0].seeking_trainer}"><br />
+              Personal Trainer: <input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${result[0].istrainer})" value="${result[0].istrainer}"><br />
               Fitness Goals:<br/>
-              <textarea id="rd_only_fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea><br/>
+              <textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea><br/>
               Bio:<br />
               <textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
 						  <input type="submit" value="Submit">
@@ -153,6 +153,27 @@ async function getClient(userId) {
     }
   });
 }
+
+async function toggleInfo(cb_value, ischecked) {
+  console.log("Trying to toggle ", cb_value, ischecked);
+  if (cb_value === "seeking" && ischecked) {
+    document.getElementById("istrainer").styledisplay = "none";
+  } else if (cb_value === "trainer" && ischecked)
+    document.getElementById("#fitness_goals").css("display", "block");
+}
+
+// <script>
+// 	function toggleInfo(checkbox) {
+// 		console.log("Trying to toggle " + checkbox.value);
+// 		if (checkbox.checked == true) {
+// 			document.getElementById("#fitness_goals").css("display", "none");
+// 			document.getElementById("#trainer_bio").css("display", "block");
+// 		} else {
+// 			document.getElementById("#fitness_goals").css("display", "block");
+// 			document.getElementById("#trainer_bio").css("display", "none");
+// 		}
+// 	}
+// </script>
 
 // function setMessageJustify(currUser, correspondent) {
 //   if (currUser == correspondent) {

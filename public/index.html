@@ -135,8 +135,7 @@
 				<div class="content_plate content_plate0">
 					<div class="container col" id="trainerbox">
 						<h1 id="profile_header">Trainer</h1>
-						<div id="Trainer" class="row"
-							style="height: 100vh; min-height: fit-content; background-color: lightsteelblue">
+						<div id="trainer" class="row">
 							<div class="row" style="width:100%">
 								<div class="col-sm-6" id="bioscreen" style="height:60vh">
 								</div>
@@ -395,18 +394,6 @@
 	<script src="./scripts/myCalendar.js"></script>
 	<script src="./scripts/myRoutines.js"></script>
 	<script src="./scripts/trainer.js"></script>
-	<script>
-		function toggleInfo(checkbox) {
-			console.log("Trying to toggle " + checkbox.value);
-			if (checkbox.checked == true) {
-				document.getElementById("#fitness_goals").css("display", "none");
-				document.getElementById("#trainer_bio").css("display", "block");
-			} else {
-				document.getElementById("#fitness_goals").css("display", "block");
-				document.getElementById("#trainer_bio").css("display", "none");
-			}
-		}
-	</script>
 </body>
 
 </html>

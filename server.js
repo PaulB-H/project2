@@ -382,23 +382,32 @@ app.post(`/routine/save/:currUser`, async function(req, res) {
       ]
     );
   }
-  res.send(writeHdr.insertId);
+  res.send({ id: writeHdr.insertId });
 });
 
 app.get(`/routine/userroutines/:currUser`, async function(req, res) {
   let routines = [];
-  let result = await db.query(
-    `select hdr.id, hdr.routine_name, dtl.exercise_name, dtl.exercise_desc, dtl.front_img_src, dtl.rear_img_src 
-    from fh_routine_hdr as hdr inner join fh_routine_dtl as dtl on hdr.id = dtl.routine_id where hdr.userid = ?`,
+  let hdr_result = await db.query(
+    `select hdr.id, hdr.routine_name from fh_routine_hdr as hdr where hdr.userid = ?`,
     [req.params.currUser]
   );
-  routines = [
-    result.id,
-    result.routine_name,
-    result.exercise_name,
-    result.exercise_desc,
-    [result.front_img_src, result.rear_img_src]
-  ];
+  console.log("Header = ", hdr_result);
+  let routinelist = {};
+  hdr_result.map(
+    routine =>
+      async function() {
+        routinelist.id = routine.id;
+        routinelist.routineName = routine.routine_name;
+        let exercise = [];
+        let dtl_result = await db.query(
+          `select dtl.exercise_name, dtl.exercise_desc, dtl.front_img_src, dtl.rear_img_src 
+      from fh_routine_dtl as dtl where dtl.routine_id = ?`,
+          [routine.id]
+        );
+        routinelist.exercise = dtl_result;
+      }
+  );
+  console.log("Routine is ", routinelist);
   res.send(routines);
 });
 // Starts the server to begin listening

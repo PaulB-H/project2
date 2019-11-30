@@ -137,7 +137,7 @@ CREATE TABLE `fh_routine_hdr_audit` (
   PRIMARY KEY (`id`)
 );
 
-drop table `fh_routine_hdr_audit`;
+drop table `fh_users`;
 CREATE TABLE `fh_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL,
