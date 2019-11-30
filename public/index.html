@@ -260,52 +260,54 @@
 					registerButton
 					back_loginButton
 				-->
-				<div class="wrap_register displayNone">
+				<div class="wrap_register ">
 					<p class="registerMessage color_greyBlue">Welcome to registration</p>
 					<p class="registerTitle color_greenMain">Welcome to FitHub</p>
 					<div class="registerPanel">
-					<div class="registerRow">
-						<p>First Name: </p>
-						<input class="registerFirstname" type=taext">
-					</div>
-					<div class="registerRow">
-						<p>Last Name: </p>
-						<input class="registerLastname" type="text">
-					</div>
-					<div class="registerRow">
-						<p>Address: </p>
-						<input class="registerAddress" type="text" name="address_line1" placeholder="Address line 1">
-					</div>
-					<div class="registerRow">
-						<p>City: </p> </p>
-						<input class="registerCity" type="text">
-					</div>
-					<div class="registerRow">
-						<p>Postal Code: </p>
-						<input class="registerPostalcode" type="text">
-					</div>
-					<div class="registerRow">
-						<p>Postal Code: </p>
-						<input class="registerPostalcode" type="text">
-					</div>
-					<div class="registerRow">
-						<p>Phone Number: </p>
-						<input class="registerPhonenumber" type="text">
-					</div>
-					<div class="registerRow">
-						<p>Email: </p>
-						<input class="loginEmail" type="text">
-					</div>
-					<div class="registerRow">
-						<p>Password: </p>
-						<input class="loginEmail" type="text">
-					</div>
-					<div class="registerRow">
-						<p>Pass :</p>
-						<input class="loginPass" type="text">
-					</div>
-						<div class="registerButton">Register</div>
-						<div class="back_loginButton">Login</div>
+					<form class="registrationForm" action="/api/users" method="POST" target="hidden-form">
+						<div class="registerRow">
+							<p>First Name: </p>
+							<input class="registerFirstname" type=taext">
+						</div>
+						<div class="registerRow">
+							<p>Last Name: </p>
+							<input class="registerLastname" type="text">
+						</div>
+						<div class="registerRow">
+							<p>Address: </p>
+							<input class="registerAddress" type="text" name="address_line1" placeholder="Address line 1">
+						</div>
+						<div class="registerRow">
+							<p>City: </p> </p>
+							<input class="registerCity" type="text">
+						</div>
+						<div class="registerRow">
+							<p>Postal Code: </p>
+							<input class="registerPostalcode" type="text">
+						</div>
+						<div class="registerRow">
+							<p>Postal Code: </p>
+							<input class="registerPostalcode" type="text">
+						</div>
+						<div class="registerRow">
+							<p>Phone Number: </p>
+							<input class="registerPhonenumber" type="text">
+						</div>
+						<div class="registerRow">
+							<p>Email: </p>
+							<input class="loginEmail" type="text">
+						</div>
+						<div class="registerRow">
+							<p>Password: </p>
+							<input class="loginEmail" type="text">
+						</div>
+						<div class="registerRow">
+							<p>Pass :</p>
+							<input class="loginPass" type="text">
+						</div>
+					</form>
+					<div class="registerButton">Register</div>
+					<div class="back_loginButton">Login</div>
 					</div>
 				</div>
 

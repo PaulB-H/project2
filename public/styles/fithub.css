@@ -603,7 +603,9 @@ height: 12px;
 }
 
 
-
+/************
+Login Styles
+*************/
 .wrap_login {
 	position: relative;
 }
@@ -702,6 +704,88 @@ height: 12px;
 	margin: 6px auto 0;
 	background-color: var(--greyBlue);
 }
+/************
+END Login Styles
+*************/
+
+/************
+Register Styles
+*************/
+.wrap_register {
+	position: relative;
+}
+
+.registerMessage {
+	width: 90%;
+	margin-top: 87px;
+	font-size: 18px;
+	font-weight: 800;
+	/* color: var(--greyBlue); */
+	letter-spacing: -0.6px;
+	line-height: 16px;
+	text-align: center;;
+}
+
+.registerTitle {
+	width: 90%;
+	margin-top: 17px;
+	font-size: 26px;
+	font-weight: 800;
+	/* color: var(--green_main); */
+	letter-spacing: -0.87px;
+	line-height: 26px;
+	text-align: center;;
+}
+
+.registerPanel {
+	position: relative;
+	margin-top: 28px;
+	padding-top: 56px;
+	width: 90%;
+	height: 338px;
+	background-color: white;
+	box-shadow: var(--shadow_opac10);
+	border-radius: 10px;
+}
+
+.registerRow {
+	position: relative;
+	height: 32px;
+	display: flex;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--greyBlue);
+
+	/* border: 1px solid black; */
+}
+
+.registerRow:nth-of-type(2) {
+	margin-top: 6px;
+}
+
+.registerRow > p {
+	position: absolute;
+	right: 73.3%;
+	width: 44px;;
+	line-height: 32px;
+	text-align: right;
+	letter-spacing: -0.32px;
+}
+
+.registerRow > input {
+	position: absolute;
+	right: 8.8%;
+	width: 62.5%;
+	height: 100%;
+	border-radius: 4px;
+	background-color: rgb(246, 247, 251);
+	border: 1px solid var(--green_main);
+	font-size: 13px;
+	padding-left: 5%;
+}
+/************
+END Register Styles
+*************/
 
 .wrap_routineAddControls {
 	display: flex;
