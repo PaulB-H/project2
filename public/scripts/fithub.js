@@ -518,15 +518,11 @@ fh.func.addListener_click_loginButtonProper = function() {
   });
 };
 
-fh.func.addListener_click_saveButtonStagedRoutine = function() {
-  let saveButton_stagedRoutine = document.querySelector(
-    ".saveButton_stagedRoutine"
-  );
+
 
   fh.func.addListener_click_saveButtonStagedRoutine = function() {
-    let saveButton_stagedRoutine = document.querySelector(
-      ".saveButton_stagedRoutine"
-    );
+    
+    let saveButton_stagedRoutine = document.querySelector(".saveButton_stagedRoutine");
 
     saveButton_stagedRoutine.addEventListener("click", function() {
       let nameInput = document.querySelector(".name_stagedRoutine");
@@ -779,47 +775,47 @@ fh.func.addListener_click_saveButtonStagedRoutine = function() {
     }
   };
 
-  fh.func.createObj_exercise = (url, myArray, flag) => {
-    return new Promise((resolve, reject) => {
-      fetch(url)
-        .then(resp => resp.json())
-        .then(data => {
-          // console.log(data, 'data');
+fh.func.createObj_exercise = (url, myArray, flag) => {
+  return new Promise((resolve, reject) => {
+    fetch(url)
+    .then(resp => resp.json())
+    .then(data => {
+      // console.log(data, 'data');
 
-          for (let i = 0; i < data.results.length; i++) {
-            let obj = {};
-            obj.name = data.results[i].name;
-            obj.desc = data.results[i].description;
-            obj.img = [];
+      for (let i = 0; i < data.results.length; i++) {
+        let obj = {};
+        obj.name = data.results[i].name;
+        obj.desc = data.results[i].description;
+        obj.img = [];
 
-            let url_forImage = `https://wger.de/api/v2/exerciseimage/?exercise=${data.results[i].id}`;
+        let url_forImage = `https://wger.de/api/v2/exerciseimage/?exercise=${data.results[i].id}`;
 
-            if (i == data.results.length - 1) {
-              return (resolution = fh.func.fetch_exerciseImages(
-                url_forImage,
-                obj,
-                myArray
-              ));
-            } else {
-              fh.func.fetch_exerciseImages(url_forImage, obj, myArray);
-            }
-          }
-        })
-        .then(v => {
-          // console.log(v, 'v');
+        if (i == data.results.length - 1) {
+          return (resolution = fh.func.fetch_exerciseImages(
+            url_forImage,
+            obj,
+            myArray
+          ));
+        } else {
+          fh.func.fetch_exerciseImages(url_forImage, obj, myArray);
+        }
+      }
+    })
+    .then(v => {
+      // console.log(v, 'v');
 
-          /*
-        Flag when Biceps fetch is done.
-        This is what I want earliest so as to start displaying on screen
-        */
-          if (flag == true) {
-            fh.flag.bicepsFetchDone = true;
-          }
+      /*
+    Flag when Biceps fetch is done.
+    This is what I want earliest so as to start displaying on screen
+    */
+      if (flag == true) {
+        fh.flag.bicepsFetchDone = true;
+      }
 
-          resolve(v);
-        });
+      resolve(v);
     });
-  };
+  });
+};
 
   fh.func.fetch_exerciseImages = function(url_forImage, obj, myArray) {
     return new Promise((resolve, reject) => {
