@@ -523,430 +523,393 @@ fh.func.addListener_click_saveButtonStagedRoutine = function() {
     ".saveButton_stagedRoutine"
   );
 
-<<<<<<< HEAD
-  saveButton_stagedRoutine.addEventListener("click", function() {
-    let nameInput = document.querySelector(".name_stagedRoutine");
-    let inputValue = nameInput.value.trim();
+  fh.func.addListener_click_saveButtonStagedRoutine = function() {
+    let saveButton_stagedRoutine = document.querySelector(
+      ".saveButton_stagedRoutine"
+    );
 
-    /* Nothing in input, alert user (give inputFlash class, flash border red 3 times), return */
-    if (inputValue.length == 0) {
-      console.log("no name given, stop cancel save");
+    saveButton_stagedRoutine.addEventListener("click", function() {
+      let nameInput = document.querySelector(".name_stagedRoutine");
+      let inputValue = nameInput.value.trim();
 
-      return;
-    } else {
-      /* else package and save to DB, hide saveRoutineBlock */
-      let routineObj = {};
-      routineObj.routineName = inputValue;
-      routineObj.exercises = fh.user.routines_staged;
-      console.log(routineObj, "routineObj");
-
-      let url = `/routine/save/${currUser}`;
-
-      fetch(url, {
-        method: "POST",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-type": "application/json"
-        },
-        body: JSON.stringify(routineObj)
-        // body: routineObj
-      })
-        .then(resp => resp.json())
-        .then(data => {
-          console.log(data, "data");
-        });
-    }
-=======
-
-fh.func.addListener_click_saveButtonStagedRoutine = function(){
-
-  let saveButton_stagedRoutine = document.querySelector('.saveButton_stagedRoutine');
-
-  saveButton_stagedRoutine.addEventListener('click', function(){
-
-     let nameInput  = document.querySelector('.name_stagedRoutine');
-     let inputValue = nameInput.value.trim();
-
-     /* Nothing in input, alert user (give inputFlash class, flash border red 3 times), return */
-     if(inputValue.length == 0){
-
-        console.log('no name given, stop cancel save');
+      /* Nothing in input, alert user (give inputFlash class, flash border red 3 times), return */
+      if (inputValue.length == 0) {
+        console.log("no name given, stop cancel save");
 
         return;
-     }
-     /* else package and save to DB, hide saveRoutineBlock */
-     else{
-
+      } else {
+        /* else package and save to DB, hide saveRoutineBlock */
         let routineObj = {};
         routineObj.routineName = inputValue;
-        routineObj.exercises   = fh.user.routines_staged;
-        console.log(routineObj, 'routineObj');
-
+        routineObj.exercises = fh.user.routines_staged;
+        console.log(routineObj, "routineObj");
 
         let url = `/routine/save/:currUser/:${routineObj}`;
 
         fetch(url, {
           method: "POST",
           headers: {
-            "Accept":       "application/json, text/plain, */*",
+            Accept: "application/json, text/plain, */*",
             "Content-type": "application/json"
           },
           body: JSON.stringify(routineObj)
         })
-        .then((resp)=>resp.json())
-        .then((data)=>{
-
-          console.log(data, 'data');
-        })
-        .catch((err)=>{console.log(err, 'err c')});
-        
-     };
->>>>>>> ce8110c8f9c5d130eb91a9aee87056e57aafbd39
-  });
-};
-
-fh.func.click_findableExercise = function(me) {
-  // console.log("clicked findable");
-
-  let findableName = me.children[0].innerHTML;
-
-  /* Need to pull exercise category from dropdown text.
-  This is used to access right exercise bucket in our data object */
-  let exerciseCategory = document.querySelector(".dropdown_findbar > span")
-    .innerHTML;
-  exerciseCategory = exerciseCategory.toLowerCase();
-
-  /* Handle 2 words for category name:
-  Split at space, capitalize second word in array, rejoin th string. */
-  if (exerciseCategory.includes(" ")) {
-    exerciseCategory = exerciseCategory.split(" ");
-    exerciseCategory[1] =
-      exerciseCategory[1].charAt(0).toUpperCase() +
-      exerciseCategory[1].substring(1);
-    exerciseCategory = exerciseCategory[0] + exerciseCategory[1];
-  }
-
-  /* With exerciseCategory allowing getting to the right array,
-  loop through array of exercise objects to find one
-  that has a name property matching the name of the clicked findable. */
-
-  let exerciseCategory_bucket = fh.data.exercises[exerciseCategory];
-
-  for (let i = 0; i < exerciseCategory_bucket.length; i++) {
-    let exercise = exerciseCategory_bucket[i];
-
-    if (findableName == exercise.name) {
-      // console.log(exercise, "this is the one");
-
-      /*
-      CREATE & APPEND PLATE IN CENTER CONTEXT COLUMN
-      */
-      let contentPlate = document.createElement("div");
-      contentPlate.className = "content_plate";
-
-      let exerciseName = document.createElement("p");
-      exerciseName.className = "cplate_exerciseName";
-      exerciseName.innerHTML = exercise.name;
-
-      let exerciseDesc = document.createElement("p");
-      exerciseDesc.className = "cplate_exerciseDesc";
-      exerciseDesc.innerHTML = exercise.desc;
-
-      // start appending pieces
-      contentPlate.appendChild(exerciseName);
-      contentPlate.appendChild(exerciseDesc);
-
-      /* Conditional creation and append */
-
-      // if images are present in the array, append them
-      if (exercise.img.length > 0) {
-        let exerciseImagesFlex = document.createElement("div");
-        exerciseImagesFlex.className = "exerciseImagesFlex";
-
-        let exercise_image = document.createElement("div");
-        exercise_image.className = "exercise_image";
-        exercise_image.setAttribute(
-          "style",
-          `background-image: url("${exercise.img[0]}");`
-        );
-
-        let exercise_image_2 = document.createElement("div");
-        exercise_image_2.className = "exercise_image_2";
-        exercise_image_2.setAttribute(
-          "style",
-          `background-image: url("${exercise.img[1]}");`
-        );
-
-        /* Convenient Custom Attributes to store img paths */
-        exercise_image.setAttribute("imgPath_1", exercise.img[0]);
-        exercise_image_2.setAttribute("imgPath_2", exercise.img[1]);
-
-        contentPlate.appendChild(exerciseImagesFlex);
-        exerciseImagesFlex.appendChild(exercise_image);
-        exerciseImagesFlex.appendChild(exercise_image_2);
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(data, "data");
+          })
+          .catch(err => {
+            console.log(err, "err c");
+          });
       }
-
-      let wrap_routineAddControls = document.createElement("div");
-      wrap_routineAddControls.className = "wrap_routineAddControls";
-
-      let addToNewRoutineButton = document.createElement("div");
-      addToNewRoutineButton.className = "addToNewRoutineButton";
-      addToNewRoutineButton.innerHTML = "Add to New Routine";
-      addToNewRoutineButton.addEventListener("click", function() {
-        // console.log('click add to new routine button');
-
-        // create routine object, pass to staged routine array
-        let exObj = {};
-        exObj.name = this.parentNode.parentNode.children[0].innerHTML;
-        exObj.desc = this.parentNode.parentNode.children[1].innerHTML;
-
-        if (
-          this.parentNode.parentNode.children[2].children[0].getAttribute(
-            "imgPath_1"
-          ) != undefined
-        ) {
-          exObj.img = [
-            this.parentNode.parentNode.children[2].children[0].getAttribute(
-              "imgPath_1"
-            ),
-            this.parentNode.parentNode.children[2].children[1].getAttribute(
-              "imgPath_2"
-            )
-          ];
-        }
-
-        /********************************
-         * Push to routines_staged array *
-         *********************************/
-
-        /* Check routines_staged array for duplicates. Return if find duplicate. */
-        for (let i = 0; i < fh.user.routines_staged.length; i++) {
-          let name_stagedRoutine = fh.user.routines_staged[i].name;
-          if (exObj.name == name_stagedRoutine) {
-            return;
-          }
-        }
-
-        /* No above return from duplicate check, push to routines_staged array */
-        fh.user.routines_staged.push(exObj);
-
-        /*************************************************************
-         * Generate the exercise items in the right side routineBlock *
-         **************************************************************/
-
-        /* Outer Wrap */
-        let exerciseItem_staged_wrap = document.createElement("div");
-        exerciseItem_staged_wrap.className = "exerciseItem_staged_wrap";
-
-        /* p element = name */
-        let exerciseItem_staged_p = document.createElement("p");
-        exerciseItem_staged_p.className = "exerciseItem_staged_p";
-        exerciseItem_staged_p.innerHTML = exObj.name;
-
-        /* div element = deleteButton */
-        let deleteButton_staged = document.createElement("div");
-        deleteButton_staged.className = "deleteButton_staged";
-        deleteButton_staged.addEventListener("click", function() {
-          let deleteTarget_name = this.previousElementSibling.innerHTML;
-
-          /* remove from staged array */
-          for (let i = 0; i < fh.user.routines_staged.length; i++) {
-            let stagedRoutineName = fh.user.routines_staged[i].name;
-
-            if (deleteTarget_name == stagedRoutineName) {
-              fh.user.routines_staged.splice(i, 1);
-            }
-          }
-
-          /* remove element from panel */
-          let exercisesInPanel = document.querySelectorAll(
-            ".exerciseItem_staged_wrap"
-          );
-
-          for (let i = 0; i < exercisesInPanel.length; i++) {
-            let exercise = exercisesInPanel[i];
-            let exerciseName = exercise.children[0].innerHTML;
-
-            if (deleteTarget_name == exerciseName) {
-              exercise.remove();
-            }
-          }
-        });
-
-        // /************
-        // Append Pieces
-        // *************/
-        exerciseItem_staged_wrap.appendChild(exerciseItem_staged_p);
-        exerciseItem_staged_wrap.appendChild(deleteButton_staged);
-
-        // /*********
-        // Append DOM
-        // **********/
-        let pasteExercises = document.querySelector(".pasteExercises");
-        pasteExercises.appendChild(exerciseItem_staged_wrap);
-      });
-
-      contentPlate.appendChild(wrap_routineAddControls);
-      wrap_routineAddControls.appendChild(addToNewRoutineButton);
-
-      // append to DOM
-      let wrap_context = document.querySelector(".wrap_context");
-      wrap_context.insertBefore(contentPlate, wrap_context.children[0]);
-    }
-  }
-};
-
-fh.func.createAppend_selectedExerciseGroup = function(exerciseBucket) {
-  let findables_exercises = document.querySelector(".findables_exercises");
-
-  for (let i = 0; i < exerciseBucket.length; i++) {
-    let obj = exerciseBucket[i];
-
-    let findable = document.createElement("div");
-    findable.className = "findable";
-    findable.addEventListener("click", function() {
-      fh.func.click_findableExercise(this);
     });
+  };
 
-    let name = document.createElement("p");
-    name.innerHTML = obj.name;
+  fh.func.click_findableExercise = function(me) {
+    // console.log("clicked findable");
 
-    findable.appendChild(name);
-    findables_exercises.appendChild(findable);
-  }
-};
+    let findableName = me.children[0].innerHTML;
 
-fh.func.createObj_exercise = (url, myArray, flag) => {
-  return new Promise((resolve, reject) => {
-    fetch(url)
-      .then(resp => resp.json())
-      .then(data => {
-        // console.log(data, 'data');
+    /* Need to pull exercise category from dropdown text.
+    This is used to access right exercise bucket in our data object */
+    let exerciseCategory = document.querySelector(".dropdown_findbar > span")
+      .innerHTML;
+    exerciseCategory = exerciseCategory.toLowerCase();
 
-        for (let i = 0; i < data.results.length; i++) {
-          let obj = {};
-          obj.name = data.results[i].name;
-          obj.desc = data.results[i].description;
-          obj.img = [];
+    /* Handle 2 words for category name:
+    Split at space, capitalize second word in array, rejoin th string. */
+    if (exerciseCategory.includes(" ")) {
+      exerciseCategory = exerciseCategory.split(" ");
+      exerciseCategory[1] =
+        exerciseCategory[1].charAt(0).toUpperCase() +
+        exerciseCategory[1].substring(1);
+      exerciseCategory = exerciseCategory[0] + exerciseCategory[1];
+    }
 
-          let url_forImage = `https://wger.de/api/v2/exerciseimage/?exercise=${data.results[i].id}`;
+    /* With exerciseCategory allowing getting to the right array,
+    loop through array of exercise objects to find one
+    that has a name property matching the name of the clicked findable. */
 
-          if (i == data.results.length - 1) {
-            return (resolution = fh.func.fetch_exerciseImages(
-              url_forImage,
-              obj,
-              myArray
-            ));
-          } else {
-            fh.func.fetch_exerciseImages(url_forImage, obj, myArray);
-          }
-        }
-      })
-      .then(v => {
-        // console.log(v, 'v');
+    let exerciseCategory_bucket = fh.data.exercises[exerciseCategory];
+
+    for (let i = 0; i < exerciseCategory_bucket.length; i++) {
+      let exercise = exerciseCategory_bucket[i];
+
+      if (findableName == exercise.name) {
+        // console.log(exercise, "this is the one");
 
         /*
-			Flag when Biceps fetch is done.
-			This is what I want earliest so as to start displaying on screen
-			*/
-        if (flag == true) {
-          fh.flag.bicepsFetchDone = true;
+        CREATE & APPEND PLATE IN CENTER CONTEXT COLUMN
+        */
+        let contentPlate = document.createElement("div");
+        contentPlate.className = "content_plate";
+
+        let exerciseName = document.createElement("p");
+        exerciseName.className = "cplate_exerciseName";
+        exerciseName.innerHTML = exercise.name;
+
+        let exerciseDesc = document.createElement("p");
+        exerciseDesc.className = "cplate_exerciseDesc";
+        exerciseDesc.innerHTML = exercise.desc;
+
+        // start appending pieces
+        contentPlate.appendChild(exerciseName);
+        contentPlate.appendChild(exerciseDesc);
+
+        /* Conditional creation and append */
+
+        // if images are present in the array, append them
+        if (exercise.img.length > 0) {
+          let exerciseImagesFlex = document.createElement("div");
+          exerciseImagesFlex.className = "exerciseImagesFlex";
+
+          let exercise_image = document.createElement("div");
+          exercise_image.className = "exercise_image";
+          exercise_image.setAttribute(
+            "style",
+            `background-image: url("${exercise.img[0]}");`
+          );
+
+          let exercise_image_2 = document.createElement("div");
+          exercise_image_2.className = "exercise_image_2";
+          exercise_image_2.setAttribute(
+            "style",
+            `background-image: url("${exercise.img[1]}");`
+          );
+
+          /* Convenient Custom Attributes to store img paths */
+          exercise_image.setAttribute("imgPath_1", exercise.img[0]);
+          exercise_image_2.setAttribute("imgPath_2", exercise.img[1]);
+
+          contentPlate.appendChild(exerciseImagesFlex);
+          exerciseImagesFlex.appendChild(exercise_image);
+          exerciseImagesFlex.appendChild(exercise_image_2);
         }
 
-        resolve(v);
-      });
-  });
-};
+        let wrap_routineAddControls = document.createElement("div");
+        wrap_routineAddControls.className = "wrap_routineAddControls";
 
-fh.func.fetch_exerciseImages = function(url_forImage, obj, myArray) {
-  return new Promise((resolve, reject) => {
-    fetch(url_forImage)
-      .then(resp => resp.json())
-      .then(data => {
-        let arr = data.results;
+        let addToNewRoutineButton = document.createElement("div");
+        addToNewRoutineButton.className = "addToNewRoutineButton";
+        addToNewRoutineButton.innerHTML = "Add to New Routine";
+        addToNewRoutineButton.addEventListener("click", function() {
+          // console.log('click add to new routine button');
 
-        if (arr.length == 1) {
-          obj.img.push(arr[0].image);
-        } else if (arr.length == 2) {
-          obj.img.push(arr[0].image);
-          obj.img.push(arr[1].image);
-        }
+          // create routine object, pass to staged routine array
+          let exObj = {};
+          exObj.name = this.parentNode.parentNode.children[0].innerHTML;
+          exObj.desc = this.parentNode.parentNode.children[1].innerHTML;
 
-        myArray.push(obj);
+          if (
+            this.parentNode.parentNode.children[2].children[0].getAttribute(
+              "imgPath_1"
+            ) != undefined
+          ) {
+            exObj.img = [
+              this.parentNode.parentNode.children[2].children[0].getAttribute(
+                "imgPath_1"
+              ),
+              this.parentNode.parentNode.children[2].children[1].getAttribute(
+                "imgPath_2"
+              )
+            ];
+          }
 
-        resolve(true);
-      })
-      .catch(function(err) {
-        throw err;
-        reject();
-      });
-  });
-};
+          /********************************
+           * Push to routines_staged array *
+           *********************************/
 
-fh.func.init_routinesBicepsInFindbar = function() {
-  fh.interval.check_exercisesFetchDone = setInterval(function() {
-    if (fh.flag.bicepsFetchDone == true) {
-      // HARD CODE the amount of Biceps Exercises Fetched in order to wait for them all before appending
+          /* Check routines_staged array for duplicates. Return if find duplicate. */
+          for (let i = 0; i < fh.user.routines_staged.length; i++) {
+            let name_stagedRoutine = fh.user.routines_staged[i].name;
+            if (exObj.name == name_stagedRoutine) {
+              return;
+            }
+          }
 
-      clearInterval(fh.interval.check_exercisesFetchDone);
+          /* No above return from duplicate check, push to routines_staged array */
+          fh.user.routines_staged.push(exObj);
 
-      let findables_exercises = document.querySelector(".findables_exercises");
+          /*************************************************************
+           * Generate the exercise items in the right side routineBlock *
+           **************************************************************/
 
-      for (let i = 0; i < fh.data.exercises.biceps.length; i++) {
-        let obj = fh.data.exercises.biceps[i];
+          /* Outer Wrap */
+          let exerciseItem_staged_wrap = document.createElement("div");
+          exerciseItem_staged_wrap.className = "exerciseItem_staged_wrap";
 
-        let findable = document.createElement("div");
-        findable.className = "findable";
-        findable.addEventListener("click", function() {
-          fh.func.click_findableExercise(this);
+          /* p element = name */
+          let exerciseItem_staged_p = document.createElement("p");
+          exerciseItem_staged_p.className = "exerciseItem_staged_p";
+          exerciseItem_staged_p.innerHTML = exObj.name;
+
+          /* div element = deleteButton */
+          let deleteButton_staged = document.createElement("div");
+          deleteButton_staged.className = "deleteButton_staged";
+          deleteButton_staged.addEventListener("click", function() {
+            let deleteTarget_name = this.previousElementSibling.innerHTML;
+
+            /* remove from staged array */
+            for (let i = 0; i < fh.user.routines_staged.length; i++) {
+              let stagedRoutineName = fh.user.routines_staged[i].name;
+
+              if (deleteTarget_name == stagedRoutineName) {
+                fh.user.routines_staged.splice(i, 1);
+              }
+            }
+
+            /* remove element from panel */
+            let exercisesInPanel = document.querySelectorAll(
+              ".exerciseItem_staged_wrap"
+            );
+
+            for (let i = 0; i < exercisesInPanel.length; i++) {
+              let exercise = exercisesInPanel[i];
+              let exerciseName = exercise.children[0].innerHTML;
+
+              if (deleteTarget_name == exerciseName) {
+                exercise.remove();
+              }
+            }
+          });
+
+          // /************
+          // Append Pieces
+          // *************/
+          exerciseItem_staged_wrap.appendChild(exerciseItem_staged_p);
+          exerciseItem_staged_wrap.appendChild(deleteButton_staged);
+
+          // /*********
+          // Append DOM
+          // **********/
+          let pasteExercises = document.querySelector(".pasteExercises");
+          pasteExercises.appendChild(exerciseItem_staged_wrap);
         });
 
-        let name = document.createElement("p");
-        name.innerHTML = obj.name;
+        contentPlate.appendChild(wrap_routineAddControls);
+        wrap_routineAddControls.appendChild(addToNewRoutineButton);
 
-        findable.appendChild(name);
-        findables_exercises.appendChild(findable);
+        // append to DOM
+        let wrap_context = document.querySelector(".wrap_context");
+        wrap_context.insertBefore(contentPlate, wrap_context.children[0]);
       }
     }
-  }, 10);
+  };
+
+  fh.func.createAppend_selectedExerciseGroup = function(exerciseBucket) {
+    let findables_exercises = document.querySelector(".findables_exercises");
+
+    for (let i = 0; i < exerciseBucket.length; i++) {
+      let obj = exerciseBucket[i];
+
+      let findable = document.createElement("div");
+      findable.className = "findable";
+      findable.addEventListener("click", function() {
+        fh.func.click_findableExercise(this);
+      });
+
+      let name = document.createElement("p");
+      name.innerHTML = obj.name;
+
+      findable.appendChild(name);
+      findables_exercises.appendChild(findable);
+    }
+  };
+
+  fh.func.createObj_exercise = (url, myArray, flag) => {
+    return new Promise((resolve, reject) => {
+      fetch(url)
+        .then(resp => resp.json())
+        .then(data => {
+          // console.log(data, 'data');
+
+          for (let i = 0; i < data.results.length; i++) {
+            let obj = {};
+            obj.name = data.results[i].name;
+            obj.desc = data.results[i].description;
+            obj.img = [];
+
+            let url_forImage = `https://wger.de/api/v2/exerciseimage/?exercise=${data.results[i].id}`;
+
+            if (i == data.results.length - 1) {
+              return (resolution = fh.func.fetch_exerciseImages(
+                url_forImage,
+                obj,
+                myArray
+              ));
+            } else {
+              fh.func.fetch_exerciseImages(url_forImage, obj, myArray);
+            }
+          }
+        })
+        .then(v => {
+          // console.log(v, 'v');
+
+          /*
+        Flag when Biceps fetch is done.
+        This is what I want earliest so as to start displaying on screen
+        */
+          if (flag == true) {
+            fh.flag.bicepsFetchDone = true;
+          }
+
+          resolve(v);
+        });
+    });
+  };
+
+  fh.func.fetch_exerciseImages = function(url_forImage, obj, myArray) {
+    return new Promise((resolve, reject) => {
+      fetch(url_forImage)
+        .then(resp => resp.json())
+        .then(data => {
+          let arr = data.results;
+
+          if (arr.length == 1) {
+            obj.img.push(arr[0].image);
+          } else if (arr.length == 2) {
+            obj.img.push(arr[0].image);
+            obj.img.push(arr[1].image);
+          }
+
+          myArray.push(obj);
+
+          resolve(true);
+        })
+        .catch(function(err) {
+          throw err;
+          reject();
+        });
+    });
+  };
+
+  fh.func.init_routinesBicepsInFindbar = function() {
+    fh.interval.check_exercisesFetchDone = setInterval(function() {
+      if (fh.flag.bicepsFetchDone == true) {
+        // HARD CODE the amount of Biceps Exercises Fetched in order to wait for them all before appending
+
+        clearInterval(fh.interval.check_exercisesFetchDone);
+
+        let findables_exercises = document.querySelector(
+          ".findables_exercises"
+        );
+
+        for (let i = 0; i < fh.data.exercises.biceps.length; i++) {
+          let obj = fh.data.exercises.biceps[i];
+
+          let findable = document.createElement("div");
+          findable.className = "findable";
+          findable.addEventListener("click", function() {
+            fh.func.click_findableExercise(this);
+          });
+
+          let name = document.createElement("p");
+          name.innerHTML = obj.name;
+
+          findable.appendChild(name);
+          findables_exercises.appendChild(findable);
+        }
+      }
+    }, 10);
+  };
+
+  fh.func.isWithin = function(coords, elem) {
+    let x = coords[0];
+    let y = coords[1];
+
+    let elem_left = elem.getBoundingClientRect().left;
+    let elem_right = elem.getBoundingClientRect().right;
+    let elem_top = elem.getBoundingClientRect().top;
+    let elem_bottom = elem.getBoundingClientRect().bottom;
+
+    if (x > elem_left && x < elem_right && y > elem_top && y < elem_bottom) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  /*************
+  Initialization
+  **************/
+  window.addEventListener("DOMContentLoaded", event => {
+    const currUser = localStorage.getItem("currentUser");
+
+    // console.log('DOM fully loaded and parsed');
+
+    // Exercises call, dropdown event, dropdownItem events, append biceps first
+    fh.func.apiCall_exercises();
+    fh.func.addListener_click_dropdownFindExercise();
+    fh.func.addListener_click_eachItemInExercisesDropdownMenu();
+    fh.func.init_routinesBicepsInFindbar();
+
+    // Login/Registration Panel Events
+    fh.func.addListener_click_initCreateAccountButton();
+    fh.func.addListener_click_loginButtonProper();
+    fh.func.addListener_click_createAccountProper();
+    fh.func.addListener_click_loginButtonBack();
+    fh.func.addListener_click_saveButtonStagedRoutine();
+
+    fh.func.addListener_click_body();
+  });
 };
-
-fh.func.isWithin = function(coords, elem) {
-  let x = coords[0];
-  let y = coords[1];
-
-  let elem_left = elem.getBoundingClientRect().left;
-  let elem_right = elem.getBoundingClientRect().right;
-  let elem_top = elem.getBoundingClientRect().top;
-  let elem_bottom = elem.getBoundingClientRect().bottom;
-
-  if (x > elem_left && x < elem_right && y > elem_top && y < elem_bottom) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-/*************
-Initialization
-**************/
-window.addEventListener("DOMContentLoaded", event => {
-  const currUser = localStorage.getItem("currentUser");
-
-  // console.log('DOM fully loaded and parsed');
-
-  // Exercises call, dropdown event, dropdownItem events, append biceps first
-  fh.func.apiCall_exercises();
-  fh.func.addListener_click_dropdownFindExercise();
-  fh.func.addListener_click_eachItemInExercisesDropdownMenu();
-  fh.func.init_routinesBicepsInFindbar();
-
-  // Login/Registration Panel Events
-  fh.func.addListener_click_initCreateAccountButton();
-  fh.func.addListener_click_loginButtonProper();
-  fh.func.addListener_click_createAccountProper();
-  fh.func.addListener_click_loginButtonBack();
-  fh.func.addListener_click_saveButtonStagedRoutine();
-
-  fh.func.addListener_click_body();
-});
