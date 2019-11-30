@@ -104,32 +104,39 @@ app.get(`/api/trainer/clientinfo/:userId`, async function(req, res) {
   res.send(result);
 });
 
-app.post(`/api/user/:currUser/:userObj`, async function(req, res) {
+app.post(`/api/user/update/:currUser`, async function(req, res) {
+  console.log("Update with ", req.body);
   let result = await db.query(
-    `update fh_users set username = IFNULL(?, username),
-    first_name = IFNULL(?, first_name), 
-    last_name = IFNULL(?, last_name), 
-    address_line1 = IFNULL(?, address_line1), 
-    address_line2 = IFNULL(?, address_line2), 
-    city = IFNULL(?, city), 
-    postal_code = IFNULL(?, postal_code), 
-    cellphone = IFNULL(?, cellphone), 
-    email = IFNULL(?, email), 
-    fitness_goals = IFNULL(?, fitness_goals), 
-    istrainer = IFNULL(?, istrainer)i
+    `update fh_users set username = ?,
+    first_name = ?, 
+    last_name = ?, 
+    address_line1 = ?, 
+    address_line2 = ?, 
+    city = ?, 
+    postal_code = ?, 
+    cellphone = ?, 
+    email = ?, 
+    user_password = ?,
+    fitness_goals = ?, 
+    seeking_trainer = ?,
+    istrainer = ?,
+    trainer_bio = ?
     where id = ?`,
     [
-      req.params.userObj.username,
-      req.params.userObj.first_name,
-      req.params.userObj.last_name,
-      req.params.userObj.address_line1,
-      req.params.userObj.address_line2,
-      req.params.userObj.city,
-      req.params.userObj.postal_code,
-      req.params.userObj.cellphone,
-      req.params.userObj.email,
-      req.params.userObj.fitness_goals,
-      req.params.userObj.istrainer,
+      req.body.email,
+      req.body.firstname,
+      req.body.lastname,
+      req.body.address_line1,
+      req.body.address_line2,
+      req.body.city,
+      req.body.postal_code,
+      req.body.cellphone,
+      req.body.email,
+      req.body.user_password,
+      req.body.fitness_goals,
+      req.body.seeking_trnr,
+      req.body.istrainer,
+      req.body.trainer_bio,
       req.params.currUser
     ]
   );

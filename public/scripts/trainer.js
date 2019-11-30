@@ -6,7 +6,10 @@ async function myClients() {
       <button class="clients myBtn col" value="${currUser}" onclick="showClientProfile(${currUser})">
         My Profile
       </button>
-    </div>`
+    </div>
+    <div class="col-sm-12" id="clientBio" style="background-color: white; overflow-y: auto; display: flex;flex-direction: column">
+    </div>
+`
   ).appendTo("#bioscreen");
   $.ajax({
     url: `/api/trainer/client/${currUser}`,
@@ -76,8 +79,9 @@ async function showClientProfile(userId) {
     type: "GET",
     cache: false,
     success: function(result) {
-      console.log(userId, currUser);
       if (Number(userId) !== Number(currUser)) {
+        $("#profile_header").innerText =
+          result[0].first_name + " " + result[0].last_name + " - Trainer";
         $(`<div style="position:relative; top: 0">
             <form action="/api/users"  method="POST" target="hidden-form">
               First name: <input type="text" name="firstname" value="${result[0].first_name}" readonly><br/>
@@ -94,19 +98,29 @@ async function showClientProfile(userId) {
             </form>
           </div>`).appendTo("#clientBio");
       } else {
+        $("#profile_header").innerText =
+          result[0].first_name + " " + result[0].last_name + " - User";
         $(`<div style="position:relative; top:0">
-            <form action="/api/users"  method="POST" target="hidden-form">
-              First Name: <input type="text" name="firstname" value="${result[0].firstname}"><br/>
-              Last Name: <input type="text" name="lastname" value="${result[0].lastname}"><br/>
+            <IFRAME style="display:none" name="hidden-form"></IFRAME>
+            <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
+              First Name: <input type="text" name="firstname" value="${result[0].first_name}"><br/>
+              Last Name: <input type="text" name="lastname" value="${result[0].last_name}"><br/>
               Address:<br/>
               <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}"><br/>
               <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}"><br/>
               City: <input type="text" name="city" value="${result[0].city}"><br/>
               Postal Code: <input type="text" name="postal_code" value="${result[0].postal_code}"><br/>
-              Contact No.: <input type="tel" id="rd_only_rd_only_phone" name="cellphone" value="${result[0].cellphone}"><br/>
-              Email: <input type="email" id="rd_only_email" value="${result[0].email}"><br/>
+              Contact No.: <input type="tel" id="phone" name="cellphone" value="${result[0].cellphone}"><br/>
+              Email: <input type="email" id="email" value="${result[0].email}"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"
+							name="email"><br/>
+              Password: <input type="text" id="password" name="password"><br />
+              Seeking Trainer: <input type="checkbox" name="seeking_trnr" onchange="toggleInfo(this)" value="${result[0].seeking_trainer}"><br />
+              Personal Trainer: <input type="checkbox" name="istrainer" onchange="toggleInfo(this)" value="${result[0].istrainer}"><br />
               Fitness Goals:<br/>
-              <textarea id="rd_only_fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea>
+              <textarea id="rd_only_fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea><br/>
+              Bio:<br />
+              <textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
+						  <input type="submit" value="Submit">
             </form>
           </div>`).appendTo("#clientBio");
       }
