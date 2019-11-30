@@ -561,8 +561,23 @@ fh.func.addListener_click_saveButtonStagedRoutine = function() {
   });
 };
 
+
+
+fh.func.centerPanelScrollTop = ()=>{
+
+  let wrap_context = document.querySelector('.wrap_context');
+
+  wrap_context.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+};
+
+
+
 fh.func.click_findableExercise = function(me) {
-  // console.log("clicked findable");
+
+  fh.func.centerPanelScrollTop();
 
   let findableName = me.children[0].innerHTML;
 
@@ -616,8 +631,8 @@ fh.func.click_findableExercise = function(me) {
 
       // if images are present in the array, append them
       if (exercise.img.length > 0) {
-        let exerciseImagesFlex = document.createElement("div");
-        exerciseImagesFlex.className = "exerciseImagesFlex";
+        let exerciseImagesCont = document.createElement("div");
+        exerciseImagesCont.className = "exerciseImagesCont";
 
         let exercise_image = document.createElement("div");
         exercise_image.className = "exercise_image";
@@ -637,9 +652,9 @@ fh.func.click_findableExercise = function(me) {
         exercise_image.setAttribute("imgPath_1", exercise.img[0]);
         exercise_image_2.setAttribute("imgPath_2", exercise.img[1]);
 
-        contentPlate.appendChild(exerciseImagesFlex);
-        exerciseImagesFlex.appendChild(exercise_image);
-        exerciseImagesFlex.appendChild(exercise_image_2);
+        contentPlate.appendChild(exerciseImagesCont);
+        exerciseImagesCont.appendChild(exercise_image);
+        exerciseImagesCont.appendChild(exercise_image_2);
       }
 
       let wrap_routineAddControls = document.createElement("div");
@@ -651,24 +666,26 @@ fh.func.click_findableExercise = function(me) {
       addToNewRoutineButton.addEventListener("click", function() {
         // console.log('click add to new routine button');
 
+        /* Hide userBlock, show saveRoutineBlock */
+        let userblock = document.querySelector('.userblock');
+        userblock.classList.add('displayNone');
+        userblock.classList.remove('displayBlock');
+
+        let saveRoutineBlock = document.querySelector('.saveRoutineBlock');
+        saveRoutineBlock.classList.add('displayBlock');
+        saveRoutineBlock.classList.remove('displayNone');
+
         // create routine object, pass to staged routine array
         let exObj = {};
         exObj.name = this.parentNode.parentNode.children[0].innerHTML;
         exObj.desc = this.parentNode.parentNode.children[1].innerHTML;
 
         /* If image path not undefined, set in array  */
-        if (
-          this.parentNode.parentNode.children[2].children[0].getAttribute(
-            "imgPath_1"
-          ) != undefined
-        ) {
+        if (this.parentNode.parentNode.children[2].children[0].getAttribute("imgPath_1") != undefined) {
+          
           exObj.img = [
-            this.parentNode.parentNode.children[2].children[0].getAttribute(
-              "imgPath_1"
-            ),
-            this.parentNode.parentNode.children[2].children[1].getAttribute(
-              "imgPath_2"
-            )
+            this.parentNode.parentNode.children[2].children[0].getAttribute("imgPath_1"),
+            this.parentNode.parentNode.children[2].children[1].getAttribute("imgPath_2")
           ];
         } else {
           /* If undefined, pass empty array. Avoids error in database. */
