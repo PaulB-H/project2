@@ -564,6 +564,7 @@ fh.func.addListener_click_saveButtonStagedRoutine = function(){
         let routineObj = {};
         routineObj.routineName = inputValue;
         routineObj.exercises   = fh.user.routines_staged;
+        
         console.log(routineObj, 'routineObj');
 
 
@@ -686,12 +687,18 @@ fh.func.click_findableExercise = function(me) {
           exObj.name = this.parentNode.parentNode.children[0].innerHTML;
           exObj.desc = this.parentNode.parentNode.children[1].innerHTML;
               
+          /* If image path not undefined, set in array  */
           if(this.parentNode.parentNode.children[2].children[0].getAttribute('imgPath_1') != undefined){
 
               exObj.img  = [
                   this.parentNode.parentNode.children[2].children[0].getAttribute('imgPath_1'),
                   this.parentNode.parentNode.children[2].children[1].getAttribute('imgPath_2'),
               ];
+          }
+          /* If undefined, pass empty array. Avoids error in database. */
+          else{
+
+              exObj.img = [];
           };
 
           /********************************

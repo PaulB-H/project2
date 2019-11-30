@@ -45,7 +45,6 @@ if (process.env.JAWSDB_URL) {
     port: 3306,
     user: "root",
     password: "IamTheBoxGhost1971",
-    // user: "root",
     // password: "steven123",
     database: "fitness_hub_db"
   });
