@@ -523,6 +523,7 @@ fh.func.addListener_click_saveButtonStagedRoutine = function() {
     ".saveButton_stagedRoutine"
   );
 
+<<<<<<< HEAD
   saveButton_stagedRoutine.addEventListener("click", function() {
     let nameInput = document.querySelector(".name_stagedRoutine");
     let inputValue = nameInput.value.trim();
@@ -555,6 +556,52 @@ fh.func.addListener_click_saveButtonStagedRoutine = function() {
           console.log(data, "data");
         });
     }
+=======
+
+fh.func.addListener_click_saveButtonStagedRoutine = function(){
+
+  let saveButton_stagedRoutine = document.querySelector('.saveButton_stagedRoutine');
+
+  saveButton_stagedRoutine.addEventListener('click', function(){
+
+     let nameInput  = document.querySelector('.name_stagedRoutine');
+     let inputValue = nameInput.value.trim();
+
+     /* Nothing in input, alert user (give inputFlash class, flash border red 3 times), return */
+     if(inputValue.length == 0){
+
+        console.log('no name given, stop cancel save');
+
+        return;
+     }
+     /* else package and save to DB, hide saveRoutineBlock */
+     else{
+
+        let routineObj = {};
+        routineObj.routineName = inputValue;
+        routineObj.exercises   = fh.user.routines_staged;
+        console.log(routineObj, 'routineObj');
+
+
+        let url = `/routine/save/:currUser/:${routineObj}`;
+
+        fetch(url, {
+          method: "POST",
+          headers: {
+            "Accept":       "application/json, text/plain, */*",
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(routineObj)
+        })
+        .then((resp)=>resp.json())
+        .then((data)=>{
+
+          console.log(data, 'data');
+        })
+        .catch((err)=>{console.log(err, 'err c')});
+        
+     };
+>>>>>>> ce8110c8f9c5d130eb91a9aee87056e57aafbd39
   });
 };
 
