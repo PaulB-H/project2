@@ -581,7 +581,9 @@ fh.func.addListener_click_saveButtonStagedRoutine = function(){
         .then((data)=>{
 
           console.log(data, 'data');
-        });
+        })
+        .catch((err)=>{console.log(err, 'err c')});
+        
      };
   });
 };
