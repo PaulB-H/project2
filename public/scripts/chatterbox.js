@@ -102,7 +102,6 @@ async function showStrangers() {
     type: "GET",
     cache: false,
     success: function(result) {
-      console.log(result);
       for (i = 0; i < result.length; i++) {
         $(`<div class="msgBox" style="margin: 1em">
             <span>${result[i].username}</span>

@@ -402,7 +402,6 @@ app.get(`/routine/userroutines/:currUser`, async function(req, res) {
     rtn_element.exercises = exercises;
     routines.push(rtn_element);
   }
-  console.log("Routine building ", routines[0].exercises);
   res.send(routines);
 });
 

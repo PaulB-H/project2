@@ -86,7 +86,7 @@ function today() {
       }
     },
     error: function(err) {
-      console.log(err);
+      console.log("Error found - ", err);
     },
     complete: function() {
       console.log("Got here");

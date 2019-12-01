@@ -1,25 +1,12 @@
 async function myClients() {
   showClientProfile(currUser);
-  $("#bioscreen").empty();
-  $(
-    `<div>
-      <button class="clients myBtn col" value="${currUser}" onclick="showClientProfile(${currUser})">
-        My Profile
-      </button>
-    </div>
-    <div class="col-sm-12" id="clientBio" style="background-color: white; overflow-y: auto; display: flex;flex-direction: column">
-    </div>
-`
-  ).appendTo("#bioscreen");
   $.ajax({
     url: `/api/trainer/client/${currUser}`,
     type: "GET",
     cache: false,
     success: function(result) {
       console.log("success reached");
-      $(
-        `<button id="newclient_btn" class="newchatBtn" onclick="">List of Potential Clients</button>`
-      ).appendTo("#potentialClients");
+      $(`<h6>Potential Clients</h6>`).appendTo("#potentialClients");
       for (i = 0; i < result.length; i++) {
         $(
           `<div class="col" style="display:flex">
@@ -34,20 +21,20 @@ async function myClients() {
                result[i].id
              }" onclick="delClient(${result[i].id})">X</button>
          </div>`
-        ).appendTo("#bioscreen");
+        ).appendTo("#client_list");
       }
       getPotentialClients();
     }
   });
 
-  $.ajax({
-    url: `/routine/userroutines/${currUser}`,
-    type: "GET",
-    cache: false,
-    success: function(result) {
-      console.log("Routine list is ", result);
-    }
-  });
+  // $.ajax({
+  //   url: `/routine/userroutines/${currUser}`,
+  //   type: "GET",
+  //   cache: false,
+  //   success: function(result) {
+  //     console.log("Routine list is ", result);
+  //   }
+  // });
 }
 
 async function getPotentialClients() {
@@ -57,9 +44,7 @@ async function getPotentialClients() {
     type: "GET",
     cache: false,
     success: function(result) {
-      $(
-        `<button id="newclient_btn" class="newchatBtn" onclick="showStrangers()">List of Potential Clients</button>`
-      ).appendTo("#potentialClients");
+      $(`<h6>Potential Clients</h6>`).appendTo("#potentialClients");
       for (i = 0; i < result.length; i++) {
         $(
           `<div class="col" style="display:flex">
@@ -81,6 +66,17 @@ async function getPotentialClients() {
 }
 
 async function showClientProfile(userId) {
+  $("#bioscreen").empty();
+  $(
+    `<div>
+      <button class="clients myBtn col" value="${currUser}" onclick="showClientProfile(${currUser})">
+        My Profile
+      </button>
+    </div>
+    <div class="col-sm-12" id="clientBio" style="background-color: white; overflow-y: auto; display: flex;flex-direction: column">
+    </div>
+`
+  ).appendTo("#bioscreen");
   $("#clientBio").empty();
   $.ajax({
     url: `/api/trainer/clientinfo/${userId}`,
@@ -137,6 +133,8 @@ async function showClientProfile(userId) {
 }
 
 async function delClient(userId) {
+  $("#client_list").empty();
+  $(`<h6>Current Clients</h6>`).appendTo("#client_list");
   $.ajax({
     url: `/api/trainer/delclient/${userId}`,
     type: "POST",
@@ -144,12 +142,14 @@ async function delClient(userId) {
     success: function(result) {
       getPotentialClients();
       myClients();
-      showClientProfile(currUser);
+      // getClient(currUser);
     }
   });
 }
 
 async function getClient(userId) {
+  $("#client_list").empty();
+  $(`<h6>Current Clients</h6>`).appendTo("#client_list");
   $.ajax({
     url: `/api/trainer/getclient/${currUser}/${userId}`,
     type: "POST",
@@ -157,7 +157,7 @@ async function getClient(userId) {
     success: function(result) {
       getPotentialClients();
       myClients();
-      showClientProfile(currUser);
+      // showClientProfile(currUser);
     }
   });
 }

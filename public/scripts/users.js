@@ -15,7 +15,7 @@ async function getTrainers() {
           </div>`
         ).appendTo(".find_trainers");
       }
-      getStrangers();
+      // getStrangers();
     }
   });
 }
