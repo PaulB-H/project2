@@ -39,6 +39,15 @@ async function myClients() {
       getPotentialClients();
     }
   });
+
+  $.ajax({
+    url: `/routine/userroutines/${currUser}`,
+    type: "GET",
+    cache: false,
+    success: function(result) {
+      console.log("Routine list is ", result);
+    }
+  });
 }
 
 async function getPotentialClients() {
@@ -48,7 +57,6 @@ async function getPotentialClients() {
     type: "GET",
     cache: false,
     success: function(result) {
-      console.log("success reached");
       $(
         `<button id="newclient_btn" class="newchatBtn" onclick="showStrangers()">List of Potential Clients</button>`
       ).appendTo("#potentialClients");
@@ -158,8 +166,9 @@ async function toggleInfo(cb_value, ischecked) {
   console.log("Trying to toggle ", cb_value, ischecked);
   if (cb_value === "seeking" && ischecked) {
     document.getElementById("istrainer").styledisplay = "none";
-  } else if (cb_value === "trainer" && ischecked)
     document.getElementById("#fitness_goals").css("display", "block");
+  } else if (cb_value === "trainer" && ischecked)
+    document.getElementById("#fitness_goals").css("display", "none");
 }
 
 // <script>
@@ -175,58 +184,4 @@ async function toggleInfo(cb_value, ischecked) {
 // 	}
 // </script>
 
-// function setMessageJustify(currUser, correspondent) {
-//   if (currUser == correspondent) {
-//     return "fromMe";
-//   } else {
-//     return "toMe";
-//   }
-// }
-
-// async function showStrangers() {
-//   $.ajax({
-//     url: `/trainer/chatter/strangers/${currUser}`,
-//     type: "GET",
-//     cache: false,
-//     success: function(result) {
-//       console.log(result);
-//       for (i = 0; i < result.length; i++) {
-//         $(`<div class="msgBox" style="margin: 1em">
-//             <span>${result[i].username}</span>
-//            </div>`).appendTo(".content_plate2");
-//       }
-//     }
-//   });
-// }
-
-// async function saveMessage() {
-//   if (
-//     $("#msg_editor")
-//       .val()
-//       .trim().length > 0
-//   ) {
-//     $.ajax({
-//       url: `/hubchat/chatter/save/${currUser}/${$("#chatWith").text()}/${$(
-//         "#msg_editor"
-//       ).val()}`,
-//       type: "POST",
-//       data: {},
-//       success: function(result) {
-//         $(`<div class="msgBox ${setMessageJustify(
-//           currUser,
-//           result[0].sentbyid
-//         )}" style="margin: 1em">
-//               <span>${moment(result[0].createdat).format("LLLL")}</span>
-//               <div style="background-color:white">${
-//                 result[0].chatmessage
-//               }</div></div>`).appendTo("#comm_thread");
-//         $("#msg_editor").val("");
-//         myMessages();
-//         showStrangers();
-//       }
-//     });
-//   }
-// }
-
-// const currUser = localStorage.getItem("currentUser");
 $(document).ready(myClients);
