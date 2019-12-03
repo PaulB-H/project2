@@ -382,7 +382,7 @@ app.post(`/routine/save/:currUser`, async function(req, res) {
       ]
     );
   }
-  res.send(writeHdr.insertId);
+  res.send({id: writeHdr.insertId});
 });
 
 app.get(`/routine/userroutines/:currUser`, async function(req, res) {

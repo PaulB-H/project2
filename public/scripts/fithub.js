@@ -529,7 +529,7 @@ fh.func.addListener_click_saveButtonStagedRoutine = function() {
 
     /* Nothing in input, alert user (give inputFlash class, flash border red 3 times), return */
     if (inputValue.length == 0) {
-      console.log("no name given, stop cancel save");
+      console.log("no name given, stop/cancel save");
 
       return;
     } else {
@@ -552,7 +552,49 @@ fh.func.addListener_click_saveButtonStagedRoutine = function() {
       })
         .then(resp => resp.json())
         .then(data => {
+          
           console.log(data, "data");
+
+          /*
+            Success:
+            
+            - populate userblock with routine item
+            - update users routines array (fh.user.routines)
+
+            ---- THERE NEEDS TO BE UNIQUE ASSOCIATION FOR ROUTINE ITEMS.
+            ---- I NEED THE ASSIGNED ROUTINE ID BACK FROM THE DB
+            */
+
+           /** Clear routine name field in saveRoutineBlock */
+           nameInput.value = '';
+          /** Clear routine items in saveRoutineBlock Y */
+           fh.user.routines_staged = [];
+          console.log(fh.user.routines_staged, 'staged should be empty');
+           /** Delete staged routine items in saveRoutineBlock */
+           let stagedItems = document.querySelectorAll('.exerciseItem_staged_wrap');
+           for(i of stagedItems){
+             i.remove();
+           };
+          /** Hide saveRoutineBlock */
+           let saveRoutineBlock = document.querySelector('.saveRoutineBlock');          
+           saveRoutineBlock.classList.add('displayNone');
+           saveRoutineBlock.classList.remove('displayBlock');
+          /** Show userblock */
+           let userblock = document.querySelector('.userblock');
+           userblock.classList.add('displayBlock');
+           userblock.classList.remove('displayNone');
+           /** Set db assigned id onto routine object and add object to user's routine array (fh.user.routines) */
+           routineObj.id = data.id;
+           fh.user.routines.push(routineObj);
+           /* Populate userblock with routine item */
+           let html_routineItem = `
+            <div class="routineItem">
+              <p class=""routineItem_p id="${routineObj.id}">${routineObj.routineName}</p>
+              <div class="deleteButton_routineItem"></div>
+            </div> 
+          `;
+          userblock.innerHTML += html_routineItem;
+
         })
         .catch(err => {
           console.log(err, "err c");
@@ -690,7 +732,7 @@ fh.func.click_findableExercise = function(me) {
         } else {
           /* If undefined, pass empty array. Avoids error in database. */
           exObj.img = [];
-        }
+        };
 
         /********************************
          * Push to routines_staged array *
