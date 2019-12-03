@@ -136,17 +136,16 @@
 				<!-- Trainer -->
 				<div class="content_plate content_plate0">
 					<div class="container col" id="trainerbox">
-						<h1 id="profile_header">Trainer</h1>
-						<div id="Trainer" class="row"
-							style="height: 100vh; min-height: fit-content; background-color: lightsteelblue">
+						<!-- <h1 id="profile_header">Trainer</h1> -->
+						<div id="trainer" class="row">
 							<div class="row" style="width:100%">
-								<div class="col-sm-6" id="bioscreen" style="height:60vh">
+								<div class="col-sm-6" id="bioscreen">
 								</div>
-								<div class="col-sm-6" id="client_list" style="height:60vh">
-									<!-- <div class="row" style="overflow-y: auto; display: flex;flex-direction: row">	 -->
-									<div class="col" id="potentialClients"
-										style="overflow: scroll; display: flex;flex-direction: column"></div>
-									<!-- </div> -->
+								<div class="col-sm-3" id="client_list">
+									<h6>Current Clients</h6>
+								</div>
+								<div class="col-sm-3" id="potentialClients">
+									<h6>Potential Clients</h6>									
 								</div>
 							</div>
 						</div>
@@ -185,7 +184,7 @@
 				</div>
 
 				<!-- Routine Builder Section -->
-				<div class="content_plate">
+				<!-- <div class="content_plate">
 					<div class="container col" id="routine_builder">
 						<h1>Routine Manager</h1>
 						<div id="Kinetics" class="row"
@@ -220,7 +219,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 			</div>
 			<!-- End wrap_context -->
@@ -229,8 +228,39 @@
 
 			<div class="wrap_userbar">
 
+				<div class="catbar displayNone">
+					<div class="wrap_catbox catbox_trainers">
+						<div class="catbox_plate">
+							<div></div>
+							<div>Routines</div>
+						</div>
+						<div class="catbox_arrow"></div>
+					</div>
+					<div class="wrap_catbox catbox_routines">
+						<div class="catbox_plate">
+							<div></div>
+							<div>Chat</div>
+						</div>
+						<div class="catbox_arrow"></div>
+					</div>
+					<div class="wrap_catbox catbox_mealPlans">
+						<div class="catbox_plate">
+							<div></div>
+							<div>Calendar</div>
+						</div>
+						<div class="catbox_arrow"></div>
+					</div>
+					<div class="wrap_catbox catbox_events">
+						<div class="catbox_plate">
+							<div></div>
+							<div>Profile</div>
+						</div>
+						<div class="catbox_arrow"></div>
+					</div>
+				</div>
+
 				<!-- <div class="wrap_login displayBlock"> -->
-				<div class="wrap_login displayNone">
+				<div class="wrap_login displayBlock">
 					<p class="loginMessage color_greyBlue">Welcome to active wellness</p>
 					<p class="loginTitle color_greenMain">Welcome to FitHub</p>
 					<div class="loginPanel">
@@ -262,58 +292,63 @@
 					registerButton
 					back_loginButton
 				-->
+
+				<!--/************
+				Register Section
+				*************/-->
 				<div class="wrap_register displayNone">
 					<p class="registerMessage color_greyBlue">Welcome to registration</p>
-					<p class="registerTitle color_greenMain">Welcome to FitHub</p>
+					<p class="registerTitle color_greenMain">Fithub Registration</p>
 					<div class="registerPanel">
-					<form class="registrationForm" action="/api/users" method="POST" target="hidden-form">
-						<div class="registerRow">
-							<p>First Name: </p>
-							<input class="registerFirstname" type=taext">
+
+
+					<form>
+						<div id="formGroupOverride" class="form-group">
+							<label class="formLabel" for="exampleInputEmail1">First Name</label>
+							<input id="formControlOverride" type="email" class="form-control registerFirstname" placeholder="Enter First Name">
 						</div>
-						<div class="registerRow">
-							<p>Last Name: </p>
-							<input class="registerLastname" type="text">
+						<div id="formGroupOverride" class="form-group">
+							<label class="formLabel" for="exampleInputEmail1">Last Name</label>
+							<input id="formControlOverride" type="email" class="form-control registerLastname" placeholder="Enter Last Name">
 						</div>
-						<div class="registerRow">
-							<p>Address: </p>
-							<input class="registerAddress" type="text" name="address_line1" placeholder="Address line 1">
+						<div id="formGroupOverride" class="form-group">
+							<label class="formLabel" for="exampleInputEmail1">Address</label>
+							<input id="formControlOverride" type="text" class="form-control registerAddress" placeholder="Enter Address">
 						</div>
-						<div class="registerRow">
-							<p>City: </p> </p>
-							<input class="registerCity" type="text">
+						<div id="formGroupOverride" class="form-group">
+							<label class="formLabel" for="exampleInputEmail1">City</label>
+							<input id="formControlOverride" type="text" class="form-control registerCity" placeholder="Enter City">
 						</div>
-						<div class="registerRow">
-							<p>Postal Code: </p>
-							<input class="registerPostalcode" type="text">
+						<div id="formGroupOverride" class="form-group">
+							<label class="formLabel" for="exampleInputEmail1">Postal Code</label>
+							<input id="formControlOverride" type="text" class="form-control registerPostalcode" placeholder="Enter Postal Code">
 						</div>
-						<div class="registerRow">
-							<p>Postal Code: </p>
-							<input class="registerPostalcode" type="text">
+						<div id="formGroupOverride" class="form-group">
+							<label class="formLabel" for="exampleInputEmail1">Phone Number</label>
+							<input id="formControlOverride" type="text" class="form-control registerPhonenumber" placeholder="Enter Phone Number">
+						</div>						
+						<div id="formGroupOverride" class="form-group">
+							<label class="formLabel" for="exampleInputEmail1">Email Address</label>
+							<input id="formControlOverride" type="text" class="form-control registerEmailaddress" placeholder="Enter Email Address">
+						</div>							
+						<div id="formGroupOverride" class="form-group">
+							<label class="formLabel" for="exampleInputPassword1">Password</label>
+							<input id="formControlOverride" type="password" class="form-control registerPassword" placeholder="Password">
 						</div>
-						<div class="registerRow">
-							<p>Phone Number: </p>
-							<input class="registerPhonenumber" type="text">
-						</div>
-						<div class="registerRow">
-							<p>Email: </p>
-							<input class="loginEmail" type="text">
-						</div>
-						<div class="registerRow">
-							<p>Password: </p>
-							<input class="loginEmail" type="text">
-						</div>
-						<div class="registerRow">
-							<p>Pass :</p>
-							<input class="loginPass" type="text">
+						<div id="registerBtn">
+							<div class="back_loginButton">Login</div>
+							<button type="submit" class="btn btn-primary">Register Now</button>
 						</div>
 					</form>
-					<div class="registerButton">Register</div>
+					OR
 					<div class="back_loginButton">Login</div>
 					</div>
 				</div>
+				<!--/************
+				END Register Section
+				*************/-->
 
-				<div class="userblock displayBlock"></div>
+				<div class="userblock displayNone"></div>
 				<!-- <div class="userblock displayNone"></div> -->
 
 				<!-- <div class="saveRoutineBlock displayBlock"> -->
@@ -322,7 +357,6 @@
 					<input class="name_stagedRoutine displayBlock" type="text" placeholder="Name Routine">
 					<div class="pasteExercises"></div>
 				</div>
-
 
 				<div class="pinblock displayNone">
 
@@ -399,18 +433,6 @@
 	<script src="./scripts/myCalendar.js"></script>
 	<script src="./scripts/myRoutines.js"></script>
 	<script src="./scripts/trainer.js"></script>
-	<script>
-		function toggleInfo(checkbox) {
-			console.log("Trying to toggle " + checkbox.value);
-			if (checkbox.checked == true) {
-				document.getElementById("#fitness_goals").css("display", "none");
-				document.getElementById("#trainer_bio").css("display", "block");
-			} else {
-				document.getElementById("#fitness_goals").css("display", "block");
-				document.getElementById("#trainer_bio").css("display", "none");
-			}
-		}
-	</script>
 </body>
 
 </html>

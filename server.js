@@ -44,8 +44,8 @@ if (process.env.JAWSDB_URL) {
     host: "localhost",
     port: 3306,
     user: "root",
-    // password: "IamTheBoxGhost1971",
-    password: "steven123",
+    password: "IamTheBoxGhost1971",
+    // password: "steven123",
     database: "fitness_hub_db"
   });
 }
@@ -105,7 +105,6 @@ app.get(`/api/trainer/clientinfo/:userId`, async function(req, res) {
 });
 
 app.post(`/api/user/update/:currUser`, async function(req, res) {
-  console.log("Update with ", req.body);
   let result = await db.query(
     `update fh_users set username = ?,
     first_name = ?, 
@@ -145,7 +144,6 @@ app.post(`/api/user/update/:currUser`, async function(req, res) {
 });
 
 app.post(`/api/users`, async function(req, res) {
-  console.log(req.body);
   let result = await db.query(
     `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, user_password, fitness_goals, seeking_trainer, istrainer, trainer_bio)
     values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
@@ -346,14 +344,6 @@ app.get(`/routine/details/:routineId`, async function(req, res) {
   res.send(result);
 });
 
-app.get(`/routine/newroutine/:currUser`, async function(req, res) {
-  let result = await db.query(
-    `select CONCAT("Routine", count(*)+1) as routine_name from fh_routine_hdr where userid = ?`,
-    [req.params.currUser]
-  );
-  res.send(result);
-});
-
 app.post(`/routine/save/:currUser`, async function(req, res) {
   let writeHdr = await db.query(
     `insert into fh_routine_hdr(userid, routine_name) values(?, ?)`,
@@ -387,20 +377,34 @@ app.post(`/routine/save/:currUser`, async function(req, res) {
 
 app.get(`/routine/userroutines/:currUser`, async function(req, res) {
   let routines = [];
-  let result = await db.query(
-    `select hdr.id, hdr.routine_name, dtl.exercise_name, dtl.exercise_desc, dtl.front_img_src, dtl.rear_img_src 
-    from fh_routine_hdr as hdr inner join fh_routine_dtl as dtl on hdr.id = dtl.routine_id where hdr.userid = ?`,
+  let routinelist = [];
+  let hdr_result = await db.query(
+    `select hdr.id, hdr.routine_name from fh_routine_hdr as hdr where hdr.userid = ?`,
     [req.params.currUser]
   );
-  routines = [
-    result.id,
-    result.routine_name,
-    result.exercise_name,
-    result.exercise_desc,
-    [result.front_img_src, result.rear_img_src]
-  ];
+
+  for (i = 0; i < hdr_result.length; i++) {
+    let rtn_element = {};
+    let dtl_result = await db.query(
+      `select dtl.exercise_name, dtl.exercise_desc, dtl.front_img_src, dtl.rear_img_src from fh_routine_dtl as dtl where dtl.routine_id = ?`,
+      [hdr_result[i].id]
+    );
+    rtn_element.id = hdr_result[i].id;
+    rtn_element.routine_name = hdr_result[i].routine_name;
+    let exercises = [];
+    for (j = 0; j < dtl_result.length; j++) {
+      exercises.push({
+        name: dtl_result[j].exercise_name,
+        desc: dtl_result[j].exercise_desc,
+        img: [dtl_result[j].front_img_src, dtl_result[j].rear_img_src]
+      });
+    }
+    rtn_element.exercises = exercises;
+    routines.push(rtn_element);
+  }
   res.send(routines);
 });
+
 // Starts the server to begin listening
 // =============================================================
 app.listen(port, function() {

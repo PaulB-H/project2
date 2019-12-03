@@ -31,3 +31,20 @@
   top: 0;
   float: right;
 }
+
+.trainerPanel {
+  background-color: white;
+  box-shadow: var(--shadow_opac10);
+  padding: 2px;
+  margin: 0 auto;
+}
+
+#trainer {
+  background-color: white;
+  box-shadow: var(--shadow_opac10);
+  padding: 2px;
+  margin: 0 auto;
+  height: 100vh;
+  min-height: fit-content;
+  /* background-color: lightsteelblue; */
+}
