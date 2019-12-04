@@ -25,6 +25,7 @@
   fh.func.addListener_click_dropdownFindExercise = function() {
   fh.func.addListener_click_eachItemInExercisesDropdownMenu = function() {
   fh.func.addListener_click_initCreateAccountButton = function() {
+  fh.func.addListener_click_isTrainerToggle = ()=>{
   fh.func.addListener_click_loginButtonBack = function() {
   fh.func.addListener_click_loginButtonProper = function() {
   fh.func.addListener_click_saveButtonStagedRoutine = function(){
@@ -311,38 +312,38 @@ fh.func.addListener_click_body = function() {
   });
 };
 
-fh.func.addListener_click_createAccountProper = function() {
-  let final_createAccountButton = document.querySelector(
-    ".final_createAccountButton"
-  );
-  final_createAccountButton.addEventListener("click", function() {
-    console.log("clicked create account button proper");
+// fh.func.addListener_click_createAccountProper = function() {
+//   let final_createAccountButton = document.querySelector(
+//     ".final_createAccountButton"
+//   );
+//   final_createAccountButton.addEventListener("click", function() {
+//     console.log("clicked create account button proper");
 
-    let email = document.querySelector(".loginEmail").value;
-    let pass = document.querySelector(".loginPass").value;
+//     let email = document.querySelector(".loginEmail").value;
+//     let pass = document.querySelector(".loginPass").value;
 
-    let newUserObj = {};
-    newUserObj.email = email;
-    newUserObj.pwd = pass;
-    newUserObj = JSON.stringify(newUserObj);
+//     let newUserObj = {};
+//     newUserObj.email = email;
+//     newUserObj.pwd = pass;
+//     newUserObj = JSON.stringify(newUserObj);
 
-    // let url = 'http://localhost:3000/api/user';
-    let url = "http://localhost:3000/api/users";
+//     // let url = 'http://localhost:3000/api/user';
+//     let url = "http://localhost:3000/api/users";
 
-    fetch(url, {
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-type": "application/json"
-      },
-      body: newUserObj
-    })
-      .then(resp => resp.json())
-      .then(function(data) {
-        console.log(data, "DATA");
-      });
-  });
-};
+//     fetch(url, {
+//       method: "POST",
+//       headers: {
+//         Accept: "application/json, text/plain, */*",
+//         "Content-type": "application/json"
+//       },
+//       body: newUserObj
+//     })
+//       .then(resp => resp.json())
+//       .then(function(data) {
+//         console.log(data, "DATA");
+//       });
+//   });
+// };
 
 fh.func.addListener_click_dropdownFindExercise = function() {
   let dropdownButton = document.querySelector(".dropdown_findbar");
@@ -413,44 +414,86 @@ fh.func.addListener_click_eachItemInExercisesDropdownMenu = function() {
   }
 };
 
+/*
+DONT NEED BELOW, THIS WAS TO CHANGE LOGIN PANEL TO REGISTRATION PANEL
+*/
 fh.func.addListener_click_initCreateAccountButton = function() {
-  let init_createAccountButton = document.querySelector(
-    ".init_createAccountButton"
-  );
+  
+  let init_createAccountButton = document.querySelector(".init_createAccountButton");
+  
   init_createAccountButton.addEventListener("click", function() {
-    // Change color and text of login message and title
-    let loginMessage = document.querySelector(".loginMessage");
-    loginMessage.innerHTML = "You're on you way";
-    loginMessage.classList.add("color_greenMain");
-    loginMessage.classList.remove("color_greyBlue");
 
-    let loginTitle = document.querySelector(".loginTitle");
-    loginTitle.innerHTML = "Create Account";
-    loginTitle.classList.add("color_greyBlue");
-    loginTitle.classList.remove("color_greenMain");
+      console.log('clicked create account button');
 
-    // displayNone the two buttons (loginButton and init_createAccountButton)
-    let loginButton = document.querySelector(".loginButton");
-    loginButton.classList.add("displayNone");
-    loginButton.classList.remove("displayBlock");
+      /*
+      - hide wrap_login, show wrap_registration
+      - 
+      */
+      let wrap_login = document.querySelector('.wrap_login');
+      wrap_login.classList.add('displayNone');
+      wrap_login.classList.remove('displayBlock');
 
-    let init_createAccountButton = document.querySelector(
-      ".init_createAccountButton"
-    );
-    init_createAccountButton.classList.add("displayNone");
-    init_createAccountButton.classList.remove("displayBlock");
-
-    // display the final_createAccountButton and back_loginButton
-    let final_createAccountButton = document.querySelector(
-      ".final_createAccountButton"
-    );
-    final_createAccountButton.classList.add("displayBlock");
-    final_createAccountButton.classList.remove("displayNone");
-
-    let back_loginButton = document.querySelector(".back_loginButton");
-    back_loginButton.classList.add("displayBlock");
-    back_loginButton.classList.remove("displayNone");
+      let wrap_register = document.querySelector('.wrap_register');
+      wrap_register.classList.add('displayBlock');
+      wrap_register.classList.remove('displayNone');
   });
+};
+
+fh.func.addListener_click_trainerToggles = ()=>{
+
+  console.log('here');
+
+  let toggles = document.querySelectorAll('.trainerToggleRow .toggle');
+
+  console.log(toggles, 'toggles');
+
+  for(let i = 0; i < toggles.length; i++){
+
+    let toggle = toggles[i];
+
+    toggle.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      let toggleBall = toggle.children[0];
+      if(toggleBall.classList.contains('toggle_off')){
+          toggleBall.classList.add('toggle_on');
+          toggleBall.classList.remove('toggle_off');
+      }
+      else
+      if(toggleBall.classList.contains('toggle_on')){
+          toggleBall.classList.add('toggle_off');
+          toggleBall.classList.remove('toggle_on');
+      };
+    });
+  };
+
+  // for(i of toggles){
+
+  //   console.log(i, 'i');
+
+  //   i.addEventListener('click', (e)=>{
+
+  //     let toggle = e.target;
+
+  //     console.log(toggle, 'toggle');
+
+  //     // let toggleBall = document.querySelector('.trainerToggleRow .toggleBall');
+  //     // let toggleBall = this;
+
+  //     if(e.target.classList.contains('toggle_off')){
+  //       console.log('was off');
+  //       e.target.classList.add('toggle_on');
+  //       e.target.classList.remove('toggle_off');
+  //     }
+  //     else
+  //     if(e.target.classList.contains('toggle_on')){
+  //       console.log('was on');
+  //       e.target.classList.add('toggle_off');
+  //       e.target.classList.remove('toggle_on');
+  //     };
+
+  //   });
+  // };
 };
 
 fh.func.addListener_click_loginButtonBack = function() {
@@ -529,7 +572,7 @@ fh.func.addListener_click_saveButtonStagedRoutine = function() {
 
     /* Nothing in input, alert user (give inputFlash class, flash border red 3 times), return */
     if (inputValue.length == 0) {
-      console.log("no name given, stop cancel save");
+      console.log("no name given, stop/cancel save");
 
       return;
     } else {
@@ -552,7 +595,49 @@ fh.func.addListener_click_saveButtonStagedRoutine = function() {
       })
         .then(resp => resp.json())
         .then(data => {
+          
           console.log(data, "data");
+
+          /*
+            Success:
+            
+            - populate userblock with routine item
+            - update users routines array (fh.user.routines)
+
+            ---- THERE NEEDS TO BE UNIQUE ASSOCIATION FOR ROUTINE ITEMS.
+            ---- I NEED THE ASSIGNED ROUTINE ID BACK FROM THE DB
+            */
+
+           /** Clear routine name field in saveRoutineBlock */
+           nameInput.value = '';
+          /** Clear routine items in saveRoutineBlock Y */
+           fh.user.routines_staged = [];
+          console.log(fh.user.routines_staged, 'staged should be empty');
+           /** Delete staged routine items in saveRoutineBlock */
+           let stagedItems = document.querySelectorAll('.exerciseItem_staged_wrap');
+           for(i of stagedItems){
+             i.remove();
+           };
+          /** Hide saveRoutineBlock */
+           let saveRoutineBlock = document.querySelector('.saveRoutineBlock');          
+           saveRoutineBlock.classList.add('displayNone');
+           saveRoutineBlock.classList.remove('displayBlock');
+          /** Show userblock */
+           let userblock = document.querySelector('.userblock');
+           userblock.classList.add('displayBlock');
+           userblock.classList.remove('displayNone');
+           /** Set db assigned id onto routine object and add object to user's routine array (fh.user.routines) */
+           routineObj.id = data.id;
+           fh.user.routines.push(routineObj);
+           /* Populate userblock with routine item */
+           let html_routineItem = `
+            <div class="routineItem">
+              <p class=""routineItem_p id="${routineObj.id}">${routineObj.routineName}</p>
+              <div class="deleteButton_routineItem"></div>
+            </div> 
+          `;
+          userblock.innerHTML += html_routineItem;
+
         })
         .catch(err => {
           console.log(err, "err c");
@@ -664,7 +749,7 @@ fh.func.click_findableExercise = function(me) {
       addToNewRoutineButton.className = "addToNewRoutineButton";
       addToNewRoutineButton.innerHTML = "Add to New Routine";
       addToNewRoutineButton.addEventListener("click", function() {
-        // console.log('click add to new routine button');
+        console.log('click add to new routine button');
 
         /* Hide userBlock, show saveRoutineBlock */
         let userblock = document.querySelector('.userblock');
@@ -690,7 +775,7 @@ fh.func.click_findableExercise = function(me) {
         } else {
           /* If undefined, pass empty array. Avoids error in database. */
           exObj.img = [];
-        }
+        };
 
         /********************************
          * Push to routines_staged array *
@@ -921,9 +1006,10 @@ window.addEventListener("DOMContentLoaded", event => {
   // Login/Registration Panel Events
   fh.func.addListener_click_initCreateAccountButton();
   fh.func.addListener_click_loginButtonProper();
-  fh.func.addListener_click_createAccountProper();
-  fh.func.addListener_click_loginButtonBack();
+  // fh.func.addListener_click_createAccountProper();
+  // fh.func.addListener_click_loginButtonBack();
   fh.func.addListener_click_saveButtonStagedRoutine();
+  fh.func.addListener_click_trainerToggles();
 
   fh.func.addListener_click_body();
 });

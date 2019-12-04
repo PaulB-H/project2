@@ -26,7 +26,7 @@ function today() {
     type: "GET",
     cache: false,
     success: function(result) {
-      console.log("success reached");
+      // console.log("success reached");
       $("#day-view").empty();
       let time_slots = new Date();
       if (result.length == 0) {
@@ -86,10 +86,10 @@ function today() {
       }
     },
     error: function(err) {
-      console.log(err);
+      console.log("Error found - ", err);
     },
     complete: function() {
-      console.log("Got here");
+      // console.log("Got here");
     }
   });
 }

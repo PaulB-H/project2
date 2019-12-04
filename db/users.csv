@@ -1,0 +1,5 @@
+"id";"username";"first_name";"last_name";"address_line1";"address_line2";"city";"postal_code";"trainerid";"cellphone";"email";"user_password";"fitness_goals";"seeking_trainer";"istrainer";"profile_pic_path";"createdat";"trainer_bio"
+1;"thunderbird@fakemail.com";"James";"Proudstar";"on the warpath again";"";"";"";0;"9995554444";"thunderbird@fakemail.com";"";"";0;1;"";"2019-11-22 12:25:50";""
+2;"martine@fakemail.com";"Martine";"Fulcrum";"somewhere out there 3";"";"";"";0;"";"martine@fakemail.com";"SausageDog";"";1;0;"";"2019-11-22 12:29:08";""
+3;"marcus@fakemail.com";"Marcus";"Fulcrum";"Fortnite arena";"";"";"";0;"";"arcus@fakemail.com";"Fortnite";"";1;0;"";"2019-11-22 12:30:13";""
+4;"martine@fakemail.com";"Kevin";"Fulcrum";"somewhere out there 4 us";"";"";"";0;"";"martine@fakemail.com";"";"";0;0;"";"2019-11-30 12:25:55";""

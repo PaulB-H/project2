@@ -29,7 +29,6 @@ CREATE TABLE `fh_calendar` (
   `hr24` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
-
 drop table `fh_calendar_audit`;
 CREATE TABLE `fh_calendar_audit` (
   `id` int(11) NOT NULL,
@@ -61,7 +60,6 @@ CREATE TABLE `fh_calendar_audit` (
   `hr24` varchar(500) DEFAULT NULL,
   `auditat` datetime DEFAULT CURRENT_TIMESTAMP
 );
-
 drop table `fh_hubchat`;
 CREATE TABLE `fh_hubchat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -74,7 +72,6 @@ CREATE TABLE `fh_hubchat` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `fh_hubchatid_UNIQUE` (`id`)
 );
-
 drop table `fh_hubchat_audit`;
 CREATE TABLE `fh_hubchat_audit` (
   `id` int(11) NOT NULL,
@@ -86,32 +83,29 @@ CREATE TABLE `fh_hubchat_audit` (
   `chatmessage` varchar(1000) NOT NULL,
   `auditedat` datetime DEFAULT CURRENT_TIMESTAMP
 );
-
 drop table `fh_routine_dtl`;
 CREATE TABLE `fh_routine_dtl` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `routine_id` int(11) NOT NULL,
   `exercise_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `exercise_desc` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `exercise_desc` varchar(5000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `front_img_src` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `rear_img_src` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
-
 drop table `fh_routine_dtl_audit`;
 CREATE TABLE `fh_routine_dtl_audit` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `routine_id` int(11) NOT NULL,
-  `routine_details` int(11) NOT NULL,
-  `workouttype` varchar(100) DEFAULT NULL,
-  `workout_summary` varchar(100) DEFAULT NULL,
-  `estimated_duration` int(11) DEFAULT NULL,
+  `exercise_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `exercise_desc` varchar(5000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `front_img_src` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `rear_img_src` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `auditat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 );
-
 drop table `fh_routine_hdr`;
 CREATE TABLE `fh_routine_hdr` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -123,7 +117,6 @@ CREATE TABLE `fh_routine_hdr` (
   `estimated_duration` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
-
 drop table `fh_routine_hdr_audit`;
 CREATE TABLE `fh_routine_hdr_audit` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -136,8 +129,7 @@ CREATE TABLE `fh_routine_hdr_audit` (
   `auditat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 );
-
-drop table `fh_routine_hdr_audit`;
+drop table `fh_users`;
 CREATE TABLE `fh_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL,
@@ -160,7 +152,6 @@ CREATE TABLE `fh_users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `userid_UNIQUE` (`id`)
 );
-
 drop table `fh_users_audit`;
 CREATE TABLE `fh_users_audit` (
   `id` int(11) NOT NULL,

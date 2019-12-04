@@ -5,7 +5,7 @@ async function myRoutines() {
     type: "GET",
     cache: false,
     success: function(result) {
-      console.log("success reached");
+      // console.log("success reached");
       for (i = 0; i < result.length; i++) {
         $(
           `<div>
