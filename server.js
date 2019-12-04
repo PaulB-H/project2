@@ -47,7 +47,7 @@ if (process.env.JAWSDB_URL) {
     // Kevins root password: "IamTheBoxGhost1971",
     // pauls root password: sqlrootpass
     // Stevens root password: steven123
-    password: "sqlrootpass",
+    password: "steven123",
     database: "fitness_hub_db"
   });
 }
@@ -145,14 +145,15 @@ app.post(`/api/user/update/:currUser`, async function(req, res) {
   // res.end();
 });
 
-app.get(`/api/users`, async function() {
+app.get(`/api/users/:email/:user_password`, async function(req, res) {
+
   let result = await db.query(
-    `select email, user_password from fh_users where email = ? AND user_password = ? `,
-    [
-      req.body.email,
-      req.body.user_password
-    ]
+    `SELECT email, user_password
+    FROM fh_users
+    WHERE email = ? AND user_password = ? `,
+    [req.params.email, req.params.user_password]
   );
+
   res.send(result);
 });
 

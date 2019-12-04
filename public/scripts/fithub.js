@@ -475,17 +475,16 @@ fh.func.addListener_click_loginButtonProper = function() {
 
     let obj = {};
         obj.email = document.querySelector(".loginEmail").value;
-        obj.password = document.querySelector(".loginPass").value;
+        obj.user_password = document.querySelector(".loginPass").value;
 
-    // let url = 'api/user';
-    // let url = 'http://localhost:3000/api/user';
+    let url = `api/users/${obj.email}/${obj.user_password}`;
 
-    // fetch(url)
-    // .then((resp)=>resp.json())
-    // .then((data)=>{
+    fetch(url)
+    .then((resp)=>resp.json())
+    .then((data)=>{
 
-    //  console.log();
-    // });
+     console.log(data, 'data 486');
+    });
   });
 };
 
@@ -972,7 +971,9 @@ fh.func.isWithin = function(coords, elem) {
   Initialization
   **************/
 window.addEventListener("DOMContentLoaded", event => {
+  
   const currUser = localStorage.getItem("currentUser");
+
 
   // console.log('DOM fully loaded and parsed');
 
