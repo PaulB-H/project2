@@ -147,7 +147,7 @@ app.post(`/api/user/update/:currUser`, async function(req, res) {
 
 app.get(`/api/users/:email/:user_password`, async function(req, res) {
   let result = await db.query(
-    `SELECT email, user_password
+    `SELECT id
     FROM fh_users
     WHERE email = ? AND user_password = ? `,
     [req.params.email, req.params.user_password]
