@@ -145,6 +145,17 @@ app.post(`/api/user/update/:currUser`, async function(req, res) {
   // res.end();
 });
 
+app.get(`/api/users`, async function() {
+  let result = await db.query(
+    `select email, user_password from fh_users where email = ? AND user_password = ? `,
+    [
+      req.body.email,
+      req.body.user_password
+    ]
+  );
+  res.send(result);
+});
+
 app.post(`/api/users`, async function(req, res) {
   let result = await db.query(
     `insert into fh_users(username, first_name, last_name, address_line1, address_line2, city, postal_code, cellphone, email, user_password, fitness_goals, seeking_trainer, istrainer, trainer_bio)
