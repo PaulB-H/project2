@@ -164,7 +164,7 @@ app.post(`/api/users`, async function(req, res) {
       req.body.trainer_bio
     ]
   );
-  res.send();
+  res.send({id: result.insertId});
 });
 
 app.get(`/api/users/trainers`, async function() {

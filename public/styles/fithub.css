@@ -752,7 +752,7 @@ Login Styles
 
 .loginButton,
 .init_createAccountButton,
-.final_createAccountButton {
+.registerButton {
   height: 32px;
   width: 82%;
   margin: 10px auto 0;
@@ -765,7 +765,7 @@ Login Styles
 }
 
 .loginButton,
-.final_createAccountButton {
+.registerButton {
   margin: 10px auto 0;
   background-color: var(--green_main);
 }

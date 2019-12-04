@@ -21,13 +21,12 @@
   fh.func.apiCall_exercises = function() {
 
   fh.func.addListener_click_body = function() {
-  fh.func.addListener_click_createAccountProper = function() {
   fh.func.addListener_click_dropdownFindExercise = function() {
   fh.func.addListener_click_eachItemInExercisesDropdownMenu = function() {
   fh.func.addListener_click_initCreateAccountButton = function() {
   fh.func.addListener_click_isTrainerToggle = ()=>{
-  fh.func.addListener_click_loginButtonBack = function() {
   fh.func.addListener_click_loginButtonProper = function() {
+  fh.func.addListener_click_registerButton = ()=>{
   fh.func.addListener_click_saveButtonStagedRoutine = function(){
   
   fh.func.click_findableExercise = function(me) {
@@ -427,7 +426,6 @@ fh.func.addListener_click_initCreateAccountButton = function() {
 
       /*
       - hide wrap_login, show wrap_registration
-      - 
       */
       let wrap_login = document.querySelector('.wrap_login');
       wrap_login.classList.add('displayNone');
@@ -441,20 +439,19 @@ fh.func.addListener_click_initCreateAccountButton = function() {
 
 fh.func.addListener_click_trainerToggles = ()=>{
 
-  console.log('here');
-
   let toggles = document.querySelectorAll('.trainerToggleRow .toggle');
-
-  console.log(toggles, 'toggles');
 
   for(let i = 0; i < toggles.length; i++){
 
     let toggle = toggles[i];
 
     toggle.addEventListener('click', function(e){
+      
       e.preventDefault();
       e.stopPropagation();
+      
       let toggleBall = toggle.children[0];
+
       if(toggleBall.classList.contains('toggle_off')){
           toggleBall.classList.add('toggle_on');
           toggleBall.classList.remove('toggle_off');
@@ -466,88 +463,19 @@ fh.func.addListener_click_trainerToggles = ()=>{
       };
     });
   };
-
-  // for(i of toggles){
-
-  //   console.log(i, 'i');
-
-  //   i.addEventListener('click', (e)=>{
-
-  //     let toggle = e.target;
-
-  //     console.log(toggle, 'toggle');
-
-  //     // let toggleBall = document.querySelector('.trainerToggleRow .toggleBall');
-  //     // let toggleBall = this;
-
-  //     if(e.target.classList.contains('toggle_off')){
-  //       console.log('was off');
-  //       e.target.classList.add('toggle_on');
-  //       e.target.classList.remove('toggle_off');
-  //     }
-  //     else
-  //     if(e.target.classList.contains('toggle_on')){
-  //       console.log('was on');
-  //       e.target.classList.add('toggle_off');
-  //       e.target.classList.remove('toggle_on');
-  //     };
-
-  //   });
-  // };
-};
-
-fh.func.addListener_click_loginButtonBack = function() {
-  let back_loginButton = document.querySelector(".back_loginButton");
-  back_loginButton.addEventListener("click", function() {
-    // Change color and text of login message and title
-    let loginMessage = document.querySelector(".loginMessage");
-    loginMessage.innerHTML = "Welcome to active wellness";
-    loginMessage.classList.add("color_greyBlue");
-    loginMessage.classList.remove("color_greenMain");
-
-    let loginTitle = document.querySelector(".loginTitle");
-    loginTitle.innerHTML = "Welcome to FitHub";
-    loginTitle.classList.add("color_greenMain");
-    loginTitle.classList.remove("color_greyBlue");
-
-    // displayNone the two buttons (final_createAccountButton and back_loginButton)
-    let final_createAccountButton = document.querySelector(
-      ".final_createAccountButton"
-    );
-    final_createAccountButton.classList.add("displayNone");
-    final_createAccountButton.classList.remove("displayBlock");
-
-    let back_loginButton = document.querySelector(".back_loginButton");
-    back_loginButton.classList.add("displayNone");
-    back_loginButton.classList.remove("displayBlock");
-
-    // display the loginButton button and init_createAccountButton
-    let loginButton = document.querySelector(".loginButton");
-    loginButton.classList.add("displayBlock");
-    loginButton.classList.remove("displayNone");
-
-    let init_createAccountButton = document.querySelector(
-      ".init_createAccountButton"
-    );
-    init_createAccountButton.classList.add("displayBlock");
-    init_createAccountButton.classList.remove("displayNone");
-  });
 };
 
 fh.func.addListener_click_loginButtonProper = function() {
+  
   let loginButton = document.querySelector(".loginButton");
+  
   loginButton.addEventListener("click", function() {
+  
     console.log("clicked login button proper");
 
-    // get inputs from fields
-    // create object
-    // attempt to post
-    let email = document.querySelector(".loginEmail").value;
-    let pass = document.querySelector(".loginPass").value;
-
-    let newUserObj = {};
-    newUserObj.email = email;
-    newUserObj.pass = pass;
+    let obj = {};
+        obj.email = document.querySelector(".loginEmail").value;
+        obj.password = document.querySelector(".loginPass").value;
 
     // let url = 'api/user';
     // let url = 'http://localhost:3000/api/user';
@@ -560,6 +488,50 @@ fh.func.addListener_click_loginButtonProper = function() {
     // });
   });
 };
+
+
+fh.func.addListener_click_registerButton = ()=>{
+
+    let registerButton = document.querySelector('.registerButton');
+    registerButton.addEventListener('click', ()=>{
+
+        let obj = {};
+        obj.firstname = document.querySelector('.reg_firstName').value.trim();
+        obj.lastname  = document.querySelector('.reg_lastName').value.trim();
+            
+        obj.istrainer = document.querySelector('.isTrainer');
+        if(obj.istrainer.classList.contains('toggle_off')){obj.istrainer = 0;}
+        else if(obj.istrainer.classList.contains('toggle_on')){obj.istrainer = 1;};
+            
+        obj.seeking_trnr = document.querySelector('.seekingTrainer');
+        if(obj.seeking_trnr.classList.contains('toggle_off')){obj.seeking_trnr = 0;}
+        else if(obj.seeking_trnr.classList.contains('toggle_on')){obj.seeking_trnr = 1;};
+            
+        obj.email = document.querySelector('.reg_email').value.trim();
+        obj.user_password = document.querySelector('.reg_password').value.trim();
+
+
+        let url = '/api/users';
+
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            "Accept": 'application/json, text/plain, */*',
+            "Content-type": 'application/json'
+          },
+          body: JSON.stringify(obj)
+        })
+        .then((resp)=>resp.json())
+        .then((data)=>{
+
+          let insertId = data.id;
+
+          window.localStorage.setItem('currentUser', insertId);
+        });
+
+    });
+};
+
 
 fh.func.addListener_click_saveButtonStagedRoutine = function() {
   let saveButton_stagedRoutine = document.querySelector(
@@ -891,6 +863,13 @@ fh.func.createObj_exercise = (url, myArray, flag) => {
           obj.desc = data.results[i].description;
           obj.img = [];
 
+
+          /* If almost no description, continue */
+          if(obj.desc.length < 10){
+            continue;
+          };
+
+
           let url_forImage = `https://wger.de/api/v2/exerciseimage/?exercise=${data.results[i].id}`;
 
           if (i == data.results.length - 1) {
@@ -1006,8 +985,7 @@ window.addEventListener("DOMContentLoaded", event => {
   // Login/Registration Panel Events
   fh.func.addListener_click_initCreateAccountButton();
   fh.func.addListener_click_loginButtonProper();
-  // fh.func.addListener_click_createAccountProper();
-  // fh.func.addListener_click_loginButtonBack();
+  fh.func.addListener_click_registerButton();
   fh.func.addListener_click_saveButtonStagedRoutine();
   fh.func.addListener_click_trainerToggles();
 

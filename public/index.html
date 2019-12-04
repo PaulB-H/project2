@@ -260,7 +260,7 @@
 				</div> -->
 
 
-				<div class="wrap_login displayNone">
+				<div class="wrap_login displayBlock">
 					<p class="loginMessage color_greyBlue">Welcome to active wellness</p>
 					<p class="loginTitle color_greenMain">Welcome to FitHub</p>
 					<div class="loginPanel">
@@ -277,26 +277,10 @@
 					</div>
 				</div>
 
-
-				<!-- Components for Register Form
-					wrap_register
-					registerMessage
-					registerTitle
-					registerPanel
-					registerRow
-					registerFirstname
-					registerLastname
-					registerAddress
-					registerCity
-					registerPostalcode
-					registerButton
-					back_loginButton
-				-->
-
 				<!--/************
 				Register Section
 				*************/-->
-				<div class="wrap_register displayBlock">
+				<div class="wrap_register displayNone">
 					<p class="registerMessage color_greyBlue">You're on your way</p>
 					<p class="registerTitle color_greenMain">Create Account</p>
 					<div class="registerPanel">
@@ -314,7 +298,7 @@
 							<div class="trainerToggleWrap">
 								<p>No</p>
 								<div class="toggle">
-									<div class="toggleBall toggle_off"></div>
+									<div class="toggleBall toggle_off isTrainer"></div>
 								</div>
 								<p>Yes</p>
 							</div>
@@ -324,7 +308,7 @@
 							<div class="trainerToggleWrap">
 								<p>No</p>
 								<div class="toggle">
-									<div class="toggleBall toggle_off"></div>
+									<div class="toggleBall toggle_off seekingTrainer"></div>
 								</div>
 								<p>Yes</p>
 							</div>
@@ -337,11 +321,7 @@
 							<p>Password:</p>
 							<input type="password" class="reg_password">
 						</div>
-						<div class='fieldRow'>
-							<p>Confirm Password:</p>
-							<input type="password" class="reg_password">
-						</div>
-						<div class="final_createAccountButton">Register</div>
+						<div class="registerButton">Register</div>
 
 
 					<!-- <form action="/api/users" method="POST">
