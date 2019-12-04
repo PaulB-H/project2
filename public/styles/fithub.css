@@ -22,20 +22,26 @@
 }
 
 :root {
-  --blue_main: rgb(74, 144, 226);
-  --pink_main: rgb(255, 94, 113);
-  --purple_main: rgb(170, 143, 193);
-  --green_main: rgb(80, 227, 194);
-  --green_smallFont: rgb(18, 200, 136);
-  --greyBlue: rgb(106, 138, 164);
+  --blue_main:        rgb(74, 144, 226);
+  
+  --pink_main:        rgb(255, 94, 113);
+  
+  --purple_main:      rgb(170, 143, 193);
+  
+  --green_main:       rgb(80, 227, 194);
+  --green_main_fade:  rgba(80, 227, 194, 0.5);
+  --green_smallFont:  rgb(18, 200, 136);
+  
+  --greyBlue:         rgb(106, 138, 164);
+  --greyBlue_fade:    rgba(106, 138, 164, 0.7);
 
-  --grey_footer: rgb(176, 192, 205);
+  --grey_footer:      rgb(176, 192, 205);
 
-  --shadow_opac10: 0 1px 10px 0 rgba(0, 0, 0, 0.1);
-  --shadow_opac05: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
-  --shadow_opac05_small: 0 1px 5px 0 rgba(0, 0, 0, 0.05);
-  --shadow_harsh_1: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
-  --shadow_deleteX: 0 0.5px 0.5px 0.25px rgba(0, 0, 0, 0.2);
+  --shadow_opac10:        0 1px 10px 0 rgba(0, 0, 0, 0.1);
+  --shadow_opac05:        0 1px 10px 0 rgba(0, 0, 0, 0.05);
+  --shadow_opac05_small:  0 1px 5px 0 rgba(0, 0, 0, 0.05);
+  --shadow_harsh_1:       0 1px 1px 0 rgba(0, 0, 0, 0.2);
+  --shadow_deleteX:       0 0.5px 0.5px 0.25px rgba(0, 0, 0, 0.2);
 
   --fontFamily_main: "Kohinoor Telugu", "Montserrat", sans-serif;
 }
@@ -613,18 +619,25 @@ Login Styles
 
 .loginMessage {
   width: 90%;
-  margin-top: 87px;
+  height: 32px;
+  position: relative;
+  top: 32px;
+  /*margin-top: 32px;*/
+  margin: 0;
   font-size: 18px;
   font-weight: 800;
   /* color: var(--greyBlue); */
   letter-spacing: -0.6px;
-  line-height: 16px;
+  line-height: 20px;
   text-align: center;
 }
 
 .loginTitle {
   width: 90%;
-  margin-top: 17px;
+  height: 52px;
+  position: relative;
+  top: 48px;
+  /*margin-top: 17px;*/
   font-size: 26px;
   font-weight: 800;
   /* color: var(--green_main); */
@@ -635,7 +648,8 @@ Login Styles
 
 .loginPanel {
   position: relative;
-  margin-top: 28px;
+  top: 62px;
+  /*margin-top: 28px;*/
   padding-top: 56px;
   width: 90%;
   height: 338px;
@@ -644,35 +658,31 @@ Login Styles
   border-radius: 10px;
 }
 
-.loginRow {
+.fieldRow {
   position: relative;
-  height: 32px;
-  display: flex;
   font-size: 14px;
   font-weight: 600;
   color: var(--greyBlue);
 
-  /* border: 1px solid black; */
+   /*border: 1px solid black; */
 }
 
-.loginRow:nth-of-type(2) {
-  margin-top: 6px;
+.fieldRow:nth-of-type(2) {
+  margin-top: 5px;
 }
 
-.loginRow > p {
-  position: absolute;
-  right: 73.3%;
-  width: 44px;
-  line-height: 32px;
-  text-align: right;
-  letter-spacing: -0.32px;
+.fieldRow > p {
+  margin-bottom: 0;
+  margin-left: 10%;
 }
 
-.loginRow > input {
-  position: absolute;
-  right: 8.8%;
-  width: 62.5%;
-  height: 100%;
+.fieldRow > input {
+  /*position: absolute;*/
+  /*right: 8.8%;*/
+  display: block;
+  width: 80%;
+  height: 32px;
+  margin: 0 auto 0;
   border-radius: 4px;
   background-color: rgb(246, 247, 251);
   border: 1px solid var(--green_main);
@@ -680,10 +690,69 @@ Login Styles
   padding-left: 5%;
 }
 
+.trainerToggleRow {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.trainerToggleWrap {
+  display: flex;
+  position: relative;
+  top: 5px;
+
+  /*border: 1px solid blue;*/
+}
+
+.trainerToggleWrap > p {
+  position: relative;
+}
+
+.trainerToggleWrap > p:nth-of-type(1) {
+  left: 20%;
+}
+
+.trainerToggleWrap > p:nth-of-type(2) {
+  left: 60%;
+}
+
+.trainerToggleRow .toggle {
+  width: 55px;
+  height: 30px;
+  position: absolute;
+  left: calc(50% - 22.5px);
+  background-color: rgb(246, 247, 251);
+  border-radius: 45px;
+  border: 1px solid var(--green_main);
+  cursor: pointer;
+}
+
+.trainerToggleRow .toggleBall {
+  position: relative;
+  top: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 28px;
+  transition-property: left, background-color;
+  transition-duration: 0.3s;
+  /*transition-timing-function: ease-in-out;*/
+  transition-timing-function: cubic-bezier(0.61,-0.03, 0.26, 1));
+}
+
+.trainerToggleRow .toggle_off {
+  left: 2px;
+  background-color: var(--green_main_fade);
+}
+
+.trainerToggleRow .toggle_on {
+  left: 27px;
+  background-color: var(--green_main);
+}
+
+
+
 .loginButton,
 .init_createAccountButton,
-.final_createAccountButton,
-.back_loginButton {
+.final_createAccountButton {
   height: 32px;
   width: 82%;
   margin: 10px auto 0;
@@ -692,6 +761,7 @@ Login Styles
   font-weight: 800;
   text-align: center;
   line-height: 32px;
+  cursor: pointer;
 }
 
 .loginButton,
@@ -708,6 +778,8 @@ Login Styles
 /************
 END Login Styles
 *************/
+
+
 
 /************
 Register Styles
@@ -733,18 +805,22 @@ Register Styles
 
 .registerMessage {
   width: 90%;
-  /* margin-top: 87px; */
+  height: 32px;
+  position: relative;
+  top: 22px;
   font-size: 18px;
   font-weight: 800;
   /* color: var(--greyBlue); */
   letter-spacing: -0.6px;
-  line-height: 16px;
+  line-height: 20px;
   text-align: center;
 }
 
 .registerTitle {
   width: 90%;
-  margin-top: 17px;
+  height: 52px;
+  position: relative;
+  top: 2px;
   font-size: 26px;
   font-weight: 800;
   /* color: var(--green_main); */
@@ -755,8 +831,8 @@ Register Styles
 
 .registerPanel {
   position: relative;
-  /* margin-top: 28px;
-	padding-top: 56px; */
+  top: -20px;
+	padding-top: 24px; 
   width: 90%;
   height: 520px;
   background-color: white;

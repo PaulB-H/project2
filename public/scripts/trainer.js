@@ -5,7 +5,7 @@ async function myClients() {
     type: "GET",
     cache: false,
     success: function(result) {
-      console.log("success reached");
+      // console.log("success reached");
       $(`<h6>Potential Clients</h6>`).appendTo("#potentialClients");
       for (i = 0; i < result.length; i++) {
         $(
