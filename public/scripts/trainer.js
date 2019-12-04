@@ -83,7 +83,12 @@ async function showClientProfile(userId) {
     type: "GET",
     cache: false,
     success: function(result) {
-      if (result[0].istrainer != 1 && Number(userId) == Number(currUser)) {
+      if (result.length == 0) {
+        console.log("User is not a trainer.");
+      } else if (
+        result[0].istrainer != 1 &&
+        Number(userId) == Number(currUser)
+      ) {
         $("#client_list").css("display", "none");
         $("#potentialClients").css("display", "none");
         console.log($("#profile_header"));

@@ -36,6 +36,7 @@
   fh.func.fetch_exerciseImages = function(url_forImage, obj, myArray) {
 
   fh.func.init_routinesBicepsInFindbar = function() {
+  fh.func.init_panel = ()=>{
   fh.func.isWithin = function(coords, elem){
 
 
@@ -483,7 +484,113 @@ fh.func.addListener_click_loginButtonProper = function() {
     .then((resp)=>resp.json())
     .then((data)=>{
 
-     console.log(data, 'data 486');
+      let id = data[0].id;
+
+      window.localStorage.setItem('currentUser', id);
+
+      $.ajax({
+        url: `/api/trainer/clientinfo/${id}`,
+        type: "GET",
+        cache: false,
+        success: function(result) {
+          if (result.length == 0) {
+            console.log("User is not a trainer.");
+          } else if (
+            result[0].istrainer != 1 &&
+            Number(id) == Number(currUser)
+          ) {
+            $("#client_list").css("display", "none");
+            $("#potentialClients").css("display", "none");
+            console.log($("#profile_header"));
+            $("#profile_header").text() =
+              result[0].first_name + " " + result[0].last_name;
+            $(`<div class="trainerPanel" style="position:relative; top:0">
+                <IFRAME style="display:none" name="hidden-form"></IFRAME>
+                <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
+                  First Name: <input type="text" name="firstname" value="${result[0].first_name}"><br/>
+                  Last Name: <input type="text" name="lastname" value="${result[0].last_name}"><br/>
+                  Address:<br/>
+                  <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}"><br/>
+                  <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}"><br/>
+                  City: <input type="text" name="city" value="${result[0].city}"><br/>
+                  Postal Code: <input type="text" name="postal_code" value="${result[0].postal_code}"><br/>
+                  Contact No.: <input type="tel" id="phone" name="cellphone" value="${result[0].cellphone}"><br/>
+                  Email: <input type="email" id="email" value="${result[0].email}"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"
+                  name="email"><br/>
+                  Password: <input type="text" id="password" name="password"><br />
+                  Seeking Trainer: <input type="checkbox" name="seeking_trnr" onchange="toggleInfo('seeking', ${result[0].seeking_trainer})" value="${result[0].seeking_trainer}"><br />
+                  Personal Trainer: <input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${result[0].istrainer})" value="${result[0].istrainer}"><br />
+                  Fitness Goals:<br/>
+                  <textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea><br/>
+                  Bio:<br />
+                  <textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
+                  <input type="submit" value="Submit">
+                </form>
+              </div>`).appendTo("#clientBio");
+          } else {
+            $("#client_list").css("display", "block");
+            $("#potentialClients").css("display", "block");
+            console.log($("#profile_header").text);
+            if (Number(id) !== Number(currUser)) {
+              $("#profile_header").innerHTML =
+                result[0].first_name + " " + result[0].last_name;
+              $(`<div style="position:relative; top: 0">
+                <form action="/api/users"  method="POST" target="hidden-form">
+                  First name: <input type="text" name="firstname" value="${result[0].first_name}" readonly><br/>
+                  Last name:  <input type="text" name="lastname" value="${result[0].last_name}" readonly><br/>
+                  Address:<br/>
+                  <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}" readonly><br/>
+                  <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}" readonly><br/>
+                  City: <input type="text" name="city" value="${result[0].city}" readonly><br/>
+                  Postal Code: <input type="text" name="postal_code" value="${result[0].postal_code}" readonly><br/>
+                  Contact No.: <input type="tel" id="rd_only_rd_only_phone" name="cellphone" value="${result[0].cellphone}" readonly><br/>
+                  Email: <input type="email" id="rd_only_email" value="${result[0].email}" readonly><br/>
+                  Fitness Goals:<br/>
+                  <textarea id="rd_only_fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}" readonly></textarea><br/>
+                </form>
+              </div>`).appendTo("#clientBio");
+            } else {
+              $("#profile_header").innerHTML =
+                result[0].first_name + " " + result[0].last_name;
+              $(`<div class="trainerPanel" style="position:relative; top:0">
+                <IFRAME style="display:none" name="hidden-form"></IFRAME>
+                <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
+                  First Name: <input type="text" name="firstname" value="${result[0].first_name}"><br/>
+                  Last Name: <input type="text" name="lastname" value="${result[0].last_name}"><br/>
+                  Address:<br/>
+                  <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}"><br/>
+                  <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}"><br/>
+                  City: <input type="text" name="city" value="${result[0].city}"><br/>
+                  Postal Code: <input type="text" name="postal_code" value="${result[0].postal_code}"><br/>
+                  Contact No.: <input type="tel" id="phone" name="cellphone" value="${result[0].cellphone}"><br/>
+                  Email: <input type="email" id="email" value="${result[0].email}"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"
+                  name="email"><br/>
+                  Password: <input type="text" id="password" name="password"><br />
+                  Seeking Trainer: <input type="checkbox" name="seeking_trnr" onchange="toggleInfo('seeking', ${result[0].seeking_trainer})" value="${result[0].seeking_trainer}"><br />
+                  Personal Trainer: <input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${result[0].istrainer})" value="${result[0].istrainer}"><br />
+                  Fitness Goals:<br/>
+                  <textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea><br/>
+                  Bio:<br />
+                  <textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
+                  <input type="submit" value="Submit">
+                </form>
+              </div>`).appendTo("#clientBio");
+            }
+          }
+        }
+      });
+      // END KEVIN FETCH
+
+    })
+    .then((v)=>{
+
+        let wrap_login = document.querySelector('.wrap_login');
+        wrap_login.classList.add('displayNone');
+        wrap_login.classList.remove('displayBlock');
+
+        let userblock = document.querySelector('.userblock');
+        userblock.classList.add('displayBlock');
+        userblock.classList.remove('displayNone');
     });
   });
 };
@@ -951,6 +1058,25 @@ fh.func.init_routinesBicepsInFindbar = function() {
   }, 10);
 };
 
+
+fh.func.init_panel = ()=>{
+
+
+  let currentUser = window.localStorage.getItem('currentUser');
+
+  if(currentUser != undefined){
+
+    let wrap_login = document.querySelector('.wrap_login');
+    wrap_login.classList.add('displayNone');
+    wrap_login.classList.remove('displayBlock');
+
+    let userblock = document.querySelector('.userblock');
+    userblock.classList.add('displayBlock');
+    userblock.classList.remove('displayNone');
+  };
+};
+
+
 fh.func.isWithin = function(coords, elem) {
   let x = coords[0];
   let y = coords[1];
@@ -982,6 +1108,8 @@ window.addEventListener("DOMContentLoaded", event => {
   fh.func.addListener_click_dropdownFindExercise();
   fh.func.addListener_click_eachItemInExercisesDropdownMenu();
   fh.func.init_routinesBicepsInFindbar();
+
+  fh.func.init_panel();
 
   // Login/Registration Panel Events
   fh.func.addListener_click_initCreateAccountButton();
