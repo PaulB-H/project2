@@ -44,10 +44,10 @@ if (process.env.JAWSDB_URL) {
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "IamTheBoxGhost1971",
+    // Kevins root password: "IamTheBoxGhost1971",
     // pauls root password: sqlrootpass
     // Stevens root password: steven123
-    // password: "sqlrootpass",
+    password: "steven123",
     database: "fitness_hub_db"
   });
 }
@@ -146,6 +146,7 @@ app.post(`/api/user/update/:currUser`, async function(req, res) {
 });
 
 app.get(`/api/users/:email/:user_password`, async function(req, res) {
+
   let result = await db.query(
     `SELECT id
     FROM fh_users
@@ -177,7 +178,7 @@ app.post(`/api/users`, async function(req, res) {
       req.body.trainer_bio
     ]
   );
-  res.send({ id: result.insertId });
+  res.send({id: result.insertId});
 });
 
 app.get(`/api/users/trainers`, async function() {
@@ -385,7 +386,7 @@ app.post(`/routine/save/:currUser`, async function(req, res) {
       ]
     );
   }
-  res.send({ id: writeHdr.insertId });
+  res.send({id: writeHdr.insertId});
 });
 
 app.get(`/routine/userroutines/:currUser`, async function(req, res) {

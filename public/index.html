@@ -97,6 +97,42 @@
 
 			<div class="wrap_context">
 
+													<!-- KEVINS ORIGINAL LOGIN FORM -->
+				<!-- <div class="content_plate">
+
+					<IFRAME style="display:none" name="hidden-form"></IFRAME>
+					<form class="registrationForm" action="/api/users" method="POST" target="hidden-form">
+						First name:<br />
+						<input type="text" name="firstname"><br />
+						Last name:<br />
+						<input type="text" name="lastname"><br />
+						Address:<br />
+						<input type="text" name="address_line1" placeholder="Address line 1"><br />
+						<input type="text" name="address_line2" placeholder="Address line 1"><br />
+						City:</br>
+						<input type="text" name="city"><br />
+						Postal Code:<br />
+						<input type="text" name="postal_code"><br />
+						Contact No.:<br />
+						<input type="tel" id="phone" name="cellphone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br />
+						Email:<br />
+						<input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"
+							name="email"><br />
+						Password:<br />
+						<input type="text" id="password" name="password"><br />
+						Seeking Trainer:<br />
+						<input type="checkbox" name="seeking_trnr" onchange="toggleInfo(this)" value=""><br />
+						Personal Trainer:<br />
+						<input type="checkbox" name="istrainer" onchange="toggleInfo(this)" value=""><br />
+						Fitness Goals:<br />
+						<textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5"
+							cols="33"></textarea><br />
+						Trainer Bio:<br />
+						<textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
+						<input type="submit" value="Submit">
+					</form>
+				</div> -->
+
 				<!-- Trainer -->
 				<div class="content_plate content_plate0">
 					<div class="container col" id="trainerbox">
@@ -146,6 +182,44 @@
 						<input type="date" id="selDate" name="selDate" value="">
 						<div class="container col" id="day-view"></div>
 				</div>
+
+				<!-- Routine Builder Section -->
+				<!-- <div class="content_plate">
+					<div class="container col" id="routine_builder">
+						<h1>Routine Manager</h1>
+						<div id="Kinetics" class="row"
+							style="height: 100vh; min-height: fit-content; background-color: lightsteelblue; border-block-color: blue;">
+							<div class="row" style="width:100%">
+								<div class="col-sm-6" id="routineManager" style="display: flex;flex-direction: column">
+									<div class="row" style="overflow-y: auto; display: flex;flex-direction: row">
+										<div class="col-sm-8" id="myRoutines"
+											style="overflow-y: auto; display: flex;flex-direction: column">
+											<div id="routine_element"
+												style="height:75vh; overflow: scroll; display: flex;flex-direction: column">
+											</div>
+										</div>
+										<div class="col-sm-4" id="initRoutine">
+											<button id="newroutine_btn" class="saveBtn col" onclick="ignition()">New
+												Routine</button>
+										</div>
+										<div class="col" style="background-color: white; color: black">
+											<div id="exercise">This is the test area for the exercise element</div>
+											<div>
+												<button id="save_btn" class="routineBtn col"
+													onclick="saveExercise()">Save Exercise</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="routine-window" class="col-sm-6">
+									<div id="routine_details"
+										style="height:75vh; overflow: scroll; display: flex;flex-direction: column">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
 
 			</div>
 			<!-- End wrap_context -->
@@ -257,6 +331,7 @@
 				</div>
 
 
+				<!-- <div class="saveRoutineBlock displayBlock"> -->
 					<div class="saveRoutineBlock displayNone">
 					<div class="saveButton_stagedRoutine">Save Routine</div>
 					<input class="name_stagedRoutine displayBlock" type="text" placeholder="Name Routine">
