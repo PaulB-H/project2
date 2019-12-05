@@ -26,7 +26,7 @@ function today() {
     type: "GET",
     cache: false,
     success: function(result) {
-      // console.log("success reached");
+      console.log("Calendar success reached");
       $("#day-view").empty();
       let time_slots = new Date();
       if (result.length == 0) {

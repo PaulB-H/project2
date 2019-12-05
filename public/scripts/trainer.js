@@ -92,8 +92,8 @@ async function showClientProfile(userId) {
         $("#client_list").css("display", "none");
         $("#potentialClients").css("display", "none");
         console.log($("#profile_header"));
-        $("#profile_header").text() =
-          result[0].first_name + " " + result[0].last_name;
+        // $("#profile_header").text() =
+        //   result[0].first_name + " " + result[0].last_name;
         $(`<div class="trainerPanel" style="position:relative; top:0">
             <IFRAME style="display:none" name="hidden-form"></IFRAME>
             <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
@@ -122,8 +122,8 @@ async function showClientProfile(userId) {
         $("#potentialClients").css("display", "block");
         console.log($("#profile_header").text);
         if (Number(userId) !== Number(currUser)) {
-          $("#profile_header").innerHTML =
-            result[0].first_name + " " + result[0].last_name;
+          // $("#profile_header").innerHTML =
+          //   result[0].first_name + " " + result[0].last_name;
           $(`<div style="position:relative; top: 0">
             <form action="/api/users"  method="POST" target="hidden-form">
               First name: <input type="text" name="firstname" value="${result[0].first_name}" readonly><br/>
@@ -140,8 +140,8 @@ async function showClientProfile(userId) {
             </form>
           </div>`).appendTo("#clientBio");
         } else {
-          $("#profile_header").innerHTML =
-            result[0].first_name + " " + result[0].last_name;
+          // $("#profile_header").innerHTML =
+          //   result[0].first_name + " " + result[0].last_name;
           $(`<div class="trainerPanel" style="position:relative; top:0">
             <IFRAME style="display:none" name="hidden-form"></IFRAME>
             <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">

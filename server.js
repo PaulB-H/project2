@@ -47,7 +47,7 @@ if (process.env.JAWSDB_URL) {
     // Kevins root password: "IamTheBoxGhost1971",
     // pauls root password: sqlrootpass
     // Stevens root password: steven123
-    password: "steven123",
+    password: "IamTheBoxGhost1971",
     database: "fitness_hub_db"
   });
 }
@@ -146,7 +146,6 @@ app.post(`/api/user/update/:currUser`, async function(req, res) {
 });
 
 app.get(`/api/users/:email/:user_password`, async function(req, res) {
-
   let result = await db.query(
     `SELECT id
     FROM fh_users
@@ -178,7 +177,7 @@ app.post(`/api/users`, async function(req, res) {
       req.body.trainer_bio
     ]
   );
-  res.send({id: result.insertId});
+  res.send({ id: result.insertId });
 });
 
 app.get(`/api/users/trainers`, async function() {
@@ -274,7 +273,7 @@ app.get(`/hubchat`, async function(rep, res) {
 // Messaging module section
 app.get(`/hubchat/chatter/messengers/:currUser`, async function(req, res) {
   let result = await db.query(
-    `select distinct chat.id, usr.username
+    `select distinct chat.id, usr.username, usr.first_name, usr.last_name
        from
        (
         select sendtoid as id, createdat from fh_hubchat 
@@ -292,7 +291,7 @@ app.get(`/hubchat/chatter/messengers/:currUser`, async function(req, res) {
 
 app.get(`/hubchat/chatter/strangers/:currUser`, async function(req, res) {
   let result = await db.query(
-    `select distinct usr.id, usr.username
+    `select distinct usr.id, usr.username, usr.first_name, usr.last_name
      from fh_users usr
      where usr.id not in
        (
@@ -302,8 +301,9 @@ app.get(`/hubchat/chatter/strangers/:currUser`, async function(req, res) {
         select sentbyid as id from fh_hubchat 
         where sendtoid = ?
        )
+       and usr.id != ? 
        order by usr.username asc`,
-    [req.params.currUser, req.params.currUser]
+    [req.params.currUser, req.params.currUser, req.params.currUser]
   );
   res.send(result);
 });
@@ -328,7 +328,6 @@ app.post(`/hubchat/chatter/save/:currUser/:userName/:msgText`, async function(
   let writeTo = await db.query(`select id from fh_users where username = ?`, [
     req.params.userName
   ]);
-
   let writeRec = await db.query(
     `insert into fh_hubchat(sendtoid, sentbyid, chatmessage, new_flg)
        values(?, ?, ?, ?)`,
@@ -386,7 +385,7 @@ app.post(`/routine/save/:currUser`, async function(req, res) {
       ]
     );
   }
-  res.send({id: writeHdr.insertId});
+  res.send({ id: writeHdr.insertId });
 });
 
 app.get(`/routine/userroutines/:currUser`, async function(req, res) {
