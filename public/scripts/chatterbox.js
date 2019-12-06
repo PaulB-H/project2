@@ -1,47 +1,45 @@
 async function myMessages() {
   $("#contacts").empty();
+  $(`<h6><strong>Conversations:</strong></h6>`).appendTo("#contacts");
   $.ajax({
     url: `/hubchat/chatter/messengers/${currUser}`,
     type: "GET",
     cache: false,
     success: function(result) {
-      console.log("success reached");
-      // $(
-      //   `<button id="newchat_btn" class="newchatBtn col" onclick="showStrangers()">Start New Chat</button>`
-      // ).appendTo("#strangers");
-      for (i = 0; i < result.length; i++) {
-        $(
-          `<div>
+      if (result.length > 0) {
+        for (i = 0; i < result.length; i++) {
+          $(
+            `<div>
             <button class="correspondents saveBtn col" value="${result[i].id}" onclick="showConversation(${result[i].id}, '${result[i].username}')">
-             ${result[i].username}
+             ${result[i].last_name}, ${result[i].first_name}
             </button>
           </div>`
-        ).appendTo("#contacts");
+          ).appendTo("#contacts");
+        }
+        getStrangers();
       }
-      getStrangers();
     }
   });
 }
 
 async function getStrangers() {
   $("#strangers").empty();
+  $(`<h6><strong>New Conversation:</strong></h6>`).appendTo("#strangers");
   $.ajax({
     url: `/hubchat/chatter/strangers/${currUser}`,
     type: "GET",
     cache: false,
     success: function(result) {
-      console.log("success reached");
-      $(
-        `<button id="newchat_btn" class="newchatBtn" onclick="showStrangers()">Start New Chat</button>`
-      ).appendTo("#strangers");
-      for (i = 0; i < result.length; i++) {
-        $(
-          `<div>
+      if (result.length > 0) {
+        for (i = 0; i < result.length; i++) {
+          $(
+            `<div>
             <button class="correspondents saveBtn col" value="${result[i].id}" onclick="showConversation(${result[i].id}, '${result[i].username}')">
-             ${result[i].username}
+             ${result[i].last_name}, ${result[i].first_name}
             </button>
           </div>`
-        ).appendTo("#strangers");
+          ).appendTo("#strangers");
+        }
       }
     }
   });
@@ -65,7 +63,8 @@ async function showConversation(correspondent, correspondentName) {
           currUser,
           result[i].sentbyid
         )}" style="margin: 1em">
-            <span>${moment(result[i].createdat).format("LLLL")}</span>
+            <span>${moment(result[i].createdat).format("LL")}</span>
+            <span>${moment(result[i].createdat).format("LTS")}</span>
             <div style="background-color:white">${
               result[i].chatmessage
             }</div></div>`).appendTo("#comm_thread");
