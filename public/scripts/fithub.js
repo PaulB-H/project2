@@ -21,13 +21,17 @@
   fh.func.apiCall_exercises = function() {
 
   fh.func.addListener_click_body = function() {
+  fh.func.addListener_click_backToLoginButton = function(){
   fh.func.addListener_click_dropdownFindExercise = function() {
   fh.func.addListener_click_eachItemInExercisesDropdownMenu = function() {
   fh.func.addListener_click_initCreateAccountButton = function() {
   fh.func.addListener_click_isTrainerToggle = ()=>{
-  fh.func.addListener_click_loginButtonProper = function() {
+  fh.func.addListener_click_loginButtonProper = function(){
+  fh.func.addListener_click_profileButton = ()=>{
   fh.func.addListener_click_registerButton = ()=>{
+  fh.func.addListener_click_routinesButton = ()=>{
   fh.func.addListener_click_saveButtonStagedRoutine = function(){
+  fh.func.addListener_click_userTile = ()=>{
   
   fh.func.click_findableExercise = function(me) {
   fh.func.createAppend_selectedExerciseGroup = function(exerciseBucket) {
@@ -74,6 +78,7 @@ Flags
 *****/
 fh.flag = {};
 fh.flag.bicepsFetchDone = false;
+fh.flag.lastRightPanelShowing = null;
 
 /********
 Intervals
@@ -312,40 +317,72 @@ fh.func.addListener_click_body = function() {
   });
 };
 
-// fh.func.addListener_click_createAccountProper = function() {
-//   let final_createAccountButton = document.querySelector(
-//     ".final_createAccountButton"
-//   );
-//   final_createAccountButton.addEventListener("click", function() {
-//     console.log("clicked create account button proper");
 
-//     let email = document.querySelector(".loginEmail").value;
-//     let pass = document.querySelector(".loginPass").value;
+fh.func.addListener_click_backToLoginButton = function(){
 
-//     let newUserObj = {};
-//     newUserObj.email = email;
-//     newUserObj.pwd = pass;
-//     newUserObj = JSON.stringify(newUserObj);
+    let backToLoginButton = document.querySelector('.backToLoginButton');
 
-//     // let url = 'http://localhost:3000/api/user';
-//     let url = "http://localhost:3000/api/users";
+    backToLoginButton.addEventListener('click', ()=>{
 
-//     fetch(url, {
-//       method: "POST",
-//       headers: {
-//         Accept: "application/json, text/plain, */*",
-//         "Content-type": "application/json"
-//       },
-//       body: newUserObj
-//     })
-//       .then(resp => resp.json())
-//       .then(function(data) {
-//         console.log(data, "DATA");
-//       });
-//   });
-// };
+        /* Hide registration form, show login form */
+        let wrap_register = document.querySelector('.wrap_register');
+        wrap_register.classList.add('displayNone');
+        wrap_register.classList.remove('displayBlock');
 
-fh.func.addListener_click_dropdownFindExercise = function() {
+        let wrap_login = document.querySelector('.wrap_login');
+        wrap_login.classList.add('displayBlock');
+        wrap_login.classList.remove('displayNone');
+
+
+        /* Wipe fields on registration form */
+        let reg_firstName = document.querySelector('.reg_firstName');
+        reg_firstName.value = '';
+
+        let reg_lastName = document.querySelector('.reg_lastName');
+        reg_lastName.value = '';
+
+        let reg_email = document.querySelector('.reg_email');
+        reg_email.value = '';
+
+        let reg_password = document.querySelector('.reg_password');
+        reg_password.value = '';
+
+        let toggleBalls = document.querySelectorAll('.trainerToggleRow .toggleBall');
+        for(toggleBall of toggleBalls){
+          toggleBall.classList.add('toggle_off');
+          toggleBall.classList.remove('toggle_on');
+        };
+    });
+};
+
+
+fh.func.addListener_click_close_stageRoutineBlock = ()=>{
+
+  let closeButton = document.querySelector('.close_stageRoutineBlock');
+  closeButton.addEventListener('click', function(){
+
+    /* Remove the stageRoutineBlock panel */
+    let parentMenu = this.parentNode;
+    parentMenu.classList.add('displayNone');
+    parentMenu.classList.remove('displayBlock');
+
+    /* Clear name field for routine */
+    let name_stagedRoutine = document.querySelector('.name_stagedRoutine');
+    name_stagedRoutine.value = '';
+
+    /* Remove exercise item elements */
+    let exerciseItems = document.querySelectorAll('.pasteExercises > div');
+    for(item of exerciseItems){
+      item.remove();
+    };
+
+    /* Clear staged array */
+    fh.user.routines_staged = [];
+  });
+};
+
+
+fh.func.addListener_click_dropdownFindExercise = function(){
   let dropdownButton = document.querySelector(".dropdown_findbar");
   dropdownButton.addEventListener("click", function() {
     let menu = document.querySelector(".wrap_dropdown_findbar .dropdownMenu");
@@ -423,11 +460,7 @@ fh.func.addListener_click_initCreateAccountButton = function() {
   
   init_createAccountButton.addEventListener("click", function() {
 
-      console.log('clicked create account button');
-
-      /*
-      - hide wrap_login, show wrap_registration
-      */
+      /* Hide wrap_login, show wrap_registration */
       let wrap_login = document.querySelector('.wrap_login');
       wrap_login.classList.add('displayNone');
       wrap_login.classList.remove('displayBlock');
@@ -435,6 +468,14 @@ fh.func.addListener_click_initCreateAccountButton = function() {
       let wrap_register = document.querySelector('.wrap_register');
       wrap_register.classList.add('displayBlock');
       wrap_register.classList.remove('displayNone');
+
+
+      /* Wipe fields on login form */
+      let loginEmail = document.querySelector('.loginEmail');
+      loginEmail.value = '';
+
+      let loginPass = document.querySelector('.loginPass');
+      loginPass.value = '';
   });
 };
 
@@ -466,7 +507,7 @@ fh.func.addListener_click_trainerToggles = ()=>{
   };
 };
 
-fh.func.addListener_click_loginButtonProper = function() {
+fh.func.addListener_click_loginButtonProper = function(){
   
   let loginButton = document.querySelector(".loginButton");
   
@@ -584,14 +625,38 @@ fh.func.addListener_click_loginButtonProper = function() {
     })
     .then((v)=>{
 
+        /* Hide wrap_login */
         let wrap_login = document.querySelector('.wrap_login');
         wrap_login.classList.add('displayNone');
         wrap_login.classList.remove('displayBlock');
 
+        /* Show user catbar */
+        let user_wrap_catbar = document.querySelector('.user_wrap_catbar');
+        user_wrap_catbar.classList.add('displayBlock');
+        user_wrap_catbar.classList.remove('displayNone');
+
+        /* Show userBlock */
         let userblock = document.querySelector('.userblock');
         userblock.classList.add('displayBlock');
         userblock.classList.remove('displayNone');
     });
+  });
+};
+
+
+fh.func.addListener_click_profileButton = ()=>{
+
+  let profileButton = document.querySelector('.catbox_profile');
+
+  profileButton.addEventListener('click', function(){
+
+    let userblock = document.querySelector('.userblock');
+    userblock.classList.add('displayBlock');
+    userblock.classList.remove('displayNone');
+
+    let routinesBlock = document.querySelector('.routinesBlock');
+    routinesBlock.classList.add('displayNone');
+    routinesBlock.classList.remove('displayBlock');
   });
 };
 
@@ -633,36 +698,69 @@ fh.func.addListener_click_registerButton = ()=>{
           let insertId = data.id;
 
           window.localStorage.setItem('currentUser', insertId);
+
+          /* Hide register */
+          let wrap_register = document.querySelector('.wrap_register');
+          wrap_register.classList.add('displayNone');
+          wrap_register.classList.remove('displayBlock');
+
+          /* Show user catbar */
+          let user_wrap_catbar = document.querySelector('.user_wrap_catbar');
+          user_wrap_catbar.classList.add('displayBlock');
+          user_wrap_catbar.classList.remove('displayNone');
+
+          /* Show userblock */
+          let userblock = document.querySelector('.userblock');
+          userblock.classList.add('displayBlock');
+          userblock.classList.remove('displayNone');
         });
 
     });
 };
 
 
-fh.func.addListener_click_saveButtonStagedRoutine = function() {
-  let saveButton_stagedRoutine = document.querySelector(
-    ".saveButton_stagedRoutine"
-  );
+fh.func.addListener_click_routinesButton = ()=>{
 
-  saveButton_stagedRoutine.addEventListener("click", function() {
+  let routinesButton = document.querySelector('.catbox_routines');
+
+console.log(routinesButton, 'ROUTINES BUTTON')
+
+  routinesButton.addEventListener('click', function(){
+
+    console.log('hello steven');
+
+    let routinesBlock = document.querySelector('.routinesBlock');
+    routinesBlock.classList.add('displayBlock');
+    routinesBlock.classList.remove('displayNone');
+
+    let userblock = document.querySelector('.userblock');
+    userblock.classList.add('displayNone');
+    userblock.classList.remove('displayBlock');
+  });
+};
+
+
+fh.func.addListener_click_saveButtonStagedRoutine = function(){
+  
+  let saveButton_stagedRoutine = document.querySelector(".saveButton_stagedRoutine");
+
+  saveButton_stagedRoutine.addEventListener("click", function(){
+    
     let nameInput = document.querySelector(".name_stagedRoutine");
     let inputValue = nameInput.value.trim();
 
     /* Nothing in input, alert user (give inputFlash class, flash border red 3 times), return */
-    if (inputValue.length == 0) {
+    if(inputValue.length == 0){
       console.log("no name given, stop/cancel save");
-
       return;
-    } else {
-      /* else package and save to DB, hide saveRoutineBlock */
+    }
+    else{
+      /* else package and save to DB, hide stageRoutineBlock */
       let routineObj = {};
       routineObj.routineName = inputValue;
       routineObj.exercises = fh.user.routines_staged;
 
-      console.log(routineObj, "routineObj");
-
       let url = `/routine/save/${currUser}`;
-
       fetch(url, {
         method: "POST",
         headers: {
@@ -676,39 +774,35 @@ fh.func.addListener_click_saveButtonStagedRoutine = function() {
           
           console.log(data, "data");
 
-          /*
-            Success:
-            
-            - populate userblock with routine item
-            - update users routines array (fh.user.routines)
 
-            ---- THERE NEEDS TO BE UNIQUE ASSOCIATION FOR ROUTINE ITEMS.
-            ---- I NEED THE ASSIGNED ROUTINE ID BACK FROM THE DB
-            */
-
-           /** Clear routine name field in saveRoutineBlock */
-           nameInput.value = '';
-          /** Clear routine items in saveRoutineBlock Y */
-           fh.user.routines_staged = [];
-          console.log(fh.user.routines_staged, 'staged should be empty');
-           /** Delete staged routine items in saveRoutineBlock */
-           let stagedItems = document.querySelectorAll('.exerciseItem_staged_wrap');
-           for(i of stagedItems){
-             i.remove();
-           };
-          /** Hide saveRoutineBlock */
-           let saveRoutineBlock = document.querySelector('.saveRoutineBlock');          
-           saveRoutineBlock.classList.add('displayNone');
-           saveRoutineBlock.classList.remove('displayBlock');
+          /** Clear field for routine name */
+          nameInput.value = '';
+          
+          /** Clear local data */
+          fh.user.routines_staged = [];
+          
+          /** Delete staged routine items in stageRoutineBlock */
+          let stagedItems = document.querySelectorAll('.exerciseItem_staged_wrap');
+          for(i of stagedItems){
+            i.remove();
+          };
+          
+          /** Hide stageRoutineBlock */
+          let stageRoutineBlock = document.querySelector('.stageRoutineBlock');          
+          stageRoutineBlock.classList.add('displayNone');
+          stageRoutineBlock.classList.remove('displayBlock');
+          
           /** Show userblock */
-           let userblock = document.querySelector('.userblock');
-           userblock.classList.add('displayBlock');
-           userblock.classList.remove('displayNone');
-           /** Set db assigned id onto routine object and add object to user's routine array (fh.user.routines) */
-           routineObj.id = data.id;
-           fh.user.routines.push(routineObj);
-           /* Populate userblock with routine item */
-           let html_routineItem = `
+          let userblock = document.querySelector('.userblock');
+          userblock.classList.add('displayBlock');
+          userblock.classList.remove('displayNone');
+          
+          /** Set db assigned id onto routine object and add object to user's routine array (fh.user.routines) */
+          routineObj.id = data.id;
+          fh.user.routines.push(routineObj);
+          
+          /* Populate userblock with routine item */
+          let html_routineItem = `
             <div class="routineItem">
               <p class=""routineItem_p id="${routineObj.id}">${routineObj.routineName}</p>
               <div class="deleteButton_routineItem"></div>
@@ -725,6 +819,105 @@ fh.func.addListener_click_saveButtonStagedRoutine = function() {
 };
 
 
+fh.func.addListener_click_userTile = ()=>{
+
+  let userTiles = document.querySelectorAll('.userTile');
+
+  for(i of userTiles){
+
+    i.addEventListener('click', function(){
+
+      fh.func.centerPanelScrollTop();
+
+      let userPlates = document.querySelectorAll('.userPlate');
+
+      let shownUserPlate = null;
+      
+      for(i of userPlates){
+      
+        if(i.classList.contains('displayBlock')){
+
+          shownUserPlate = i;
+        };
+      };
+
+      /* Show relevent plate, hide the other two */
+      if(this.classList.contains('bioTile')){
+
+        /* If tile clicked has it's plate up, remove it */
+        if(shownUserPlate != null
+        && shownUserPlate.classList.contains('bioPlate')){
+
+          shownUserPlate.classList.add('displayNone');
+          shownUserPlate.classList.remove('displayBlock');
+        }
+        else{
+
+          let bioPlate = document.querySelector('.bioPlate');
+          bioPlate.classList.add('displayBlock');
+          bioPlate.classList.remove('displayNone');
+
+          let chatPlate = document.querySelector('.chatPlate');
+          chatPlate.classList.add('displayNone');
+          chatPlate.classList.remove('displayBlock');
+
+          let calendarPlate = document.querySelector('.calendarPlate');
+          calendarPlate.classList.add('displayNone');
+          calendarPlate.classList.remove('displayBlock');
+        };
+      }
+      else
+      if(this.classList.contains('chatTile')){
+
+        if(shownUserPlate != null
+        && shownUserPlate.classList.contains('chatPlate')){
+
+          shownUserPlate.classList.add('displayNone');
+          shownUserPlate.classList.remove('displayBlock');
+        }
+        else{
+
+          let chatPlate = document.querySelector('.chatPlate');
+          chatPlate.classList.add('displayBlock');
+          chatPlate.classList.remove('displayNone');
+
+          let bioPlate = document.querySelector('.bioPlate');
+          bioPlate.classList.add('displayNone');
+          bioPlate.classList.remove('displayBlock');
+
+          let calendarPlate = document.querySelector('.calendarPlate');
+          calendarPlate.classList.add('displayNone');
+          calendarPlate.classList.remove('displayBlock');
+        };
+      }
+      else
+      if(this.classList.contains('calendarTile')){
+
+        if(shownUserPlate != null
+        && shownUserPlate.classList.contains('calendarPlate')){
+
+          shownUserPlate.classList.add('displayNone');
+          shownUserPlate.classList.remove('displayBlock');
+        }
+        else{
+
+          let calendarPlate = document.querySelector('.calendarPlate');
+          calendarPlate.classList.add('displayBlock');
+          calendarPlate.classList.remove('displayNone');
+
+          let bioPlate = document.querySelector('.bioPlate');
+          bioPlate.classList.add('displayNone');
+          bioPlate.classList.remove('displayBlock');
+
+          let chatPlate = document.querySelector('.chatPlate');
+          chatPlate.classList.add('displayNone');
+          chatPlate.classList.remove('displayBlock');
+        };
+      };
+    });
+  };
+};
+
 
 fh.func.centerPanelScrollTop = ()=>{
 
@@ -737,10 +930,33 @@ fh.func.centerPanelScrollTop = ()=>{
 };
 
 
-
 fh.func.click_findableExercise = function(me) {
 
   fh.func.centerPanelScrollTop();
+
+
+  /* If any userPlate(bioPlate, chatPlate, or calendarPlate) showing, hide them */
+  let userPlates = document.querySelectorAll('.userPlate');
+  for(i of userPlates){
+
+    if(i.classList.contains('displayBlock')){
+      i.classList.add('displayNone');
+      i.classList.remove('displayBlock');
+    };
+  };
+
+
+  /* If that exercise already in the center, remove it */
+  let title_ofClickedFindable = me.children[0].innerHTML;
+
+  let contentPlates = document.querySelectorAll('.content_plate');
+
+  for(i of contentPlates){
+    if(i.children[0].innerHTML == title_ofClickedFindable){
+      i.remove();
+    };
+  };
+
 
   let findableName = me.children[0].innerHTML;
 
@@ -800,15 +1016,13 @@ fh.func.click_findableExercise = function(me) {
         let exercise_image = document.createElement("div");
         exercise_image.className = "exercise_image";
         exercise_image.setAttribute(
-          "style",
-          `background-image: url("${exercise.img[0]}");`
+          "style",`background-image: url("${exercise.img[0]}");`
         );
 
         let exercise_image_2 = document.createElement("div");
         exercise_image_2.className = "exercise_image_2";
         exercise_image_2.setAttribute(
-          "style",
-          `background-image: url("${exercise.img[1]}");`
+          "style",`background-image: url("${exercise.img[1]}");`
         );
 
         /* Convenient Custom Attributes to store img paths */
@@ -827,24 +1041,27 @@ fh.func.click_findableExercise = function(me) {
       addToNewRoutineButton.className = "addToNewRoutineButton";
       addToNewRoutineButton.innerHTML = "Add to New Routine";
       addToNewRoutineButton.addEventListener("click", function() {
-        console.log('click add to new routine button');
-
-        /* Hide userBlock, show saveRoutineBlock */
+        
+        /* Hide catbar */
+        let user_wrap_catbar = document.querySelector('.user_wrap_catbar');
+        user_wrap_catbar.classList.add('displayNone');
+        user_wrap_catbar.classList.remove('displayBlock');
+        /* Hide userBlock */
         let userblock = document.querySelector('.userblock');
         userblock.classList.add('displayNone');
         userblock.classList.remove('displayBlock');
+        /* Show stageRoutineBlock */
+        let stageRoutineBlock = document.querySelector('.stageRoutineBlock');
+        stageRoutineBlock.classList.add('displayBlock');
+        stageRoutineBlock.classList.remove('displayNone');
 
-        let saveRoutineBlock = document.querySelector('.saveRoutineBlock');
-        saveRoutineBlock.classList.add('displayBlock');
-        saveRoutineBlock.classList.remove('displayNone');
-
-        // create routine object, pass to staged routine array
+        /* create routine object, pass to staged routine array */
         let exObj = {};
         exObj.name = this.parentNode.parentNode.children[0].innerHTML;
         exObj.desc = this.parentNode.parentNode.children[1].innerHTML;
 
         /* If image path not undefined, set in array  */
-        if (this.parentNode.parentNode.children[2].children[0].getAttribute("imgPath_1") != undefined) {
+        if(this.parentNode.parentNode.children[2].children[0].getAttribute("imgPath_1") != undefined){
           
           exObj.img = [
             this.parentNode.parentNode.children[2].children[0].getAttribute("imgPath_1"),
@@ -1061,15 +1278,22 @@ fh.func.init_routinesBicepsInFindbar = function() {
 
 fh.func.init_panel = ()=>{
 
-
   let currentUser = window.localStorage.getItem('currentUser');
 
+  /* There is a currentUser */
   if(currentUser != undefined){
 
+    /* Hide Login */
     let wrap_login = document.querySelector('.wrap_login');
     wrap_login.classList.add('displayNone');
     wrap_login.classList.remove('displayBlock');
 
+    /* Show user catbar */
+    let user_wrap_catbar = document.querySelector('.user_wrap_catbar');
+    user_wrap_catbar.classList.add('displayBlock');
+    user_wrap_catbar.classList.remove('displayNone');
+
+    /* Show User Block */
     let userblock = document.querySelector('.userblock');
     userblock.classList.add('displayBlock');
     userblock.classList.remove('displayNone');
@@ -1093,30 +1317,65 @@ fh.func.isWithin = function(coords, elem) {
   }
 };
 
+
 /*************
   Initialization
   **************/
 window.addEventListener("DOMContentLoaded", event => {
   
+  /* Retrieve local storage token */
   const currUser = localStorage.getItem("currentUser");
 
 
-  // console.log('DOM fully loaded and parsed');
-
-  // Exercises call, dropdown event, dropdownItem events, append biceps first
+  /****
+  Calls
+  *****/
+  /* Call exercises API, dropdown event, dropdownItem events, append biceps first */
   fh.func.apiCall_exercises();
+
+
+  /*********
+  Init Style
+  **********/
+  /* What right panel to start? */
+  fh.func.init_panel();
+
+
+  /*********************
+  Attach Event Listeners
+  **********************/
+  /* Body General */
+  fh.func.addListener_click_body();
+
+  /* Left Side Events */
   fh.func.addListener_click_dropdownFindExercise();
   fh.func.addListener_click_eachItemInExercisesDropdownMenu();
   fh.func.init_routinesBicepsInFindbar();
 
-  fh.func.init_panel();
+  /* Right Side Events */
+  fh.func.addListener_click_profileButton();
+  fh.func.addListener_click_routinesButton();
 
-  // Login/Registration Panel Events
+  /* Login/Registration Panel Events */
   fh.func.addListener_click_initCreateAccountButton();
   fh.func.addListener_click_loginButtonProper();
   fh.func.addListener_click_registerButton();
-  fh.func.addListener_click_saveButtonStagedRoutine();
+  fh.func.addListener_click_backToLoginButton();
   fh.func.addListener_click_trainerToggles();
+  
+  /* Routine Content Plate Events */
+  fh.func.addListener_click_saveButtonStagedRoutine();
 
-  fh.func.addListener_click_body();
+  /* Save Routine Block Events */
+  fh.func.addListener_click_close_stageRoutineBlock();
+
+  /* User Block Events */
+  fh.func.addListener_click_userTile();
+
 });
+
+
+
+
+
+

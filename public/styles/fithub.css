@@ -68,6 +68,10 @@ body {
   display: flex;
 }
 
+.order_neg1 {
+  order: -1;
+}
+
 .color_greenMain {
   color: var(--green_main);
 }
@@ -107,6 +111,8 @@ body {
 }
 
 .wrap_context {
+  display: flex;
+  flex-direction: column;
   width: 45%;
   height: 100vh;
   margin-left: 68px;
@@ -133,16 +139,16 @@ body {
 }
 
 .wrap_findbar .wrap_catbox:nth-of-type(1) {
-  /*margin-left: 4px;*/
-  margin-left: 6px;
+  /*margin-left: 6px;*/
 }
 
 .wrap_findbar .wrap_catbox:not(:nth-of-type(1)) {
-  margin-left: 10px;
+  /*margin-left: 10px;*/
 }
 
 .catbar {
   display: flex;
+  justify-content: center;
   width: 100%;
   height: 70px;
   font-size: 10px;
@@ -156,8 +162,10 @@ body {
 .wrap_catbox {
   width: 22.4%;
   height: 100%;
+  margin: 0 8px;
   text-align: center;
   line-height: 30px;
+  cursor: pointer;
 
   /*border: 1px solid blue;*/
 }
@@ -185,18 +193,22 @@ body {
   background-color: white;
 }
 
-.catbox_trainers > .catbox_plate > div:nth-of-type(1) {
+.catbox_trainers > .catbox_plate > div:nth-of-type(1),
+.catbox_profile > .catbox_plate > div:nth-of-type(1) {
   background-color: var(--blue_main);
 }
 
-.catbox_trainers > .catbox_plate > div:nth-of-type(2) {
+.catbox_trainers > .catbox_plate > div:nth-of-type(2),
+.catbox_profile > .catbox_plate > div:nth-of-type(2) {
   color: var(--blue_main);
 }
 
+.catbox_exercises > .catbox_plate > div:nth-of-type(1),
 .catbox_routines > .catbox_plate > div:nth-of-type(1) {
   background-color: var(--green_main);
 }
 
+.catbox_exercises > .catbox_plate > div:nth-of-type(2),
 .catbox_routines > .catbox_plate > div:nth-of-type(2) {
   color: var(--green_smallFont);
 }
@@ -233,10 +245,12 @@ body {
   /*border: 1px solid red;*/
 }
 
-.catbox_trainers > .catbox_arrow {
+.catbox_trainers > .catbox_arrow,
+.catbox_profile > .catbox_arrow {
   background-color: var(--blue_main);
 }
 
+.catbox_exercises > .catbox_arrow,
 .catbox_routines > .catbox_arrow {
   background-color: var(--green_main);
 }
@@ -266,7 +280,6 @@ body {
   background-color: var(--green_main);
   box-shadow: var(--shadow_opac10);
   cursor: pointer;
-
   color: white;
   line-height: 28px;
 }
@@ -286,7 +299,6 @@ body {
   top: 120%;
   width: 80%;
   margin-left: 10%;
-  /*height: 350px;*/
   z-index: 2;
   box-shadow: var(--shadow_harsh_1);
   border-radius: 4px;
@@ -310,12 +322,8 @@ body {
 .wrap_findables {
   width: 100%;
   height: 500px;
-
-  /*position: relative;*/
   position: absolute;
-
   margin-top: 10px;
-
   overflow-y: scroll;
 
   /*border: 1px solid red;*/
@@ -398,157 +406,71 @@ body {
   border: 1px solid black;
 }
 
-.userblock {
-  width: 100%;
-  height: 87vh;
 
-  border: 1px solid blue;
-}
 
-.userblock .wrap_catbox:nth-of-type(1) {
-  margin-left: 6px;
-}
-
-.userblock .wrap_catbox:not(:nth-of-type(1)) {
-    margin-left: 10px;
-}
-
-.wrap_pins {
-  width: 100%;
-  height: 400px;
-  overflow-y: scroll;
-
-  /*border: 1px solid green;*/
-}
-
-.wrap_pins::-webkit-scrollbar {
-  display: none;
-}
-
-.pinnedItem {
-  width: 79.1%;
-  height: 100px;
-  margin-top: 6px;
-  margin-left: 10%;
-  border-radius: 10px;
-  background-color: white;
-  box-shadow: var(--shadow_opac05_small);
-}
-
-.pinnedItem:nth-of-type(1) {
-  margin-top: 0;
-}
-
-.catbar_user_small {
-  display: flex;
-  width: 100%;
-  height: 69px;
-  margin-top: 32px;
-  font-size: 10px;
-  font-weight: 600;
-
+.user_wrap_catbar {
+  
   /*border: 1px solid red;*/
 }
 
-.wrap_catbox_small {
-  width: 23.2%;
+
+
+.userblock {
+  /*border: 1px solid black;*/
+}
+
+.userTile {
+  width: 90%;
   height: 60px;
-  margin-top: 7px;
-  text-align: center;
-  line-height: 30px;
-
-  /*border: 1px solid green;*/
-}
-
-.wrap_catbox_small:nth-of-type(1) {
-  /* margin-left: 6px; */
-}
-
-.wrap_catbox_small:not(:nth-of-type(1)) {
-  margin-left: 6px;
-}
-
-.catbox_plate_small {
-  width: 100%;
-  height: 60px;
-  border-radius: 10px;
+  margin: 0 auto 0;
   background-color: white;
-  box-shadow: var(--shadow_opac10);
-
-  /*border: 1px solid pink;*/
+  border-radius: 10px;
+  box-shadow: var(--shadow_opac05);
+  cursor: pointer;
 }
 
-.catbox_plate_small > div:nth-of-type(1) {
-  height: 50%;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+.userTile:nth-of-type(1) {
+  margin-top: 42px;
 }
 
-.catbox_plate_small > div:nth-of-type(2) {
-  height: 50%;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+.userTile:not(:nth-of-type(1)) {
+  margin-top: 8px;
 }
 
-.catbox_trainers > .catbox_plate_small > div:nth-of-type(1) {
-  color: var(--blue_main);
-}
-
-.catbox_trainers > .catbox_plate_small > div:nth-of-type(2) {
-  background-color: var(--blue_main);
-}
-
-.catbox_routines > .catbox_plate_small > div:nth-of-type(1) {
-  color: var(--green_smallFont);
-}
-
-.catbox_routines > .catbox_plate_small > div:nth-of-type(2) {
-  background-color: var(--green_main);
-}
-
-.catbox_mealPlans > .catbox_plate_small > div:nth-of-type(1) {
-  color: var(--purple_main);
-}
-
-.catbox_mealPlans > .catbox_plate_small > div:nth-of-type(2) {
-  background-color: var(--purple_main);
-}
-
-.catbox_events > .catbox_plate_small > div:nth-of-type(1) {
-  color: var(--pink_main);
-}
-
-.catbox_events > .catbox_plate_small > div:nth-of-type(2) {
-  background-color: var(--pink_main);
-}
-
-.catbox_arrow_small {
-  width: 12px;
-  height: 12px;
+.userTile > div {
+  display: flex;
   position: relative;
-  top: -66px;
-  left: calc(50% - 6px);
-  box-shadow: var(--shadow_opac10);
-  transform-origin: 50% 50%;
-  transform: rotate(45deg);
-  z-index: -1;
+  height: 60px;
+  
+  /*border: 1px solid black;*/
 }
 
-.catbox_trainers .catbox_arrow_small {
-  background-color: var(--blue_main);
+.userTile > div > span {
+  display: block;
+  width: 15px;
+  height: 15px;
+  align-self: center;
+  position: absolute;
+  left: 46px;
+  background-image: url('../img/leftArrow.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-.catbox_routines .catbox_arrow_small {
-  background-color: var(--purple_main);
+.userTile > div > p {
+  display: block;
+  position: relative;
+  left: 84px;
+  color: var(--blue_main);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 60px;
+  letter-spacing: -0.5px;
 }
 
-.catbox_mealPlans .catbox_arrow_small {
-  background-color: var(--purple_main);
-}
 
-.catbox_events .catbox_arrow_small {
-  background-color: var(--green_main);
-}
+
 
 .scrollbar_user {
   width: 4px;
@@ -559,6 +481,8 @@ body {
 
   border: 1px solid black;
 }
+
+
 
 .cplate_exerciseName {
   width: 80%;
@@ -760,7 +684,8 @@ Login Styles
 
 .loginButton,
 .init_createAccountButton,
-.registerButton {
+.registerButton,
+.backToLoginButton {
   height: 32px;
   width: 82%;
   margin: 10px auto 0;
@@ -769,6 +694,7 @@ Login Styles
   font-weight: 800;
   text-align: center;
   line-height: 32px;
+  letter-spacing: -0.5px;
   cursor: pointer;
 }
 
@@ -779,7 +705,7 @@ Login Styles
 }
 
 .init_createAccountButton,
-.back_loginButton {
+.backToLoginButton {
   margin: 6px auto 0;
   background-color: var(--greyBlue);
 }
@@ -919,6 +845,7 @@ END Register Styles
   background-color: var(--green_main);
   text-align: center;
   line-height: 32px;
+  letter-spacing: -0.5px;
   color: white;
   font-weight: 600;
   box-shadow: var(--shadow_opac10);
@@ -930,26 +857,42 @@ END Register Styles
 /************
 Routine Block
 *************/
-.saveRoutineBlock {
+.stageRoutineBlock {
   position: relative;
   width: 90%;
-  height: 500px;
-  margin-top: 87px;
+  /*height: 500px;*/
+  margin: 112px auto 0;
+  padding-top: 46px;
   background-color: white;
   border-radius: 10px;
   box-shadow: var(--shadow_opac10);
 }
 
+.close_stageRoutineBlock {
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    right: -4px;
+    top: -12px;
+    border-radius: 20px;
+    cursor: pointer;
+    background-image: url(../img/icon_deleteX.svg);
+    background-size: 11px;
+    background-position: center;
+    background-color: white;
+    box-shadow: var(--shadow_deleteX);
+}
+
 .saveButton_stagedRoutine {
   height: 32px;
   width: 80%;
-  margin: 46px auto 0;
+  margin: 0 auto 0;
   position: relative;
-  top: 46px;
   border-radius: 4px;
   background-color: var(--green_main);
   text-align: center;
   line-height: 32px;
+  letter-spacing: -0.5px;
   color: white;
   font-weight: 600;
   box-shadow: var(--shadow_opac10);
@@ -960,8 +903,7 @@ Routine Block
   height: 32px;
   width: 80%;
   position: relative;
-  top: 60px;
-  margin: 0 auto 0;
+  margin: 16px auto 0;
   /*padding-left: 15%;*/
   text-align: center;
   border-radius: 4px;
@@ -974,7 +916,8 @@ Routine Block
 
 .pasteExercises {
   position: relative;
-  top: 80px;
+  padding-top: 24px;
+  padding-bottom: 24px;
   max-height: 350px;
   overflow-y: scroll;
 
@@ -995,15 +938,71 @@ Routine Block
 }
 
 .deleteButton_staged {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 20px;
   cursor: pointer;
   background-image: url("../img/icon_deleteX.svg");
-  background-size: 10px;
+  background-size: 11px;
   background-position: center;
+  background-color: white;
   box-shadow: var(--shadow_deleteX);
 }
 
 .inputFlash {
 }
+
+
+/*******************
+Saved Routines Block  
+********************/
+.routinesBlock {
+  width: 90%;
+  height: 400px;
+  margin: 42px auto 0;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: var(--shadow_opac05);
+
+  /*border: 1px solid blue;*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
