@@ -723,11 +723,7 @@ fh.func.addListener_click_routinesButton = ()=>{
 
   let routinesButton = document.querySelector('.catbox_routines');
 
-console.log(routinesButton, 'ROUTINES BUTTON')
-
   routinesButton.addEventListener('click', function(){
-
-    console.log('hello steven');
 
     let routinesBlock = document.querySelector('.routinesBlock');
     routinesBlock.classList.add('displayBlock');
