@@ -44,10 +44,9 @@ if (process.env.JAWSDB_URL) {
     host: "localhost",
     port: 3306,
     user: "root",
-    // Kevins root password: "IamTheBoxGhost1971",
-    // pauls root password: sqlrootpass
-    // Stevens root password: steven123
-    password: "IamTheBoxGhost1971",
+    // password: "IamTheBoxGhost1971",
+    password: "steven123",
+    // password: "sqlrootpass",
     database: "fitness_hub_db"
   });
 }
@@ -343,6 +342,7 @@ app.post(`/hubchat/chatter/save/:currUser/:userName/:msgText`, async function(
 
 // Routine Module section
 app.get(`/routine/:currUser`, async function(req, res) {
+
   let result = await db.query(`select * from fh_routine_hdr where userid = ?`, [
     req.params.currUser
   ]);
@@ -371,7 +371,7 @@ app.post(`/routine/save/:currUser`, async function(req, res) {
     }
 
     if (req.body.exercises[i].img) {
-      img_src2 = req.body.exercises[i].img[0];
+      img_src2 = req.body.exercises[i].img[1];
     }
     writeDtl = await db.query(
       `insert into fh_routine_dtl(routine_id, exercise_name, exercise_desc, front_img_src, rear_img_src)
@@ -416,6 +416,21 @@ app.get(`/routine/userroutines/:currUser`, async function(req, res) {
     routines.push(rtn_element);
   }
   res.send(routines);
+});
+
+app.delete("/routine/delroutine/:routineid", async function(req, res) {
+  
+  console.log(Number(req.params.routineid), 'REQ PARAMS');
+
+  let dtl_result = await db.query(
+    `delete from fh_routine_dtl where routine_id = ?`,
+    [Number(req.params.routineid)]
+  );
+  let hdr_result = await db.query(
+    `delete from fh_routine_hdr where id = ?`,
+    [Number(req.params.routineid)]
+  );
+  res.send(hdr_result);
 });
 
 // Starts the server to begin listening

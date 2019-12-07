@@ -953,16 +953,55 @@ Routine Block
 }
 
 
-/*******************
-Saved Routines Block  
-********************/
+/*************
+Routines Block  
+**************/
 .routinesBlock {
   width: 90%;
-  height: 400px;
   margin: 42px auto 0;
+  padding-top: 24px;
+  padding-left: 24px;
+  padding-bottom: 24px;
   background-color: white;
   border-radius: 10px;
   box-shadow: var(--shadow_opac05);
+
+  /*border: 1px solid blue;*/
+}
+
+.routineRow {
+  display: flex;
+  position: relative;
+  font-size: 16px;
+  font-weight: 500;
+
+  /*border: 1px solid green;*/
+}
+
+.routineRow > p {
+  width: 70%;
+  cursor: pointer;
+
+  /*border: 1px solid red;*/
+}
+
+.routineRow > p:hover {
+  font-weight: 700;
+}
+
+.routineRow > .deleteRoutineButton {
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  right: 10%;
+  background-color: white;
+  background-image: url('../img/icon_deleteX.svg');
+  background-size: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 22px;
+  box-shadow: var(--shadow_opac10);
+  cursor: pointer;
 
   /*border: 1px solid blue;*/
 }
