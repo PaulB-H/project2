@@ -523,8 +523,13 @@ fh.func.addListener_click_loginButtonProper = function () {
           }
         } /* END success */
       });/* END Kevin's NESTED AJAX */
+
+      /* Calls routines for current user */
+      fh.func.dbCall_routines();
+
     }) /* LAST THEN of OFIGINAL FETCH */
     .then((v) => {
+
 
         /* Hide wrap_login */
         let wrap_login = document.querySelector('.wrap_login');

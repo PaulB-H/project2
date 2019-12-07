@@ -1,175 +1,177 @@
-drop table `fh_calendar`;
-CREATE TABLE `fh_calendar` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userid` int(11) NOT NULL,
-  `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `hr1` varchar(500) DEFAULT NULL,
-  `hr2` varchar(500) DEFAULT NULL,
-  `hr3` varchar(500) DEFAULT NULL,
-  `hr4` varchar(500) DEFAULT NULL,
-  `hr5` varchar(500) DEFAULT NULL,
-  `hr6` varchar(500) DEFAULT NULL,
-  `hr7` varchar(500) DEFAULT NULL,
-  `hr8` varchar(500) DEFAULT NULL,
-  `hr9` varchar(500) DEFAULT NULL,
-  `hr10` varchar(500) DEFAULT NULL,
-  `hr11` varchar(500) DEFAULT NULL,
-  `hr12` varchar(500) DEFAULT NULL,
-  `hr13` varchar(500) DEFAULT NULL,
-  `hr14` varchar(500) DEFAULT NULL,
-  `hr15` varchar(500) DEFAULT NULL,
-  `hr16` varchar(500) DEFAULT NULL,
-  `hr17` varchar(500) DEFAULT NULL,
-  `hr18` varchar(500) DEFAULT NULL,
-  `hr19` varchar(500) DEFAULT NULL,
-  `hr20` varchar(500) DEFAULT NULL,
-  `hr21` varchar(500) DEFAULT NULL,
-  `hr22` varchar(500) DEFAULT NULL,
-  `hr23` varchar(500) DEFAULT NULL,
-  `hr24` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+drop table fh_calendar;
+CREATE TABLE fh_calendar (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  userid int(11) NOT NULL,
+  createdat datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  hr1 varchar(500) DEFAULT NULL,
+  hr2 varchar(500) DEFAULT NULL,
+  hr3 varchar(500) DEFAULT NULL,
+  hr4 varchar(500) DEFAULT NULL,
+  hr5 varchar(500) DEFAULT NULL,
+  hr6 varchar(500) DEFAULT NULL,
+  hr7 varchar(500) DEFAULT NULL,
+  hr8 varchar(500) DEFAULT NULL,
+  hr9 varchar(500) DEFAULT NULL,
+  hr10 varchar(500) DEFAULT NULL,
+  hr11 varchar(500) DEFAULT NULL,
+  hr12 varchar(500) DEFAULT NULL,
+  hr13 varchar(500) DEFAULT NULL,
+  hr14 varchar(500) DEFAULT NULL,
+  hr15 varchar(500) DEFAULT NULL,
+  hr16 varchar(500) DEFAULT NULL,
+  hr17 varchar(500) DEFAULT NULL,
+  hr18 varchar(500) DEFAULT NULL,
+  hr19 varchar(500) DEFAULT NULL,
+  hr20 varchar(500) DEFAULT NULL,
+  hr21 varchar(500) DEFAULT NULL,
+  hr22 varchar(500) DEFAULT NULL,
+  hr23 varchar(500) DEFAULT NULL,
+  hr24 varchar(500) DEFAULT NULL,
+  PRIMARY KEY (id)
 );
-drop table `fh_calendar_audit`;
-CREATE TABLE `fh_calendar_audit` (
-  `id` int(11) NOT NULL,
-  `userid` int(11) NOT NULL,
-  `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `hr1` varchar(500) DEFAULT NULL,
-  `hr2` varchar(500) DEFAULT NULL,
-  `hr3` varchar(500) DEFAULT NULL,
-  `hr4` varchar(500) DEFAULT NULL,
-  `hr5` varchar(500) DEFAULT NULL,
-  `hr6` varchar(500) DEFAULT NULL,
-  `hr7` varchar(500) DEFAULT NULL,
-  `hr8` varchar(500) DEFAULT NULL,
-  `hr9` varchar(500) DEFAULT NULL,
-  `hr10` varchar(500) DEFAULT NULL,
-  `hr11` varchar(500) DEFAULT NULL,
-  `hr12` varchar(500) DEFAULT NULL,
-  `hr13` varchar(500) DEFAULT NULL,
-  `hr14` varchar(500) DEFAULT NULL,
-  `hr15` varchar(500) DEFAULT NULL,
-  `hr16` varchar(500) DEFAULT NULL,
-  `hr17` varchar(500) DEFAULT NULL,
-  `hr18` varchar(500) DEFAULT NULL,
-  `hr19` varchar(500) DEFAULT NULL,
-  `hr20` varchar(500) DEFAULT NULL,
-  `hr21` varchar(500) DEFAULT NULL,
-  `hr22` varchar(500) DEFAULT NULL,
-  `hr23` varchar(500) DEFAULT NULL,
-  `hr24` varchar(500) DEFAULT NULL,
-  `auditat` datetime DEFAULT CURRENT_TIMESTAMP
+drop table fh_calendar_audit;
+CREATE TABLE fh_calendar_audit (
+  id int(11) NOT NULL,
+  userid int(11) NOT NULL,
+  createdat datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  hr1 varchar(500) DEFAULT NULL,
+  hr2 varchar(500) DEFAULT NULL,
+  hr3 varchar(500) DEFAULT NULL,
+  hr4 varchar(500) DEFAULT NULL,
+  hr5 varchar(500) DEFAULT NULL,
+  hr6 varchar(500) DEFAULT NULL,
+  hr7 varchar(500) DEFAULT NULL,
+  hr8 varchar(500) DEFAULT NULL,
+  hr9 varchar(500) DEFAULT NULL,
+  hr10 varchar(500) DEFAULT NULL,
+  hr11 varchar(500) DEFAULT NULL,
+  hr12 varchar(500) DEFAULT NULL,
+  hr13 varchar(500) DEFAULT NULL,
+  hr14 varchar(500) DEFAULT NULL,
+  hr15 varchar(500) DEFAULT NULL,
+  hr16 varchar(500) DEFAULT NULL,
+  hr17 varchar(500) DEFAULT NULL,
+  hr18 varchar(500) DEFAULT NULL,
+  hr19 varchar(500) DEFAULT NULL,
+  hr20 varchar(500) DEFAULT NULL,
+  hr21 varchar(500) DEFAULT NULL,
+  hr22 varchar(500) DEFAULT NULL,
+  hr23 varchar(500) DEFAULT NULL,
+  hr24 varchar(500) DEFAULT NULL,
+  auditat datetime DEFAULT CURRENT_TIMESTAMP
 );
-drop table `fh_hubchat`;
-CREATE TABLE `fh_hubchat` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sentbyid` int(11) NOT NULL,
-  `sendtoid` int(11) NOT NULL,
-  `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `new_flg` tinyint(4) DEFAULT NULL,
-  `new_client` tinyint(4) DEFAULT NULL,
-  `chatmessage` varchar(1000) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `fh_hubchatid_UNIQUE` (`id`)
+drop table fh_hubchat;
+CREATE TABLE fh_hubchat (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  sentbyid int(11) NOT NULL,
+  sendtoid int(11) NOT NULL,
+  createdat datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  new_flg tinyint(4) DEFAULT NULL,
+  new_client tinyint(4) DEFAULT NULL,
+  chatmessage varchar(1000) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY fh_hubchatid_UNIQUE (id)
 );
-drop table `fh_hubchat_audit`;
-CREATE TABLE `fh_hubchat_audit` (
-  `id` int(11) NOT NULL,
-  `sentbyid` int(11) NOT NULL,
-  `sendtoid` int(11) NOT NULL,
-  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `new_flg` tinyint(4) DEFAULT NULL,
-  `new_client` tinyint(4) DEFAULT NULL,
-  `chatmessage` varchar(1000) NOT NULL,
-  `auditedat` datetime DEFAULT CURRENT_TIMESTAMP
+drop table fh_hubchat_audit;
+CREATE TABLE fh_hubchat_audit (
+  id int(11) NOT NULL,
+  sentbyid int(11) NOT NULL,
+  sendtoid int(11) NOT NULL,
+  createdAt datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  new_flg tinyint(4) DEFAULT NULL,
+  new_client tinyint(4) DEFAULT NULL,
+  chatmessage varchar(1000) NOT NULL,
+  auditedat datetime DEFAULT CURRENT_TIMESTAMP
 );
-drop table `fh_routine_dtl`;
-CREATE TABLE `fh_routine_dtl` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `routine_id` int(11) NOT NULL,
-  `exercise_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `exercise_desc` varchar(5000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `front_img_src` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `rear_img_src` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+drop table fh_routine_dtl;
+CREATE TABLE fh_routine_dtl (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  createdat datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  routine_id int(11) NOT NULL,
+  exercise_name varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  exercise_desc varchar(5000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  front_img_src varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  rear_img_src varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  exercise_reps int(4) DEFAULT '1',
+  PRIMARY KEY (id)
 );
-drop table `fh_routine_dtl_audit`;
-CREATE TABLE `fh_routine_dtl_audit` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `routine_id` int(11) NOT NULL,
-  `exercise_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `exercise_desc` varchar(5000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `front_img_src` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `rear_img_src` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `auditat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+drop table fh_routine_dtl_audit;
+CREATE TABLE fh_routine_dtl_audit (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  createdat datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  routine_id int(11) NOT NULL,
+  exercise_name varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  exercise_desc varchar(5000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  front_img_src varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  rear_img_src varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  exercise_reps int(4) DEFAULT '1',
+  auditat datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
 );
-drop table `fh_routine_hdr`;
-CREATE TABLE `fh_routine_hdr` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `routine_name` varchar(100) NOT NULL,
-  `userid` int(11) NOT NULL,
-  `workouttype` varchar(100) DEFAULT NULL,
-  `workout_summary` varchar(100) DEFAULT NULL,
-  `estimated_duration` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+drop table fh_routine_hdr;
+CREATE TABLE fh_routine_hdr (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  createdat datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  routine_name varchar(100) NOT NULL,
+  userid int(11) NOT NULL,
+  workouttype varchar(100) DEFAULT NULL,
+  workout_summary varchar(100) DEFAULT NULL,
+  estimated_duration int(11) DEFAULT NULL,
+  PRIMARY KEY (id)
 );
-drop table `fh_routine_hdr_audit`;
-CREATE TABLE `fh_routine_hdr_audit` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `routine_name` varchar(100) NOT NULL,
-  `userid` int(11) NOT NULL,
-  `workouttype` varchar(100) DEFAULT NULL,
-  `workout_summary` varchar(100) DEFAULT NULL,
-  `estimated_duration` int(11) DEFAULT NULL,
-  `auditat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+drop table fh_routine_hdr_audit;
+CREATE TABLE fh_routine_hdr_audit (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  createdat datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  routine_name varchar(100) NOT NULL,
+  userid int(11) NOT NULL,
+  workouttype varchar(100) DEFAULT NULL,
+  workout_summary varchar(100) DEFAULT NULL,
+  estimated_duration int(11) DEFAULT NULL,
+  auditat datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
 );
-drop table `fh_users`;
-CREATE TABLE `fh_users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(45) NOT NULL,
-  `first_name` varchar(30) NOT NULL,
-  `last_name` varchar(30) NOT NULL,
-  `address_line1` varchar(45) DEFAULT NULL,
-  `address_line2` varchar(45) DEFAULT NULL,
-  `city` varchar(45) DEFAULT NULL,
-  `postal_code` varchar(7) DEFAULT NULL,
-  `trainerid` int(11) DEFAULT NULL,
-  `cellphone` varchar(10) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `user_password` varchar(45) DEFAULT NULL,
-  `fitness_goals` varchar(1000) DEFAULT NULL,
-  `seeking_trainer` tinyint(1) DEFAULT '0',
-  `istrainer` tinyint(1) DEFAULT '0',
-  `profile_pic_path` varchar(45) DEFAULT NULL,
-  `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `trainer_bio` varchar(1000) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `userid_UNIQUE` (`id`)
+drop table fh_users;
+CREATE TABLE fh_users (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  username varchar(45) NOT NULL,
+  first_name varchar(30) NOT NULL,
+  last_name varchar(30) NOT NULL,
+  address_line1 varchar(45) DEFAULT NULL,
+  address_line2 varchar(45) DEFAULT NULL,
+  city varchar(45) DEFAULT NULL,
+  postal_code varchar(7) DEFAULT NULL,
+  trainerid int(11) DEFAULT NULL,
+  cellphone varchar(10) DEFAULT NULL,
+  email varchar(45) DEFAULT NULL,
+  user_password varchar(45) DEFAULT NULL,
+  fitness_goals varchar(1000) DEFAULT NULL,
+  seeking_trainer tinyint(1) DEFAULT '0',
+  istrainer tinyint(1) DEFAULT '0',
+  profile_pic_path varchar(45) DEFAULT NULL,
+  createdat datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  trainer_bio varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY userid_UNIQUE (id)
 );
-drop table `fh_users_audit`;
-CREATE TABLE `fh_users_audit` (
-  `id` int(11) NOT NULL,
-  `first_name` varchar(30) DEFAULT NULL,
-  `last_name` varchar(30) DEFAULT NULL,
-  `address_line1` varchar(45) DEFAULT NULL,
-  `address_line2` varchar(45) DEFAULT NULL,
-  `city` varchar(45) DEFAULT NULL,
-  `postal_code` varchar(7) DEFAULT NULL,
-  `trainerid` int(11) DEFAULT NULL,
-  `cellphone` varchar(10) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `fitness_goals` varchar(1000) DEFAULT NULL,
-  `seeking_trainer` tinyint(1) DEFAULT '0',
-  `istrainer` tinyint(1) DEFAULT NULL,
-  `profile_pic_path` varchar(45) DEFAULT NULL,
-  `createdat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `auditedat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `trainer_bio` varchar(1000) DEFAULT NULL,
-  PRIMARY KEY (`auditedat`,`id`)
+drop table fh_users_audit;
+CREATE TABLE fh_users_audit (
+  id int(11) NOT NULL,
+  first_name varchar(30) DEFAULT NULL,
+  last_name varchar(30) DEFAULT NULL,
+  address_line1 varchar(45) DEFAULT NULL,
+  address_line2 varchar(45) DEFAULT NULL,
+  city varchar(45) DEFAULT NULL,
+  postal_code varchar(7) DEFAULT NULL,
+  trainerid int(11) DEFAULT NULL,
+  cellphone varchar(10) DEFAULT NULL,
+  email varchar(45) DEFAULT NULL,
+  fitness_goals varchar(1000) DEFAULT NULL,
+  seeking_trainer tinyint(1) DEFAULT '0',
+  istrainer tinyint(1) DEFAULT NULL,
+  profile_pic_path varchar(45) DEFAULT NULL,
+  createdat datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  auditedat datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  trainer_bio varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (auditedat,id)
 );
