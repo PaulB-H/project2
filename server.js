@@ -66,6 +66,13 @@ async function validUserName(username) {
 }
 
 // Trainer section
+app.get(`/api/users/trainers`, async function() {
+  let result = await db.query(
+    `select id, username, first_name, last_name from fh_users where istrainer = 1`
+  );
+  res.send(result);
+});
+
 app.get(`/api/trainer/client/:currUser`, async function(req, res) {
   let result = await db.query(
     `select id, username, first_name, last_name from fh_users where trainerid = ? order by last_name, first_name asc`,
@@ -177,13 +184,6 @@ app.post(`/api/users`, async function(req, res) {
     ]
   );
   res.send({ id: result.insertId });
-});
-
-app.get(`/api/users/trainers`, async function() {
-  let result = await db.query(
-    `select id, username from fh_users where istrainer = 1`
-  );
-  res.send(result);
 });
 
 //  Calendar Section
@@ -374,18 +374,54 @@ app.post(`/routine/save/:currUser`, async function(req, res) {
       img_src2 = req.body.exercises[i].img[1];
     }
     writeDtl = await db.query(
-      `insert into fh_routine_dtl(routine_id, exercise_name, exercise_desc, front_img_src, rear_img_src)
-    values(?, ?, ?, ?, ?)`,
+      `insert into fh_routine_dtl(routine_id, exercise_name, exercise_desc, front_img_src, rear_img_src, exercise_reps)
+    values(?, ?, ?, ?, ?, ?)`,
       [
         writeHdr.insertId,
         req.body.exercises[i].name,
         req.body.exercises[i].desc,
         img_src1,
-        img_src2
+        img_src2,
+        req.body.exercises[i].reps
       ]
     );
   }
   res.send({ id: writeHdr.insertId });
+});
+
+app.post(`/routine/addexercise/:routineid`, async function(req, res) {
+  let img_src1 = "";
+  let img_src2 = "";
+  let writeDtl = "";
+  for (i = 0; i < req.body.exercises.length; i++) {
+    checkDupe = await db.query(
+      `select count(*) as dupeCount from  fh_routine_hdr where routine_id = ? and exercise_name = ?`,
+      [req.params.routineid, req.body.exercises[i].name]
+    );
+
+    if (checkDupe[0].dupeCount == 0) {
+      if (req.body.exercises[i].img) {
+        img_src1 = req.body.exercises[i].img[0];
+      }
+
+      if (req.body.exercises[i].img) {
+        img_src2 = req.body.exercises[i].img[0];
+      }
+      writeDtl = await db.query(
+        `insert into fh_routine_dtl(routine_id, exercise_name, exercise_desc, front_img_src, rear_img_src, exercise_reps)
+    values(?, ?, ?, ?, ?, ?)`,
+        [
+          req.params.routineid,
+          req.body.exercises[i].name,
+          req.body.exercises[i].desc,
+          img_src1,
+          img_src2,
+          req.body.exercises[i].reps
+        ]
+      );
+    }
+  }
+  res.send({ writeDtl });
 });
 
 app.get(`/routine/userroutines/:currUser`, async function(req, res) {
@@ -399,7 +435,7 @@ app.get(`/routine/userroutines/:currUser`, async function(req, res) {
   for (i = 0; i < hdr_result.length; i++) {
     let rtn_element = {};
     let dtl_result = await db.query(
-      `select dtl.exercise_name, dtl.exercise_desc, dtl.front_img_src, dtl.rear_img_src from fh_routine_dtl as dtl where dtl.routine_id = ?`,
+      `select dtl.exercise_name, dtl.exercise_desc, dtl.front_img_src, dtl.rear_img_src, exercise_reps from fh_routine_dtl as dtl where dtl.routine_id = ?`,
       [hdr_result[i].id]
     );
     rtn_element.id = hdr_result[i].id;
@@ -420,8 +456,6 @@ app.get(`/routine/userroutines/:currUser`, async function(req, res) {
 
 app.delete("/routine/delroutine/:routineid", async function(req, res) {
   
-  console.log(Number(req.params.routineid), 'REQ PARAMS');
-
   let dtl_result = await db.query(
     `delete from fh_routine_dtl where routine_id = ?`,
     [Number(req.params.routineid)]
