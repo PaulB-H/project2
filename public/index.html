@@ -91,7 +91,7 @@
 				<!--************ 
 					SPLASH PAGE 
 					************-->
-				<div class="content_plate content_plate4">
+				<div class="content_plate content_plate4 displayNone">
 					<div id="splashPage">
 						<div id="head">
 							<h2>Welcome</h2>
@@ -139,152 +139,122 @@
 				</div>
 				<!--************ 
 					FIT TIPS 
-					************-->				
+					************-->
 				<div class="content_plate content_plate3">
 					<div id="fitTipsContainer">
-						<div id="fitTipsHead">
-							<h1>FitTips!</h1>
+						<div id="fitTipsHead" style="margin: 40px;">
+							<h1>Welcome</h1>
 							<p>
 								It can be confusing and scary to start your fitness journey alone. Here are some tips to
 								help you get
 								started.
-								<br>
-								Keep in mind a trainer can create a more efficient routine for you based on your body
-								type, experience
-								and and personal goals.
+
 							</p>
 							<p>
-								The guidelines provided here are based on information from Jay @<a
-									href="https://www.aworkoutroutine.com/">aworkoutroutine.com</a>
-								<br><br>
-								I have summarized the information into the following catagories:
-								<ul>
-									<li>General Tips</li>
-									<li>Volume & Reps per Set</li>
-									<li>Main Compound Workouts</li>
-								</ul>
+								The guidelines provided here are based on information from <a href="https://www.aworkoutroutine.com/">aworkoutroutine.com</a> Check out that page if your interested in an in-depth look at training methods.
 							</p>
-							<h3>Click on a header below to show content!</h3>
+							<div id="splashNav" style="display: flex; justify-content: space-evenly; margin-bottom: 25px;">
+								<div id="generalTipsButton">Rest & Pain</div>
+								<div id="volumeAndrepsButton">Volume</div>
+								<div id="theBig3Button">Examples</div>
+							</div>
 						</div>
 
-						<div id="generalTips">
-							<h2 id="generalTipsButton">General Tips</h2>
+						<div id="generalTips" style="margin: 40px;">
 							<div id="generalTipsContent" class="d-none">
 								<h4>Rest Days</h4>
 								<p>
 									Give each muscle group at least ONE rest day. (ie: if you worked legs Monday, don't
 									do them again
-									until Tuesday) Most scientific studies find it takes around 1-2 days to recover
-									depending on the
-									intensity of the workout and individual needs
+									until Tuesday) Some studies find it takes around 1-2 days to recover depending on the intensity of the workout and individual needs
 									<br>
-									<a href="https://www.unm.edu/~lkravitz/Article%20folder/recoveryUNM.html">University
-										of New Mexico:
-										Recovery in Training</a>
+									<a style="font-size: 75%;" href="https://www.unm.edu/~lkravitz/Article%20folder/recoveryUNM.html">University of New Mexico: Recovery in Training</a>
 								</p>
 								<br>
 								<h4>Pain vs Progress</h4>
 								<p>
-									Muscle soreness is OK and a normal part of exercise *however* it is important to
+									Muscle soreness is OK and a normal part of exercise however it is important to
 									know the difference
 									between soreness and pain
 									<br><br>
-									Soreness occurs gradually after the exercise is over
-									<br>
-									&
-									<br>
-									Pain is experienced during or immediately following exercise
+									Soreness occurs gradually after the exercise is over while pain is experienced during or immediately following exercise
 									<br><br>
-									If you are not sure if its soreness or pain, <strong>PLEASE err on the side of
-										caution</strong> and
-									end that exercise early, and see if the feeling occurs next time. If the feeling
-									occurs every time
-									you do a particular movement even after ample rest time, see if there is another
-									exercise that can
-									target the same muscle group without pain, and consider visiting a physician to
-									determine if it is
-									caused by an underlying injury.
+									If you are not sure if its soreness or pain, end that exercise early. If the feeling occurs every time you do a particular movement, even after enough rest, find another exercise that can target the same muscle group without pain.
 									<br><br>
-									An injury can set your training back weeks if not longer, or lead to permanent
-									damage, so
-									<strong>PLEASE err on the side of caution</strong> and seek a medical professional
-									if the condition
-									does not go away.
-									<br><br>
-									For more information on pain vs soreness see the following link from The Department
-									of Exercise
-									Science, University of Massachusetts, Amherst.
-									<br>
-									<a href="https://www.ncbi.nlm.nih.gov/pubmed/7830383">Exercise-induced muscle
-										pain.</a>
 								</p>
 							</div>
 						</div>
 
-						<div id="volumeAndreps">
-							<h2 id="volumeAndrepsButton">Volume & Reps per Set</h2>
+						<div id="volumeAndreps" style="margin: 40px;">
 							<div id="volumeAndrepsContent" class="d-none">
 								<h4>Volume</h4>
 								<p>
-									Volume is: The amount of exercises, sets and reps you do (usually per week)
+									Volume is the combined amount of exercises, sets and reps you do in a week. You want to do less volume on smaller muscle groups, because they get worked when you are doing larger muscles. 
 								</p>
-								<ul>
+								<p>
+									For example the Bench Press targets your chest, but also engages your triceps.
+								</p>
+								<ul style="list-style: none;">
 									<li>Big muscle group: 60-120 total reps PER WEEK.</li>
 									<li>Small muscle group: 30-60 total reps PER WEEK.</li>
 								</ul>
-								<p>
-									This means if you target every bodypart every week you are looking at a total volume
-									of aprox 390 to
-									780 total reps per week.
-								</p>
 								<h4>Big vs Small Muscle Groups</h4>
 								<p>
-									<table>
-										<tr>
-											<td>Chest / Back / Quads / Hamstrings</td>
-											<td>Major</td>
-											<td>60-120 reps/week</td>
-										</tr>
-										<tr>
-											<td>Shoulders / Biceps / Triceps / Calves / Abs</td>
-											<td>Minor</td>
-											<td>30-60 reps/week</td>
-										</tr>
-									</table>
+									<ul style="list-style: none;">
+										<lh>Major</lh>
+										<li>Chest / Back / Quads / Hamstrings</li>
+										<li>60-120 reps/week</li>
+									</ul>
+									<ul style="list-style: none;">
+										<lh>Minor</lh>
+										<li>Shoulders / Biceps / Triceps / Calves / Abs</li>
+										<li>30-60 reps/week</li>
+									</ul>
 								</p>
 
 								<h4>Reps Per Set</h4>
-								<table>
-									<tr>
-										<td>Strength</td>
-										<td>Muscle Building</td>
-										<td>Endurance</td>
-									</tr>
-									<tr>
-										<td>1 to 5 reps per set</td>
-										<td>6 to 12 reps per set</td>
-										<td>13+ reps per set</td>
-									</tr>
-								</table>
+								<ul style="list-style: none;">
+									<lh>Strength</lh>
+									<li>1 to 5 reps per set</li>
+								</ul>
+								<ul style="list-style: none;">
+									<lh>Strength</lh>
+									<li>6 to 12 reps per set</li>
+								</ul>
+								<ul style="list-style: none;">
+									<lh>Endurance</lh>
+									<li>13+ reps per set</li>
+								</ul>
 							</div>
 						</div>
 
-						<div id="theBig3">
-							<h2 id="theBig3Button">The Big 3</h2>
+						<div id="theBig3" style="margin: 40px;">
 							<div id="theBig3Content" class="d-none">
+								<h4>Compound Exercises</h4>
 								<p>
-									There are 3 major compound exercises that can work most of your body
+									Compound exercises are important because they work several muscle groups at once, leading to greater overall muscle growth.
 								</p>
-								<ul>
+								<ul style="list-style: none;">
 									<li><strong>Bench Press</strong></h4>
 									</li>
 									<p class="tab">Targets: Chest, Shoulders, Triceps</p>
 									<li><strong>Squat</strong></li>
-									<p class="tab">Targets: Legs (Hamstring, Thigh, Calves) & Butt</p>
+									<p class="tab">Targets: Legs (Hamstring, Quads, Calves) & Butt</p>
 									<li><strong>Deadlift</strong></li>
-									<p class="tab">Targets: Legs (More hamstrings), Butt, Back, Abs</p>
+									<p class="tab">Targets: Legs (More hamstrings), Glutes, Back, Abs</p>
 								</ul>
+								<p>
+									An easy way to make a balanced exercise, is to start with a compound exercise, and then move on to isolation movements to target specific muscles.
+								</p>
+								<p>
+									Never rush an exercise
+									<br>
+									Rest well and eat well
+									<br>
+									Stay consistent 
+								</p>
 							</div>
+						
 						</div>
 
 					</div>
