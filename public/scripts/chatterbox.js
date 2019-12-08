@@ -1,6 +1,6 @@
 async function myMessages() {
   $("#contacts").empty();
-  $(`<h6><strong>Conversations:</strong></h6>`).appendTo("#contacts");
+  $(`<h6>Conversations:</h6>`).appendTo("#contacts");
 
   $.ajax({
     url: `/hubchat/chatter/messengers/${currUser}`,
@@ -25,7 +25,7 @@ async function myMessages() {
 
 async function getStrangers() {
   $("#strangers").empty();
-  $(`<h6><strong>New Conversation:</strong></h6>`).appendTo("#strangers");
+  $(`<h6>Users:</h6>`).appendTo("#strangers");
   $.ajax({
     url: `/hubchat/chatter/strangers/${currUser}`,
     type: "GET",
@@ -55,7 +55,7 @@ async function showConversation(correspondent, correspondentName) {
       $("#comm_thread").empty();
       $("#chatWith").empty();
       $(
-        `<h5><span><span>${result[0].last_name}, ${result[0].first_name} (</span><span id="chatWith" style="text-align: left">${correspondentName}</span>)</span></h5>`
+        `<h5><span><span>Chat to: ${result[0].last_name}, ${result[0].first_name} (</span><span id="chatWith" style="text-align: left">${correspondentName}</span>)</span></h5>`
       ).prependTo("#chat-window");
 
       // function writeMessages() {
