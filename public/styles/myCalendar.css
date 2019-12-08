@@ -65,18 +65,15 @@
 
 .inline_time {
   margin: auto;
+  width: 50px;
 }
 
 .saveBtn {
-  border-left: 1px solid black;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-  background-color: #06aed5;
+  border-radius: 15px;
+  background-color: #4A90E2;
   padding-left: 5px;
-  padding-right: 5px;
   color: white;
-  /* width: 6vw; */
-  top: 0;
+  top: 13px;
   float: right;
 }
 
@@ -123,6 +120,7 @@
   font: black;
   font: bold;
   justify-content: space-between;
+  padding: 0;
 }
 
 #calendar-header {
