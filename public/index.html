@@ -48,39 +48,63 @@
 						<div class="catbox_arrow"></div>
 					</div>
 				</div>
+				<div class="findbar_container">
 
-				<!-- wrap_dropdown_findbar -->
-				<div class="wrap_dropdown_findbar">
 
-					<!-- drop bar -->
-					<div class="dropdown_findbar">
-						<span>Biceps</span>
-						<span class="dropdownArrow_findbar"></span>
+					<div id="findbar_exercises">
+						<!-- 
+							FINDBAR EXERCISES 
+						-->
+						<!-- wrap_dropdown_findbar -->
+						<div class="wrap_dropdown_findbar">
+
+							<!-- drop bar -->
+							<div class="dropdown_findbar">
+								<span>Biceps</span>
+								<span class="dropdownArrow_findbar"></span>
+							</div>
+
+							<!-- drop menu -->
+							<div class="dropdownMenu drop_exercises displayNone">
+								<div><span>Biceps</span></div>
+								<div><span>Shoulders</span></div>
+								<div><span>Obliques</span></div>
+								<div><span>Chest</span></div>
+								<div><span>Quads</span></div>
+								<div><span>Abs</span></div>
+								<div><span>Lower Neck</span></div>
+								<div><span>Triceps</span></div>
+								<div><span>Outer Back</span></div>
+								<div><span>Butt</span></div>
+								<div><span>Hamstring</span></div>
+								<div><span>Calves</span></div>
+							</div>
+						</div>
+
+						<!-- wrap_findables -->
+						<div class="wrap_findables">
+							<div class="findables_exercises">
+								<!-- findables go here -->
+							</div>
+						</div>
+						<!-- 
+							END FINDBAR EXERCISES 
+						-->					
 					</div>
 
-					<!-- drop menu -->
-					<div class="dropdownMenu drop_exercises displayNone">
-						<div><span>Biceps</span></div>
-						<div><span>Shoulders</span></div>
-						<div><span>Obliques</span></div>
-						<div><span>Chest</span></div>
-						<div><span>Quads</span></div>
-						<div><span>Abs</span></div>
-						<div><span>Lower Neck</span></div>
-						<div><span>Triceps</span></div>
-						<div><span>Outer Back</span></div>
-						<div><span>Butt</span></div>
-						<div><span>Hamstring</span></div>
-						<div><span>Calves</span></div>
+					<div id="findbar_trainers" class="displayNone">
+						<div>
+							Trainer 1
+						</div>
+						<div>
+							Trainer 2
+						</div>
 					</div>
+
+
 				</div>
 
-				<!-- wrap_findables -->
-				<div class="wrap_findables">
-					<div class="findables_exercises">
-						<!-- findables go here -->
-					</div>
-				</div>
+
 			</div>
 			<!-- END wrap_findbar -->
 
@@ -282,11 +306,11 @@
 				<!-- Chatterbox -->
 				<div class="content_plate content_plate1 chatPlate userPlate displayNone order_neg1">
 					<div class="container col" id="chatterbox">
-						<h1>ChatterBox</h1>
+						<h1>Chat</h1>
 						<div id="ChatterBox" class="row"
-							style="height: 100vh; min-height: fit-content; background-color: lightsteelblue">
-							<div class="row" style="width:100%">
-								<div class="col-sm-6" id="comm_list">
+							style="min-height: fit-content;">
+							<div id="contactsAndUsers" class="row" style="width:100%">
+								<div class="col-sm-12" id="comm_list">
 									<div class="row" style="overflow-y: auto; display: flex;flex-direction: row">
 										<div class="col-sm-6" id="contacts"
 											style="overflow-y: auto; display: flex;flex-direction: column"></div>
@@ -294,9 +318,9 @@
 											style="overflow-y: auto; display: flex;flex-direction: column"></div>
 									</div>
 								</div>
-								<div id="chat-window" class="col-sm-6">
+								<div id="chat-window" class="col-sm-12">
 									<div id="comm_thread"
-										style="height:75vh; overflow: scroll; display: flex;flex-direction: column">
+										style="height:40vh; overflow: scroll; display: flex;flex-direction: column">
 									</div>
 								</div>
 							</div>

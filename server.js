@@ -309,8 +309,9 @@ app.get(`/hubchat/chatter/strangers/:currUser`, async function(req, res) {
 
 app.get(`/hubchat/chatter/:currUser/:correspondent`, async function(req, res) {
   let result = await db.query(
-    `select * from fh_hubchat where (sentbyid = ? and sendtoid = ?) or (sentbyid = ? and sendtoid = ?)`,
+    `select * from fh_hubchat inner join fh_users as usr on usr.id = ? where (sentbyid = ? and sendtoid = ?) or (sentbyid = ? and sendtoid = ?)`,
     [
+      req.params.correspondent,
       req.params.currUser,
       req.params.correspondent,
       req.params.correspondent,
@@ -342,7 +343,6 @@ app.post(`/hubchat/chatter/save/:currUser/:userName/:msgText`, async function(
 
 // Routine Module section
 app.get(`/routine/:currUser`, async function(req, res) {
-
   let result = await db.query(`select * from fh_routine_hdr where userid = ?`, [
     req.params.currUser
   ]);
@@ -455,15 +455,13 @@ app.get(`/routine/userroutines/:currUser`, async function(req, res) {
 });
 
 app.delete("/routine/delroutine/:routineid", async function(req, res) {
-  
   let dtl_result = await db.query(
     `delete from fh_routine_dtl where routine_id = ?`,
     [Number(req.params.routineid)]
   );
-  let hdr_result = await db.query(
-    `delete from fh_routine_hdr where id = ?`,
-    [Number(req.params.routineid)]
-  );
+  let hdr_result = await db.query(`delete from fh_routine_hdr where id = ?`, [
+    Number(req.params.routineid)
+  ]);
   res.send(hdr_result);
 });
 

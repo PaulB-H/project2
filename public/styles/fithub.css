@@ -22,26 +22,26 @@
 }
 
 :root {
-  --blue_main:        rgb(74, 144, 226);
-  
-  --pink_main:        rgb(255, 94, 113);
-  
-  --purple_main:      rgb(170, 143, 193);
-  
-  --green_main:       rgb(80, 227, 194);
-  --green_main_fade:  rgba(80, 227, 194, 0.5);
-  --green_smallFont:  rgb(18, 200, 136);
-  
-  --greyBlue:         rgb(106, 138, 164);
-  --greyBlue_fade:    rgba(106, 138, 164, 0.7);
+  --blue_main: rgb(74, 144, 226);
 
-  --grey_footer:      rgb(176, 192, 205);
+  --pink_main: rgb(255, 94, 113);
 
-  --shadow_opac10:        0 1px 10px 0 rgba(0, 0, 0, 0.1);
-  --shadow_opac05:        0 1px 10px 0 rgba(0, 0, 0, 0.05);
-  --shadow_opac05_small:  0 1px 5px 0 rgba(0, 0, 0, 0.05);
-  --shadow_harsh_1:       0 1px 1px 0 rgba(0, 0, 0, 0.2);
-  --shadow_deleteX:       0 0.5px 0.5px 0.25px rgba(0, 0, 0, 0.2);
+  --purple_main: rgb(170, 143, 193);
+
+  --green_main: rgb(80, 227, 194);
+  --green_main_fade: rgba(80, 227, 194, 0.5);
+  --green_smallFont: rgb(18, 200, 136);
+
+  --greyBlue: rgb(106, 138, 164);
+  --greyBlue_fade: rgba(106, 138, 164, 0.7);
+
+  --grey_footer: rgb(176, 192, 205);
+
+  --shadow_opac10: 0 1px 10px 0 rgba(0, 0, 0, 0.1);
+  --shadow_opac05: 0 1px 10px 0 rgba(0, 0, 0, 0.05);
+  --shadow_opac05_small: 0 1px 5px 0 rgba(0, 0, 0, 0.05);
+  --shadow_harsh_1: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+  --shadow_deleteX: 0 0.5px 0.5px 0.25px rgba(0, 0, 0, 0.2);
 
   --fontFamily_main: "Kohinoor Telugu", "Montserrat", sans-serif;
 }
@@ -406,14 +406,9 @@ body {
   border: 1px solid black;
 }
 
-
-
 .user_wrap_catbar {
-  
   /*border: 1px solid red;*/
 }
-
-
 
 .userblock {
   /*border: 1px solid black;*/
@@ -441,7 +436,7 @@ body {
   display: flex;
   position: relative;
   height: 60px;
-  
+
   /*border: 1px solid black;*/
 }
 
@@ -452,7 +447,7 @@ body {
   align-self: center;
   position: absolute;
   left: 46px;
-  background-image: url('../img/leftArrow.svg');
+  background-image: url("../img/leftArrow.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -496,8 +491,6 @@ body {
 
   border: 1px solid black;
 }
-
-
 
 .cplate_exerciseName {
   width: 80%;
@@ -654,7 +647,7 @@ Login Styles
   font-weight: 600;
   color: var(--greyBlue);
 
-   /*border: 1px solid black; */
+  /*border: 1px solid black; */
 }
 
 .fieldRow:nth-of-type(2) {
@@ -725,7 +718,7 @@ Login Styles
   transition-property: left, background-color;
   transition-duration: 0.3s;
   /*transition-timing-function: ease-in-out;*/
-  transition-timing-function: cubic-bezier(0.61,-0.03, 0.26, 1));
+  transition-timing-function: cubic-bezier(0.61, -0.03, 0.26, 1);
 }
 
 .trainerToggleRow .toggle_off {
@@ -737,8 +730,6 @@ Login Styles
   left: 27px;
   background-color: var(--green_main);
 }
-
-
 
 .loginButton,
 .init_createAccountButton,
@@ -770,8 +761,6 @@ Login Styles
 /************
 END Login Styles
 *************/
-
-
 
 /************
 Register Styles
@@ -824,7 +813,7 @@ Register Styles
 .registerPanel {
   position: relative;
   top: -20px;
-	padding-top: 24px; 
+  padding-top: 24px;
   width: 90%;
   height: 520px;
   background-color: white;
@@ -927,18 +916,18 @@ Routine Block
 }
 
 .close_stageRoutineBlock {
-    width: 22px;
-    height: 22px;
-    position: absolute;
-    right: -4px;
-    top: -12px;
-    border-radius: 20px;
-    cursor: pointer;
-    background-image: url(../img/icon_deleteX.svg);
-    background-size: 11px;
-    background-position: center;
-    background-color: white;
-    box-shadow: var(--shadow_deleteX);
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  right: -4px;
+  top: -12px;
+  border-radius: 20px;
+  cursor: pointer;
+  background-image: url(../img/icon_deleteX.svg);
+  background-size: 11px;
+  background-position: center;
+  background-color: white;
+  box-shadow: var(--shadow_deleteX);
 }
 
 .saveButton_stagedRoutine {
@@ -1066,7 +1055,7 @@ Routines Block
   position: absolute;
   right: 10%;
   background-color: white;
-  background-image: url('../img/icon_deleteX.svg');
+  background-image: url("../img/icon_deleteX.svg");
   background-size: 10px;
   background-position: center;
   background-repeat: no-repeat;
@@ -1076,43 +1065,3 @@ Routines Block
 
   /*border: 1px solid blue;*/
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
