@@ -10,7 +10,7 @@ async function myClients() {
       for (i = 0; i < result.length; i++) {
         $(
           `<div class="col" style="display:flex">
-            <button class="clients saveBtn" style="width:${
+            <button class="clients myBtn" style="width:${
               result[i].username.length
             }" value="${result[i].id}" onclick="showClientProfile(${
             result[i].id
@@ -26,15 +26,6 @@ async function myClients() {
       getPotentialClients();
     }
   });
-
-  // $.ajax({
-  //   url: `/routine/userroutines/${currUser}`,
-  //   type: "GET",
-  //   cache: false,
-  //   success: function(result) {
-  //     console.log("Routine list is ", result);
-  //   }
-  // });
 }
 
 async function getPotentialClients() {
@@ -48,7 +39,7 @@ async function getPotentialClients() {
       for (i = 0; i < result.length; i++) {
         $(
           `<div class="col" style="display:flex">
-            <button class="correspondent saveBtn" style="width:${
+            <button class="correspondent myBtn" style="width:${
               result[i].username.length
             }" value="${result[i].id}" onclick="showClientProfile(${
             result[i].id
@@ -91,9 +82,6 @@ async function showClientProfile(userId) {
       ) {
         $("#client_list").css("display", "none");
         $("#potentialClients").css("display", "none");
-        console.log($("#profile_header"));
-        // $("#profile_header").text() =
-        //   result[0].first_name + " " + result[0].last_name;
         $(`<div class="trainerPanel" style="position:relative; top:0">
             <IFRAME style="display:none" name="hidden-form"></IFRAME>
             <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
@@ -120,10 +108,7 @@ async function showClientProfile(userId) {
       } else {
         $("#client_list").css("display", "block");
         $("#potentialClients").css("display", "block");
-        console.log($("#profile_header").text);
         if (Number(userId) !== Number(currUser)) {
-          // $("#profile_header").innerHTML =
-          //   result[0].first_name + " " + result[0].last_name;
           $(`<div style="position:relative; top: 0">
             <form action="/api/users"  method="POST" target="hidden-form">
               First name: <input type="text" name="firstname" value="${result[0].first_name}" readonly><br/>
