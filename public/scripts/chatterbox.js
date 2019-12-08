@@ -1,6 +1,7 @@
 async function myMessages() {
   $("#contacts").empty();
   $(`<h6><strong>Conversations:</strong></h6>`).appendTo("#contacts");
+
   $.ajax({
     url: `/hubchat/chatter/messengers/${currUser}`,
     type: "GET",
@@ -103,7 +104,7 @@ async function showStrangers() {
     success: function(result) {
       for (i = 0; i < result.length; i++) {
         $(`<div class="msgBox" style="margin: 1em">
-            <span>${result[i].username}</span>
+            <span>${result[i].last_name}, ${result[i].first_name}</span>
            </div>`).appendTo(".content_plate2");
       }
     }
