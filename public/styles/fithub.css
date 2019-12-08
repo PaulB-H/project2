@@ -469,6 +469,21 @@ body {
   letter-spacing: -0.5px;
 }
 
+.userblock > .logoutTile {
+  height: 32px;
+  margin-top: 10px;
+  background-color: var(--green_main);
+  border-radius: 4px;
+}
+
+.logoutTile > div > p {
+  color: white;
+  line-height: 32px;
+  font-size: 17px;
+  left: 0;
+  margin: 0 auto 0;
+}
+
 
 
 
@@ -507,6 +522,16 @@ body {
   margin-top: 5px;
 }
 
+.exerciseImagesCont_asRoutine {
+  width: 50%;
+  height: 150px;
+  position: relative;
+  margin-top: 5px;
+  margin-bottom: 24px;
+
+  /*border: 1px solid blue;*/
+}
+
 .exercise_image,
 .exercise_image_2 {
   width: 35%;
@@ -521,6 +546,11 @@ body {
   animation-iteration-count: infinite;
 
   /* border: 1px solid blue; */
+}
+
+.exercise_image.asARoutineTile,
+.exercise_image_2.asARoutineTile {
+  left: 15%;
 }
 
 .exercise_image_2 {
@@ -540,6 +570,34 @@ body {
   100% {
     opacity: 0;
   }
+}
+
+.cplate_flexExerciseAndReps {
+  display: flex;
+  position: relative;
+  min-height: 100px;
+
+  /*border: 1px solid black;*/
+}
+
+.cplate_exerciseReps {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  /*bottom: 10px;*/
+  bottom: -40%;
+  font-size: 80px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 60px;
+
+  /* border: 1px solid red; */
+}
+
+.cplate_exerciseReps > span {
+  
+  /*border: 1px solid green;*/
 }
 
 /************
@@ -907,7 +965,7 @@ Routine Block
   /*padding-left: 15%;*/
   text-align: center;
   border-radius: 4px;
-  border: 1px solid var(--green_main);
+  border: 2px solid var(--green_main);
 }
 
 .name_stagedRoutine::placeholder {
@@ -929,17 +987,30 @@ Routine Block
 }
 
 .exerciseItem_staged_p {
-  width: 70%;
+  width: 52%;
   margin-left: 10%;
   font-size: 12px;
-  cursor: pointer;
+}
 
-  /*border: 1px solid red;*/
+.exerciseItem_staged_input {
+  position: absolute;
+  right: 23%;
+  width: 24px;
+  height: 24px;
+  margin-top: 1px;
+  border: 2px solid var(--green_main);
+  border-radius: 4px;
+  text-align: center;
+  font-family: var(--fontFamily_main);
+  font-weight: 500;
 }
 
 .deleteButton_staged {
+  position: absolute;
+  right: 10%;
   width: 22px;
   height: 22px;
+  margin-left: 10px;
   border-radius: 20px;
   cursor: pointer;
   background-image: url("../img/icon_deleteX.svg");

@@ -41,6 +41,9 @@
   
   fh.func.dbCall_routines = ()=>{
   fh.func.deleteRoutine = (me)=>{
+  fh.func.deleteStagedExercise = (me)=>{
+
+  fh.event
 
   fh.func.fetch_exerciseImages = function(url_forImage, obj, myArray) {
 
@@ -431,6 +434,7 @@ fh.func.addListener_click_loginButtonProper = function () {
       let id = data[0].id;
 
       window.localStorage.setItem('currentUser', id);
+      const currUser = localStorage.getItem("currentUser");
 
       $.ajax({
         url: `/api/trainer/clientinfo/${id}`,
@@ -612,6 +616,7 @@ fh.func.addListener_click_registerButton = () => {
         let insertId = data.id;
 
         window.localStorage.setItem('currentUser', insertId);
+        currUser = localStorage.getItem("currentUser");
 
         /* Hide register */
         let wrap_register = document.querySelector('.wrap_register');
@@ -673,10 +678,18 @@ fh.func.addListener_click_saveButtonStagedRoutine = function () {
       return;
     }
     else {
-      /* else package and save to DB, hide stageRoutineBlock */
+      /* else create routineObj payload and save to DB, hide stageRoutineBlock */
+
+      let repValues = document.querySelectorAll('.exerciseItem_staged_input');
+      for(let i = 0; i < fh.user.routines_staged.length; i++){
+        let exerciseObj = fh.user.routines_staged[i];
+        exerciseObj.reps = repValues[i].value;
+      };
+
       let routineObj = {};
       routineObj.routineName = inputValue;
       routineObj.exercises = fh.user.routines_staged;
+      console.log(routineObj,'routineObj');
 
       let url = `/routine/save/${currUser}`;
       fetch(url, {
@@ -742,103 +755,55 @@ fh.func.addListener_click_saveButtonStagedRoutine = function () {
 };
 
 
-fh.func.addListener_click_userTile = () => {
+fh.func.addListener_click_userTile = ()=>{
 
   let userTiles = document.querySelectorAll('.userTile');
 
-  for (i of userTiles) {
+  for (userTile of userTiles) {
 
-    i.addEventListener('click', function () {
+    userTile.addEventListener('click', function () {
 
-      fh.func.clearContext();
+      /* Logout action/tile checked first. Happens before and prevents removal of middle elements. */
+      if(this.classList.contains('logoutTile')){
 
-      fh.func.centerPanelScrollTop();
-
-      let userPlates = document.querySelectorAll('.userPlate');
-
-      let shownUserPlate = null;
-
-      for (i of userPlates) {
-
-        if (i.classList.contains('displayBlock')) {
-
-          shownUserPlate = i;
-        };
+        window.localStorage.removeItem('currentUser');
+        window.location.reload();
       };
 
-      /* Show relevent plate, hide the other two */
-      if (this.classList.contains('bioTile')) {
 
-        /* If tile clicked has it's plate up, remove it */
-        if (shownUserPlate != null
-          && shownUserPlate.classList.contains('bioPlate')) {
+      /* Clear center context */
+      fh.func.clearContext();
 
-          shownUserPlate.classList.add('displayNone');
-          shownUserPlate.classList.remove('displayBlock');
-        }
-        else {
+      /* Hide any shown userPlates */
+      fh.func.clearContext_hideUserPlate()
 
-          let bioPlate = document.querySelector('.bioPlate');
-          bioPlate.classList.add('displayBlock');
-          bioPlate.classList.remove('displayNone');
+      /* Scroll to top */
+      fh.func.centerPanelScrollTop();
 
-          let chatPlate = document.querySelector('.chatPlate');
-          chatPlate.classList.add('displayNone');
-          chatPlate.classList.remove('displayBlock');
-
-          let calendarPlate = document.querySelector('.calendarPlate');
-          calendarPlate.classList.add('displayNone');
-          calendarPlate.classList.remove('displayBlock');
-        };
+      /* Depending on TILE class, find and show PLATE by related plate class */
+      if(this.classList.contains('bioTile')){
+        let bioPlate = document.querySelector('.bioPlate');
+        bioPlate.classList.add('displayBlock');
+        bioPlate.classList.remove('displayNone');
       }
       else
-        if (this.classList.contains('chatTile')) {
-
-          if (shownUserPlate != null
-            && shownUserPlate.classList.contains('chatPlate')) {
-
-            shownUserPlate.classList.add('displayNone');
-            shownUserPlate.classList.remove('displayBlock');
-          }
-          else {
-
-            let chatPlate = document.querySelector('.chatPlate');
-            chatPlate.classList.add('displayBlock');
-            chatPlate.classList.remove('displayNone');
-
-            let bioPlate = document.querySelector('.bioPlate');
-            bioPlate.classList.add('displayNone');
-            bioPlate.classList.remove('displayBlock');
-
-            let calendarPlate = document.querySelector('.calendarPlate');
-            calendarPlate.classList.add('displayNone');
-            calendarPlate.classList.remove('displayBlock');
-          };
-        }
-        else
-          if (this.classList.contains('calendarTile')) {
-
-            if (shownUserPlate != null
-              && shownUserPlate.classList.contains('calendarPlate')) {
-
-              shownUserPlate.classList.add('displayNone');
-              shownUserPlate.classList.remove('displayBlock');
-            }
-            else {
-
-              let calendarPlate = document.querySelector('.calendarPlate');
-              calendarPlate.classList.add('displayBlock');
-              calendarPlate.classList.remove('displayNone');
-
-              let bioPlate = document.querySelector('.bioPlate');
-              bioPlate.classList.add('displayNone');
-              bioPlate.classList.remove('displayBlock');
-
-              let chatPlate = document.querySelector('.chatPlate');
-              chatPlate.classList.add('displayNone');
-              chatPlate.classList.remove('displayBlock');
-            };
-          };
+      if(this.classList.contains('chatTile')){
+        let chatPlate = document.querySelector('.chatPlate');
+        chatPlate.classList.add('displayBlock');
+        chatPlate.classList.remove('displayNone');
+      }
+      else
+      if(this.classList.contains('calendarTile')){
+        let calendarPlate = document.querySelector('.calendarPlate');
+        calendarPlate.classList.add('displayBlock');
+        calendarPlate.classList.remove('displayNone');
+      }
+      else
+      if(this.classList.contains('welcomeTile')){
+        let welcomePlate = document.querySelector('.welcomePlate');
+        welcomePlate.classList.add('displayBlock');
+        welcomePlate.classList.remove('displayNone');
+      }
     });
   };
 };
@@ -903,8 +868,7 @@ fh.func.click_findableExercise = function(me) {
 
   /* Need to pull exercise category from dropdown text.
     This is used to access right exercise bucket in our data object */
-  let exerciseCategory = document.querySelector(".dropdown_findbar > span")
-    .innerHTML;
+  let exerciseCategory = document.querySelector(".dropdown_findbar > span").innerHTML;
   exerciseCategory = exerciseCategory.toLowerCase();
 
   /* Handle 2 words for category name:
@@ -1005,112 +969,36 @@ fh.func.click_findableExercise = function(me) {
         stageRoutineBlock.classList.remove('displayNone');
 
 
-        /* create routine object, pass to staged routine array */
-        let exObj = {};
-        exObj.name = this.parentNode.parentNode.children[0].innerHTML;
-        exObj.desc = this.parentNode.parentNode.children[1].innerHTML;
-
+        /* Create exerciseObj*/
+        let exerciseObj = {};
+        exerciseObj.name = this.parentNode.parentNode.children[0].innerHTML;
+        exerciseObj.desc = this.parentNode.parentNode.children[1].innerHTML;
         /* If image path not undefined, set in array  */
         if (this.parentNode.parentNode.children[2].children[0].getAttribute("imgPath_1") != undefined) {
-
-          exObj.img = [
+          exerciseObj.img = [
             this.parentNode.parentNode.children[2].children[0].getAttribute("imgPath_1"),
             this.parentNode.parentNode.children[2].children[1].getAttribute("imgPath_2")
           ];
         } else {
-          /* If undefined, pass empty array. Avoids error in database. */
-          exObj.img = [];
+          /* Set empty array. Avoids error in database. */
+          exerciseObj.img = [];
         };
 
+        /* Push exerciseObj to local data (routines_staged) */
+        fh.user.routines_staged.push(exerciseObj);
 
-        /********************************
-         * Push to routines_staged array *
-         *********************************/
-        /* Check routines_staged array for duplicates. Return if find duplicate. */
-        for (let i = 0; i < fh.user.routines_staged.length; i++) {
-          let name_stagedRoutine = fh.user.routines_staged[i].name;
-          if (exObj.name == name_stagedRoutine) {
-            return;
-          }
-        }
+        /* Create exerciseItem */
+        let html = `
+          <div class="exerciseItem_staged_wrap">
+            <p class="exerciseItem_staged_p">${exerciseObj.name}</p>
+            <input class="exerciseItem_staged_input"type="text" onfocus="fh.func.exerciseStaged_focus(this)" onfocusOut="fh.func.exerciseStaged_focusOut(this)" value="1">
+            <div class="deleteButton_staged"  onclick="fh.func.deleteStagedExercise(this)"></div>
+          </div>
+        `;
 
-        /* No above return from duplicate check, push to routines_staged array */
-        fh.user.routines_staged.push(exObj);
-
-
-        /*********************************************************
-        Generate the exercise items in the right side routineBlock
-        **********************************************************/
-        /* Outer Wrap */
-        let exerciseItem_staged_wrap = document.createElement("div");
-        exerciseItem_staged_wrap.className = "exerciseItem_staged_wrap";
-
-        /* p element = name */
-        let exerciseItem_staged_p = document.createElement("p");
-        exerciseItem_staged_p.className = "exerciseItem_staged_p";
-        exerciseItem_staged_p.innerHTML = exObj.name;
-
-        /* div element = deleteButton */
-        let deleteButton_staged = document.createElement("div");
-        deleteButton_staged.className = "deleteButton_staged";
-        deleteButton_staged.addEventListener("click", function() {
-          
-          let deleteTarget_name = this.previousElementSibling.innerHTML;
-
-          /* remove from staged array */
-          for (let i = 0; i < fh.user.routines_staged.length; i++) {
-            let stagedRoutineName = fh.user.routines_staged[i].name;
-
-            if (deleteTarget_name == stagedRoutineName) {
-              fh.user.routines_staged.splice(i, 1);
-            }
-          };
-
-          /* remove element from panel */
-          let exercisesInPanel = document.querySelectorAll(".exerciseItem_staged_wrap");
-          for (let i = 0; i < exercisesInPanel.length; i++) {
-            let exercise = exercisesInPanel[i];
-            let exerciseName = exercise.children[0].innerHTML;
-
-            if (deleteTarget_name == exerciseName) {
-              exercise.remove();
-            }
-          };
-
-          /* Hide stageRoutineBlock */
-          let stageRoutineBlock = document.querySelector('.stageRoutineBlock');
-          stageRoutineBlock.classList.add('displayNone');
-          stageRoutineBlock.classList.remove('displayBlock');
-
-          /* Show catbar */
-          let user_wrap_catbar = document.querySelector('.user_wrap_catbar');
-          user_wrap_catbar.classList.add('displayBlock');
-          user_wrap_catbar.classList.remove('displayNone');
-
-          /* Show fh.flag.lastRightSidePanelShowing */
-          if(fh.flag.lastRightPanelShowing == 'profile'){
-            let userblock = document.querySelector('.userblock');
-            userblock.classList.add('displayBlock');
-            userblock.classList.remove('displayNone');
-          }
-          else{
-            let routinesBlock = document.querySelector('.routinesBlock');
-            routinesBlock.classList.add('displayBlock');
-            routinesBlock.classList.remove('displayNone');
-          };
-        });
-
-        // /************
-        // Append Pieces
-        // *************/
-        exerciseItem_staged_wrap.appendChild(exerciseItem_staged_p);
-        exerciseItem_staged_wrap.appendChild(deleteButton_staged);
-
-        // /*********
-        // Append DOM
-        // **********/
-        let pasteExercises = document.querySelector(".pasteExercises");
-        pasteExercises.appendChild(exerciseItem_staged_wrap);
+        /* Append exerciseItem to pasteExercises */
+        let pasteExercises = document.querySelector(".pasteExercises");       
+        pasteExercises.insertAdjacentHTML('beforeend', html)
       });
 
       contentPlate.appendChild(wrap_routineAddControls);
@@ -1265,6 +1153,69 @@ fh.func.deleteRoutine = (me)=>{
 };
 
 
+fh.func.deleteStagedExercise = (me)=>{
+
+  let deleteTarget_name = me.previousElementSibling.previousElementSibling.innerHTML;
+
+  /* Remove from staged array */
+  for (let i = 0; i < fh.user.routines_staged.length; i++) {
+    let stagedRoutineName = fh.user.routines_staged[i].name;
+
+    if (deleteTarget_name == stagedRoutineName) {
+      fh.user.routines_staged.splice(i, 1);
+    }
+  };
+
+  /* Remove element from panel */
+  let exercisesInPanel = document.querySelectorAll(".exerciseItem_staged_wrap");
+  for (let i = 0; i < exercisesInPanel.length; i++) {
+    let exercise = exercisesInPanel[i];
+    let exerciseName = exercise.children[0].innerHTML;
+    if(deleteTarget_name == exerciseName){
+      exercise.remove();
+    };
+  };
+
+  /* No more exercises in panel (weird that you check length 1 at this point)*/
+  if(exercisesInPanel.length == 1){
+
+    /* Hide stageRoutineBlock */
+    let stageRoutineBlock = document.querySelector('.stageRoutineBlock');
+    stageRoutineBlock.classList.add('displayNone');
+    stageRoutineBlock.classList.remove('displayBlock');
+
+    /* Show catbar */
+    let user_wrap_catbar = document.querySelector('.user_wrap_catbar');
+    user_wrap_catbar.classList.add('displayBlock');
+    user_wrap_catbar.classList.remove('displayNone');
+
+    /* Show fh.flag.lastRightSidePanelShowing */
+    if(fh.flag.lastRightPanelShowing == 'profile'){
+      let userblock = document.querySelector('.userblock');
+      userblock.classList.add('displayBlock');
+      userblock.classList.remove('displayNone');
+    }
+    else{
+      let routinesBlock = document.querySelector('.routinesBlock');
+      routinesBlock.classList.add('displayBlock');
+      routinesBlock.classList.remove('displayNone');
+    };
+  };
+};
+
+
+fh.func.exerciseStaged_focus = function(me){
+  me.value = '';
+};
+
+
+fh.func.exerciseStaged_focusOut = function(me){
+  if(me.value.trim().length == 0){
+    me.value = '1';
+  };
+}
+
+
 fh.func.fetch_exerciseImages = function(url_forImage, obj, myArray) {
   return new Promise((resolve, reject) => {
     fetch(url_forImage)
@@ -1412,22 +1363,31 @@ fh.func.populateRoutineDetails = (me)=>{
           <div class="cplate_exerciseDesc">${exercise.exercise_desc}</div>
       `;
 
+      /* Flex container for exerciseImagesCont and cplate_exerciseReps */
+      html += `<div class="cplate_flexExerciseAndReps">`;
+
       /* If images are present in the array, create and append them */
       if(exercise.front_img_src != undefined){
 
         html += `
           <div class="exerciseImagesCont">
             
-            <div  class="exercise_image"
+            <div  class="exercise_image asARoutineTile"
                   style="background-image: url(${exercise.front_img_src})"
                   imgPath_1="${exercise.front_img_src}"></div>
             
-            <div  class="exercise_image_2" 
+            <div  class="exercise_image_2 asARoutineTile" 
                   style="background-image: url(${exercise.rear_img_src})"
                   imgPath_2="${exercise.rear_img_src}"></div>
           </div>
         `;
       };
+
+      /* cplate_exerciseReps + close cplate_flexExerciseAndReps */
+      html += `
+          <p class="cplate_exerciseReps">${exercise.exercise_reps}</p>
+        </div>
+      `;
 
       /* Close HTML/ content_plate */
       html += `</div>`; 
@@ -1448,7 +1408,7 @@ Initialization
 window.addEventListener("DOMContentLoaded", event => {
 
   /* Retrieve local storage token */
-  const currUser = localStorage.getItem("currentUser");
+  currUser = localStorage.getItem("currentUser");
 
 
   /********

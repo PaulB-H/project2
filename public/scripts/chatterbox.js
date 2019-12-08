@@ -139,5 +139,5 @@ async function saveMessage() {
   }
 }
 
-const currUser = localStorage.getItem("currentUser");
+var currUser = localStorage.getItem("currentUser");
 $(document).ready(myMessages);
