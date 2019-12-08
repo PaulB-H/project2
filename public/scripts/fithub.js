@@ -1521,5 +1521,21 @@ window.addEventListener("DOMContentLoaded", event => {
     document.querySelector("#generalTipsContent").classList.add("d-none");
   })
 
+
+   /* 
+  Buttons for FitTips & SplashPage
+  */ 
+  document.querySelector(".catbox_exercises").addEventListener("click", function () {
+    document.querySelector("#findbar_exercises").classList.remove("d-none");
+    document.querySelector("#findbar_trainers").classList.add("d-none");
+  })
+
+  document.querySelector(".catbox_trainers").addEventListener("click", function () {
+    document.querySelector("#findbar_trainers").classList.remove("d-none");
+    document.querySelector("#findbar_exercises").classList.add("d-none");
+  })
+
+
+
 });
 
