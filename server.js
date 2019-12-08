@@ -309,8 +309,9 @@ app.get(`/hubchat/chatter/strangers/:currUser`, async function(req, res) {
 
 app.get(`/hubchat/chatter/:currUser/:correspondent`, async function(req, res) {
   let result = await db.query(
-    `select * from fh_hubchat where (sentbyid = ? and sendtoid = ?) or (sentbyid = ? and sendtoid = ?)`,
+    `select * from fh_hubchat inner join fh_users as usr on usr.id = ? where (sentbyid = ? and sendtoid = ?) or (sentbyid = ? and sendtoid = ?)`,
     [
+      req.params.correspondent,
       req.params.currUser,
       req.params.correspondent,
       req.params.correspondent,

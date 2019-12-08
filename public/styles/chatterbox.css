@@ -14,8 +14,10 @@
   background-color: lightgray;
 }
 
-#correspondents {
-  background-color: white;
+.correspondents {
+  display: flex;
+  color: black;
+  background-color: var(--green_main);
 }
 
 /* .msgBox {

@@ -11,7 +11,7 @@ async function myMessages() {
         for (i = 0; i < result.length; i++) {
           $(
             `<div>
-            <button class="correspondents saveBtn col" value="${result[i].id}" onclick="showConversation(${result[i].id}, '${result[i].username}')">
+            <button class="correspondents col" value="${result[i].id}" onclick="showConversation(${result[i].id}, '${result[i].username}')">
              ${result[i].last_name}, ${result[i].first_name}
             </button>
           </div>`
@@ -55,7 +55,7 @@ async function showConversation(correspondent, correspondentName) {
       $("#comm_thread").empty();
       $("#chatWith").empty();
       $(
-        `<span><h5 id="chatWith" style="text-align: center">${correspondentName}</h5></span>`
+        `<h5><span><span>${result[0].last_name}, ${result[0].first_name} (</span><span id="chatWith" style="text-align: left">${correspondentName}</span>)</span></h5>`
       ).prependTo("#chat-window");
 
       // function writeMessages() {
