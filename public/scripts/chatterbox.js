@@ -179,22 +179,18 @@ async function showConversation(correspondent, correspondentName) {
       $("#msg_holder").empty();
       if (result.length > 0) {
         $(
-          `<h5 id="chat-header" ><span><span>Chat to: ${result[0].last_name}, ${result[0].first_name} (</span><span id="chatWith" style="text-align: left">${correspondentName}</span>)</span></h5>`
+          `<h5 id="chat-header" ><span><span>Chat with: ${result[0].last_name}, ${result[0].first_name} </span><span id="chatWith" style="text-align: left"></span></span></h5>`
         ).prependTo("#chat-window");
-        console.log(
-          moment(result[i].createdat).format("LL"),
-          moment(result[i].createdat).format("LTS"),
-          result
-        );
+        // ${correspondentName}
+
         // function writeMessages() {
         for (i = 0; i < result.length; i++) {
           $(`<div class="msgBox ${setMessageJustify(
             currUser,
             result[i].sentbyid
           )}" style="margin: 1em">
-            <span>${moment(result[i].createdat).format("LL")}</span>
-            <span>${moment(result[i].createdat).format("LTS")}</span>
-            <div class = "msgBox" style="background-color:white">${
+            <span>${moment(result[i].createdat).format("ddd")} ${moment(result[i].createdat).format("LT")}</span>
+            <div class="msgBox" style="background-color:white">${
               result[i].chatmessage
             }</div></div>`).appendTo("#comm_thread");
         }
@@ -206,13 +202,13 @@ async function showConversation(correspondent, correspondentName) {
 								cols="50"
 								spellcheck="true"
 								class="card time-block col"
-								style="background-color:lemonchiffon"
 								id="msg_editor"
-								value=""
+
+                placeholder="Type a message..."
 								>
 								</textarea>
-								<div><button id="save_btn" class="saveBtn" value="" onclick=saveMessage(${correspondent})>Save Message</button></div>
-							</div></span>`).appendTo("#chat-window");
+								<div><button id="save_btn" class="saveBtn" value="" onclick=saveMessage(${correspondent})>&#9993; Send</button></div>
+							</div>`).appendTo("#chat-window");
     }
   });
 }

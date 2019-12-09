@@ -1,5 +1,15 @@
-#chatPlate {
-  height: 60%;
+.chatPlate {
+  min-height: 735px;
+  max-height: 800px;
+}
+
+/* #chatterBox {
+
+} */
+
+.msgBox {
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .fromMe {
@@ -21,14 +31,17 @@
 .correspondents {
   display: flex;
   color: black;
-  background-color: var(--green_main);
-  margin: 4px;
+  border-radius: 10px;
+  margin: 2px;
+  background-color: lightgray;
 }
 
 #comm_list {
   border: 2px solid lightgray;
   border-radius: 15px;
   margin-bottom: 25px;
+  max-height: 150px;
+  overflow: scroll;
 }
 
 #comm_thread {
@@ -36,16 +49,23 @@
   border-radius: 15px;
   padding-left: 15px;
   padding-right: 15px;
+  margin-bottom: 10px;
 }
 #chat-window {
   padding: 0;
 }
 
+#msg_editor {
+  border: 2px solid lightgray;
+}
+
+#save_btn {
+  width: 90px;
+  padding-right: 15px;
+  margin-top: 5px;
+}
+
 #contactsAndUsers {
   margin-left: 15px;
   margin-right: 15px;
-}
-
-.msgBox {
-  padding: 5px;
 }
