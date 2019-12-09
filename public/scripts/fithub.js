@@ -433,8 +433,6 @@ fh.func.addListener_click_loginButtonProper = function() {
               $("#client_list").css("display", "none");
               $("#potentialClients").css("display", "none");
               // console.log($("#profile_header"));
-              $("#profile_header").text() =
-                result[0].first_name + " " + result[0].last_name;
               $(`<div class="trainerPanel" style="position:relative; top:0">
                 <IFRAME style="display:none" name="hidden-form"></IFRAME>
                 <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
@@ -462,8 +460,6 @@ fh.func.addListener_click_loginButtonProper = function() {
               $("#client_list").css("display", "block");
               $("#potentialClients").css("display", "block");
               if (Number(id) !== Number(currUser)) {
-                $("#profile_header").innerHTML =
-                  result[0].first_name + " " + result[0].last_name;
                 $(`<div style="position:relative; top: 0">
                   <form action="/api/users"  method="POST" target="hidden-form">
                     First name: <input type="text" name="firstname" value="${result[0].first_name}" readonly><br/>
@@ -480,8 +476,6 @@ fh.func.addListener_click_loginButtonProper = function() {
                   </form>
                 </div>`).appendTo("#clientBio");
               } else {
-                $("#profile_header").innerHTML =
-                  result[0].first_name + " " + result[0].last_name;
                 $(`<div class="trainerPanel" style="position:relative; top:0">
                   <IFRAME style="display:none" name="hidden-form"></IFRAME>
                   <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">

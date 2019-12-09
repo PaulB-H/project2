@@ -22,6 +22,7 @@
   display: flex;
   color: black;
   background-color: var(--green_main);
+  margin: 4px;
 }
 
 #comm_list {
