@@ -44,8 +44,8 @@ if (process.env.JAWSDB_URL) {
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "IamTheBoxGhost1971",
-    // password: "steven123",
+    // password: "IamTheBoxGhost1971",
+    password: "steven123",
     // password: "sqlrootpass",
     database: "fitness_hub_db"
   });
@@ -101,7 +101,6 @@ app.get(`/api/trainer/potentials`, async function(req, res) {
   let result = await db.query(
     `select id, username, first_name, last_name from fh_users where not trainerid and email is not null and seeking_trainer order by last_name, first_name asc`
   );
-  console.log(result, 'result');
   res.send(result);
 });
 

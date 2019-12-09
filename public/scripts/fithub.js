@@ -31,6 +31,7 @@
   fh.func.addListener_click_registerButton = ()=>{
   fh.func.addListener_click_routinesButton = ()=>{
   fh.func.addListener_click_saveButtonStagedRoutine = function(){
+  fh.func.addListener_click_sectionButtons = ()=>{
   fh.func.addListener_click_userTile = ()=>{
   
   fh.func.centerPanelScrollTop = ()=>{
@@ -43,12 +44,11 @@
   fh.func.deleteRoutine = (me)=>{
   fh.func.deleteStagedExercise = (me)=>{
 
-  fh.event
-
   fh.func.fetch_exerciseImages = function(url_forImage, obj, myArray) {
 
+  fh.func.init_mobile_startProfileSection = ()=>{
   fh.func.init_routinesBicepsInFindbar = function() {
-  fh.func.init_panel = ()=>{
+  fh.func.init_startingRightPanel = ()=>{
   fh.func.isWithin = function(coords, elem){
 
   fh.func.populateRoutineDetails = (me)=>{
@@ -82,6 +82,8 @@ fh.data.exercises.outerBack = [];
 fh.data.exercises.butt = [];
 fh.data.exercises.hamstring = [];
 fh.data.exercises.calves = [];
+
+fh.data.mobileScreenPositions = [0, -82, -177.4];
 
 /****
 Flags
@@ -539,6 +541,7 @@ fh.func.addListener_click_loginButtonProper = function() {
   }); /* END loginButton.addEventListener */
 }; /* END fh.func.addListener_click_loginButtonProper */
 
+
 fh.func.addListener_click_profileButton = () => {
   let profileButton = document.querySelector(".catbox_profile");
 
@@ -741,6 +744,43 @@ fh.func.addListener_click_saveButtonStagedRoutine = function() {
     }
   });
 };
+
+
+fh.func.addListener_click_sectionButtons = ()=>{
+  
+  let sectionButtons = document.querySelectorAll('.sectionButton');
+  for(button of sectionButtons){
+    
+    button.addEventListener('click', function(){
+
+      let marginLeft = null;
+      let classes = ['find', 'content', 'profile'];
+      let positions = fh.data.mobileScreenPositions;
+      for(let i = 0; i < classes.length; i++){
+        if(this.classList.contains(`${classes[i]}`)){
+          marginLeft = positions[i];
+        };
+      };
+
+      let innerwrap_fithub = document.querySelector('.innerwrap_fithub');
+      innerwrap_fithub.style.marginLeft = `${marginLeft}%`;
+
+
+      /* Remove selected class from one that had it previously */
+      let sectionButtons = document.querySelectorAll('.sectionButton');
+      for(button of sectionButtons){
+        if(button.classList.contains('selected')){
+          button.classList.remove('selected');
+        };
+      };
+
+      /* Add selected class to this clicked button */
+      this.classList.add('selected');
+      
+    });
+  };
+};
+
 
 fh.func.addListener_click_userTile = () => {
   let userTiles = document.querySelectorAll(".userTile");
@@ -1199,6 +1239,21 @@ fh.func.fetch_exerciseImages = function(url_forImage, obj, myArray) {
   });
 };
 
+
+fh.func.init_mobile_startProfileSection = ()=>{
+
+  let screenWidth = screen.width;
+
+  if(screenWidth <= 1025){
+    let innerwrap_fithub = document.querySelector('.innerwrap_fithub');
+    innerwrap_fithub.style.marginLeft = `${fh.data.mobileScreenPositions[2]}%`;
+
+    let sectionButton_profile = document.querySelector('.sectionButton.profile');
+    sectionButton_profile.classList.add('selected');
+  };
+};
+
+
 fh.func.init_routinesBicepsInFindbar = function() {
   fh.interval.check_exercisesFetchDone = setInterval(function() {
     if (fh.flag.bicepsFetchDone == true) {
@@ -1227,7 +1282,7 @@ fh.func.init_routinesBicepsInFindbar = function() {
   }, 10);
 };
 
-fh.func.init_panel = () => {
+fh.func.init_startingRightPanel = () => {
   let currentUser = window.localStorage.getItem("currentUser");
 
   /* There is a currentUser set in localStorage*/
@@ -1265,7 +1320,7 @@ fh.func.init_panel = () => {
     let wrap_login = document.querySelector(".wrap_login");
     wrap_login.classList.add("displayBlock");
     wrap_login.classList.remove("displayNone");
-  }
+  };
 };
 
 fh.func.isWithin = function(coords, elem) {
@@ -1375,14 +1430,17 @@ window.addEventListener("DOMContentLoaded", event => {
   /*********
   Init Style
   **********/
-  /* What right panel to start? */
-  fh.func.init_panel();
+  fh.func.init_startingRightPanel();
+  fh.func.init_mobile_startProfileSection();
 
   /*********************
   Attach Event Listeners
   **********************/
   /* Body General */
   fh.func.addListener_click_body();
+
+  /* Footer */
+  fh.func.addListener_click_sectionButtons();
 
   /* Left Side Events */
   fh.func.addListener_click_dropdownFindExercise();
@@ -1408,6 +1466,8 @@ window.addEventListener("DOMContentLoaded", event => {
 
   /* User Block Events */
   fh.func.addListener_click_userTile();
+
+
 
   /* 
   Buttons for FitTips & SplashPage
