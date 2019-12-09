@@ -109,8 +109,7 @@ fh.user.routines_staged = [];
 Functions
 *********/
 // Function to initialise state of chatterbox and calendar
-async function initChatTrainerState(currUser) {
-  // Start of initialization section
+async function initChatTrainerState() {
   {
     $("#bioscreen").empty();
     $(
@@ -182,6 +181,7 @@ async function initChatTrainerState(currUser) {
             })">X</button></div>`
           ).appendTo("#client_list");
         }
+        // getPotentialClients();
       }
     });
     // -----------------------------------------------------
@@ -191,19 +191,22 @@ async function initChatTrainerState(currUser) {
       type: "GET",
       cache: false,
       success: function(result) {
+        console.log(result, "HERE!!!");
         $(`<h6>Potential Clients</h6>`).appendTo("#potentialClients");
         for (i = 0; i < result.length; i++) {
-          $(
-            `<div class="col" style="display:flex">
-                        <button class="correspondent myBtn value="${
-                          result[i].id
-                        }" onclick="showClientProfile(${result[i].id})">
-              ${result[i].last_name + ", " + result[i].first_name}
+          $(`<div class="col" style="display:flex">
+              <button class="correspondent myBtn" value="${
+                result[i].id
+              }" onclick="showClientProfile(${result[i].id})">
+                ${result[i].last_name + ", " + result[i].first_name}
               </button>
               <button class=addBtn value="${result[i].id}" onclick="getClient(${
-              result[i].id
-            })">A</button></div>`
-          ).appendTo("#potentialClients");
+            result[i].id
+          })">
+              A
+              </button>
+            </div>
+          `).appendTo("#potentialClients");
         }
       }
     });
@@ -577,51 +580,14 @@ fh.func.addListener_click_loginButtonProper = function() {
       .then(resp => resp.json())
       .then(data => {
         let id = data[0].id;
-        console.log("ID from fetch ", id);
 
+        const currUser = id;
         window.localStorage.setItem("currentUser", id);
-        const currUser = localStorage.getItem("currentUser");
-        console.log("Current user val from ID ", currUser);
-        initChatTrainerState(currUser);
-        // $.ajax({
-        //   url: `/api/trainer/client/${id}`,
-        //   type: "GET",
-        //   cache: false,
-        //   success: function(result) {
-        //     if (result.length > 0) {
-        //       // $("#client_list").css("display", "none");
-        //       // $("#potentialClients").css("display", "none");
-        //       $(`<div class="trainerPanel" style="position:relative; top:0">
-        //       <IFRAME style="display:none" name="hidden-form"></IFRAME>
-        //       <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
-        //         First Name: <input type="text" name="firstname" value="${result[0].first_name}"><br/>
-        //         Last Name: <input type="text" name="lastname" value="${result[0].last_name}"><br/>
-        //         Address:<br/>
-        //         <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}"><br/>
-        //         <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}"><br/>
-        //         City: <input type="text" name="city" value="${result[0].city}"><br/>
-        //         Postal Code: <input type="text" name="postal_code" value="${result[0].postal_code}"><br/>
-        //         Contact No.: <input type="tel" id="phone" name="cellphone" value="${result[0].cellphone}"><br/>
-        //         Email: <input type="email" id="email" value="${result[0].email}"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"
-        //       name="email"><br/>
-        //         Password: <input type="text" id="password" name="password"><br />
-        //         Seeking Trainer: <input type="checkbox" name="seeking_trnr" onchange="toggleInfo('seeking', ${result[0].seeking_trainer})" value="${result[0].seeking_trainer}"><br />
-        //         Personal Trainer: <input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${result[0].istrainer})" value="${result[0].istrainer}"><br />
-        //         Fitness Goals:<br/>
-        //         <textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea><br/>
-        //         Bio:<br />
-        //         <textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
-        //       <input type="submit" value="Submit">
-        //       </form>
-        //     </div>`).appendTo("#clientBio");
-        //     }
-        //   } /* END success */
-        // }); /* END Kevin's NESTED AJAX */
 
-        /* Calls routines for current user */
-        fh.func.dbCall_routines();
-      }) /* LAST THEN of OFIGINAL FETCH */
-      .then(v => {
+        console.log(currUser, "currUser on login 587 ");
+
+        /* COMMENTED OUT STUFF WENT HERE */
+
         /* Hide wrap_login */
         let wrap_login = document.querySelector(".wrap_login");
         wrap_login.classList.add("displayNone");
@@ -643,7 +609,7 @@ fh.func.addListener_click_loginButtonProper = function() {
           "fh_lastRightPanelShowing",
           fh.flag.lastRightPanelShowing
         );
-      }); /* END original fetch */
+      });
   }); /* END loginButton.addEventListener */
 }; /* END fh.func.addListener_click_loginButtonProper */
 
@@ -708,8 +674,8 @@ fh.func.addListener_click_registerButton = () => {
         let insertId = data.id;
         console.log("PASSING CURRUSER ", insertId);
 
+        currUser = insertId;
         window.localStorage.setItem("currentUser", insertId);
-        currUser = localStorage.getItem("currentUser");
 
         console.log("PASSING CURRUSER ", currUser);
         /* Hide register */
@@ -1199,7 +1165,9 @@ fh.func.createObj_exercise = (url, myArray, flag) => {
 
 fh.func.dbCall_routines = () => {
   let currentUser = window.localStorage.getItem("currentUser");
-  console.log("PASSING dbCall CURRUSER ", insertId);
+  console.log(currentUser, "currentUser - 1206");
+  console.log(currUser, "currUser - 1207");
+
   if (currentUser != undefined) {
     let url = `/routine/${currentUser}`;
 

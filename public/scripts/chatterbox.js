@@ -48,6 +48,7 @@ async function getStrangers() {
 }
 
 function setMessageJustify(currUser, correspondent) {
+  console.log(correspondent, 'currUser chatterbox 51');
   if (currUser == correspondent) {
     return "fromMe";
   } else {
@@ -137,5 +138,5 @@ async function saveMessage(msgTo) {
   }
 }
 
-var currUser = localStorage.getItem("currentUser");
+// var currUser = localStorage.getItem("currentUser");
 $(document).ready(myMessages);
