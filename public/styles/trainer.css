@@ -22,10 +22,11 @@
 
 .myBtn {
   border-left: 1px solid black;
-  border-radius: 15px;
-  margin-left: 2vw;
-  margin-bottom: 1vw;
-  background-color: #4A90E2;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  /* margin-left: 2vw;
+  margin-bottom: 1vw; */
+  background-color: #4a90e2;
   color: white;
   /* width: 1vw; */
   top: 0;

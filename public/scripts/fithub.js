@@ -108,7 +108,7 @@ Functions
 *********/
 fh.func = {};
 
-fh.func.apiCall_exercises = function () {
+fh.func.apiCall_exercises = function() {
   /* Muscle Groups Accessed by ID given by API */
 
   /* Front Muscles */
@@ -185,9 +185,9 @@ fh.func.apiCall_exercises = function () {
   });
 };
 
-fh.func.addListener_click_body = function () {
+fh.func.addListener_click_body = function() {
   let docBody = document.querySelector("body");
-  docBody.addEventListener("click", function (e) {
+  docBody.addEventListener("click", function(e) {
     let x = e.clientX;
     let y = e.clientY;
     let coords = [x, y];
@@ -207,92 +207,84 @@ fh.func.addListener_click_body = function () {
   });
 };
 
+fh.func.addListener_click_backToLoginButton = function() {
+  let backToLoginButton = document.querySelector(".backToLoginButton");
 
-fh.func.addListener_click_backToLoginButton = function () {
-
-  let backToLoginButton = document.querySelector('.backToLoginButton');
-
-  backToLoginButton.addEventListener('click', () => {
-
+  backToLoginButton.addEventListener("click", () => {
     /* Hide registration form, show login form */
-    let wrap_register = document.querySelector('.wrap_register');
-    wrap_register.classList.add('displayNone');
-    wrap_register.classList.remove('displayBlock');
+    let wrap_register = document.querySelector(".wrap_register");
+    wrap_register.classList.add("displayNone");
+    wrap_register.classList.remove("displayBlock");
 
-    let wrap_login = document.querySelector('.wrap_login');
-    wrap_login.classList.add('displayBlock');
-    wrap_login.classList.remove('displayNone');
-
+    let wrap_login = document.querySelector(".wrap_login");
+    wrap_login.classList.add("displayBlock");
+    wrap_login.classList.remove("displayNone");
 
     /* Wipe fields on registration form */
-    let reg_firstName = document.querySelector('.reg_firstName');
-    reg_firstName.value = '';
+    let reg_firstName = document.querySelector(".reg_firstName");
+    reg_firstName.value = "";
 
-    let reg_lastName = document.querySelector('.reg_lastName');
-    reg_lastName.value = '';
+    let reg_lastName = document.querySelector(".reg_lastName");
+    reg_lastName.value = "";
 
-    let reg_email = document.querySelector('.reg_email');
-    reg_email.value = '';
+    let reg_email = document.querySelector(".reg_email");
+    reg_email.value = "";
 
-    let reg_password = document.querySelector('.reg_password');
-    reg_password.value = '';
+    let reg_password = document.querySelector(".reg_password");
+    reg_password.value = "";
 
-    let toggleBalls = document.querySelectorAll('.trainerToggleRow .toggleBall');
+    let toggleBalls = document.querySelectorAll(
+      ".trainerToggleRow .toggleBall"
+    );
     for (toggleBall of toggleBalls) {
-      toggleBall.classList.add('toggle_off');
-      toggleBall.classList.remove('toggle_on');
-    };
+      toggleBall.classList.add("toggle_off");
+      toggleBall.classList.remove("toggle_on");
+    }
   });
 };
 
-
 fh.func.addListener_click_close_stageRoutineBlock = () => {
-
-  let closeButton = document.querySelector('.close_stageRoutineBlock');
-  closeButton.addEventListener('click', function () {
-
+  let closeButton = document.querySelector(".close_stageRoutineBlock");
+  closeButton.addEventListener("click", function() {
     /* Remove the stageRoutineBlock panel */
     let parentMenu = this.parentNode;
-    parentMenu.classList.add('displayNone');
-    parentMenu.classList.remove('displayBlock');
+    parentMenu.classList.add("displayNone");
+    parentMenu.classList.remove("displayBlock");
 
     /* Clear name field for routine */
-    let name_stagedRoutine = document.querySelector('.name_stagedRoutine');
-    name_stagedRoutine.value = '';
+    let name_stagedRoutine = document.querySelector(".name_stagedRoutine");
+    name_stagedRoutine.value = "";
 
     /* Remove exercise item elements */
-    let exerciseItems = document.querySelectorAll('.pasteExercises > div');
+    let exerciseItems = document.querySelectorAll(".pasteExercises > div");
     for (item of exerciseItems) {
       item.remove();
-    };
+    }
 
     /* Clear staged array */
     fh.user.routines_staged = [];
 
-
     /* Show user_wrap_catbar */
-    let user_wrap_catbar = document.querySelector('.user_wrap_catbar');
-    user_wrap_catbar.classList.add('displayBlock');
-    user_wrap_catbar.classList.remove('displayNone');
+    let user_wrap_catbar = document.querySelector(".user_wrap_catbar");
+    user_wrap_catbar.classList.add("displayBlock");
+    user_wrap_catbar.classList.remove("displayNone");
 
     /* Show the lastRightPanelShowing */
-    if(fh.flag.lastRightPanelShowing == 'profile'){
-      let userblock = document.querySelector('.userblock');
-      userblock.classList.add('displayBlock');
-      userblock.classList.remove('displayNone');
+    if (fh.flag.lastRightPanelShowing == "profile") {
+      let userblock = document.querySelector(".userblock");
+      userblock.classList.add("displayBlock");
+      userblock.classList.remove("displayNone");
+    } else {
+      let routinesBlock = document.querySelector(".routinesBlock");
+      routinesBlock.classList.add("displayBlock");
+      routinesBlock.classList.remove("displayNone");
     }
-    else{
-      let routinesBlock = document.querySelector('.routinesBlock');
-      routinesBlock.classList.add('displayBlock');
-      routinesBlock.classList.remove('displayNone');
-    };
   });
 };
 
-
-fh.func.addListener_click_dropdownFindExercise = function () {
+fh.func.addListener_click_dropdownFindExercise = function() {
   let dropdownButton = document.querySelector(".dropdown_findbar");
-  dropdownButton.addEventListener("click", function () {
+  dropdownButton.addEventListener("click", function() {
     let menu = document.querySelector(".wrap_dropdown_findbar .dropdownMenu");
 
     if (menu.classList.contains("displayNone")) {
@@ -305,13 +297,13 @@ fh.func.addListener_click_dropdownFindExercise = function () {
   });
 };
 
-fh.func.addListener_click_eachItemInExercisesDropdownMenu = function () {
+fh.func.addListener_click_eachItemInExercisesDropdownMenu = function() {
   let items = document.querySelectorAll(".drop_exercises > div");
 
   for (let i = 0; i < items.length; i++) {
     let item = items[i];
 
-    item.addEventListener("click", function () {
+    item.addEventListener("click", function() {
       /* Remove items currently inside findables_exercises */
 
       let currentItems = document.querySelector(".findables_exercises")
@@ -362,65 +354,57 @@ fh.func.addListener_click_eachItemInExercisesDropdownMenu = function () {
 /*
 DONT NEED BELOW, THIS WAS TO CHANGE LOGIN PANEL TO REGISTRATION PANEL
 */
-fh.func.addListener_click_initCreateAccountButton = function () {
+fh.func.addListener_click_initCreateAccountButton = function() {
+  let init_createAccountButton = document.querySelector(
+    ".init_createAccountButton"
+  );
 
-  let init_createAccountButton = document.querySelector(".init_createAccountButton");
-
-  init_createAccountButton.addEventListener("click", function () {
-
+  init_createAccountButton.addEventListener("click", function() {
     /* Hide wrap_login, show wrap_registration */
-    let wrap_login = document.querySelector('.wrap_login');
-    wrap_login.classList.add('displayNone');
-    wrap_login.classList.remove('displayBlock');
+    let wrap_login = document.querySelector(".wrap_login");
+    wrap_login.classList.add("displayNone");
+    wrap_login.classList.remove("displayBlock");
 
-    let wrap_register = document.querySelector('.wrap_register');
-    wrap_register.classList.add('displayBlock');
-    wrap_register.classList.remove('displayNone');
-
+    let wrap_register = document.querySelector(".wrap_register");
+    wrap_register.classList.add("displayBlock");
+    wrap_register.classList.remove("displayNone");
 
     /* Wipe fields on login form */
-    let loginEmail = document.querySelector('.loginEmail');
-    loginEmail.value = '';
+    let loginEmail = document.querySelector(".loginEmail");
+    loginEmail.value = "";
 
-    let loginPass = document.querySelector('.loginPass');
-    loginPass.value = '';
+    let loginPass = document.querySelector(".loginPass");
+    loginPass.value = "";
   });
 };
 
 fh.func.addListener_click_trainerToggles = () => {
-
-  let toggles = document.querySelectorAll('.trainerToggleRow .toggle');
+  let toggles = document.querySelectorAll(".trainerToggleRow .toggle");
 
   for (let i = 0; i < toggles.length; i++) {
-
     let toggle = toggles[i];
 
-    toggle.addEventListener('click', function (e) {
-
+    toggle.addEventListener("click", function(e) {
       e.preventDefault();
       e.stopPropagation();
 
       let toggleBall = toggle.children[0];
 
-      if (toggleBall.classList.contains('toggle_off')) {
-        toggleBall.classList.add('toggle_on');
-        toggleBall.classList.remove('toggle_off');
+      if (toggleBall.classList.contains("toggle_off")) {
+        toggleBall.classList.add("toggle_on");
+        toggleBall.classList.remove("toggle_off");
+      } else if (toggleBall.classList.contains("toggle_on")) {
+        toggleBall.classList.add("toggle_off");
+        toggleBall.classList.remove("toggle_on");
       }
-      else
-        if (toggleBall.classList.contains('toggle_on')) {
-          toggleBall.classList.add('toggle_off');
-          toggleBall.classList.remove('toggle_on');
-        };
     });
-  };
+  }
 };
 
-fh.func.addListener_click_loginButtonProper = function () {
-
+fh.func.addListener_click_loginButtonProper = function() {
   let loginButton = document.querySelector(".loginButton");
-  
-  loginButton.addEventListener("click", function() {
 
+  loginButton.addEventListener("click", function() {
     let obj = {};
     obj.email = document.querySelector(".loginEmail").value;
     obj.user_password = document.querySelector(".loginPass").value;
@@ -428,30 +412,30 @@ fh.func.addListener_click_loginButtonProper = function () {
     let url = `api/users/${obj.email}/${obj.user_password}`;
 
     fetch(url)
-    .then((resp) => resp.json())
-    .then((data) => {
+      .then(resp => resp.json())
+      .then(data => {
+        let id = data[0].id;
 
-      let id = data[0].id;
+        window.localStorage.setItem("currentUser", id);
+        const currUser = localStorage.getItem("currentUser");
 
-      window.localStorage.setItem('currentUser', id);
-      const currUser = localStorage.getItem("currentUser");
-
-      $.ajax({
-        url: `/api/trainer/clientinfo/${id}`,
-        type: "GET",
-        cache: false,
-        success: function (result) {
-            
-          if (result.length == 0) {
-            console.log("User is not a trainer.");
-          }
-          else
-          if( result[0].istrainer != 1 && Number(id) == Number(currUser) ){
-            $("#client_list").css("display", "none");
-            $("#potentialClients").css("display", "none");
-            // console.log($("#profile_header"));
-            $("#profile_header").text() = result[0].first_name + " " + result[0].last_name;
-            $(`<div class="trainerPanel" style="position:relative; top:0">
+        $.ajax({
+          url: `/api/trainer/clientinfo/${id}`,
+          type: "GET",
+          cache: false,
+          success: function(result) {
+            if (result.length == 0) {
+              console.log("User is not a trainer.");
+            } else if (
+              result[0].istrainer != 1 &&
+              Number(id) == Number(currUser)
+            ) {
+              $("#client_list").css("display", "none");
+              $("#potentialClients").css("display", "none");
+              // console.log($("#profile_header"));
+              $("#profile_header").text() =
+                result[0].first_name + " " + result[0].last_name;
+              $(`<div class="trainerPanel" style="position:relative; top:0">
                 <IFRAME style="display:none" name="hidden-form"></IFRAME>
                 <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
                   First Name: <input type="text" name="firstname" value="${result[0].first_name}"><br/>
@@ -473,15 +457,14 @@ fh.func.addListener_click_loginButtonProper = function () {
                   <textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
                   <input type="submit" value="Submit">
                 </form>
-              </div>`
-            ).appendTo("#clientBio");
-          }else {
-            $("#client_list").css("display", "block");
-            $("#potentialClients").css("display", "block");
-            // console.log($("#profile_header").text);
-            if (Number(id) !== Number(currUser)) {
-              $("#profile_header").innerHTML = result[0].first_name + " " + result[0].last_name;
-              $(`<div style="position:relative; top: 0">
+              </div>`).appendTo("#clientBio");
+            } else {
+              $("#client_list").css("display", "block");
+              $("#potentialClients").css("display", "block");
+              if (Number(id) !== Number(currUser)) {
+                $("#profile_header").innerHTML =
+                  result[0].first_name + " " + result[0].last_name;
+                $(`<div style="position:relative; top: 0">
                   <form action="/api/users"  method="POST" target="hidden-form">
                     First name: <input type="text" name="firstname" value="${result[0].first_name}" readonly><br/>
                     Last name:  <input type="text" name="lastname" value="${result[0].last_name}" readonly><br/>
@@ -495,11 +478,11 @@ fh.func.addListener_click_loginButtonProper = function () {
                     Fitness Goals:<br/>
                     <textarea id="rd_only_fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}" readonly></textarea><br/>
                   </form>
-                </div>`
-              ).appendTo("#clientBio");
-            }else {
-              $("#profile_header").innerHTML = result[0].first_name + " " + result[0].last_name;
-              $(`<div class="trainerPanel" style="position:relative; top:0">
+                </div>`).appendTo("#clientBio");
+              } else {
+                $("#profile_header").innerHTML =
+                  result[0].first_name + " " + result[0].last_name;
+                $(`<div class="trainerPanel" style="position:relative; top:0">
                   <IFRAME style="display:none" name="hidden-form"></IFRAME>
                   <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
                     First Name: <input type="text" name="firstname" value="${result[0].first_name}"><br/>
@@ -521,156 +504,156 @@ fh.func.addListener_click_loginButtonProper = function () {
                     <textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
                     <input type="submit" value="Submit">
                   </form>
-                </div>`
-              ).appendTo("#clientBio");
+                </div>`).appendTo("#clientBio");
+              }
             }
-          }
-        } /* END success */
-      });/* END Kevin's NESTED AJAX */
+          } /* END success */
+        }); /* END Kevin's NESTED AJAX */
 
-      /* Calls routines for current user */
-      fh.func.dbCall_routines();
-
-    }) /* LAST THEN of OFIGINAL FETCH */
-    .then((v) => {
-
-
+        /* Calls routines for current user */
+        fh.func.dbCall_routines();
+      }) /* LAST THEN of OFIGINAL FETCH */
+      .then(v => {
         /* Hide wrap_login */
-        let wrap_login = document.querySelector('.wrap_login');
-        wrap_login.classList.add('displayNone');
-        wrap_login.classList.remove('displayBlock');
+        let wrap_login = document.querySelector(".wrap_login");
+        wrap_login.classList.add("displayNone");
+        wrap_login.classList.remove("displayBlock");
 
         /* Show user catbar */
-        let user_wrap_catbar = document.querySelector('.user_wrap_catbar');
-        user_wrap_catbar.classList.add('displayBlock');
-        user_wrap_catbar.classList.remove('displayNone');
+        let user_wrap_catbar = document.querySelector(".user_wrap_catbar");
+        user_wrap_catbar.classList.add("displayBlock");
+        user_wrap_catbar.classList.remove("displayNone");
 
         /* Show userBlock */
-        let userblock = document.querySelector('.userblock');
-        userblock.classList.add('displayBlock');
-        userblock.classList.remove('displayNone');
+        let userblock = document.querySelector(".userblock");
+        userblock.classList.add("displayBlock");
+        userblock.classList.remove("displayNone");
 
         /* Flag 'profile' as lastRightPanelShowing */
-        fh.flag.lastRightPanelShowing = 'profile';
-        window.localStorage.setItem('fh_lastRightPanelShowing', fh.flag.lastRightPanelShowing);
-    }); /* END original fetch */
+        fh.flag.lastRightPanelShowing = "profile";
+        window.localStorage.setItem(
+          "fh_lastRightPanelShowing",
+          fh.flag.lastRightPanelShowing
+        );
+      }); /* END original fetch */
   }); /* END loginButton.addEventListener */
 }; /* END fh.func.addListener_click_loginButtonProper */
 
-
 fh.func.addListener_click_profileButton = () => {
+  let profileButton = document.querySelector(".catbox_profile");
 
-  let profileButton = document.querySelector('.catbox_profile');
+  profileButton.addEventListener("click", function() {
+    let userblock = document.querySelector(".userblock");
+    userblock.classList.add("displayBlock");
+    userblock.classList.remove("displayNone");
 
-  profileButton.addEventListener('click', function () {
-
-    let userblock = document.querySelector('.userblock');
-    userblock.classList.add('displayBlock');
-    userblock.classList.remove('displayNone');
-
-    let routinesBlock = document.querySelector('.routinesBlock');
-    routinesBlock.classList.add('displayNone');
-    routinesBlock.classList.remove('displayBlock');
+    let routinesBlock = document.querySelector(".routinesBlock");
+    routinesBlock.classList.add("displayNone");
+    routinesBlock.classList.remove("displayBlock");
 
     /* Flag 'profile' as lastRightPanelShowing */
-    fh.flag.lastRightPanelShowing = 'profile';
-    window.localStorage.setItem('fh_lastRightPanelShowing', fh.flag.lastRightPanelShowing);
+    fh.flag.lastRightPanelShowing = "profile";
+    window.localStorage.setItem(
+      "fh_lastRightPanelShowing",
+      fh.flag.lastRightPanelShowing
+    );
   });
 };
 
-
 fh.func.addListener_click_registerButton = () => {
-
-  let registerButton = document.querySelector('.registerButton');
-  registerButton.addEventListener('click', () => {
-
+  let registerButton = document.querySelector(".registerButton");
+  registerButton.addEventListener("click", () => {
     let obj = {};
-    obj.firstname = document.querySelector('.reg_firstName').value.trim();
-    obj.lastname = document.querySelector('.reg_lastName').value.trim();
 
-    obj.istrainer = document.querySelector('.isTrainer');
-    if (obj.istrainer.classList.contains('toggle_off')) { obj.istrainer = 0; }
-    else if (obj.istrainer.classList.contains('toggle_on')) { obj.istrainer = 1; };
+    obj.firstname = document.querySelector(".reg_firstName").value.trim();
+    obj.lastname = document.querySelector(".reg_lastName").value.trim();
 
-    obj.seeking_trnr = document.querySelector('.seekingTrainer');
-    if(obj.seeking_trnr.classList.contains('toggle_off')){
-      obj.seeking_trnr = 0;
+    obj.istrainer = document.querySelector(".isTrainer");
+    if (obj.istrainer.classList.contains("toggle_off")) {
+      obj.istrainer = 0;
+    } else if (obj.istrainer.classList.contains("toggle_on")) {
+      obj.istrainer = 1;
     }
-    else if (obj.seeking_trnr.classList.contains('toggle_on')) { obj.seeking_trnr = 1; };
 
-    obj.email = document.querySelector('.reg_email').value.trim();
-    obj.user_password = document.querySelector('.reg_password').value.trim();
+    obj.seeking_trnr = document.querySelector(".seekingTrainer");
+    if (obj.seeking_trnr.classList.contains("toggle_off")) {
+      obj.seeking_trnr = 0;
+    } else if (obj.seeking_trnr.classList.contains("toggle_on")) {
+      obj.seeking_trnr = 1;
+    }
 
+    obj.email = document.querySelector(".reg_email").value.trim();
+    obj.user_password = document.querySelector(".reg_password").value.trim();
 
-    let url = '/api/users';
+    let url = "/api/users";
 
     fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        "Accept": 'application/json, text/plain, */*',
-        "Content-type": 'application/json'
+        Accept: "application/json, text/plain, */*",
+        "Content-type": "application/json"
       },
       body: JSON.stringify(obj)
     })
-      .then((resp) => resp.json())
-      .then((data) => {
-
+      .then(resp => resp.json())
+      .then(data => {
         let insertId = data.id;
 
-        window.localStorage.setItem('currentUser', insertId);
+        window.localStorage.setItem("currentUser", insertId);
         currUser = localStorage.getItem("currentUser");
 
         /* Hide register */
-        let wrap_register = document.querySelector('.wrap_register');
-        wrap_register.classList.add('displayNone');
-        wrap_register.classList.remove('displayBlock');
+        let wrap_register = document.querySelector(".wrap_register");
+        wrap_register.classList.add("displayNone");
+        wrap_register.classList.remove("displayBlock");
 
         /* Show user catbar */
-        let user_wrap_catbar = document.querySelector('.user_wrap_catbar');
-        user_wrap_catbar.classList.add('displayBlock');
-        user_wrap_catbar.classList.remove('displayNone');
+        let user_wrap_catbar = document.querySelector(".user_wrap_catbar");
+        user_wrap_catbar.classList.add("displayBlock");
+        user_wrap_catbar.classList.remove("displayNone");
 
         /* Show userblock */
-        let userblock = document.querySelector('.userblock');
-        userblock.classList.add('displayBlock');
-        userblock.classList.remove('displayNone');
+        let userblock = document.querySelector(".userblock");
+        userblock.classList.add("displayBlock");
+        userblock.classList.remove("displayNone");
 
         /* Flag 'profile' as lastRightPanelShowing */
-        fh.flag.lastRightPanelShowing = 'profile';
-        window.localStorage.setItem('fh_lastRightPanelShowing', fh.flag.lastRightPanelShowing);
+        fh.flag.lastRightPanelShowing = "profile";
+        window.localStorage.setItem(
+          "fh_lastRightPanelShowing",
+          fh.flag.lastRightPanelShowing
+        );
       });
-
   });
 };
-
 
 fh.func.addListener_click_routinesButton = () => {
+  let routinesButton = document.querySelector(".catbox_routines");
 
-  let routinesButton = document.querySelector('.catbox_routines');
+  routinesButton.addEventListener("click", function() {
+    let routinesBlock = document.querySelector(".routinesBlock");
+    routinesBlock.classList.add("displayBlock");
+    routinesBlock.classList.remove("displayNone");
 
-  routinesButton.addEventListener('click', function () {
-
-    let routinesBlock = document.querySelector('.routinesBlock');
-    routinesBlock.classList.add('displayBlock');
-    routinesBlock.classList.remove('displayNone');
-
-    let userblock = document.querySelector('.userblock');
-    userblock.classList.add('displayNone');
-    userblock.classList.remove('displayBlock');
+    let userblock = document.querySelector(".userblock");
+    userblock.classList.add("displayNone");
+    userblock.classList.remove("displayBlock");
 
     /* Flag 'profile' as lastRightPanelShowing */
-    fh.flag.lastRightPanelShowing = 'routines';
-    window.localStorage.setItem('fh_lastRightPanelShowing', fh.flag.lastRightPanelShowing);
+    fh.flag.lastRightPanelShowing = "routines";
+    window.localStorage.setItem(
+      "fh_lastRightPanelShowing",
+      fh.flag.lastRightPanelShowing
+    );
   });
 };
 
+fh.func.addListener_click_saveButtonStagedRoutine = function() {
+  let saveButton_stagedRoutine = document.querySelector(
+    ".saveButton_stagedRoutine"
+  );
 
-fh.func.addListener_click_saveButtonStagedRoutine = function () {
-
-  let saveButton_stagedRoutine = document.querySelector(".saveButton_stagedRoutine");
-
-  saveButton_stagedRoutine.addEventListener("click", function () {
-
+  saveButton_stagedRoutine.addEventListener("click", function() {
     let nameInput = document.querySelector(".name_stagedRoutine");
     let inputValue = nameInput.value.trim();
 
@@ -678,20 +661,19 @@ fh.func.addListener_click_saveButtonStagedRoutine = function () {
     if (inputValue.length == 0) {
       console.log("no name given, stop/cancel save");
       return;
-    }
-    else {
+    } else {
       /* else create routineObj payload and save to DB, hide stageRoutineBlock */
 
-      let repValues = document.querySelectorAll('.exerciseItem_staged_input');
-      for(let i = 0; i < fh.user.routines_staged.length; i++){
+      let repValues = document.querySelectorAll(".exerciseItem_staged_input");
+      for (let i = 0; i < fh.user.routines_staged.length; i++) {
         let exerciseObj = fh.user.routines_staged[i];
         exerciseObj.reps = repValues[i].value;
-      };
+      }
 
       let routineObj = {};
       routineObj.routineName = inputValue;
       routineObj.exercises = fh.user.routines_staged;
-      console.log(routineObj,'routineObj');
+      console.log(routineObj, "routineObj");
 
       let url = `/routine/save/${currUser}`;
       fetch(url, {
@@ -702,118 +684,108 @@ fh.func.addListener_click_saveButtonStagedRoutine = function () {
         },
         body: JSON.stringify(routineObj)
       })
-      .then(resp => resp.json())
-      .then(data => {
+        .then(resp => resp.json())
+        .then(data => {
+          /** Clear field for routine name */
+          nameInput.value = "";
 
-        /** Clear field for routine name */
-        nameInput.value = '';
-        
-        /** Clear local data */
-        fh.user.routines_staged = [];
-        
-        /** Delete staged routine items in stageRoutineBlock */
-        let stagedItems = document.querySelectorAll('.exerciseItem_staged_wrap');
-        for(i of stagedItems){
-          i.remove();
-        };
-        
-        /** Hide stageRoutineBlock */
-        let stageRoutineBlock = document.querySelector('.stageRoutineBlock');          
-        stageRoutineBlock.classList.add('displayNone');
-        stageRoutineBlock.classList.remove('displayBlock');
-        
-        /* Show user_wrap_catbar */
-        let user_wrap_catbar = document.querySelector('.user_wrap_catbar');
-        user_wrap_catbar.classList.add('displayBlock');
-        user_wrap_catbar.classList.remove('displayNone');
+          /** Clear local data */
+          fh.user.routines_staged = [];
 
-        /** Show routinesBlock */
-        let routinesBlock = document.querySelector('.routinesBlock');
-        routinesBlock.classList.add('displayBlock');
-        routinesBlock.classList.remove('displayNone');
+          /** Delete staged routine items in stageRoutineBlock */
+          let stagedItems = document.querySelectorAll(
+            ".exerciseItem_staged_wrap"
+          );
+          for (i of stagedItems) {
+            i.remove();
+          }
 
-        /* Set routinesBlock as fh.flag.lastRightPanelShowing */
-        fh.flag.lastRightPanelShowing = 'routines';
-        window.localStorage.setItem('fh_lastRightPanelShowing', fh.flag.lastRightPanelShowing);
-        
-        /** Set db assigned id onto routine object and add object to user's routine array (fh.user.routines) */
-        routineObj.id = data.id;
-        fh.user.routines.push(routineObj);
-        
-        /* Populate routinesBlock with routine item */
-        let html_routineItem = `
+          /** Hide stageRoutineBlock */
+          let stageRoutineBlock = document.querySelector(".stageRoutineBlock");
+          stageRoutineBlock.classList.add("displayNone");
+          stageRoutineBlock.classList.remove("displayBlock");
+
+          /* Show user_wrap_catbar */
+          let user_wrap_catbar = document.querySelector(".user_wrap_catbar");
+          user_wrap_catbar.classList.add("displayBlock");
+          user_wrap_catbar.classList.remove("displayNone");
+
+          /** Show routinesBlock */
+          let routinesBlock = document.querySelector(".routinesBlock");
+          routinesBlock.classList.add("displayBlock");
+          routinesBlock.classList.remove("displayNone");
+
+          /* Set routinesBlock as fh.flag.lastRightPanelShowing */
+          fh.flag.lastRightPanelShowing = "routines";
+          window.localStorage.setItem(
+            "fh_lastRightPanelShowing",
+            fh.flag.lastRightPanelShowing
+          );
+
+          /** Set db assigned id onto routine object and add object to user's routine array (fh.user.routines) */
+          routineObj.id = data.id;
+          fh.user.routines.push(routineObj);
+
+          /* Populate routinesBlock with routine item */
+          let html_routineItem = `
           <div class="routineRow">
             <p id="${routineObj.id}" onclick="fh.func.populateRoutineDetails(this)">${routineObj.routineName}</p>
             <div class="deleteRoutineButton" onclick="fh.func.deleteRoutine(this)"></div>
           </div> 
         `;
-        routinesBlock.innerHTML += html_routineItem;
-      })
-      .catch(err => {
-        console.log(err, "err c");
-      });
+          routinesBlock.innerHTML += html_routineItem;
+        })
+        .catch(err => {
+          console.log(err, "err c");
+        });
     }
   });
 };
 
-
-fh.func.addListener_click_userTile = ()=>{
-
-  let userTiles = document.querySelectorAll('.userTile');
+fh.func.addListener_click_userTile = () => {
+  let userTiles = document.querySelectorAll(".userTile");
 
   for (userTile of userTiles) {
-
-    userTile.addEventListener('click', function () {
-
+    userTile.addEventListener("click", function() {
       /* Logout action/tile checked first. Happens before and prevents removal of middle elements. */
-      if(this.classList.contains('logoutTile')){
-
-        window.localStorage.removeItem('currentUser');
+      if (this.classList.contains("logoutTile")) {
+        window.localStorage.removeItem("currentUser");
         window.location.reload();
-      };
-
+      }
 
       /* Clear center context */
       fh.func.clearContext();
 
       /* Hide any shown userPlates */
-      fh.func.clearContext_hideUserPlate()
+      fh.func.clearContext_hideUserPlate();
 
       /* Scroll to top */
       fh.func.centerPanelScrollTop();
 
       /* Depending on TILE class, find and show PLATE by related plate class */
-      if(this.classList.contains('bioTile')){
-        let bioPlate = document.querySelector('.bioPlate');
-        bioPlate.classList.add('displayBlock');
-        bioPlate.classList.remove('displayNone');
-      }
-      else
-      if(this.classList.contains('chatTile')){
-        let chatPlate = document.querySelector('.chatPlate');
-        chatPlate.classList.add('displayBlock');
-        chatPlate.classList.remove('displayNone');
-      }
-      else
-      if(this.classList.contains('calendarTile')){
-        let calendarPlate = document.querySelector('.calendarPlate');
-        calendarPlate.classList.add('displayBlock');
-        calendarPlate.classList.remove('displayNone');
-      }
-      else
-      if(this.classList.contains('welcomeTile')){
-        let welcomePlate = document.querySelector('.welcomePlate');
-        welcomePlate.classList.add('displayBlock');
-        welcomePlate.classList.remove('displayNone');
+      if (this.classList.contains("bioTile")) {
+        let bioPlate = document.querySelector(".bioPlate");
+        bioPlate.classList.add("displayBlock");
+        bioPlate.classList.remove("displayNone");
+      } else if (this.classList.contains("chatTile")) {
+        let chatPlate = document.querySelector(".chatPlate");
+        chatPlate.classList.add("displayBlock");
+        chatPlate.classList.remove("displayNone");
+      } else if (this.classList.contains("calendarTile")) {
+        let calendarPlate = document.querySelector(".calendarPlate");
+        calendarPlate.classList.add("displayBlock");
+        calendarPlate.classList.remove("displayNone");
+      } else if (this.classList.contains("welcomeTile")) {
+        let welcomePlate = document.querySelector(".welcomePlate");
+        welcomePlate.classList.add("displayBlock");
+        welcomePlate.classList.remove("displayNone");
       }
     });
-  };
+  }
 };
 
-
 fh.func.centerPanelScrollTop = () => {
-
-  let wrap_context = document.querySelector('.wrap_context');
+  let wrap_context = document.querySelector(".wrap_context");
 
   wrap_context.scrollTo({
     top: 0,
@@ -821,56 +793,52 @@ fh.func.centerPanelScrollTop = () => {
   });
 };
 
-
-fh.func.clearContext = ()=>{
-  let contentPlates = document.querySelectorAll('.content_plate:not(.userPlate)');
-  for(plate of contentPlates){
+fh.func.clearContext = () => {
+  let contentPlates = document.querySelectorAll(
+    ".content_plate:not(.userPlate)"
+  );
+  for (plate of contentPlates) {
     plate.remove();
-  };
+  }
 };
 
-
-fh.func.clearContext_hideUserPlate = ()=>{
-  let userPlates = document.querySelectorAll('.userPlate');
-  for(plate of userPlates){
-    plate.classList.add('displayNone');
-    plate.classList.remove('displayBlock');
-  };
+fh.func.clearContext_hideUserPlate = () => {
+  let userPlates = document.querySelectorAll(".userPlate");
+  for (plate of userPlates) {
+    plate.classList.add("displayNone");
+    plate.classList.remove("displayBlock");
+  }
 };
-
 
 fh.func.click_findableExercise = function(me) {
-
   fh.func.centerPanelScrollTop();
 
   /* If any userPlate(bioPlate, chatPlate, or calendarPlate) showing, hide them */
-  let userPlates = document.querySelectorAll('.userPlate');
+  let userPlates = document.querySelectorAll(".userPlate");
   for (i of userPlates) {
-
-    if (i.classList.contains('displayBlock')) {
-      i.classList.add('displayNone');
-      i.classList.remove('displayBlock');
-    };
-  };
-
+    if (i.classList.contains("displayBlock")) {
+      i.classList.add("displayNone");
+      i.classList.remove("displayBlock");
+    }
+  }
 
   /* If that exercise already in the center, remove it */
   let title_ofClickedFindable = me.children[0].innerHTML;
 
-  let contentPlates = document.querySelectorAll('.content_plate');
+  let contentPlates = document.querySelectorAll(".content_plate");
 
   for (i of contentPlates) {
     if (i.children[0].innerHTML == title_ofClickedFindable) {
       i.remove();
-    };
-  };
-
+    }
+  }
 
   let findableName = me.children[0].innerHTML;
 
   /* Need to pull exercise category from dropdown text.
     This is used to access right exercise bucket in our data object */
-  let exerciseCategory = document.querySelector(".dropdown_findbar > span").innerHTML;
+  let exerciseCategory = document.querySelector(".dropdown_findbar > span")
+    .innerHTML;
   exerciseCategory = exerciseCategory.toLowerCase();
 
   /* Handle 2 words for category name:
@@ -893,7 +861,6 @@ fh.func.click_findableExercise = function(me) {
     let exercise = exerciseCategory_bucket[i];
 
     if (findableName == exercise.name) {
-
       /*********************************************
       CREATE & APPEND PLATE IN CENTER CONTEXT COLUMN
       **********************************************/
@@ -908,11 +875,9 @@ fh.func.click_findableExercise = function(me) {
       exerciseDesc.className = "cplate_exerciseDesc";
       exerciseDesc.innerHTML = exercise.desc;
 
-
       /* start appending pieces */
       contentPlate.appendChild(exerciseName);
       contentPlate.appendChild(exerciseDesc);
-
 
       /* Conditional creation and append */
 
@@ -924,13 +889,15 @@ fh.func.click_findableExercise = function(me) {
         let exercise_image = document.createElement("div");
         exercise_image.className = "exercise_image";
         exercise_image.setAttribute(
-          "style", `background-image: url("${exercise.img[0]}");`
+          "style",
+          `background-image: url("${exercise.img[0]}");`
         );
 
         let exercise_image_2 = document.createElement("div");
         exercise_image_2.className = "exercise_image_2";
         exercise_image_2.setAttribute(
-          "style", `background-image: url("${exercise.img[1]}");`
+          "style",
+          `background-image: url("${exercise.img[1]}");`
         );
 
         /* Convenient Custom Attributes to store img paths */
@@ -940,7 +907,7 @@ fh.func.click_findableExercise = function(me) {
         contentPlate.appendChild(exerciseImagesCont);
         exerciseImagesCont.appendChild(exercise_image);
         exerciseImagesCont.appendChild(exercise_image_2);
-      };
+      }
 
       let wrap_routineAddControls = document.createElement("div");
       wrap_routineAddControls.className = "wrap_routineAddControls";
@@ -948,43 +915,49 @@ fh.func.click_findableExercise = function(me) {
       let addToNewRoutineButton = document.createElement("div");
       addToNewRoutineButton.className = "addToNewRoutineButton";
       addToNewRoutineButton.innerHTML = "Add to New Routine";
-      addToNewRoutineButton.addEventListener("click", function () {
-
+      addToNewRoutineButton.addEventListener("click", function() {
         /* Hide catbar */
-        let user_wrap_catbar = document.querySelector('.user_wrap_catbar');
-        user_wrap_catbar.classList.add('displayNone');
-        user_wrap_catbar.classList.remove('displayBlock');
-        
+        let user_wrap_catbar = document.querySelector(".user_wrap_catbar");
+        user_wrap_catbar.classList.add("displayNone");
+        user_wrap_catbar.classList.remove("displayBlock");
+
         /* Hide userBlock */
-        let userblock = document.querySelector('.userblock');
-        userblock.classList.add('displayNone');
-        userblock.classList.remove('displayBlock');
+        let userblock = document.querySelector(".userblock");
+        userblock.classList.add("displayNone");
+        userblock.classList.remove("displayBlock");
 
         /* Hide routinesBlock */
-        let routinesBlock = document.querySelector('.routinesBlock');
-        routinesBlock.classList.add('displayNone');
-        routinesBlock.classList.remove('displayBlock');
-        
-        /* Show stageRoutineBlock */
-        let stageRoutineBlock = document.querySelector('.stageRoutineBlock');
-        stageRoutineBlock.classList.add('displayBlock');
-        stageRoutineBlock.classList.remove('displayNone');
+        let routinesBlock = document.querySelector(".routinesBlock");
+        routinesBlock.classList.add("displayNone");
+        routinesBlock.classList.remove("displayBlock");
 
+        /* Show stageRoutineBlock */
+        let stageRoutineBlock = document.querySelector(".stageRoutineBlock");
+        stageRoutineBlock.classList.add("displayBlock");
+        stageRoutineBlock.classList.remove("displayNone");
 
         /* Create exerciseObj*/
         let exerciseObj = {};
         exerciseObj.name = this.parentNode.parentNode.children[0].innerHTML;
         exerciseObj.desc = this.parentNode.parentNode.children[1].innerHTML;
         /* If image path not undefined, set in array  */
-        if (this.parentNode.parentNode.children[2].children[0].getAttribute("imgPath_1") != undefined) {
+        if (
+          this.parentNode.parentNode.children[2].children[0].getAttribute(
+            "imgPath_1"
+          ) != undefined
+        ) {
           exerciseObj.img = [
-            this.parentNode.parentNode.children[2].children[0].getAttribute("imgPath_1"),
-            this.parentNode.parentNode.children[2].children[1].getAttribute("imgPath_2")
+            this.parentNode.parentNode.children[2].children[0].getAttribute(
+              "imgPath_1"
+            ),
+            this.parentNode.parentNode.children[2].children[1].getAttribute(
+              "imgPath_2"
+            )
           ];
         } else {
           /* Set empty array. Avoids error in database. */
           exerciseObj.img = [];
-        };
+        }
 
         /* Push exerciseObj to local data (routines_staged) */
         fh.user.routines_staged.push(exerciseObj);
@@ -999,8 +972,8 @@ fh.func.click_findableExercise = function(me) {
         `;
 
         /* Append exerciseItem to pasteExercises */
-        let pasteExercises = document.querySelector(".pasteExercises");       
-        pasteExercises.insertAdjacentHTML('beforeend', html)
+        let pasteExercises = document.querySelector(".pasteExercises");
+        pasteExercises.insertAdjacentHTML("beforeend", html);
       });
 
       contentPlate.appendChild(wrap_routineAddControls);
@@ -1013,7 +986,7 @@ fh.func.click_findableExercise = function(me) {
   }
 };
 
-fh.func.createAppend_selectedExerciseGroup = function (exerciseBucket) {
+fh.func.createAppend_selectedExerciseGroup = function(exerciseBucket) {
   let findables_exercises = document.querySelector(".findables_exercises");
 
   for (let i = 0; i < exerciseBucket.length; i++) {
@@ -1021,7 +994,7 @@ fh.func.createAppend_selectedExerciseGroup = function (exerciseBucket) {
 
     let findable = document.createElement("div");
     findable.className = "findable";
-    findable.addEventListener("click", function () {
+    findable.addEventListener("click", function() {
       fh.func.click_findableExercise(this);
     });
 
@@ -1046,12 +1019,10 @@ fh.func.createObj_exercise = (url, myArray, flag) => {
           obj.desc = data.results[i].description;
           obj.img = [];
 
-
           /* If almost no description, continue */
           if (obj.desc.length < 10) {
             continue;
-          };
-
+          }
 
           let url_forImage = `https://wger.de/api/v2/exerciseimage/?exercise=${data.results[i].id}`;
 
@@ -1082,82 +1053,72 @@ fh.func.createObj_exercise = (url, myArray, flag) => {
   });
 };
 
+fh.func.dbCall_routines = () => {
+  let currentUser = window.localStorage.getItem("currentUser");
 
-fh.func.dbCall_routines = ()=>{
-
-  let currentUser = window.localStorage.getItem('currentUser');
-
-  if(currentUser != undefined){
-
+  if (currentUser != undefined) {
     let url = `/routine/${currentUser}`;
-    
+
     fetch(url)
-    .then((resp)=>resp.json())
-    .then((data)=>{
+      .then(resp => resp.json())
+      .then(data => {
+        /* Store routines in local array (fh.user.routines) */
+        fh.user.routines = data;
 
-      /* Store routines in local array (fh.user.routines) */
-      fh.user.routines = data;
+        /* Add routineRow elements onto routineBlock */
+        let routines = data;
+        let routinesBlock = document.querySelector(".routinesBlock");
 
-      /* Add routineRow elements onto routineBlock */
-      let routines = data;
-      let routinesBlock = document.querySelector('.routinesBlock');
-
-      for(routine of routines){
-
-        let html = `
+        for (routine of routines) {
+          let html = `
           <div class="routineRow">
             <p id="${routine.id}" onclick="fh.func.populateRoutineDetails(this)">${routine.routine_name}</p>
             <div class="deleteRoutineButton" onclick="fh.func.deleteRoutine(this)"></div>
           </div>
         `;
 
-        routinesBlock.innerHTML += html;
-      };
-    });
-  };
+          routinesBlock.innerHTML += html;
+        }
+      });
+  }
 };
 
-
-fh.func.deleteRoutine = (me)=>{
-
+fh.func.deleteRoutine = me => {
   let routineRow = me.parentNode;
   let routineId = me.previousElementSibling.id;
 
   /* Delete from DB */
   let url = `/routine/delroutine/${routineId}`;
-  fetch(url,{
-    method: 'DELETE'
+  fetch(url, {
+    method: "DELETE"
   })
-  .then((resp)=>resp.json())
-  .then((data)=>{
-
+    .then(resp => resp.json())
+    .then(data => {
       /* Clear plates from center context */
       fh.func.clearContext();
 
       /* Remove routineRow from routinesBlock */
-      let routineRows = document.querySelectorAll('.routineRow');
-      for(routineRow of routineRows){
-        if(routineRow.children[0].id == routineId){
+      let routineRows = document.querySelectorAll(".routineRow");
+      for (routineRow of routineRows) {
+        if (routineRow.children[0].id == routineId) {
           routineRow.remove();
-        };
-      };
+        }
+      }
 
       /* Remove from local routines array */
-      for(let i = 0; i < fh.user.routines.length; i++){
-
+      for (let i = 0; i < fh.user.routines.length; i++) {
         let user_routineId = fh.user.routines[i].id;
 
-        if(routineId == user_routineId){
+        if (routineId == user_routineId) {
           fh.user.routines.splice(i, 1);
-        };
-      };
-  });
+        }
+      }
+    });
 };
 
-
-fh.func.deleteStagedExercise = (me)=>{
-
-  let deleteTarget_name = me.previousElementSibling.previousElementSibling.innerHTML;
+fh.func.deleteStagedExercise = me => {
+  let deleteTarget_name =
+    me.previousElementSibling.previousElementSibling.innerHTML;
 
   /* Remove from staged array */
   for (let i = 0; i < fh.user.routines_staged.length; i++) {
@@ -1166,57 +1127,52 @@ fh.func.deleteStagedExercise = (me)=>{
     if (deleteTarget_name == stagedRoutineName) {
       fh.user.routines_staged.splice(i, 1);
     }
-  };
+  }
 
   /* Remove element from panel */
   let exercisesInPanel = document.querySelectorAll(".exerciseItem_staged_wrap");
   for (let i = 0; i < exercisesInPanel.length; i++) {
     let exercise = exercisesInPanel[i];
     let exerciseName = exercise.children[0].innerHTML;
-    if(deleteTarget_name == exerciseName){
+    if (deleteTarget_name == exerciseName) {
       exercise.remove();
-    };
-  };
+    }
+  }
 
   /* No more exercises in panel (weird that you check length 1 at this point)*/
-  if(exercisesInPanel.length == 1){
-
+  if (exercisesInPanel.length == 1) {
     /* Hide stageRoutineBlock */
-    let stageRoutineBlock = document.querySelector('.stageRoutineBlock');
-    stageRoutineBlock.classList.add('displayNone');
-    stageRoutineBlock.classList.remove('displayBlock');
+    let stageRoutineBlock = document.querySelector(".stageRoutineBlock");
+    stageRoutineBlock.classList.add("displayNone");
+    stageRoutineBlock.classList.remove("displayBlock");
 
     /* Show catbar */
-    let user_wrap_catbar = document.querySelector('.user_wrap_catbar');
-    user_wrap_catbar.classList.add('displayBlock');
-    user_wrap_catbar.classList.remove('displayNone');
+    let user_wrap_catbar = document.querySelector(".user_wrap_catbar");
+    user_wrap_catbar.classList.add("displayBlock");
+    user_wrap_catbar.classList.remove("displayNone");
 
     /* Show fh.flag.lastRightSidePanelShowing */
-    if(fh.flag.lastRightPanelShowing == 'profile'){
-      let userblock = document.querySelector('.userblock');
-      userblock.classList.add('displayBlock');
-      userblock.classList.remove('displayNone');
+    if (fh.flag.lastRightPanelShowing == "profile") {
+      let userblock = document.querySelector(".userblock");
+      userblock.classList.add("displayBlock");
+      userblock.classList.remove("displayNone");
+    } else {
+      let routinesBlock = document.querySelector(".routinesBlock");
+      routinesBlock.classList.add("displayBlock");
+      routinesBlock.classList.remove("displayNone");
     }
-    else{
-      let routinesBlock = document.querySelector('.routinesBlock');
-      routinesBlock.classList.add('displayBlock');
-      routinesBlock.classList.remove('displayNone');
-    };
-  };
+  }
 };
 
-
-fh.func.exerciseStaged_focus = function(me){
-  me.value = '';
+fh.func.exerciseStaged_focus = function(me) {
+  me.value = "";
 };
 
-
-fh.func.exerciseStaged_focusOut = function(me){
-  if(me.value.trim().length == 0){
-    me.value = '1';
-  };
-}
-
+fh.func.exerciseStaged_focusOut = function(me) {
+  if (me.value.trim().length == 0) {
+    me.value = "1";
+  }
+};
 
 fh.func.fetch_exerciseImages = function(url_forImage, obj, myArray) {
   return new Promise((resolve, reject) => {
@@ -1236,15 +1192,15 @@ fh.func.fetch_exerciseImages = function(url_forImage, obj, myArray) {
 
         resolve(true);
       })
-      .catch(function (err) {
+      .catch(function(err) {
         throw err;
         reject();
       });
   });
 };
 
-fh.func.init_routinesBicepsInFindbar = function () {
-  fh.interval.check_exercisesFetchDone = setInterval(function () {
+fh.func.init_routinesBicepsInFindbar = function() {
+  fh.interval.check_exercisesFetchDone = setInterval(function() {
     if (fh.flag.bicepsFetchDone == true) {
       // HARD CODE the amount of Biceps Exercises Fetched in order to wait for them all before appending
 
@@ -1257,7 +1213,7 @@ fh.func.init_routinesBicepsInFindbar = function () {
 
         let findable = document.createElement("div");
         findable.className = "findable";
-        findable.addEventListener("click", function () {
+        findable.addEventListener("click", function() {
           fh.func.click_findableExercise(this);
         });
 
@@ -1271,56 +1227,48 @@ fh.func.init_routinesBicepsInFindbar = function () {
   }, 10);
 };
 
-
 fh.func.init_panel = () => {
-
-  let currentUser = window.localStorage.getItem('currentUser');
+  let currentUser = window.localStorage.getItem("currentUser");
 
   /* There is a currentUser set in localStorage*/
-  if(currentUser != undefined){
-
+  if (currentUser != undefined) {
     /* Hide Login */
-    let wrap_login = document.querySelector('.wrap_login');
-    wrap_login.classList.add('displayNone');
-    wrap_login.classList.remove('displayBlock');
+    let wrap_login = document.querySelector(".wrap_login");
+    wrap_login.classList.add("displayNone");
+    wrap_login.classList.remove("displayBlock");
 
     /* Show user catbar */
-    let user_wrap_catbar = document.querySelector('.user_wrap_catbar');
-    user_wrap_catbar.classList.add('displayBlock');
-    user_wrap_catbar.classList.remove('displayNone');
+    let user_wrap_catbar = document.querySelector(".user_wrap_catbar");
+    user_wrap_catbar.classList.add("displayBlock");
+    user_wrap_catbar.classList.remove("displayNone");
 
-
-    let lastRightPanel = window.localStorage.getItem("fh_lastRightPanelShowing");
+    let lastRightPanel = window.localStorage.getItem(
+      "fh_lastRightPanelShowing"
+    );
 
     fh.flag.lastRightPanelShowing = lastRightPanel;
 
-    if(lastRightPanel == 'routines'){
-
+    if (lastRightPanel == "routines") {
       /* Show routinesBlock */
-      let routinesBlock = document.querySelector('.routinesBlock');
-      routinesBlock.classList.add('displayBlock');
-      routinesBlock.classList.remove('displayNone');
-    }
-    else{
-
+      let routinesBlock = document.querySelector(".routinesBlock");
+      routinesBlock.classList.add("displayBlock");
+      routinesBlock.classList.remove("displayNone");
+    } else {
       /* Show User Block */
-      let userblock = document.querySelector('.userblock');
-      userblock.classList.add('displayBlock');
-      userblock.classList.remove('displayNone');
+      let userblock = document.querySelector(".userblock");
+      userblock.classList.add("displayBlock");
+      userblock.classList.remove("displayNone");
     }
-  }
-  /* NO currentUser set in localStorage */
-  else{
-
+  } else {
+    /* NO currentUser set in localStorage */
     /* Show login */
-    let wrap_login = document.querySelector('.wrap_login');
-    wrap_login.classList.add('displayBlock');
-    wrap_login.classList.remove('displayNone');
-  };
+    let wrap_login = document.querySelector(".wrap_login");
+    wrap_login.classList.add("displayBlock");
+    wrap_login.classList.remove("displayNone");
+  }
 };
 
-
-fh.func.isWithin = function (coords, elem) {
+fh.func.isWithin = function(coords, elem) {
   let x = coords[0];
   let y = coords[1];
 
@@ -1336,42 +1284,37 @@ fh.func.isWithin = function (coords, elem) {
   }
 };
 
-
-fh.func.populateRoutineDetails = (me)=>{
-
+fh.func.populateRoutineDetails = me => {
   let routineId = me.id;
 
   /* Fetch for routine details */
   let url = `/routine/details/${routineId}`;
   fetch(url)
-  .then((resp)=>resp.json())
-  .then((data)=>{
+    .then(resp => resp.json())
+    .then(data => {
+      /* Remove all content_plate except for the userPlates (chat, calendar, trainer) */
+      fh.func.clearContext();
+      fh.func.clearContext_hideUserPlate();
 
-    /* Remove all content_plate except for the userPlates (chat, calendar, trainer) */
-    fh.func.clearContext();
-    fh.func.clearContext_hideUserPlate();
-    
-    /* Loop to create and append exercise plates for clicked routine */
-    for(exercise of data){
-
-      /*********************************************
+      /* Loop to create and append exercise plates for clicked routine */
+      for (exercise of data) {
+        /*********************************************
       CREATE & APPEND PLATE IN CENTER CONTEXT COLUMN
       **********************************************/
 
-      /* Start creating HTML. Not complete yet. */
-      let html = `
+        /* Start creating HTML. Not complete yet. */
+        let html = `
         <div class="content_plate">
           <div class="cplate_exerciseName">${exercise.exercise_name}</div>
           <div class="cplate_exerciseDesc">${exercise.exercise_desc}</div>
       `;
 
-      /* Flex container for exerciseImagesCont and cplate_exerciseReps */
-      html += `<div class="cplate_flexExerciseAndReps">`;
+        /* Flex container for exerciseImagesCont and cplate_exerciseReps */
+        html += `<div class="cplate_flexExerciseAndReps">`;
 
-      /* If images are present in the array, create and append them */
-      if(exercise.front_img_src != undefined){
-
-        html += `
+        /* If images are present in the array, create and append them */
+        if (exercise.front_img_src != undefined) {
+          html += `
           <div class="exerciseImagesCont">
             
             <div  class="exercise_image asARoutineTile"
@@ -1383,26 +1326,23 @@ fh.func.populateRoutineDetails = (me)=>{
                   imgPath_2="${exercise.rear_img_src}"></div>
           </div>
         `;
-      };
+        }
 
-      /* cplate_exerciseReps + close cplate_flexExerciseAndReps */
-      html += `
+        /* cplate_exerciseReps + close cplate_flexExerciseAndReps */
+        html += `
           <p class="cplate_exerciseReps">${exercise.exercise_reps}</p>
         </div>
       `;
 
-      /* Close HTML/ content_plate */
-      html += `</div>`; 
+        /* Close HTML/ content_plate */
+        html += `</div>`;
 
-      /* Append to DOM */
-      let wrap_context = document.querySelector(".wrap_context");
-      wrap_context.innerHTML += html;
-    };
-  });
+        /* Append to DOM */
+        let wrap_context = document.querySelector(".wrap_context");
+        wrap_context.innerHTML += html;
+      }
+    });
 };
-
-
-
 
 /*************
 Initialization
@@ -1411,19 +1351,15 @@ window.addEventListener("DOMContentLoaded", event => {
 
 
 
-  fetch('/api/trainer/potentials')
-  .then((resp)=>resp.json())
-  .then((data)=>{
-    console.log(data, 'data 1415');
-  });
-
-
-
+  // fetch('/api/trainer/potentials')
+  // .then((resp)=>resp.json())
+  // .then((data)=>{
+  //   console.log(data, 'data 1415');
+  // });
 
 
   /* Retrieve local storage token */
   currUser = localStorage.getItem("currentUser");
-
 
   /********
   API Calls
@@ -1431,19 +1367,16 @@ window.addEventListener("DOMContentLoaded", event => {
   /* Call exercises API, dropdown event, dropdownItem events, append biceps first */
   fh.func.apiCall_exercises();
 
-
   /*******
   DB Calls
   ********/
   fh.func.dbCall_routines();
-
 
   /*********
   Init Style
   **********/
   /* What right panel to start? */
   fh.func.init_panel();
-
 
   /*********************
   Attach Event Listeners
@@ -1479,37 +1412,45 @@ window.addEventListener("DOMContentLoaded", event => {
   /* 
   Buttons for FitTips & SplashPage
   */
-  document.querySelector("#generalTipsButton").addEventListener("click", function () {
-    document.querySelector("#generalTipsContent").classList.remove("d-none");
-    document.querySelector("#volumeAndrepsContent").classList.add("d-none");
-    document.querySelector("#theBig3Content").classList.add("d-none");
-  })
-  document.querySelector("#volumeAndrepsButton").addEventListener("click", function () {
-    document.querySelector("#volumeAndrepsContent").classList.remove("d-none");
-    document.querySelector("#generalTipsContent").classList.add("d-none");
-    document.querySelector("#theBig3Content").classList.add("d-none");
-  })
-  document.querySelector("#theBig3Button").addEventListener("click", function () {
-    document.querySelector("#theBig3Content").classList.remove("d-none");
-    document.querySelector("#volumeAndrepsContent").classList.add("d-none");
-    document.querySelector("#generalTipsContent").classList.add("d-none");
-  })
+  document
+    .querySelector("#generalTipsButton")
+    .addEventListener("click", function() {
+      document.querySelector("#generalTipsContent").classList.remove("d-none");
+      document.querySelector("#volumeAndrepsContent").classList.add("d-none");
+      document.querySelector("#theBig3Content").classList.add("d-none");
+    });
+  document
+    .querySelector("#volumeAndrepsButton")
+    .addEventListener("click", function() {
+      document
+        .querySelector("#volumeAndrepsContent")
+        .classList.remove("d-none");
+      document.querySelector("#generalTipsContent").classList.add("d-none");
+      document.querySelector("#theBig3Content").classList.add("d-none");
+    });
+  document
+    .querySelector("#theBig3Button")
+    .addEventListener("click", function() {
+      document.querySelector("#theBig3Content").classList.remove("d-none");
+      document.querySelector("#volumeAndrepsContent").classList.add("d-none");
+      document.querySelector("#generalTipsContent").classList.add("d-none");
+    });
 
-
-   /* 
+  /* 
   Buttons for FitTips & SplashPage
-  */ 
-  document.querySelector(".catbox_exercises").addEventListener("click", function () {
-    document.querySelector("#findbar_exercises").classList.remove("d-none");
-    document.querySelector("#findbar_trainers").classList.add("d-none");
-  })
+  */
 
-  document.querySelector(".catbox_trainers").addEventListener("click", function () {
-    document.querySelector("#findbar_trainers").classList.remove("d-none");
-    document.querySelector("#findbar_exercises").classList.add("d-none");
-  })
+  document
+    .querySelector(".catbox_exercises")
+    .addEventListener("click", function() {
+      document.querySelector("#findbar_exercises").classList.remove("d-none");
+      document.querySelector("#findbar_trainers").classList.add("d-none");
+    });
 
-
-
+  document
+    .querySelector(".catbox_trainers")
+    .addEventListener("click", function() {
+      document.querySelector("#findbar_trainers").classList.remove("d-none");
+      document.querySelector("#findbar_exercises").classList.add("d-none");
+    });
 });
-

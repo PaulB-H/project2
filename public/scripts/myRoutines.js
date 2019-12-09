@@ -68,7 +68,6 @@ async function saveExercise() {
       type: "POST",
       data: {},
       success: function(result) {
-        console.log(result[0]);
         $(`<div class="msgBox" style="margin: 1em">
               <div style="background-color:white">${result[0].title}</div></div>`).appendTo(
           "#myRoutines"

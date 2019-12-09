@@ -44,8 +44,8 @@ if (process.env.JAWSDB_URL) {
     host: "localhost",
     port: 3306,
     user: "root",
-    // password: "IamTheBoxGhost1971",
-    password: "steven123",
+    password: "IamTheBoxGhost1971",
+    // password: "steven123",
     // password: "sqlrootpass",
     database: "fitness_hub_db"
   });
@@ -82,7 +82,6 @@ app.get(`/api/trainer/client/:currUser`, async function(req, res) {
 });
 
 app.post(`/api/trainer/delclient/:userId`, async function(req, res) {
-  console.log(req.params.userId);
   let result = await db.query(
     `update fh_users set trainerid = 0 where id = ?`,
     [req.params.userId]
@@ -310,7 +309,7 @@ app.get(`/hubchat/chatter/strangers/:currUser`, async function(req, res) {
 
 app.get(`/hubchat/chatter/:currUser/:correspondent`, async function(req, res) {
   let result = await db.query(
-    `select * from fh_hubchat inner join fh_users as usr on usr.id = ? where (sentbyid = ? and sendtoid = ?) or (sentbyid = ? and sendtoid = ?)`,
+    `select * from fh_hubchat left join fh_users as usr on usr.id = ? where (sentbyid = ? and sendtoid = ?) or (sentbyid = ? and sendtoid = ?)`,
     [
       req.params.correspondent,
       req.params.currUser,
@@ -326,7 +325,7 @@ app.post(`/hubchat/chatter/save/:currUser/:userName/:msgText`, async function(
   req,
   res
 ) {
-  let writeTo = await db.query(`select id from fh_users where username = ?`, [
+  let writeTo = await db.query(`select id from fh_users where id = ?`, [
     req.params.userName
   ]);
   let writeRec = await db.query(

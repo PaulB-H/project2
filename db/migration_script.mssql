@@ -141,7 +141,7 @@ CREATE TABLE fh_users (
   address_line2 varchar(45) DEFAULT NULL,
   city varchar(45) DEFAULT NULL,
   postal_code varchar(7) DEFAULT NULL,
-  trainerid int(11) DEFAULT NULL,
+  trainerid int(11) DEFAULT 0,
   cellphone varchar(10) DEFAULT NULL,
   email varchar(45) DEFAULT NULL,
   user_password varchar(45) DEFAULT NULL,
