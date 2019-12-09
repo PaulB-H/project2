@@ -29,6 +29,7 @@ CREATE TABLE fh_calendar (
   hr24 varchar(500) DEFAULT NULL,
   PRIMARY KEY (id)
 );
+
 drop table fh_calendar_audit;
 CREATE TABLE fh_calendar_audit (
   id int(11) NOT NULL,

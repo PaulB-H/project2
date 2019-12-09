@@ -105,7 +105,7 @@ async function save_event() {
     type: "POST",
     data: { calDay },
     success: function(data) {
-      console.log("Committed", data);
+      // console.log("Committed", data);
     }
   });
 }

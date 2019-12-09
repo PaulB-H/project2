@@ -54,6 +54,7 @@ async function showConversation(correspondent, correspondentName) {
     success: function(result) {
       $("#comm_thread").empty();
       $("#chat-header").empty();
+      $("#msg_holder").empty();
       if (result.length > 0) {
         $(
           `<h5 id="chat-header" ><span><span>Chat with: ${result[0].last_name}, ${result[0].first_name} </span><span id="chatWith" style="text-align: left"></span></span></h5>`
@@ -73,7 +74,7 @@ async function showConversation(correspondent, correspondentName) {
         }
       }
 
-      $(`<div style="position:absolute; bottom: -40; right: 0">
+      $(`<span id="msg_holder" ><div style="position:absolute; bottom: -40; right: 0">
 								<textarea
 								rows="4"
 								cols="50"
@@ -114,6 +115,13 @@ async function showStrangers() {
 }
 
 async function saveMessage(msgTo) {
+  console.log("Checking results", msgTo);
+  console.log(
+    "Checking results",
+    $("#msg_editor")
+      .val()
+      .trim()
+  );
   if (
     $("#msg_editor")
       .val()
