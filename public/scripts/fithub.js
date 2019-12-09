@@ -307,59 +307,6 @@ async function initChatTrainerState() {
     }
   });
   // -----------------------------------------------
-  function setMessageJustify(currUser, correspondent) {
-    if (currUser == correspondent) {
-      return "fromMe";
-    } else {
-      return "toMe";
-    }
-  }
-  $.ajax({
-    url: `/hubchat/chatter/${currUser}/${correspondent}`,
-    type: "GET",
-    cache: false,
-    success: function(result) {
-      $("#comm_thread").empty();
-      $("#chat-header").empty();
-      $("#msg_holder").empty();
-      if (result.length > 0) {
-        $(
-          `<h5 id="chat-header" ><span><span>Chat to: ${result[0].last_name}, ${result[0].first_name} (</span><span id="chatWith" style="text-align: left">${correspondentName}</span>)</span></h5>`
-        ).prependTo("#chat-window");
-        console.log(
-          moment(result[i].createdat).format("LL"),
-          moment(result[i].createdat).format("LTS"),
-          result
-        );
-        // function writeMessages() {
-        for (i = 0; i < result.length; i++) {
-          $(`<div class="msgBox ${setMessageJustify(
-            currUser,
-            result[i].sentbyid
-          )}" style="margin: 1em">
-                    <span>${moment(result[i].createdat).format("LL")}</span>
-                    <span>${moment(result[i].createdat).format("LTS")}</span>
-                    <div class = "msgBox" style="background-color:white">${
-                      result[i].chatmessage
-                    }</div></div>`).appendTo("#comm_thread");
-        }
-      }
-      $(`<span id="msg_holder" ><div style="position:absolute; bottom: -40; right: 0">
-                  <textarea
-                  rows="4"
-                  cols="50"
-                  spellcheck="true"
-                  class="card time-block col"
-                  style="background-color:lemonchiffon"
-                  id="msg_editor"
-                  value=""
-                  >
-                  </textarea>
-                  <div><button id="save_btn" class="saveBtn" value="" onclick=saveMessage(${correspondent})>Save Message</button></div>
-                </div></span>`).appendTo("#chat-window");
-    }
-  });
-  // -----------------------------------------------
   $.ajax({
     url: `/hubchat/chatter/strangers/${currUser}`,
     type: "GET",
@@ -367,10 +314,8 @@ async function initChatTrainerState() {
     success: function(result) {
       for (i = 0; i < result.length; i++) {
         $(`<div class="msgBox" style="margin: 1em">
-                                                             <span>${result[i].last_name}, ${result[i].first_name}</span>
-                                                            </div>`).appendTo(
-          ".content_plate2"
-        );
+            <span>${result[i].last_name}, ${result[i].first_name}</span>
+          </div>`).appendTo(".content_plate2");
       }
     }
   });
