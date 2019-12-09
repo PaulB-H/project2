@@ -160,13 +160,14 @@ async function initChatTrainerState() {
       }
     });
     // -----------------------------------------------------
+    $("#client_list").empty();
     $.ajax({
       url: `/api/trainer/client/${currUser}`,
       type: "GET",
       cache: false,
       success: function(result) {
         // console.log("success reached");
-        $(`<h6>Potential Clients</h6>`).appendTo("#potentialClients");
+        $(`<h6>Current Clients</h6>`).appendTo("#client_list");
         for (i = 0; i < result.length; i++) {
           $(
             `<div class="col" style="display:flex">

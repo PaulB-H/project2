@@ -160,7 +160,7 @@ async function myClients() {
     cache: false,
     success: function(result) {
       // console.log("success reached");
-      $(`<h6>Potential Clients</h6>`).appendTo("#potentialClients");
+      $(`<h6>Current Clients</h6>`).appendTo("#potentialClients");
       for (i = 0; i < result.length; i++) {
         $(
           `<div class="col" style="display:flex">
@@ -182,33 +182,33 @@ async function myClients() {
   });
 }
 
-async function getPotentialClients() {
-  $("#potentialClients").empty();
-  $.ajax({
-    url: `/api/trainer/potentials`,
-    type: "GET",
-    cache: false,
-    success: function(result) {
-      $(`<h6>Potential Clients</h6>`).appendTo("#potentialClients");
-      for (i = 0; i < result.length; i++) {
-        $(
-          `<div class="col" style="display:flex">
-            <button class="correspondent myBtn" style="width:${
-              result[i].username.length
-            }" value="${result[i].id}" onclick="showClientProfile(${
-            result[i].id
-          })">
-             ${result[i].last_name + ", " + result[i].first_name}
-            </button>
-            <button class=addBtn value="${result[i].id}" onclick="getClient(${
-            result[i].id
-          })">A</button>
-          </div>`
-        ).appendTo("#potentialClients");
-      }
-    }
-  });
-}
+// async function getPotentialClients() {
+//   $("#potentialClients").empty();
+//   $.ajax({
+//     url: `/api/trainer/potentials`,
+//     type: "GET",
+//     cache: false,
+//     success: function(result) {
+//       $(`<h6>Potential Clients</h6>`).appendTo("#potentialClients");
+//       for (i = 0; i < result.length; i++) {
+//         $(
+//           `<div class="col" style="display:flex">
+//             <button class="correspondent myBtn" style="width:${
+//               result[i].username.length
+//             }" value="${result[i].id}" onclick="showClientProfile(${
+//             result[i].id
+//           })">
+//              ${result[i].last_name + ", " + result[i].first_name}
+//             </button>
+//             <button class=addBtn value="${result[i].id}" onclick="getClient(${
+//             result[i].id
+//           })">A</button>
+//           </div>`
+//         ).appendTo("#potentialClients");
+//       }
+//     }
+//   });
+// }
 
 async function showClientProfile(userId) {
   $("#bioscreen").empty();
