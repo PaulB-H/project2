@@ -433,8 +433,8 @@ fh.func.addListener_click_loginButtonProper = function() {
               $("#client_list").css("display", "none");
               $("#potentialClients").css("display", "none");
               // console.log($("#profile_header"));
-              $("#profile_header").text() =
-                result[0].first_name + " " + result[0].last_name;
+              // $("#profile_header").text() =
+              //   result[0].first_name + " " + result[0].last_name;
               $(`<div class="trainerPanel" style="position:relative; top:0">
                 <IFRAME style="display:none" name="hidden-form"></IFRAME>
                 <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
@@ -462,8 +462,8 @@ fh.func.addListener_click_loginButtonProper = function() {
               $("#client_list").css("display", "block");
               $("#potentialClients").css("display", "block");
               if (Number(id) !== Number(currUser)) {
-                $("#profile_header").innerHTML =
-                  result[0].first_name + " " + result[0].last_name;
+                // $("#profile_header").innerHTML =
+                //   result[0].first_name + " " + result[0].last_name;
                 $(`<div style="position:relative; top: 0">
                   <form action="/api/users"  method="POST" target="hidden-form">
                     First name: <input type="text" name="firstname" value="${result[0].first_name}" readonly><br/>
@@ -480,8 +480,8 @@ fh.func.addListener_click_loginButtonProper = function() {
                   </form>
                 </div>`).appendTo("#clientBio");
               } else {
-                $("#profile_header").innerHTML =
-                  result[0].first_name + " " + result[0].last_name;
+                // $("#profile_header").innerHTML =
+                //   result[0].first_name + " " + result[0].last_name;
                 $(`<div class="trainerPanel" style="position:relative; top:0">
                   <IFRAME style="display:none" name="hidden-form"></IFRAME>
                   <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
@@ -1343,6 +1343,36 @@ fh.func.populateRoutineDetails = me => {
     });
 };
 
+// Populate trainer list
+fh.func.dbCall_trainers = () => {
+
+  if (currentUser != undefined) {
+    let url = `/api/users/trainers`;
+
+    fetch(url)
+      .then(resp => resp.json())
+      .then(data => {
+        /* Store routines in local array (fh.trainer.list) */
+        fh.trainer.list = data;
+
+        /* Add trainer elements onto .findbar_trainers */
+        let trainers = data;
+        let trainerBlock = document.querySelector(".findbar_trainers");
+
+        for (trainer of trainers) {
+          let html = `
+          <div class="trainerRow">
+            <p id="${trainer.id}" onclick="fh.func.populateTrainerDetails(this)">${trainer.routine_name}</p>
+          </div>
+        `;
+
+          trainerBlock.innerHTML += html;
+        }
+      });
+  }
+};
+
+
 /*************
 Initialization
 **************/
@@ -1441,5 +1471,6 @@ window.addEventListener("DOMContentLoaded", event => {
     .addEventListener("click", function() {
       document.querySelector("#findbar_trainers").classList.remove("d-none");
       document.querySelector("#findbar_exercises").classList.add("d-none");
+      fh.func.dbCall_trainers();
     });
 });
