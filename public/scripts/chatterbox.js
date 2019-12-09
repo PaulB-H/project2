@@ -145,6 +145,7 @@ async function getStrangers() {
     type: "GET",
     cache: false,
     success: function(result) {
+      console.log("Loading strangers", result);
       if (result.length > 0) {
         for (i = 0; i < result.length; i++) {
           $(
@@ -189,7 +190,9 @@ async function showConversation(correspondent, correspondentName) {
             currUser,
             result[i].sentbyid
           )}" style="margin: 1em">
-            <span>${moment(result[i].createdat).format("ddd")} ${moment(result[i].createdat).format("LT")}</span>
+            <span>${moment(result[i].createdat).format("ddd")} ${moment(
+            result[i].createdat
+          ).format("LT")}</span>
             <div class="msgBox" style="background-color:white">${
               result[i].chatmessage
             }</div></div>`).appendTo("#comm_thread");

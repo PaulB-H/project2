@@ -106,6 +106,272 @@ fh.user.routines_staged = [];
 /********
 Functions
 *********/
+// Function to initialise state of chatterbox and calendar
+async function initChatTrainerState() {
+  // Start of trigger section
+  {
+    $("#bioscreen").empty();
+    $(
+      `<div>
+                <button class="clients myBtn col" value="${currUser}" onclick="showClientProfile(${currUser})">
+                  Load My Profile
+                </button>
+              </div>
+              <div class="col-sm-12" id="clientBio" style="background-color: white; overflow-y: auto; display: flex;flex-direction: column">
+              </div>
+                                                 `
+    ).appendTo("#bioscreen");
+    $("#clientBio").empty();
+    $.ajax({
+      url: `/api/trainer/clientinfo/${currUser}`,
+      type: "GET",
+      cache: false,
+      success: function(result) {
+        if (result.length == 0) {
+          console.log("User is not a trainer.");
+        } else if (result[0].istrainer != 1) {
+          $("#client_list").css("display", "none");
+          $("#potentialClients").css("display", "none");
+          $(`<div class="trainerPanel" style="position:relative; top:0">
+                    <IFRAME style="display:none" name="hidden-form"></IFRAME>
+                    <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
+                      First Name: <input type="text" name="firstname" value="${result[0].first_name}"><br/>
+                      Last Name: <input type="text" name="lastname" value="${result[0].last_name}"><br/>
+                      Address:<br/>
+                      <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}"><br/>
+                      <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}"><br/>
+                      City: <input type="text" name="city" value="${result[0].city}"><br/>
+                      Postal Code: <input type="text" name="postal_code" value="${result[0].postal_code}"><br/>
+                      Contact No.: <input type="tel" id="phone" name="cellphone" value="${result[0].cellphone}"><br/>
+                      Email: <input type="email" id="email" value="${result[0].email}"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"
+                    name="email"><br/>
+                      Password: <input type="text" id="password" name="password"><br />
+                      Seeking Trainer: <input type="checkbox" name="seeking_trnr" onchange="toggleInfo('seeking', ${result[0].seeking_trainer})" value="${result[0].seeking_trainer}"><br />
+                      Personal Trainer: <input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${result[0].istrainer})" value="${result[0].istrainer}"><br />
+                      Fitness Goals:<br/>
+                      <textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea><br/>
+                      Bio:<br />
+                      <textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
+                    <input type="submit" value="Submit">
+                    </form>
+                  </div>`).appendTo("#clientBio");
+        } else {
+          $("#client_list").css("display", "block");
+          $("#potentialClients").css("display", "block");
+          if (Number(userId) !== Number(currUser)) {
+            $(`<div style="position:relative; top: 0">
+                        <form action="/api/users"  method="POST" target="hidden-form">
+                          First name: <input type="text" name="firstname" value="${result[0].first_name}" readonly><br/>
+                          Last name:  <input type="text" name="lastname" value="${result[0].last_name}" readonly><br/>
+                          Address:<br/>
+                          <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}" readonly><br/>
+                          <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}" readonly><br/>
+                          City: <input type="text" name="city" value="${result[0].city}" readonly><br/>
+                          Postal Code: <input type="text" name="postal_code" value="${result[0].postal_code}" readonly><br/>
+                          Contact No.: <input type="tel" id="rd_only_rd_only_phone" name="cellphone" value="${result[0].cellphone}" readonly><br/>
+                          Email: <input type="email" id="rd_only_email" value="${result[0].email}" readonly><br/>
+                          Fitness Goals:<br/>
+                          <textarea id="rd_only_fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}" readonly></textarea><br/>
+                        </form>
+                      </div>`).appendTo("#clientBio");
+          } else {
+            $(`<div class="trainerPanel" style="position:relative; top:0">
+                        <IFRAME style="display:none" name="hidden-form"></IFRAME>
+                        <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
+                          First Name: <input type="text" name="firstname" value="${result[0].first_name}"><br/>
+                          Last Name: <input type="text" name="lastname" value="${result[0].last_name}"><br/>
+                          Address:<br/>
+                          <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}"><br/>
+                          <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}"><br/>
+                          City: <input type="text" name="city" value="${result[0].city}"><br/>
+                          Postal Code: <input type="text" name="postal_code" value="${result[0].postal_code}"><br/>
+                          Contact No.: <input type="tel" id="phone" name="cellphone" value="${result[0].cellphone}"><br/>
+                          Email: <input type="email" id="email" value="${result[0].email}"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"
+                        name="email"><br/>
+                          Password: <input type="text" id="password" name="password"><br />
+                          Seeking Trainer: <input type="checkbox" name="seeking_trnr" onchange="toggleInfo('seeking', ${result[0].seeking_trainer})" value="${result[0].seeking_trainer}"><br />
+                          Personal Trainer: <input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${result[0].istrainer})" value="${result[0].istrainer}"><br />
+                          Fitness Goals:<br/>
+                          <textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea><br/>
+                          Bio:<br />
+                          <textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
+                        <input type="submit" value="Submit">
+                        </form>
+                      </div>`).appendTo("#clientBio");
+          }
+        }
+      }
+    });
+    // -----------------------------------------------------
+    $.ajax({
+      url: `/api/trainer/client/${currUser}`,
+      type: "GET",
+      cache: false,
+      success: function(result) {
+        // console.log("success reached");
+        $(`<h6>Potential Clients</h6>`).appendTo("#potentialClients");
+        for (i = 0; i < result.length; i++) {
+          $(
+            `<div class="col" style="display:flex">
+                      <button class="clients myBtn" style="width:${
+                        result[i].username.length
+                      }" value="${result[i].id}" onclick="showClientProfile(${
+              result[i].id
+            })">
+                        ${result[i].last_name + ", " + result[i].first_name}
+                        </button>
+                        <button><button class=delBtn value="${
+                          result[i].id
+                        }" onclick="delClient(${
+              result[i].id
+            })">X</button></div>`
+          ).appendTo("#client_list");
+        }
+        getPotentialClients();
+      }
+    });
+    // -----------------------------------------------------
+    $("#potentialClients").empty();
+    $.ajax({
+      url: `/api/trainer/potentials`,
+      type: "GET",
+      cache: false,
+      success: function(result) {
+        $(`<h6>Potential Clients</h6>`).appendTo("#potentialClients");
+        for (i = 0; i < result.length; i++) {
+          $(
+            `<div class="col" style="display:flex">
+                        <button class="correspondent myBtn" style="width:${
+                          result[i].username.length
+                        }" value="${result[i].id}" onclick="showClientProfile(${
+              result[i].id
+            })">
+                      ${result[i].last_name + ", " + result[i].first_name}
+                      </button>
+                      <button class=addBtn value="${
+                        result[i].id
+                      }" onclick="getClient(${result[i].id})">A</button></div>`
+          ).appendTo("#potentialClients");
+        }
+      }
+    });
+    // -----------------------------------------------------
+  }
+  // End of trigger section
+  // Start of chatterbox initialization
+  $("#contacts").empty();
+  $(`<h6>Conversations:</h6>`).appendTo("#contacts");
+  $.ajax({
+    url: `/hubchat/chatter/messengers/${currUser}`,
+    type: "GET",
+    cache: false,
+    success: function(result) {
+      if (result.length > 0) {
+        for (i = 0; i < result.length; i++) {
+          $(
+            `<div>
+                      <button class="correspondents col" value="${result[i].id}" onclick="showConversation(${result[i].id}, '${result[i].username}')">
+                      ${result[i].last_name}, ${result[i].first_name}
+                      </button>
+                    </div>`
+          ).appendTo("#contacts");
+        }
+        getStrangers();
+      }
+    }
+  });
+  // -----------------------------------------------
+  $("#strangers").empty();
+  $(`<h6>Users:</h6>`).appendTo("#strangers");
+  $.ajax({
+    url: `/hubchat/chatter/strangers/${currUser}`,
+    type: "GET",
+    cache: false,
+    success: function(result) {
+      if (result.length > 0) {
+        for (i = 0; i < result.length; i++) {
+          $(
+            `<div>
+                        <button class="correspondents col" value="${result[i].id}" onclick="showConversation(${result[i].id}, '${result[i].username}')">
+                        ${result[i].last_name}, ${result[i].first_name}
+                        </button>
+                      </div>`
+          ).appendTo("#strangers");
+        }
+      }
+    }
+  });
+  // -----------------------------------------------
+  function setMessageJustify(currUser, correspondent) {
+    if (currUser == correspondent) {
+      return "fromMe";
+    } else {
+      return "toMe";
+    }
+  }
+  $.ajax({
+    url: `/hubchat/chatter/${currUser}/${correspondent}`,
+    type: "GET",
+    cache: false,
+    success: function(result) {
+      $("#comm_thread").empty();
+      $("#chat-header").empty();
+      $("#msg_holder").empty();
+      if (result.length > 0) {
+        $(
+          `<h5 id="chat-header" ><span><span>Chat to: ${result[0].last_name}, ${result[0].first_name} (</span><span id="chatWith" style="text-align: left">${correspondentName}</span>)</span></h5>`
+        ).prependTo("#chat-window");
+        console.log(
+          moment(result[i].createdat).format("LL"),
+          moment(result[i].createdat).format("LTS"),
+          result
+        );
+        // function writeMessages() {
+        for (i = 0; i < result.length; i++) {
+          $(`<div class="msgBox ${setMessageJustify(
+            currUser,
+            result[i].sentbyid
+          )}" style="margin: 1em">
+                    <span>${moment(result[i].createdat).format("LL")}</span>
+                    <span>${moment(result[i].createdat).format("LTS")}</span>
+                    <div class = "msgBox" style="background-color:white">${
+                      result[i].chatmessage
+                    }</div></div>`).appendTo("#comm_thread");
+        }
+      }
+      $(`<span id="msg_holder" ><div style="position:absolute; bottom: -40; right: 0">
+                  <textarea
+                  rows="4"
+                  cols="50"
+                  spellcheck="true"
+                  class="card time-block col"
+                  style="background-color:lemonchiffon"
+                  id="msg_editor"
+                  value=""
+                  >
+                  </textarea>
+                  <div><button id="save_btn" class="saveBtn" value="" onclick=saveMessage(${correspondent})>Save Message</button></div>
+                </div></span>`).appendTo("#chat-window");
+    }
+  });
+  // -----------------------------------------------
+  $.ajax({
+    url: `/hubchat/chatter/strangers/${currUser}`,
+    type: "GET",
+    cache: false,
+    success: function(result) {
+      for (i = 0; i < result.length; i++) {
+        $(`<div class="msgBox" style="margin: 1em">
+                                                             <span>${result[i].last_name}, ${result[i].first_name}</span>
+                                                            </div>`).appendTo(
+          ".content_plate2"
+        );
+      }
+    }
+  });
+  // end of chatterbox initialization
+}
+
 fh.func = {};
 
 fh.func.apiCall_exercises = function() {
@@ -766,10 +1032,12 @@ fh.func.addListener_click_userTile = () => {
         let bioPlate = document.querySelector(".bioPlate");
         bioPlate.classList.add("displayBlock");
         bioPlate.classList.remove("displayNone");
+        initChatTrainerState();
       } else if (this.classList.contains("chatTile")) {
         let chatPlate = document.querySelector(".chatPlate");
         chatPlate.classList.add("displayBlock");
         chatPlate.classList.remove("displayNone");
+        initChatTrainerState();
       } else if (this.classList.contains("calendarTile")) {
         let calendarPlate = document.querySelector(".calendarPlate");
         calendarPlate.classList.add("displayBlock");
