@@ -78,7 +78,7 @@ async function showConversation(correspondent, correspondentName) {
           )}" style="margin: 1em">
             <span>${moment(result[i].createdat).format("ddd")} ${moment(
             result[i].createdat
-          ).format("LT")}</span>
+          ).format("LL")} ${moment(result[i].createdat).format("LT")}</span>
             <div class="msgBox" style="background-color:white">${
               result[i].chatmessage
             }</div></div>`).appendTo("#comm_thread");

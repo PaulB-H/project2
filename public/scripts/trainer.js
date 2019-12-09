@@ -98,8 +98,8 @@ async function showClientProfile(userId) {
               Email: <input type="email" id="email" value="${result[0].email}"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"
 							name="email"><br/>
               Password: <input type="text" id="password" name="password"><br />
-              Seeking Trainer: <input type="checkbox" name="seeking_trnr" onchange="toggleInfo('seeking', ${result[0].seeking_trainer})" value="${result[0].seeking_trainer}"><br />
-              Personal Trainer: <input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${result[0].istrainer})" value="${result[0].istrainer}"><br />
+              Seeking Trainer: <input type="checkbox" name="seeking_trnr" value="${result[0].seeking_trainer}"><br />
+              Personal Trainer: <input type="checkbox" id="istrainer" name="istrainer" value="${result[0].istrainer}"><br />
               Fitness Goals:<br/>
               <textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea><br/>
               Bio:<br />
@@ -108,8 +108,8 @@ async function showClientProfile(userId) {
             </form>
           </div>`).appendTo("#clientBio");
       } else {
-        $("#client_list").css("display", "block");
-        $("#potentialClients").css("display", "block");
+        // $("#client_list").css("display", "block");
+        // $("#potentialClients").css("display", "block");
         // console.log($("#profile_header").text);
         if (Number(userId) !== Number(currUser)) {
           $(`<div style="position:relative; top: 0">

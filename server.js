@@ -74,6 +74,7 @@ app.get(`/api/users/trainers`, async function() {
 });
 
 app.get(`/api/trainer/client/:currUser`, async function(req, res) {
+  console.log("Current user is ", req.params.currUser);
   let result = await db.query(
     `select id, username, first_name, last_name from fh_users where trainerid = ? order by last_name, first_name asc`,
     [req.params.currUser, req.params.currUser]

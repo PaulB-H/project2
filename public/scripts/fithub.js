@@ -109,7 +109,7 @@ fh.user.routines_staged = [];
 Functions
 *********/
 // Function to initialise state of chatterbox and calendar
-async function initChatTrainerState() {
+async function initChatTrainerState(currUser) {
   // Start of initialization section
   {
     $("#bioscreen").empty();
@@ -131,8 +131,6 @@ async function initChatTrainerState() {
       cache: false,
       success: function(result) {
         if (result.length > 0) {
-          // $("#client_list").css("display", "none");
-          // $("#potentialClients").css("display", "none");
           $(`<div class="trainerPanel" style="position:relative; top:0">
               <IFRAME style="display:none" name="hidden-form"></IFRAME>
               <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
@@ -166,7 +164,6 @@ async function initChatTrainerState() {
       type: "GET",
       cache: false,
       success: function(result) {
-        // console.log("success reached");
         $(`<h6>Current Clients</h6>`).appendTo("#client_list");
         for (i = 0; i < result.length; i++) {
           $(
@@ -190,7 +187,7 @@ async function initChatTrainerState() {
     // -----------------------------------------------------
     $("#potentialClients").empty();
     $.ajax({
-      url: `/api/trainer/potentials`,
+      url: `/api/trainer/potentials/${currUser}`,
       type: "GET",
       cache: false,
       success: function(result) {
@@ -580,44 +577,46 @@ fh.func.addListener_click_loginButtonProper = function() {
       .then(resp => resp.json())
       .then(data => {
         let id = data[0].id;
+        console.log("ID from fetch ", id);
 
         window.localStorage.setItem("currentUser", id);
         const currUser = localStorage.getItem("currentUser");
-
-        $.ajax({
-          url: `/api/trainer/client/${id}`,
-          type: "GET",
-          cache: false,
-          success: function(result) {
-            if (result.length > 0) {
-              // $("#client_list").css("display", "none");
-              // $("#potentialClients").css("display", "none");
-              $(`<div class="trainerPanel" style="position:relative; top:0">
-              <IFRAME style="display:none" name="hidden-form"></IFRAME>
-              <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
-                First Name: <input type="text" name="firstname" value="${result[0].first_name}"><br/>
-                Last Name: <input type="text" name="lastname" value="${result[0].last_name}"><br/>
-                Address:<br/>
-                <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}"><br/>
-                <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}"><br/>
-                City: <input type="text" name="city" value="${result[0].city}"><br/>
-                Postal Code: <input type="text" name="postal_code" value="${result[0].postal_code}"><br/>
-                Contact No.: <input type="tel" id="phone" name="cellphone" value="${result[0].cellphone}"><br/>
-                Email: <input type="email" id="email" value="${result[0].email}"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"
-              name="email"><br/>
-                Password: <input type="text" id="password" name="password"><br />
-                Seeking Trainer: <input type="checkbox" name="seeking_trnr" onchange="toggleInfo('seeking', ${result[0].seeking_trainer})" value="${result[0].seeking_trainer}"><br />
-                Personal Trainer: <input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${result[0].istrainer})" value="${result[0].istrainer}"><br />
-                Fitness Goals:<br/>
-                <textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea><br/>
-                Bio:<br />
-                <textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
-              <input type="submit" value="Submit">
-              </form>
-            </div>`).appendTo("#clientBio");
-            }
-          } /* END success */
-        }); /* END Kevin's NESTED AJAX */
+        console.log("Current user val from ID ", currUser);
+        initChatTrainerState(currUser);
+        // $.ajax({
+        //   url: `/api/trainer/client/${id}`,
+        //   type: "GET",
+        //   cache: false,
+        //   success: function(result) {
+        //     if (result.length > 0) {
+        //       // $("#client_list").css("display", "none");
+        //       // $("#potentialClients").css("display", "none");
+        //       $(`<div class="trainerPanel" style="position:relative; top:0">
+        //       <IFRAME style="display:none" name="hidden-form"></IFRAME>
+        //       <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
+        //         First Name: <input type="text" name="firstname" value="${result[0].first_name}"><br/>
+        //         Last Name: <input type="text" name="lastname" value="${result[0].last_name}"><br/>
+        //         Address:<br/>
+        //         <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}"><br/>
+        //         <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}"><br/>
+        //         City: <input type="text" name="city" value="${result[0].city}"><br/>
+        //         Postal Code: <input type="text" name="postal_code" value="${result[0].postal_code}"><br/>
+        //         Contact No.: <input type="tel" id="phone" name="cellphone" value="${result[0].cellphone}"><br/>
+        //         Email: <input type="email" id="email" value="${result[0].email}"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"
+        //       name="email"><br/>
+        //         Password: <input type="text" id="password" name="password"><br />
+        //         Seeking Trainer: <input type="checkbox" name="seeking_trnr" onchange="toggleInfo('seeking', ${result[0].seeking_trainer})" value="${result[0].seeking_trainer}"><br />
+        //         Personal Trainer: <input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${result[0].istrainer})" value="${result[0].istrainer}"><br />
+        //         Fitness Goals:<br/>
+        //         <textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea><br/>
+        //         Bio:<br />
+        //         <textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
+        //       <input type="submit" value="Submit">
+        //       </form>
+        //     </div>`).appendTo("#clientBio");
+        //     }
+        //   } /* END success */
+        // }); /* END Kevin's NESTED AJAX */
 
         /* Calls routines for current user */
         fh.func.dbCall_routines();
@@ -707,10 +706,12 @@ fh.func.addListener_click_registerButton = () => {
       .then(resp => resp.json())
       .then(data => {
         let insertId = data.id;
+        console.log("PASSING CURRUSER ", insertId);
 
         window.localStorage.setItem("currentUser", insertId);
         currUser = localStorage.getItem("currentUser");
 
+        console.log("PASSING CURRUSER ", currUser);
         /* Hide register */
         let wrap_register = document.querySelector(".wrap_register");
         wrap_register.classList.add("displayNone");
@@ -887,7 +888,9 @@ fh.func.addListener_click_userTile = () => {
   for (userTile of userTiles) {
     userTile.addEventListener("click", function() {
       /* Logout action/tile checked first. Happens before and prevents removal of middle elements. */
+      console.log("PASSING 1 CURRUSER ", currUser);
       if (this.classList.contains("logoutTile")) {
+        console.log("PASSING 2 CURRUSER ", currUser);
         window.localStorage.removeItem("currentUser");
         window.location.reload();
       }
@@ -906,12 +909,12 @@ fh.func.addListener_click_userTile = () => {
         let bioPlate = document.querySelector(".bioPlate");
         bioPlate.classList.add("displayBlock");
         bioPlate.classList.remove("displayNone");
-        initChatTrainerState();
+        initChatTrainerState(currUser);
       } else if (this.classList.contains("chatTile")) {
         let chatPlate = document.querySelector(".chatPlate");
         chatPlate.classList.add("displayBlock");
         chatPlate.classList.remove("displayNone");
-        initChatTrainerState();
+        initChatTrainerState(currUser);
       } else if (this.classList.contains("calendarTile")) {
         let calendarPlate = document.querySelector(".calendarPlate");
         calendarPlate.classList.add("displayBlock");
@@ -1196,7 +1199,7 @@ fh.func.createObj_exercise = (url, myArray, flag) => {
 
 fh.func.dbCall_routines = () => {
   let currentUser = window.localStorage.getItem("currentUser");
-
+  console.log("PASSING dbCall CURRUSER ", insertId);
   if (currentUser != undefined) {
     let url = `/routine/${currentUser}`;
 
@@ -1384,7 +1387,7 @@ fh.func.init_routinesBicepsInFindbar = function() {
 
 fh.func.init_startingRightPanel = () => {
   let currentUser = window.localStorage.getItem("currentUser");
-
+  dbCall;
   /* There is a currentUser set in localStorage*/
   if (currentUser != undefined) {
     /* Hide Login */
