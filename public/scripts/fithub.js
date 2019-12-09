@@ -581,7 +581,6 @@ fh.func.addListener_click_loginButtonProper = function() {
 
         window.localStorage.setItem("currentUser", id);
         const currUser = localStorage.getItem("currentUser");
-
         $.ajax({
           url: `/api/trainer/client/${id}`,
           type: "GET",
