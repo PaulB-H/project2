@@ -182,7 +182,27 @@ async function getClient(userId) {
     success: function(result) {
       getPotentialClients();
       myClients();
-      // showClientProfile(currUser);
+      async function welcomeMessage(userId) {
+        $.ajax({
+          url: `/hubchat/chatter/save/${currUser}/${userId}/"Hi, as we start our fitness journey together I would like to express to you my commitment to helping you achieve the best you possible. I look forward to working with you."`,
+          type: "POST",
+          data: {},
+          success: function(result) {
+            // $(`<div class="msgBox ${setMessageJustify(
+            //   currUser,
+            //   result[0].sentbyid
+            // )}" style="margin: 1em">
+            // <span>${moment(result[0].createdat).format("LLLL")}</span>
+            // <div style="background-color:white">${
+            //   result[0].chatmessage
+            // }</div></div>`).appendTo("#comm_thread");
+            // $("#msg_editor").val("");
+            // myMessages();
+            // showStrangers();
+          }
+        });
+      }
+      welcomeMessage(userId);
     }
   });
 }
