@@ -161,14 +161,16 @@ async function getStrangers() {
   });
 }
 
-async function showConversation(correspondent, correspondentName) {
-  function setMessageJustify(currUser, correspondent) {
-    if (currUser == correspondent) {
-      return "fromMe";
-    } else {
-      return "toMe";
-    }
+function setMessageJustify(currUser, correspondent) {
+  if (currUser == correspondent) {
+    return "fromMe";
+  } else {
+    return "toMe";
   }
+}
+  
+async function showConversation(correspondent, correspondentName) {
+
 
   $.ajax({
     url: `/hubchat/chatter/${currUser}/${correspondent}`,

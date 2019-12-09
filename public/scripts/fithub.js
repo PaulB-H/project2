@@ -110,8 +110,6 @@ Functions
 *********/
 // Function to initialise state of chatterbox and calendar
 async function initChatTrainerState() {
-
-  // Start of trigger section
   {
     $("#bioscreen").empty();
     $(
@@ -130,9 +128,9 @@ async function initChatTrainerState() {
       type: "GET",
       cache: false,
       success: function(result) {
-        if (result.length == 0) {
-          $("#client_list").css("display", "none");
-          $("#potentialClients").css("display", "none");
+        if (result.length > 0) {
+          // $("#client_list").css("display", "none");
+          // $("#potentialClients").css("display", "none");
           $(`<div class="trainerPanel" style="position:relative; top:0">
               <IFRAME style="display:none" name="hidden-form"></IFRAME>
               <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
@@ -195,21 +193,18 @@ async function initChatTrainerState() {
       type: "GET",
       cache: false,
       success: function(result) {
+        console.log(result, 'HERE!!!');
         $(`<h6>Potential Clients</h6>`).appendTo("#potentialClients");
         for (i = 0; i < result.length; i++) {
-          $(
-            `<div class="col" style="display:flex">
-                        <button class="correspondent myBtn" style="width:${
-                          result[i].username.length
-                        }" value="${result[i].id}" onclick="showClientProfile(${
-              result[i].id
-            })">
-                      ${result[i].last_name + ", " + result[i].first_name}
-                      </button>
-                      <button class=addBtn value="${
-                        result[i].id
-                      }" onclick="getClient(${result[i].id})">A</button></div>`
-          ).appendTo("#potentialClients");
+          $(`<div class="col" style="display:flex">
+              <button class="correspondent myBtn" value="${result[i].id}" onclick="showClientProfile(${result[i].id})">
+                ${result[i].last_name + ", " + result[i].first_name}
+              </button>
+              <button class=addBtn value="${result[i].id}" onclick="getClient(${result[i].id})">
+              A
+              </button>
+            </div>
+          `).appendTo("#potentialClients");
         }
       }
     });
@@ -234,7 +229,6 @@ async function initChatTrainerState() {
                     </div>`
           ).appendTo("#contacts");
         }
-        getStrangers();
       }
     }
   });
@@ -599,8 +593,8 @@ fh.func.addListener_click_loginButtonProper = function() {
               result[0].istrainer != 1 &&
               Number(id) == Number(currUser)
             ) {
-              $("#client_list").css("display", "none");
-              $("#potentialClients").css("display", "none");
+              // $("#client_list").css("display", "none");
+              // $("#potentialClients").css("display", "none");
               // console.log($("#profile_header"));
               // $("#profile_header").text() =
               //   result[0].first_name + " " + result[0].last_name;

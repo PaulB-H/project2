@@ -271,17 +271,17 @@ app.get(`/hubchat`, async function(rep, res) {
 // Messaging module section
 app.get(`/hubchat/chatter/messengers/:currUser`, async function(req, res) {
   let result = await db.query(
-    `select distinct chat.id, usr.username, usr.first_name, usr.last_name
+    `select distinct chat.id, usr.username, usr.first_name, usr.last_name, chat.createdat
        from
        (
         select sendtoid as id, createdat from fh_hubchat 
-        where sentbyid = ?
+        where sentbyid = 1
         union
         select sentbyid as id, createdat from fh_hubchat 
-        where sendtoid = ?
+        where sendtoid = 2
        ) as chat
        inner join fh_users usr on chat.id = usr.id
-       order by chat.createdat desc`,
+       order by chat.createdat asc`,
     [req.params.currUser, req.params.currUser]
   );
   res.send(result);
