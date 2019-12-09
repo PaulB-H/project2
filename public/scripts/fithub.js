@@ -110,7 +110,7 @@ Functions
 *********/
 // Function to initialise state of chatterbox and calendar
 async function initChatTrainerState() {
-  // Start of trigger section
+  // Start of initialization section
   {
     $("#bioscreen").empty();
     $(
@@ -129,7 +129,7 @@ async function initChatTrainerState() {
       type: "GET",
       cache: false,
       success: function(result) {
-        if (result.length == 0) {
+        if (result.length > 0) {
           $("#client_list").css("display", "none");
           $("#potentialClients").css("display", "none");
           $(`<div class="trainerPanel" style="position:relative; top:0">
@@ -184,7 +184,6 @@ async function initChatTrainerState() {
             })">X</button></div>`
           ).appendTo("#client_list");
         }
-        getPotentialClients();
       }
     });
     // -----------------------------------------------------
@@ -233,7 +232,6 @@ async function initChatTrainerState() {
                     </div>`
           ).appendTo("#contacts");
         }
-        getStrangers();
       }
     }
   });
