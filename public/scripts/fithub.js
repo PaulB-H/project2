@@ -130,8 +130,8 @@ async function initChatTrainerState() {
       cache: false,
       success: function(result) {
         if (result.length > 0) {
-          $("#client_list").css("display", "none");
-          $("#potentialClients").css("display", "none");
+          // $("#client_list").css("display", "none");
+          // $("#potentialClients").css("display", "none");
           $(`<div class="trainerPanel" style="position:relative; top:0">
               <IFRAME style="display:none" name="hidden-form"></IFRAME>
               <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
@@ -197,16 +197,14 @@ async function initChatTrainerState() {
         for (i = 0; i < result.length; i++) {
           $(
             `<div class="col" style="display:flex">
-                        <button class="correspondent myBtn" style="width:${
-                          result[i].username.length
-                        }" value="${result[i].id}" onclick="showClientProfile(${
+                        <button class="correspondent myBtn value="${
+                          result[i].id
+                        }" onclick="showClientProfile(${result[i].id})">
+              ${result[i].last_name + ", " + result[i].first_name}
+              </button>
+              <button class=addBtn value="${result[i].id}" onclick="getClient(${
               result[i].id
-            })">
-                      ${result[i].last_name + ", " + result[i].first_name}
-                      </button>
-                      <button class=addBtn value="${
-                        result[i].id
-                      }" onclick="getClient(${result[i].id})">A</button></div>`
+            })">A</button></div>`
           ).appendTo("#potentialClients");
         }
       }
@@ -586,92 +584,36 @@ fh.func.addListener_click_loginButtonProper = function() {
         const currUser = localStorage.getItem("currentUser");
 
         $.ajax({
-          url: `/api/trainer/clientinfo/${id}`,
+          url: `/api/trainer/client/${id}`,
           type: "GET",
           cache: false,
           success: function(result) {
-            if (result.length == 0) {
-              console.log("User is not a trainer.");
-            } else if (
-              result[0].istrainer != 1 &&
-              Number(id) == Number(currUser)
-            ) {
-              $("#client_list").css("display", "none");
-              $("#potentialClients").css("display", "none");
-              // console.log($("#profile_header"));
-              // $("#profile_header").text() =
-              //   result[0].first_name + " " + result[0].last_name;
+            if (result.length > 0) {
+              // $("#client_list").css("display", "none");
+              // $("#potentialClients").css("display", "none");
               $(`<div class="trainerPanel" style="position:relative; top:0">
-                <IFRAME style="display:none" name="hidden-form"></IFRAME>
-                <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
-                  First Name: <input type="text" name="firstname" value="${result[0].first_name}"><br/>
-                  Last Name: <input type="text" name="lastname" value="${result[0].last_name}"><br/>
-                  Address:<br/>
-                  <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}"><br/>
-                  <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}"><br/>
-                  City: <input type="text" name="city" value="${result[0].city}"><br/>
-                  Postal Code: <input type="text" name="postal_code" value="${result[0].postal_code}"><br/>
-                  Contact No.: <input type="tel" id="phone" name="cellphone" value="${result[0].cellphone}"><br/>
-                  Email: <input type="email" id="email" value="${result[0].email}"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"
-                  name="email"><br/>
-                  Password: <input type="text" id="password" name="password"><br />
-                  Seeking Trainer: <input type="checkbox" name="seeking_trnr" onchange="toggleInfo('seeking', ${result[0].seeking_trainer})" value="${result[0].seeking_trainer}"><br />
-                  Personal Trainer: <input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${result[0].istrainer})" value="${result[0].istrainer}"><br />
-                  Fitness Goals:<br/>
-                  <textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea><br/>
-                  Bio:<br />
-                  <textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
-                  <input type="submit" value="Submit">
-                </form>
-              </div>`).appendTo("#clientBio");
-            } else {
-              $("#client_list").css("display", "block");
-              $("#potentialClients").css("display", "block");
-              if (Number(id) !== Number(currUser)) {
-                // $("#profile_header").innerHTML =
-                //   result[0].first_name + " " + result[0].last_name;
-                $(`<div style="position:relative; top: 0">
-                  <form action="/api/users"  method="POST" target="hidden-form">
-                    First name: <input type="text" name="firstname" value="${result[0].first_name}" readonly><br/>
-                    Last name:  <input type="text" name="lastname" value="${result[0].last_name}" readonly><br/>
-                    Address:<br/>
-                    <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}" readonly><br/>
-                    <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}" readonly><br/>
-                    City: <input type="text" name="city" value="${result[0].city}" readonly><br/>
-                    Postal Code: <input type="text" name="postal_code" value="${result[0].postal_code}" readonly><br/>
-                    Contact No.: <input type="tel" id="rd_only_rd_only_phone" name="cellphone" value="${result[0].cellphone}" readonly><br/>
-                    Email: <input type="email" id="rd_only_email" value="${result[0].email}" readonly><br/>
-                    Fitness Goals:<br/>
-                    <textarea id="rd_only_fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}" readonly></textarea><br/>
-                  </form>
-                </div>`).appendTo("#clientBio");
-              } else {
-                // $("#profile_header").innerHTML =
-                //   result[0].first_name + " " + result[0].last_name;
-                $(`<div class="trainerPanel" style="position:relative; top:0">
-                  <IFRAME style="display:none" name="hidden-form"></IFRAME>
-                  <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
-                    First Name: <input type="text" name="firstname" value="${result[0].first_name}"><br/>
-                    Last Name: <input type="text" name="lastname" value="${result[0].last_name}"><br/>
-                    Address:<br/>
-                    <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}"><br/>
-                    <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}"><br/>
-                    City: <input type="text" name="city" value="${result[0].city}"><br/>
-                    Postal Code: <input type="text" name="postal_code" value="${result[0].postal_code}"><br/>
-                    Contact No.: <input type="tel" id="phone" name="cellphone" value="${result[0].cellphone}"><br/>
-                    Email: <input type="email" id="email" value="${result[0].email}"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"
-                    name="email"><br/>
-                    Password: <input type="text" id="password" name="password"><br />
-                    Seeking Trainer: <input type="checkbox" name="seeking_trnr" onchange="toggleInfo('seeking', ${result[0].seeking_trainer})" value="${result[0].seeking_trainer}"><br />
-                    Personal Trainer: <input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${result[0].istrainer})" value="${result[0].istrainer}"><br />
-                    Fitness Goals:<br/>
-                    <textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea><br/>
-                    Bio:<br />
-                    <textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
-                    <input type="submit" value="Submit">
-                  </form>
-                </div>`).appendTo("#clientBio");
-              }
+              <IFRAME style="display:none" name="hidden-form"></IFRAME>
+              <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
+                First Name: <input type="text" name="firstname" value="${result[0].first_name}"><br/>
+                Last Name: <input type="text" name="lastname" value="${result[0].last_name}"><br/>
+                Address:<br/>
+                <input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}"><br/>
+                <input type="text" name="address_line2" placeholder="Address line 2" value="${result[0].address_line2}"><br/>
+                City: <input type="text" name="city" value="${result[0].city}"><br/>
+                Postal Code: <input type="text" name="postal_code" value="${result[0].postal_code}"><br/>
+                Contact No.: <input type="tel" id="phone" name="cellphone" value="${result[0].cellphone}"><br/>
+                Email: <input type="email" id="email" value="${result[0].email}"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"
+              name="email"><br/>
+                Password: <input type="text" id="password" name="password"><br />
+                Seeking Trainer: <input type="checkbox" name="seeking_trnr" onchange="toggleInfo('seeking', ${result[0].seeking_trainer})" value="${result[0].seeking_trainer}"><br />
+                Personal Trainer: <input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${result[0].istrainer})" value="${result[0].istrainer}"><br />
+                Fitness Goals:<br/>
+                <textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea><br/>
+                Bio:<br />
+                <textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
+              <input type="submit" value="Submit">
+              </form>
+            </div>`).appendTo("#clientBio");
             }
           } /* END success */
         }); /* END Kevin's NESTED AJAX */
