@@ -177,7 +177,7 @@ async function myClients() {
          </div>`
         ).appendTo("#client_list");
       }
-      getPotentialClients();
+      // getPotentialClients();
     }
   });
 }

@@ -185,7 +185,7 @@ async function initChatTrainerState() {
             })">X</button></div>`
           ).appendTo("#client_list");
         }
-        getPotentialClients();
+        // getPotentialClients();
       }
     });
     // -----------------------------------------------------
