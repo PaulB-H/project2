@@ -59,7 +59,11 @@ async function showConversation(correspondent, correspondentName) {
         $(
           `<h5 id="chat-header" ><span><span>Chat to: ${result[0].last_name}, ${result[0].first_name} (</span><span id="chatWith" style="text-align: left">${correspondentName}</span>)</span></h5>`
         ).prependTo("#chat-window");
-
+        console.log(
+          moment(result[i].createdat).format("LL"),
+          moment(result[i].createdat).format("LTS"),
+          result
+        );
         // function writeMessages() {
         for (i = 0; i < result.length; i++) {
           $(`<div class="msgBox ${setMessageJustify(
