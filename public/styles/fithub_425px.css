@@ -1,7 +1,8 @@
 /*************
 phones / 425px
 **************/
-@media (max-width: 425px) {
+/*@media (max-width: 425px) {*/
+@media (max-width: 1025px) {
 
 
 	.wrap_fithub {
@@ -108,11 +109,20 @@ phones / 425px
 	.catbar {
 		display: flex;
 		justify-content: center;
-		width: 82%;
+		/*width: 82%;*/
+		/*width: 100%;*/
 		height: 62px;
 		left: 0;
 
 		/*border: 1px solid red;*/
+	}
+
+	.wrap_findbar .catbar {
+		width: 82%;
+	}
+
+	.wrap_userbar .catbar{
+		width: 100%;	
 	}
 
 	.wrap_catbox {
@@ -132,6 +142,10 @@ phones / 425px
 		width: 10px;
 		height: 10px;
 		top: -5px;
+	}
+
+	.dropdown_findbar {
+		width: 75%;
 	}
 
 	.wrap_findables {
@@ -214,26 +228,33 @@ phones / 425px
 		background-color: var(--grey_footer);
 	}
 
-	.pageBtn {
+	.sectionButton {
 		height:  100%;
 		width: 33.33%;
 	}
 
-	.pageBtn_find {
+	.sectionButton.find {
 		border-top-left-radius: 16px;
 
 		/*border: 1px solid black;*/
 	}
 
-	.pageBtn_content {
+	.sectionButton.content {
 		/*border: 1px solid blue;*/
 	}
 
-	.pageBtn_profile {
+	.sectionButton.profile {
 		border-top-right-radius: 16px;
 
 		/*border: 1px solid red;*/
 	}
+
+	.sectionButton.selected {
+		background-color: var(--blue_main);
+	}
+
+
+
 
 
 

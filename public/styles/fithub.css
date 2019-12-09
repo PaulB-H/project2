@@ -104,7 +104,7 @@ body {
   width: 19.8%;
   height: 627px;
   position: relative;
-  top: 46px;
+  /*top: 46px;*/
   margin-left: 4.6%;
 
   /*border: 1px solid black;*/
@@ -157,6 +157,10 @@ body {
   line-height: 40px;
 
   /*border: 1px solid red;*/
+}
+
+.wrap_findbar .catbar {
+  margin-top: 46px;
 }
 
 .wrap_catbox {
@@ -265,7 +269,7 @@ body {
 
 .wrap_dropdown_findbar {
   position: relative;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   text-align: center;
 }
@@ -273,15 +277,15 @@ body {
 .dropdown_findbar {
   position: relative;
   width: 80%;
-  height: 28px;
-  margin-top: 16px;
+  height: 32px;
+  margin-top: 42px;
   margin-left: 10%;
   border-radius: 4px;
   background-color: var(--green_main);
   box-shadow: var(--shadow_opac10);
   cursor: pointer;
   color: white;
-  line-height: 28px;
+  line-height: 32px;
 }
 
 .dropdownArrow_findbar {
@@ -415,8 +419,8 @@ body {
 }
 
 .userTile {
-  /* width: 90%; */
-  width: 115px;
+  width: 90%; 
+  /*width: 115px;*/
   height: 60px;
   margin: 0 auto 0;
   background-color: white;
@@ -447,7 +451,7 @@ body {
   height: 15px;
   align-self: center;
   position: absolute;
-  left: -15px;
+  left: 46px;
   background-image: url("../img/leftArrow.svg");
   background-size: contain;
   background-repeat: no-repeat;
@@ -457,7 +461,7 @@ body {
 .userTile > div > p {
   display: block;
   position: relative;
-  left: 10px;
+  left: 84px;
   color: var(--blue_main);
   font-size: 20px;
   font-weight: 600;

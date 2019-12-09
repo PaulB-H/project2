@@ -262,6 +262,7 @@ async function showClientProfile(userId) {
       } else {
         $("#client_list").css("display", "block");
         $("#potentialClients").css("display", "block");
+        // console.log($("#profile_header").text);
         if (Number(userId) !== Number(currUser)) {
           $(`<div style="position:relative; top: 0">
             <form action="/api/users"  method="POST" target="hidden-form">
