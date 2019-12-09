@@ -163,25 +163,28 @@ async function initChatTrainerState() {
       type: "GET",
       cache: false,
       success: function(result) {
-        $(`<h6>Current Clients</h6>`).appendTo("#client_list");
-        for (i = 0; i < result.length; i++) {
-          $(
-            `<div class="col" style="display:flex">
+        if (result.length > 0) {
+          console.log("Trainer route ", result);
+          $(`<h6>Current Clients</h6>`).appendTo("#client_list");
+          for (i = 0; i < result.length; i++) {
+            $(
+              `<div class="col" style="display:flex">
                       <button class="clients myBtn" style="width:${
                         result[i].username.length
                       }" value="${result[i].id}" onclick="showClientProfile(${
-              result[i].id
-            })">
+                result[i].id
+              })">
                         ${result[i].last_name + ", " + result[i].first_name}
                         </button>
                         <button><button class=delBtn value="${
                           result[i].id
                         }" onclick="delClient(${
-              result[i].id
-            })">X</button></div>`
-          ).appendTo("#client_list");
+                result[i].id
+              })">X</button></div>`
+            ).appendTo("#client_list");
+          }
+          // getPotentialClients();
         }
-        // getPotentialClients();
       }
     });
     // -----------------------------------------------------
@@ -191,22 +194,24 @@ async function initChatTrainerState() {
       type: "GET",
       cache: false,
       success: function(result) {
-        console.log(result, "HERE!!!");
-        $(`<h6>Potential Clients</h6>`).appendTo("#potentialClients");
-        for (i = 0; i < result.length; i++) {
-          $(`<div class="col" style="display:flex">
+        if (result.length > 0) {
+          console.log(result, "HERE!!!");
+          $(`<h6>Potential Clients</h6>`).appendTo("#potentialClients");
+          for (i = 0; i < result.length; i++) {
+            $(`<div class="col" style="display:flex">
               <button class="correspondent myBtn" value="${
                 result[i].id
               }" onclick="showClientProfile(${result[i].id})">
                 ${result[i].last_name + ", " + result[i].first_name}
               </button>
               <button class=addBtn value="${result[i].id}" onclick="getClient(${
-            result[i].id
-          })">
+              result[i].id
+            })">
               A
               </button>
             </div>
           `).appendTo("#potentialClients");
+          }
         }
       }
     });
@@ -581,7 +586,7 @@ fh.func.addListener_click_loginButtonProper = function() {
       .then(data => {
         let id = data[0].id;
 
-        const currUser = id;
+        currUser = id;
         window.localStorage.setItem("currentUser", id);
 
         console.log(currUser, "currUser on login 587 ");
@@ -1355,7 +1360,7 @@ fh.func.init_routinesBicepsInFindbar = function() {
 
 fh.func.init_startingRightPanel = () => {
   let currentUser = window.localStorage.getItem("currentUser");
-  dbCall;
+
   /* There is a currentUser set in localStorage*/
   if (currentUser != undefined) {
     /* Hide Login */

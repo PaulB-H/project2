@@ -44,8 +44,8 @@ if (process.env.JAWSDB_URL) {
     host: "localhost",
     port: 3306,
     user: "root",
-    // password: "IamTheBoxGhost1971",
-    password: "steven123",
+    password: "IamTheBoxGhost1971",
+    // password: "steven123",
     // password: "sqlrootpass",
     database: "fitness_hub_db"
   });
@@ -74,7 +74,6 @@ app.get(`/api/users/trainers`, async function() {
 });
 
 app.get(`/api/trainer/client/:currUser`, async function(req, res) {
-  console.log("Current user is ", req.params.currUser);
   let result = await db.query(
     `select id, username, first_name, last_name from fh_users where trainerid = ? order by last_name, first_name asc`,
     [req.params.currUser, req.params.currUser]
@@ -100,8 +99,12 @@ app.post(`/api/trainer/getclient/:currUser/:userId`, async function(req, res) {
 
 app.get(`/api/trainer/potentials/:currUser`, async function(req, res) {
   let result = await db.query(
-    `select id, username, first_name, last_name from fh_users where not trainerid and email is not null and seeking_trainer and id != ? order by last_name, first_name asc`,
-    [req.params.currUser]
+    `select id, username, first_name, last_name from fh_users 
+where not trainerid 
+and email is not null 
+and seeking_trainer 
+and ? in (select id from fh_users u2 where u2.id = ? and istrainer) order by last_name, first_name asc;`,
+    [req.params.currUser, req.params.currUser]
   );
   res.send(result);
 });
@@ -277,10 +280,10 @@ app.get(`/hubchat/chatter/messengers/:currUser`, async function(req, res) {
        from
        (
         select sendtoid as id, createdat from fh_hubchat 
-        where sentbyid = 1
+        where sentbyid = ?
         union
         select sentbyid as id, createdat from fh_hubchat 
-        where sendtoid = 2
+        where sendtoid = ?
        ) as chat
        inner join fh_users usr on chat.id = usr.id
        order by chat.createdat asc`,

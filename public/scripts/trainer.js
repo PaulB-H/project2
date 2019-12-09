@@ -5,25 +5,27 @@ async function myClients() {
     type: "GET",
     cache: false,
     success: function(result) {
-      // console.log("success reached");
-      $(`<h6>Current Clients</h6>`).appendTo("#potentialClients");
-      for (i = 0; i < result.length; i++) {
-        $(
-          `<div class="col" style="display:flex">
+      if (result.length > 0) {
+        // console.log("success reached");
+        $(`<h6>Current Clients</h6>`).appendTo("#potentialClients");
+        for (i = 0; i < result.length; i++) {
+          $(
+            `<div class="col" style="display:flex">
             <button class="clients myBtn" style="width:${
               result[i].username.length
             }" value="${result[i].id}" onclick="showClientProfile(${
-            result[i].id
-          })">
+              result[i].id
+            })">
              ${result[i].last_name + ", " + result[i].first_name}
             </button>
              <button><button class=delBtn value="${
                result[i].id
              }" onclick="delClient(${result[i].id})">X</button>
          </div>`
-        ).appendTo("#client_list");
+          ).appendTo("#client_list");
+        }
+        // getPotentialClients();
       }
-      // getPotentialClients();
     }
   });
 }
@@ -35,23 +37,25 @@ async function getPotentialClients() {
     type: "GET",
     cache: false,
     success: function(result) {
-      $(`<h6>Potential Clients</h6>`).appendTo("#potentialClients");
-      for (i = 0; i < result.length; i++) {
-        console.log("Testing Potential");
-        $(
-          `<div class="col" style="display:flex">
+      if (result.length > 0) {
+        $(`<h6>Potential Clients</h6>`).appendTo("#potentialClients");
+        for (i = 0; i < result.length; i++) {
+          console.log("Testing Potential");
+          $(
+            `<div class="col" style="display:flex">
             <button class="correspondent myBtn" style="width:${
               result[i].username.length
             }" value="${result[i].id}" onclick="showClientProfile(${
-            result[i].id
-          })">
+              result[i].id
+            })">
              ${result[i].last_name + ", " + result[i].first_name}
             </button>
             <button class=addBtn value="${result[i].id}" onclick="getClient(${
-            result[i].id
-          })">A</button>
+              result[i].id
+            })">A</button>
           </div>`
-        ).appendTo("#potentialClients");
+          ).appendTo("#potentialClients");
+        }
       }
     }
   });
