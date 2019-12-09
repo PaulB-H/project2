@@ -102,6 +102,7 @@ app.get(`/api/trainer/potentials`, async function(req, res) {
   let result = await db.query(
     `select id, username, first_name, last_name from fh_users where not trainerid and email is not null and seeking_trainer order by last_name, first_name asc`
   );
+  console.log(result, 'result');
   res.send(result);
 });
 

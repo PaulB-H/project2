@@ -593,7 +593,9 @@ fh.func.addListener_click_registerButton = () => {
     else if (obj.istrainer.classList.contains('toggle_on')) { obj.istrainer = 1; };
 
     obj.seeking_trnr = document.querySelector('.seekingTrainer');
-    if (obj.seeking_trnr.classList.contains('toggle_off')) { obj.seeking_trnr = 0; }
+    if(obj.seeking_trnr.classList.contains('toggle_off')){
+      obj.seeking_trnr = 0;
+    }
     else if (obj.seeking_trnr.classList.contains('toggle_on')) { obj.seeking_trnr = 1; };
 
     obj.email = document.querySelector('.reg_email').value.trim();
@@ -1406,6 +1408,18 @@ fh.func.populateRoutineDetails = (me)=>{
 Initialization
 **************/
 window.addEventListener("DOMContentLoaded", event => {
+
+
+
+  fetch('/api/trainer/potentials')
+  .then((resp)=>resp.json())
+  .then((data)=>{
+    console.log(data, 'data 1415');
+  });
+
+
+
+
 
   /* Retrieve local storage token */
   currUser = localStorage.getItem("currentUser");

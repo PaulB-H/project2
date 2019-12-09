@@ -120,7 +120,7 @@ async function showClientProfile(userId) {
       } else {
         $("#client_list").css("display", "block");
         $("#potentialClients").css("display", "block");
-        console.log($("#profile_header").text);
+        // console.log($("#profile_header").text);
         if (Number(userId) !== Number(currUser)) {
           // $("#profile_header").innerHTML =
           //   result[0].first_name + " " + result[0].last_name;
