@@ -110,6 +110,9 @@ Functions
 *********/
 // Function to initialise state of chatterbox and calendar
 async function initChatTrainerState() {
+
+  console.log('Hello Steven');
+
   // Start of trigger section
   {
     $("#bioscreen").empty();
