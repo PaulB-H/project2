@@ -124,6 +124,7 @@ async function initChatTrainerState() {
                                                  `
     ).appendTo("#bioscreen");
     $("#clientBio").empty();
+    console.log("Initializing ", currUser);
     $.ajax({
       url: `/api/trainer/clientinfo/${currUser}`,
       type: "GET",

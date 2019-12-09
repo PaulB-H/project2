@@ -76,7 +76,7 @@ app.get(`/api/users/trainers`, async function() {
 app.get(`/api/trainer/client/:currUser`, async function(req, res) {
   let result = await db.query(
     `select id, username, first_name, last_name from fh_users where trainerid = ? order by last_name, first_name asc`,
-    [req.params.currUser]
+    [req.params.currUser, req.params.currUser]
   );
   res.send(result);
 });
@@ -97,9 +97,10 @@ app.post(`/api/trainer/getclient/:currUser/:userId`, async function(req, res) {
   res.send(result);
 });
 
-app.get(`/api/trainer/potentials`, async function(req, res) {
+app.get(`/api/trainer/potentials/:currUser`, async function(req, res) {
   let result = await db.query(
-    `select id, username, first_name, last_name from fh_users where not trainerid and email is not null and seeking_trainer order by last_name, first_name asc`
+    `select id, username, first_name, last_name from fh_users where not trainerid and email is not null and seeking_trainer and id != ? order by last_name, first_name asc`,
+    [req.params.currUser]
   );
   res.send(result);
 });

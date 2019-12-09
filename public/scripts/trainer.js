@@ -31,7 +31,7 @@ async function myClients() {
 async function getPotentialClients() {
   $("#potentialClients").empty();
   $.ajax({
-    url: `/api/trainer/potentials`,
+    url: `/api/trainer/potentials/${currUser}`,
     type: "GET",
     cache: false,
     success: function(result) {
@@ -70,6 +70,7 @@ async function showClientProfile(userId) {
 `
   ).appendTo("#bioscreen");
   $("#clientBio").empty();
+  console.log("Loading Bio ", currUser);
   $.ajax({
     url: `/api/trainer/clientinfo/${userId}`,
     type: "GET",
