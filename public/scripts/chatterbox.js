@@ -168,10 +168,8 @@ function setMessageJustify(currUser, correspondent) {
     return "toMe";
   }
 }
-  
+
 async function showConversation(correspondent, correspondentName) {
-
-
   $.ajax({
     url: `/hubchat/chatter/${currUser}/${correspondent}`,
     type: "GET",
