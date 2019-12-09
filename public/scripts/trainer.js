@@ -61,7 +61,7 @@ async function showClientProfile(userId) {
   $(
     `<div>
       <button class="clients myBtn col" value="${currUser}" onclick="showClientProfile(${currUser})">
-        My Profile
+        Load My Profile
       </button>
     </div>
     <div class="col-sm-12" id="clientBio" style="background-color: white; overflow-y: auto; display: flex;flex-direction: column">

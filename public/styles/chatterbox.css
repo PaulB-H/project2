@@ -2,7 +2,6 @@
   height: 60%;
 }
 
-
 .fromMe {
   width: 60%;
   display: flex;
@@ -46,6 +45,6 @@
   margin-right: 15px;
 }
 
-/* .msgBox {
-  border-radius: 15%;
-} */
+.msgBox {
+  padding: 5px;
+}
