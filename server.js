@@ -127,6 +127,9 @@ app.post(`/api/user/update/:currUser`, async function(req, res) {
   } else {
     let seekingVal = req.body.seeking_trnr;
   }
+
+  cellphone = req.body.cellphone.replace(/\D/g, "");
+
   let result = await db.query(
     `update fh_users set username = ?,
     first_name = ?, 
@@ -151,7 +154,7 @@ app.post(`/api/user/update/:currUser`, async function(req, res) {
       req.body.address_line2,
       req.body.city,
       req.body.postal_code,
-      req.body.cellphone,
+      cellphone,
       req.body.email,
       req.body.user_password,
       req.body.fitness_goals,
