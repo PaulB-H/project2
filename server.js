@@ -265,7 +265,8 @@ app.post("/calendar/save/:currUser/:myDate", async function(req, res) {
       hr20 = ?, 
       hr21 = ?, 
       hr22 = ?,
-      hr23 = ?
+      hr23 = ?,
+      hr24 = ?
       where DATE(createdat) = DATE(?)
       and   userid = ?`,
       [
