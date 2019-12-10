@@ -110,25 +110,46 @@ and ? in (select id from fh_users u2 where u2.id = ? and istrainer) order by las
 });
 
 app.get(`/api/trainer/clientinfo/:userId`, async function(req, res) {
-  let result = await db.query(`select * from fh_users where id = ?`, [
-    req.params.userId
-  ]);
+  let result = await db.query(
+    `select id,
+    username,
+    first_name,
+    last_name,
+    address_line1,
+    address_line2,
+    city,
+    postal_code,
+    trainerid, 
+    CONCAT(substr(cellphone, 1,  3), "-", substr(cellphone, 4,  3),"-",substr(cellphone, 7)) cellphone,
+    email,
+    user_password,
+    fitness_goals,
+    seeking_trainer,
+    istrainer,
+    profile_pic_path,
+    createdat,
+    trainer_bio
+    from fh_users where id = ?`,
+    [req.params.userId]
+  );
   res.send(result);
 });
 
 app.post(`/api/user/update/:currUser`, async function(req, res) {
+  let trainerVal;
+  let seekingVal;
   if (req.body.istrainer == null || req.body.istrainer == undefined) {
-    let trainerVal = 0;
+    trainerVal = 0;
   } else {
-    let trainerVal = req.body.istrainer;
+    trainerVal = req.body.istrainer;
   }
   if (req.body.seeking_trnr == null || req.body.seeking_trnr == undefined) {
-    let seekingVal = 0;
+    seekingVal = 0;
   } else {
-    let seekingVal = req.body.seeking_trnr;
+    seekingVal = req.body.seeking_trnr;
   }
 
-  cellphone = req.body.cellphone.replace(/\D/g, "");
+  let cellphone = req.body.cellphone.replace(/\D/g, "");
 
   let result = await db.query(
     `update fh_users set username = ?,

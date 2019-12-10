@@ -93,8 +93,7 @@ async function showClientProfile(userId) {
         result[0].istrainer != 1 &&
         Number(userId) == Number(currUser)
       ) {
-        // $("#client_list").css("display", "none");
-        // $("#potentialClients").css("display", "none");
+        console.log("Phone is ");
         $(`<div class="trainerPanel" style="position:relative; top:0">
             <IFRAME style="display:none" name="hidden-form"></IFRAME>
             <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
