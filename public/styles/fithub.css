@@ -119,6 +119,7 @@ body {
   margin-left: 3.6%;
   overflow-y: scroll;
   overflow-x: hidden;
+  padding-bottom: 46px;
 
   /*border: 1px solid blue;*/
 }
