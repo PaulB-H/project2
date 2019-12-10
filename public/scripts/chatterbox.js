@@ -7,6 +7,7 @@ async function myMessages() {
     type: "GET",
     cache: false,
     success: function(result) {
+      console.log('result 10 chatterbox',result)
       if (result.length > 0) {
         for (i = 0; i < result.length; i++) {
           $(
