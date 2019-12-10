@@ -1170,8 +1170,6 @@ fh.func.createObj_exercise = (url, myArray, flag) => {
 
 fh.func.dbCall_routines = () => {
   let currentUser = window.localStorage.getItem("currentUser");
-  console.log(currentUser, "currentUser - 1206");
-  console.log(currUser, "currUser - 1207");
 
   if (currentUser != undefined) {
     let url = `/routine/${currentUser}`;
@@ -1477,7 +1475,7 @@ fh.func.populateRoutineDetails = me => {
 
 // Populate trainer list
 fh.func.dbCall_trainers = () => {
-  if (currentUser != undefined) {
+  if (currUser != undefined) {
     let url = `/api/users/trainers`;
 
     fetch(url)

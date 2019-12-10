@@ -94,21 +94,6 @@ async function showConversation(correspondent, correspondentName) {
   });
 }
 
-async function showStrangers() {
-  $.ajax({
-    url: `/hubchat/chatter/strangers/${currUser}`,
-    type: "GET",
-    cache: false,
-    success: function(result) {
-      for (i = 0; i < result.length; i++) {
-        $(`<div class="msgBox" style="margin: 1em">
-            <span>${result[i].last_name}, ${result[i].first_name}</span>
-           </div>`).appendTo(".content_plate2");
-      }
-    }
-  });
-}
-
 async function saveMessage(msgTo) {
   if (
     $("#msg_editor")
