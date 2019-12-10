@@ -54,6 +54,8 @@
 
   fh.func.populateRoutineDetails = (me)=>{
 
+  fh.func.scrollBottom_chat = ()=>{
+
 
   Initialization
   ==============
@@ -259,19 +261,6 @@ async function initChatTrainerState() {
                       </div>`
           ).appendTo("#strangers");
         }
-      }
-    }
-  });
-  // -----------------------------------------------
-  $.ajax({
-    url: `/hubchat/chatter/strangers/${currUser}`,
-    type: "GET",
-    cache: false,
-    success: function(result) {
-      for (i = 0; i < result.length; i++) {
-        $(`<div class="msgBox" style="margin: 1em">
-            <span>${result[i].last_name}, ${result[i].first_name}</span>
-          </div>`).appendTo(".content_plate2");
       }
     }
   });
@@ -1577,7 +1566,16 @@ fh.func.populateRoutineDetails = me => {
   });
 };
 
+
+fh.func.scrollBottom_chat = ()=>{
+
+  let comm_thread = document.querySelector('#comm_thread');
+  comm_thread.scrollTo(0, comm_thread.getBoundingClientRect().bottom)
+};
+
+
 // Populate trainer list
+// UNUSED CURRENTLY
 fh.func.dbCall_trainers = () => {
   if (currUser != undefined) {
     let url = `/api/users/trainers`;
@@ -1676,15 +1674,19 @@ window.addEventListener("DOMContentLoaded", event => {
     .querySelector("#generalTipsButton")
     .addEventListener("click", function() {
       document.querySelector("#generalTipsContent").classList.remove("d-none");
+      document.querySelector("#generalTipsButton").classList.add("activeSplashNav");
+      document.querySelector("#volumeAndrepsButton").classList.remove("activeSplashNav");
+      document.querySelector("#theBig3Button").classList.remove("activeSplashNav");
       document.querySelector("#volumeAndrepsContent").classList.add("d-none");
       document.querySelector("#theBig3Content").classList.add("d-none");
     });
   document
     .querySelector("#volumeAndrepsButton")
     .addEventListener("click", function() {
-      document
-        .querySelector("#volumeAndrepsContent")
-        .classList.remove("d-none");
+      document.querySelector("#volumeAndrepsContent").classList.remove("d-none");
+      document.querySelector("#volumeAndrepsButton").classList.add("activeSplashNav");
+      document.querySelector("#generalTipsButton").classList.remove("activeSplashNav");
+      document.querySelector("#theBig3Button").classList.remove("activeSplashNav");
       document.querySelector("#generalTipsContent").classList.add("d-none");
       document.querySelector("#theBig3Content").classList.add("d-none");
     });
@@ -1692,6 +1694,9 @@ window.addEventListener("DOMContentLoaded", event => {
     .querySelector("#theBig3Button")
     .addEventListener("click", function() {
       document.querySelector("#theBig3Content").classList.remove("d-none");
+      document.querySelector("#theBig3Button").classList.add("activeSplashNav");
+      document.querySelector("#generalTipsButton").classList.remove("activeSplashNav");
+      document.querySelector("#volumeAndrepsButton").classList.remove("activeSplashNav");
       document.querySelector("#volumeAndrepsContent").classList.add("d-none");
       document.querySelector("#generalTipsContent").classList.add("d-none");
     });
