@@ -35,6 +35,7 @@
   fh.func.addListener_click_userTile = ()=>{
   
   fh.func.centerPanelScrollTop = ()=>{
+  fh.func.centerPanel_moveTo = ()=>{
   fh.func.clearContext = ()=>{
   fh.func.click_findableExercise = function(me) {
   fh.func.createAppend_selectedExerciseGroup = function(exerciseBucket) {
@@ -914,9 +915,7 @@ fh.func.addListener_click_userTile = () => {
   for (userTile of userTiles) {
     userTile.addEventListener("click", function() {
       /* Logout action/tile checked first. Happens before and prevents removal of middle elements. */
-      console.log("PASSING 1 CURRUSER ", currUser);
       if (this.classList.contains("logoutTile")) {
-        console.log("PASSING 2 CURRUSER ", currUser);
         window.localStorage.removeItem("currentUser");
         window.location.reload();
       }
@@ -951,9 +950,28 @@ fh.func.addListener_click_userTile = () => {
         welcomePlate.classList.add("displayBlock");
         welcomePlate.classList.remove("displayNone");
       }
+
+
+      /* On mobile, move to center after select routine, changes styles of nav buttons */
+      let screenWidth = screen.width;
+      
+      if (screenWidth <= 1025) {
+        
+        /* Moves to center */
+        fh.func.centerPanel_moveTo();
+
+        /* Selected Style for center button */
+        let sectionButton_content = document.querySelector('.sectionButton.content');
+        sectionButton_content.classList.add('selected');
+
+        let sectionButton_profile = document.querySelector('.sectionButton.profile');
+        sectionButton_profile.classList.remove('selected');
+      };
+
     });
   }
 };
+
 
 fh.func.centerPanelScrollTop = () => {
   let wrap_context = document.querySelector(".wrap_context");
@@ -963,6 +981,15 @@ fh.func.centerPanelScrollTop = () => {
     behavior: "smooth"
   });
 };
+
+
+fh.func.centerPanel_moveTo = ()=>{
+
+  let innerwrap_fithub = document.querySelector('.innerwrap_fithub');
+
+  innerwrap_fithub.style.marginLeft = `${fh.data.mobileScreenPositions[1]}%`;
+};
+
 
 fh.func.clearContext = () => {
   let contentPlates = document.querySelectorAll(
@@ -1085,8 +1112,15 @@ fh.func.click_findableExercise = function(me) {
 
       let addToNewRoutineButton = document.createElement("div");
       addToNewRoutineButton.className = "addToNewRoutineButton";
+      if( !(currUser > 0) ){addToNewRoutineButton.classList.add('displayNone')};
       addToNewRoutineButton.innerHTML = "Add to New Routine";
       addToNewRoutineButton.addEventListener("click", function() {
+        
+        /* Show stageRoutineBlock */
+        let stageRoutineBlock = document.querySelector(".stageRoutineBlock");
+        stageRoutineBlock.classList.add("displayBlock");
+        stageRoutineBlock.classList.remove("displayNone");
+
         /* Hide catbar */
         let user_wrap_catbar = document.querySelector(".user_wrap_catbar");
         user_wrap_catbar.classList.add("displayNone");
@@ -1102,10 +1136,6 @@ fh.func.click_findableExercise = function(me) {
         routinesBlock.classList.add("displayNone");
         routinesBlock.classList.remove("displayBlock");
 
-        /* Show stageRoutineBlock */
-        let stageRoutineBlock = document.querySelector(".stageRoutineBlock");
-        stageRoutineBlock.classList.add("displayBlock");
-        stageRoutineBlock.classList.remove("displayNone");
 
         /* Create exerciseObj*/
         let exerciseObj = {};
@@ -1475,58 +1505,76 @@ fh.func.populateRoutineDetails = me => {
   /* Fetch for routine details */
   let url = `/routine/details/${routineId}`;
   fetch(url)
-    .then(resp => resp.json())
-    .then(data => {
-      /* Remove all content_plate except for the userPlates (chat, calendar, trainer) */
-      fh.func.clearContext();
-      fh.func.clearContext_hideUserPlate();
+  .then(resp => resp.json())
+  .then(data => {
+    /* Remove all content_plate except for the userPlates (chat, calendar, trainer) */
+    fh.func.clearContext();
+    fh.func.clearContext_hideUserPlate();
 
-      /* Loop to create and append exercise plates for clicked routine */
-      for (exercise of data) {
-        /*********************************************
-      CREATE & APPEND PLATE IN CENTER CONTEXT COLUMN
-      **********************************************/
+    /* Loop to create and append exercise plates for clicked routine */
+    for (exercise of data) {
+      /*********************************************
+    CREATE & APPEND PLATE IN CENTER CONTEXT COLUMN
+    **********************************************/
 
-        /* Start creating HTML. Not complete yet. */
-        let html = `
-        <div class="content_plate">
-          <div class="cplate_exerciseName">${exercise.exercise_name}</div>
-          <div class="cplate_exerciseDesc">${exercise.exercise_desc}</div>
-      `;
+      /* Start creating HTML. Not complete yet. */
+      let html = `
+      <div class="content_plate">
+        <div class="cplate_exerciseName">${exercise.exercise_name}</div>
+        <div class="cplate_exerciseDesc">${exercise.exercise_desc}</div>
+    `;
 
-        /* Flex container for exerciseImagesCont and cplate_exerciseReps */
-        html += `<div class="cplate_flexExerciseAndReps">`;
+      /* Flex container for exerciseImagesCont and cplate_exerciseReps */
+      html += `<div class="cplate_flexExerciseAndReps">`;
 
-        /* If images are present in the array, create and append them */
-        if (exercise.front_img_src != undefined) {
-          html += `
-          <div class="exerciseImagesCont">
-            
-            <div  class="exercise_image asARoutineTile"
-                  style="background-image: url(${exercise.front_img_src})"
-                  imgPath_1="${exercise.front_img_src}"></div>
-            
-            <div  class="exercise_image_2 asARoutineTile" 
-                  style="background-image: url(${exercise.rear_img_src})"
-                  imgPath_2="${exercise.rear_img_src}"></div>
-          </div>
-        `;
-        }
-
-        /* cplate_exerciseReps + close cplate_flexExerciseAndReps */
+      /* If images are present in the array, create and append them */
+      if (exercise.front_img_src != undefined) {
         html += `
-          <p class="cplate_exerciseReps">${exercise.exercise_reps}</p>
+        <div class="exerciseImagesCont">
+          
+          <div  class="exercise_image asARoutineTile"
+                style="background-image: url(${exercise.front_img_src})"
+                imgPath_1="${exercise.front_img_src}"></div>
+          
+          <div  class="exercise_image_2 asARoutineTile" 
+                style="background-image: url(${exercise.rear_img_src})"
+                imgPath_2="${exercise.rear_img_src}"></div>
         </div>
       `;
-
-        /* Close HTML/ content_plate */
-        html += `</div>`;
-
-        /* Append to DOM */
-        let wrap_context = document.querySelector(".wrap_context");
-        wrap_context.innerHTML += html;
       }
-    });
+
+      /* cplate_exerciseReps + close cplate_flexExerciseAndReps */
+      html += `
+        <p class="cplate_exerciseReps">${exercise.exercise_reps}</p>
+      </div>
+    `;
+
+      /* Close HTML/ content_plate */
+      html += `</div>`;
+
+      /* Append to DOM */
+      let wrap_context = document.querySelector(".wrap_context");
+      wrap_context.innerHTML += html;
+    }
+
+
+    /* On mobile, move to center after select routine, changes styles of nav buttons */
+    let screenWidth = screen.width;
+    
+    if (screenWidth <= 1025) {
+      
+      /* Moves to center */
+      fh.func.centerPanel_moveTo();
+
+      /* Selected Style for center button */
+      let sectionButton_content = document.querySelector('.sectionButton.content');
+      sectionButton_content.classList.add('selected');
+
+      let sectionButton_profile = document.querySelector('.sectionButton.profile');
+      sectionButton_profile.classList.remove('selected');
+    };
+
+  });
 };
 
 // Populate trainer list
