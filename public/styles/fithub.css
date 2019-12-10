@@ -148,7 +148,7 @@ body {
 }
 
 .catbar {
-  display: flex;
+  display: none;
   justify-content: center;
   width: 100%;
   height: 70px;

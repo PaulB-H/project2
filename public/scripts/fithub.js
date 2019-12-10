@@ -275,6 +275,60 @@ async function initChatTrainerState() {
     }
   });
   // end of chatterbox initialization
+
+  // Calendar Initialization
+  let dspTime;
+  $.ajax({
+    url: `/calendar/load/${moment($("#selDate").val()).format(
+      "YYYY-MM-DD"
+    )}/${currUser}`,
+    type: "GET",
+    cache: false,
+    success: function(result) {
+      console.log(result, "Calendar success reached");
+      $("#day-view").empty();
+      let time_slots = new Date();
+      if (result.length == 0) {
+        for (i = 0; i < 24; i++) {
+          time_slots.setHours(i, 0, 0, 0);
+          dspTime = time_slots.toLocaleString([], {
+            hour: "2-digit",
+            minute: "2-digit"
+          });
+          $(`<div class="" id="time-block">
+              <p class="inline_time"> ${dspTime} </p>
+              <div class="fieldRow_calendar">
+                <textarea spellcheck="true" class="time-block timeField" id="eventhr${i +
+                  1}" value=""></textarea>
+                <button class="saveBtn_calendar" value="${currUser}" onclick="save_event()">Save</button>
+              </div>
+            </div>`).appendTo("#day-view");
+        }
+      } else {
+        for (i = 0; i < 24; i++) {
+          time_slots.setHours(i, 0, 0, 0);
+          dspTime = time_slots.toLocaleString([], {
+            hour: "2-digit",
+            minute: "2-digit"
+          });
+          $(`<div class="" id="time-block">
+              <p class="inline_time"> ${dspTime} </p>
+              <div class="fieldRow_calendar">
+                <textarea spellcheck="true" class="time-block timeField" id="eventhr${i +
+                  1}" value="">${result[0][`hr${i + 1}`]}</textarea>
+                <button class="saveBtn_calendar" value="${currUser}" onclick="save_event()">Save</button>
+              </div>
+            </div>`).appendTo("#day-view");
+        }
+      }
+    },
+    error: function(err) {
+      console.log("Error found - ", err);
+    },
+    complete: function() {
+      // console.log("Got here");
+    }
+  });
 }
 
 fh.func = {};
@@ -576,7 +630,6 @@ fh.func.addListener_click_loginButtonProper = function() {
   let loginButton = document.querySelector(".loginButton");
 
   loginButton.addEventListener("click", function() {
-
     let obj = {};
     obj.email = document.querySelector(".loginEmail").value;
     obj.user_password = document.querySelector(".loginPass").value;
@@ -892,6 +945,7 @@ fh.func.addListener_click_userTile = () => {
         let calendarPlate = document.querySelector(".calendarPlate");
         calendarPlate.classList.add("displayBlock");
         calendarPlate.classList.remove("displayNone");
+        initChatTrainerState(currUser);
       } else if (this.classList.contains("welcomeTile")) {
         let welcomePlate = document.querySelector(".welcomePlate");
         welcomePlate.classList.add("displayBlock");

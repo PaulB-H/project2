@@ -44,8 +44,8 @@ if (process.env.JAWSDB_URL) {
     host: "localhost",
     port: 3306,
     user: "root",
-    // password: "IamTheBoxGhost1971",
-    password: "steven123",
+    password: "IamTheBoxGhost1971",
+    // password: "steven123",
     // password: "sqlrootpass",
     database: "fitness_hub_db"
   });
@@ -117,6 +117,19 @@ app.get(`/api/trainer/clientinfo/:userId`, async function(req, res) {
 });
 
 app.post(`/api/user/update/:currUser`, async function(req, res) {
+  if (req.body.istrainer == null || req.body.istrainer == undefined) {
+    let trainerVal = 0;
+  } else {
+    let trainerVal = req.body.istrainer;
+  }
+  if (req.body.seeking_trnr == null || req.body.seeking_trnr == undefined) {
+    let seekingVal = 0;
+  } else {
+    let seekingVal = req.body.seeking_trnr;
+  }
+
+  cellphone = req.body.cellphone.replace(/\D/g, "");
+
   let result = await db.query(
     `update fh_users set username = ?,
     first_name = ?, 
@@ -141,12 +154,12 @@ app.post(`/api/user/update/:currUser`, async function(req, res) {
       req.body.address_line2,
       req.body.city,
       req.body.postal_code,
-      req.body.cellphone,
+      cellphone,
       req.body.email,
       req.body.user_password,
       req.body.fitness_goals,
-      req.body.seeking_trnr,
-      req.body.istrainer,
+      seekingVal,
+      trainerVal,
       req.body.trainer_bio,
       req.params.currUser
     ]
