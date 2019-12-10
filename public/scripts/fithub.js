@@ -35,6 +35,7 @@
   fh.func.addListener_click_userTile = ()=>{
   
   fh.func.centerPanelScrollTop = ()=>{
+  fh.func.centerPanel_moveTo = ()=>{
   fh.func.clearContext = ()=>{
   fh.func.click_findableExercise = function(me) {
   fh.func.createAppend_selectedExerciseGroup = function(exerciseBucket) {
@@ -52,6 +53,8 @@
   fh.func.isWithin = function(coords, elem){
 
   fh.func.populateRoutineDetails = (me)=>{
+
+  fh.func.scrollBottom_chat = ()=>{
 
 
   Initialization
@@ -121,13 +124,12 @@ async function initChatTrainerState() {
     $("#bioscreen").empty();
     $(
       `<div>
-                <button class="clients myBtn col" value="${currUser}" onclick="showClientProfile(${currUser})">
-                  Load My Profile
-                </button>
-              </div>
-              <div class="col-sm-12" id="clientBio" style="background-color: white; overflow-y: auto; display: flex;flex-direction: column">
-              </div>
-                                                 `
+        <button class="clients myBtn col" value="${currUser}" onclick="showClientProfile(${currUser})">
+          My Bio
+        </button>
+      </div>
+       <div id="clientBio" style=" "></div>
+                                     `
     ).appendTo("#bioscreen");
     $("#clientBio").empty();
     console.log("Initializing ", currUser);
@@ -137,51 +139,22 @@ async function initChatTrainerState() {
       cache: false,
       success: function(result) {
         if (result.length > 0) {
-          $(`<div class="trainerPanel" style="position:relative; top:0">
+          $(`<div class="trainerPanel">
               <IFRAME style="display:none" name="hidden-form"></IFRAME>
-              <form action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
-                First Name: <input type="text" name="firstname" value="${
-                  result[0].first_name
-                }"><br/>
-                Last Name: <input type="text" name="lastname" value="${
-                  result[0].last_name
-                }"><br/>
-                Address:<br/>
-                <input type="text" name="address_line1" placeholder="Address line 1" value="${
-                  result[0].address_line1
-                }"><br/>
-                <input type="text" name="address_line2" placeholder="Address line 2" value="${
-                  result[0].address_line2
-                }"><br/>
-                City: <input type="text" name="city" value="${
-                  result[0].city
-                }"><br/>
-                Postal Code: <input type="text" name="postal_code" value="${
-                  result[0].postal_code
-                }"><br/>
-                Contact No.: <input type="tel" id="phone" name="cellphone" value="${
-                  result[0].cellphone
-                }"><br/>
-                Email: <input type="email" id="email" value="${
-                  result[0].email
-                }"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"
-              name="email"><br/>
-                Password: <input type="text" id="password" name="password"><br />
-              Seeking Trainer: <input type="checkbox" name="seeking_trnr" value="${
-                result[0].seeking_trainer
-              }" ${setCheckboxState(result[0].seeking_trainer)}><br />
-                Personal Trainer: <input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${
-                  result[0].istrainer
-                })" value="${result[0].istrainer}"  ${setCheckboxState(
-            result[0].istrainer
-          )}><br />
-                Fitness Goals:<br/>
-                <textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${
-                  result[0].fitness_goals
-                }"></textarea><br/>
-                Bio:<br />
-                <textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea>
-              <input type="submit" value="Submit">
+              <form class="bioForm" action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
+                <div><span class="bioLabel">First Name: </span><input type="text" name="firstname" value="${result[0].first_name}"></div>
+                <div><span class="bioLabel">Last Name: </span><input type="text" name="lastname" value="${result[0].last_name}"></div>
+                <div><span class="bioLabel">Address: </span><input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}"></div>
+                <div><span class="bioLabel">City: </span><input type="text" name="city" value="${result[0].city}"></div>
+                <div><span class="bioLabel">Postal Code: </span><input type="text" name="postal_code" value="${result[0].postal_code}"></div>
+                <div><span class="bioLabel">Contact No.: </span><input type="tel" id="phone" name="cellphone" value="${result[0].cellphone}"></div>
+                <div><span class="bioLabel">Email: </span><input type="email" id="email" value="${result[0].email}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"name="email"></div>
+                <div class="hideBioLabel"><span class="bioLabel">Password: </span><input type="text" id="password" name="password"></div>
+                <div class="toggleMarginTop"><span class="bioLabel">Seeking Trainer: </span><input type="checkbox" name="seeking_trnr" value="${result[0].seeking_trainer}" ${setCheckboxState(result[0].seeking_trainer)}></div>
+                <div class="toggleMarginTop"><span class="bioLabel">Personal Trainer: </span><input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${result[0].istrainer})" value="${result[0].istrainer}"  ${setCheckboxState(result[0].istrainer)}></div>
+                <div class="fullWidth"><span class="bioLabel">Fitness Goals: </span><textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea></div>
+                <div class="fullWidth"><span class="bioLabel">Bio: </span><textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea></div>
+                <div><input type="submit" value="Update"></div>
               </form>
             </div>`).appendTo("#clientBio");
         }
@@ -288,19 +261,6 @@ async function initChatTrainerState() {
                       </div>`
           ).appendTo("#strangers");
         }
-      }
-    }
-  });
-  // -----------------------------------------------
-  $.ajax({
-    url: `/hubchat/chatter/strangers/${currUser}`,
-    type: "GET",
-    cache: false,
-    success: function(result) {
-      for (i = 0; i < result.length; i++) {
-        $(`<div class="msgBox" style="margin: 1em">
-            <span>${result[i].last_name}, ${result[i].first_name}</span>
-          </div>`).appendTo(".content_plate2");
       }
     }
   });
@@ -944,9 +904,7 @@ fh.func.addListener_click_userTile = () => {
   for (userTile of userTiles) {
     userTile.addEventListener("click", function() {
       /* Logout action/tile checked first. Happens before and prevents removal of middle elements. */
-      console.log("PASSING 1 CURRUSER ", currUser);
       if (this.classList.contains("logoutTile")) {
-        console.log("PASSING 2 CURRUSER ", currUser);
         window.localStorage.removeItem("currentUser");
         window.location.reload();
       }
@@ -981,9 +939,28 @@ fh.func.addListener_click_userTile = () => {
         welcomePlate.classList.add("displayBlock");
         welcomePlate.classList.remove("displayNone");
       }
+
+
+      /* On mobile, move to center after select routine, changes styles of nav buttons */
+      let screenWidth = screen.width;
+      
+      if (screenWidth <= 1025) {
+        
+        /* Moves to center */
+        fh.func.centerPanel_moveTo();
+
+        /* Selected Style for center button */
+        let sectionButton_content = document.querySelector('.sectionButton.content');
+        sectionButton_content.classList.add('selected');
+
+        let sectionButton_profile = document.querySelector('.sectionButton.profile');
+        sectionButton_profile.classList.remove('selected');
+      };
+
     });
   }
 };
+
 
 fh.func.centerPanelScrollTop = () => {
   let wrap_context = document.querySelector(".wrap_context");
@@ -993,6 +970,15 @@ fh.func.centerPanelScrollTop = () => {
     behavior: "smooth"
   });
 };
+
+
+fh.func.centerPanel_moveTo = ()=>{
+
+  let innerwrap_fithub = document.querySelector('.innerwrap_fithub');
+
+  innerwrap_fithub.style.marginLeft = `${fh.data.mobileScreenPositions[1]}%`;
+};
+
 
 fh.func.clearContext = () => {
   let contentPlates = document.querySelectorAll(
@@ -1115,8 +1101,15 @@ fh.func.click_findableExercise = function(me) {
 
       let addToNewRoutineButton = document.createElement("div");
       addToNewRoutineButton.className = "addToNewRoutineButton";
+      if( !(currUser > 0) ){addToNewRoutineButton.classList.add('displayNone')};
       addToNewRoutineButton.innerHTML = "Add to New Routine";
       addToNewRoutineButton.addEventListener("click", function() {
+        
+        /* Show stageRoutineBlock */
+        let stageRoutineBlock = document.querySelector(".stageRoutineBlock");
+        stageRoutineBlock.classList.add("displayBlock");
+        stageRoutineBlock.classList.remove("displayNone");
+
         /* Hide catbar */
         let user_wrap_catbar = document.querySelector(".user_wrap_catbar");
         user_wrap_catbar.classList.add("displayNone");
@@ -1132,10 +1125,6 @@ fh.func.click_findableExercise = function(me) {
         routinesBlock.classList.add("displayNone");
         routinesBlock.classList.remove("displayBlock");
 
-        /* Show stageRoutineBlock */
-        let stageRoutineBlock = document.querySelector(".stageRoutineBlock");
-        stageRoutineBlock.classList.add("displayBlock");
-        stageRoutineBlock.classList.remove("displayNone");
 
         /* Create exerciseObj*/
         let exerciseObj = {};
@@ -1505,59 +1494,85 @@ fh.func.populateRoutineDetails = me => {
   /* Fetch for routine details */
   let url = `/routine/details/${routineId}`;
   fetch(url)
-    .then(resp => resp.json())
-    .then(data => {
-      /* Remove all content_plate except for the userPlates (chat, calendar, trainer) */
-      fh.func.clearContext();
-      fh.func.clearContext_hideUserPlate();
+  .then(resp => resp.json())
+  .then(data => {
+    /* Remove all content_plate except for the userPlates (chat, calendar, trainer) */
+    fh.func.clearContext();
+    fh.func.clearContext_hideUserPlate();
 
-      /* Loop to create and append exercise plates for clicked routine */
-      for (exercise of data) {
-        /*********************************************
-      CREATE & APPEND PLATE IN CENTER CONTEXT COLUMN
-      **********************************************/
+    /* Loop to create and append exercise plates for clicked routine */
+    for (exercise of data) {
+      /*********************************************
+    CREATE & APPEND PLATE IN CENTER CONTEXT COLUMN
+    **********************************************/
 
-        /* Start creating HTML. Not complete yet. */
-        let html = `
-        <div class="content_plate">
-          <div class="cplate_exerciseName">${exercise.exercise_name}</div>
-          <div class="cplate_exerciseDesc">${exercise.exercise_desc}</div>
-      `;
+      /* Start creating HTML. Not complete yet. */
+      let html = `
+      <div class="content_plate">
+        <div class="cplate_exerciseName">${exercise.exercise_name}</div>
+        <div class="cplate_exerciseDesc">${exercise.exercise_desc}</div>
+    `;
 
-        /* Flex container for exerciseImagesCont and cplate_exerciseReps */
-        html += `<div class="cplate_flexExerciseAndReps">`;
+      /* Flex container for exerciseImagesCont and cplate_exerciseReps */
+      html += `<div class="cplate_flexExerciseAndReps">`;
 
-        /* If images are present in the array, create and append them */
-        if (exercise.front_img_src != undefined) {
-          html += `
-          <div class="exerciseImagesCont">
-            
-            <div  class="exercise_image asARoutineTile"
-                  style="background-image: url(${exercise.front_img_src})"
-                  imgPath_1="${exercise.front_img_src}"></div>
-            
-            <div  class="exercise_image_2 asARoutineTile" 
-                  style="background-image: url(${exercise.rear_img_src})"
-                  imgPath_2="${exercise.rear_img_src}"></div>
-          </div>
-        `;
-        }
-
-        /* cplate_exerciseReps + close cplate_flexExerciseAndReps */
+      /* If images are present in the array, create and append them */
+      if (exercise.front_img_src != undefined) {
         html += `
-          <p class="cplate_exerciseReps">${exercise.exercise_reps}</p>
+        <div class="exerciseImagesCont">
+          
+          <div  class="exercise_image asARoutineTile"
+                style="background-image: url(${exercise.front_img_src})"
+                imgPath_1="${exercise.front_img_src}"></div>
+          
+          <div  class="exercise_image_2 asARoutineTile" 
+                style="background-image: url(${exercise.rear_img_src})"
+                imgPath_2="${exercise.rear_img_src}"></div>
         </div>
       `;
-
-        /* Close HTML/ content_plate */
-        html += `</div>`;
-
-        /* Append to DOM */
-        let wrap_context = document.querySelector(".wrap_context");
-        wrap_context.innerHTML += html;
       }
-    });
+
+      /* cplate_exerciseReps + close cplate_flexExerciseAndReps */
+      html += `
+        <p class="cplate_exerciseReps">${exercise.exercise_reps}</p>
+      </div>
+    `;
+
+      /* Close HTML/ content_plate */
+      html += `</div>`;
+
+      /* Append to DOM */
+      let wrap_context = document.querySelector(".wrap_context");
+      wrap_context.innerHTML += html;
+    }
+
+
+    /* On mobile, move to center after select routine, changes styles of nav buttons */
+    let screenWidth = screen.width;
+    
+    if (screenWidth <= 1025) {
+      
+      /* Moves to center */
+      fh.func.centerPanel_moveTo();
+
+      /* Selected Style for center button */
+      let sectionButton_content = document.querySelector('.sectionButton.content');
+      sectionButton_content.classList.add('selected');
+
+      let sectionButton_profile = document.querySelector('.sectionButton.profile');
+      sectionButton_profile.classList.remove('selected');
+    };
+
+  });
 };
+
+
+fh.func.scrollBottom_chat = ()=>{
+
+  let comm_thread = document.querySelector('#comm_thread');
+  comm_thread.scrollTo(0, comm_thread.getBoundingClientRect().bottom)
+};
+
 
 // Populate trainer list
 // UNUSED CURRENTLY

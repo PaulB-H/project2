@@ -91,6 +91,7 @@ async function showConversation(correspondent, correspondentName) {
         <textarea rows="4" cols="50" spellcheck="true" class="card time-block col" id="msg_editor" placeholder="Type a message..."></textarea>
         <div><button id="save_btn" class="saveBtn" value="" onclick=saveMessage(${correspondent})>&#9993; Send</button></div>
       </div>`).appendTo("#chat-window");
+      fh.func.scrollBottom_chat();
     }
   });
 }
@@ -119,6 +120,7 @@ async function saveMessage(msgTo) {
         $("#msg_editor").val("");
         myMessages();
         getStrangers();
+        fh.func.scrollBottom_chat();
       }
     });
   }
