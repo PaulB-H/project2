@@ -1667,6 +1667,30 @@ window.addEventListener("DOMContentLoaded", event => {
   /* User Block Events */
   fh.func.addListener_click_userTile();
 
+
+
+  /* Crude way to hide the footer when an input is the active element */
+  var check_focusInput_hideFooter = setInterval(function(){
+
+    let activeElement = document.activeElement;
+    let footer = document.querySelector('.footer');
+
+    if(screen.width <= 1025
+    && activeElement != undefined
+    && activeElement.tagName != 'INPUT'){
+
+      footer.classList.add('displayFlex');
+      footer.classList.remove('displayNone');
+    }
+    else{
+
+      footer.classList.add('displayNone');
+      footer.classList.remove('displayFlex');
+    };
+
+  },100);
+
+
   /* 
   Buttons for FitTips & SplashPage
   */
