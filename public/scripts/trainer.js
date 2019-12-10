@@ -94,17 +94,39 @@ async function showClientProfile(userId) {
         $(`<div class="trainerPanel" style="position:relative; top:0">
               <IFRAME style="display:none" name="hidden-form"></IFRAME>
               <form class="bioForm" action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
-                <div><span class="bioLabel">First Name: </span><input type="text" name="firstname" value="${result[0].first_name}"></div>
-                <div><span class="bioLabel">Last Name: </span><input type="text" name="lastname" value="${result[0].last_name}"></div>
-                <div><span class="bioLabel">Address: </span><input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}"></div>
-                <div><span class="bioLabel">City: </span><input type="text" name="city" value="${result[0].city}"></div>
-                <div><span class="bioLabel">Postal Code: </span><input type="text" name="postal_code" value="${result[0].postal_code}"></div>
-                <div><span class="bioLabel">Contact No.: </span><input type="tel" id="phone" name="cellphone" value="${result[0].cellphone}"></div>
-                <div><span class="bioLabel">Email: </span><input type="email" id="email" value="${result[0].email}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"name="email"></div>
+                <div><span class="bioLabel">First Name: </span><input type="text" name="firstname" value="${
+                  result[0].first_name
+                }"></div>
+                <div><span class="bioLabel">Last Name: </span><input type="text" name="lastname" value="${
+                  result[0].last_name
+                }"></div>
+                <div><span class="bioLabel">Address: </span><input type="text" name="address_line1" placeholder="Address line 1" value="${
+                  result[0].address_line1
+                }"></div>
+                <div><span class="bioLabel">City: </span><input type="text" name="city" value="${
+                  result[0].city
+                }"></div>
+                <div><span class="bioLabel">Postal Code: </span><input type="text" name="postal_code" value="${
+                  result[0].postal_code
+                }"></div>
+                <div><span class="bioLabel">Contact No.: </span><input type="tel" id="phone" name="cellphone" value="${
+                  result[0].cellphone
+                }"></div>
+                <div><span class="bioLabel">Email: </span><input type="email" id="email" value="${
+                  result[0].email
+                }" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"name="email"></div>
                 <div class="hideBioLabel"><span class="bioLabel">Password: </span><input type="text" id="password" name="password"></div>
-                <div><span class="bioLabel">Seeking Trainer: </span><input type="checkbox" name="seeking_trnr" value="${result[0].seeking_trainer}" ${setCheckboxState(result[0].seeking_trainer)}></div>
-                <div><span class="bioLabel">Personal Trainer: </span><input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${result[0].istrainer})" value="${result[0].istrainer}"  ${setCheckboxState(result[0].istrainer)}></div>
-                <div class="fullWidth"><span class="bioLabel">Fitness Goals: </span><textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea></div>
+                <div><span class="bioLabel">Seeking Trainer: </span><input type="checkbox" name="seeking_trainer" value="${
+                  result[0].seeking_trainer
+                }" ${setCheckboxState(result[0].seeking_trainer)}></div>
+                <div><span class="bioLabel">Personal Trainer: </span><input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${
+                  result[0].istrainer
+                })" value="${result[0].istrainer}"  ${setCheckboxState(
+          result[0].istrainer
+        )}></div>
+                <div class="fullWidth"><span class="bioLabel">Fitness Goals: </span><textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${
+                  result[0].fitness_goals
+                }"></textarea></div>
                 <div class="fullWidth"><span class="bioLabel">Bio: </span><textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea></div>
                 <div><input type="submit" value="Update"></div>
               </form>
@@ -133,17 +155,39 @@ async function showClientProfile(userId) {
           $(`<div class="trainerPanel" style="position:relative; top:0">
               <IFRAME style="display:none" name="hidden-form"></IFRAME>
               <form class="bioForm" action="/api/user/update/${currUser}"  method="POST" target="hidden-form">
-                <div><span class="bioLabel">First Name: </span><input type="text" name="firstname" value="${result[0].first_name}"></div>
-                <div><span class="bioLabel">Last Name: </span><input type="text" name="lastname" value="${result[0].last_name}"></div>
-                <div><span class="bioLabel">Address: </span><input type="text" name="address_line1" placeholder="Address line 1" value="${result[0].address_line1}"></div>
-                <div><span class="bioLabel">City: </span><input type="text" name="city" value="${result[0].city}"></div>
-                <div><span class="bioLabel">Postal Code: </span><input type="text" name="postal_code" value="${result[0].postal_code}"></div>
-                <div><span class="bioLabel">Contact No.: </span><input type="tel" id="phone" name="cellphone" value="${result[0].cellphone}"></div>
-                <div><span class="bioLabel">Email: </span><input type="email" id="email" value="${result[0].email}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"name="email"></div>
+                <div><span class="bioLabel">First Name: </span><input type="text" name="firstname" value="${
+                  result[0].first_name
+                }"></div>
+                <div><span class="bioLabel">Last Name: </span><input type="text" name="lastname" value="${
+                  result[0].last_name
+                }"></div>
+                <div><span class="bioLabel">Address: </span><input type="text" name="address_line1" placeholder="Address line 1" value="${
+                  result[0].address_line1
+                }"></div>
+                <div><span class="bioLabel">City: </span><input type="text" name="city" value="${
+                  result[0].city
+                }"></div>
+                <div><span class="bioLabel">Postal Code: </span><input type="text" name="postal_code" value="${
+                  result[0].postal_code
+                }"></div>
+                <div><span class="bioLabel">Contact No.: </span><input type="tel" id="phone" name="cellphone" value="${
+                  result[0].cellphone
+                }"></div>
+                <div><span class="bioLabel">Email: </span><input type="email" id="email" value="${
+                  result[0].email
+                }" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" size="30"name="email"></div>
                 <div class="hideBioLabel"><span class="bioLabel">Password: </span><input type="text" id="password" name="password"></div>
-                <div><span class="bioLabel">Seeking Trainer: </span><input type="checkbox" name="seeking_trnr" value="${result[0].seeking_trainer}" ${setCheckboxState(result[0].seeking_trainer)}></div>
-                <div><span class="bioLabel">Personal Trainer: </span><input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${result[0].istrainer})" value="${result[0].istrainer}"  ${setCheckboxState(result[0].istrainer)}></div>
-                <div class="fullWidth"><span class="bioLabel">Fitness Goals: </span><textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${result[0].fitness_goals}"></textarea></div>
+                <div><span class="bioLabel">Seeking Trainer: </span><input type="checkbox" name="seeking_trainer" value="${
+                  result[0].seeking_trainer
+                }" ${setCheckboxState(result[0].seeking_trainer)}></div>
+                <div><span class="bioLabel">Personal Trainer: </span><input type="checkbox" id="istrainer" name="istrainer" onchange="toggleInfo('trainer', ${
+                  result[0].istrainer
+                })" value="${result[0].istrainer}"  ${setCheckboxState(
+            result[0].istrainer
+          )}></div>
+                <div class="fullWidth"><span class="bioLabel">Fitness Goals: </span><textarea id="fitness_goals" spellcheck="true" name="fitness_goals" rows="5" cols="33" value="${
+                  result[0].fitness_goals
+                }"></textarea></div>
                 <div class="fullWidth"><span class="bioLabel">Bio: </span><textarea id="trainer_bio" spellcheck="true" name="trainer_bio" rows="5" cols="33"></textarea></div>
                 <div><input type="submit" value="Update"></div>
               </form>

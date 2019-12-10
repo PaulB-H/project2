@@ -40,32 +40,29 @@ class Database {
 if (process.env.JAWSDB_URL) {
   db = new Database(process.env.JAWSDB_URL);
 } else {
-
-  // db = new Database({
-  //   host: "localhost",
-  //   port: 3306,
-  //   user: "root",
-  //   // password: "IamTheBoxGhost1971",
-  //   password: "steven123",
-  //   // password: "sqlrootpass",
-  //   database: "fitness_hub_db"
-  // });
-
   db = new Database({
-    host: "thh2lzgakldp794r.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    host: "localhost",
     port: 3306,
-    user: "wd4xx86qafekvmf0",
-    password: "y3mf1rdg6y2149v6",
-    database: "xj7i769o9d269rod"
+    user: "root",
+    password: "IamTheBoxGhost1971",
+    //   password: "steven123",
+    //   // password: "sqlrootpass",
+    database: "fitness_hub_db"
   });
 
-
+  // db = new Database({
+  //   host: "thh2lzgakldp794r.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+  //   port: 3306,
+  //   user: "wd4xx86qafekvmf0",
+  //   password: "y3mf1rdg6y2149v6",
+  //   database: "xj7i769o9d269rod"
+  // });
 
   // Host  thh2lzgakldp794r.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
-  // Username  wd4xx86qafekvmf0  
-  // Password  y3mf1rdg6y2149v6  
+  // Username  wd4xx86qafekvmf0
+  // Password  y3mf1rdg6y2149v6
   // Reset
-  // Port  3306  
+  // Port  3306
   // Database  xj7i769o9d269rod
 }
 
@@ -156,6 +153,7 @@ app.get(`/api/trainer/clientinfo/:userId`, async function(req, res) {
 app.post(`/api/user/update/:currUser`, async function(req, res) {
   let trainerVal;
   let seekingVal;
+  console.log("Am I a Trainer ", req.body.istrainer);
   if (req.body.istrainer == null || req.body.istrainer == undefined) {
     trainerVal = 0;
   } else {
@@ -179,7 +177,6 @@ app.post(`/api/user/update/:currUser`, async function(req, res) {
     postal_code = ?, 
     cellphone = ?, 
     email = ?, 
-    user_password = ?,
     fitness_goals = ?, 
     seeking_trainer = ?,
     istrainer = ?,
@@ -195,7 +192,6 @@ app.post(`/api/user/update/:currUser`, async function(req, res) {
       req.body.postal_code,
       cellphone,
       req.body.email,
-      req.body.user_password,
       req.body.fitness_goals,
       seekingVal,
       trainerVal,
@@ -383,15 +379,15 @@ app.get(`/hubchat/chatter/strangers/:currUser`, async function(req, res) {
     //  from fh_users usr
     //  where usr.id not in
     //    (
-    //     select sendtoid as id from fh_hubchat 
+    //     select sendtoid as id from fh_hubchat
     //     where sentbyid = ?
     //     union
-    //     select sentbyid as id from fh_hubchat 
+    //     select sentbyid as id from fh_hubchat
     //     where sendtoid = ?
     //    )
-    //    and usr.id != ? 
+    //    and usr.id != ?
     //    order by usr.username asc`,
-      `select distinct usr.id, usr.username, usr.first_name, usr.last_name
+    `select distinct usr.id, usr.username, usr.first_name, usr.last_name
        from fh_users usr
        where usr.id not in
          (
@@ -405,7 +401,7 @@ app.get(`/hubchat/chatter/strangers/:currUser`, async function(req, res) {
          order by usr.username asc`,
     [req.params.currUser, req.params.currUser, req.params.currUser]
   );
-  console.log(result, 'MY RESULT !!!');
+  console.log(result, "MY RESULT !!!");
   res.send(result);
 });
 
