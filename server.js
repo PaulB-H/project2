@@ -194,76 +194,108 @@ app.post(`/api/users`, async function(req, res) {
 app.get(`/calendar/load/:inDate/:currUser`, async function(req, res) {
   res.setHeader("Last-Modified", new Date() - 1);
   let result = await db.query(
-    `select userid, createdat as myDate, hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24 from fh_calendar where userid = ? and DATE(createdat) = DATE(?)`,
+    // `select userid, createdat as myDate, hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24 from fh_calendar where userid = ? and DATE(createdat) = DATE(?)`,
+    `select hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24 from fh_calendar where userid = ? and DATE(createdat) = DATE(?)`,
     [req.params.currUser, req.params.inDate]
   );
   res.send(result);
 });
 
-app.post("/calendar/save", async function(req, res) {
+app.post("/calendar/save/:currUser/:myDate", async function(req, res) {
   let check_new = await db.query(
     `select count(*) as dayExists from fh_calendar where DATE(createdat) = ? and userid = ?`,
-    [req.body.calDay[0], req.body.calDay[1]]
+    [req.params.myDate, req.params.currUser]
   );
   if (check_new[0].dayExists == 0) {
     result = await db.query(
-      `insert into fh_calendar (createdat, userid, hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23, hr24)
-       values("${req.body.calDay[0]}", 
-       "${req.body.calDay[1]}", 
-       "${req.body.calDay[2]}", 
-       "${req.body.calDay[3]}",
-       "${req.body.calDay[4]}",
-       "${req.body.calDay[5]}",
-       "${req.body.calDay[6]}",
-       "${req.body.calDay[7]}",
-       "${req.body.calDay[8]}",
-       "${req.body.calDay[9]}",
-       "${req.body.calDay[10]}",
-       "${req.body.calDay[11]}",
-       "${req.body.calDay[12]}",
-       "${req.body.calDay[13]}",
-       "${req.body.calDay[14]}",
-       "${req.body.calDay[15]}",
-       "${req.body.calDay[16]}",
-       "${req.body.calDay[17]}",
-       "${req.body.calDay[18]}",
-       "${req.body.calDay[19]}",
-       "${req.body.calDay[20]}",
-       "${req.body.calDay[21]}",
-       "${req.body.calDay[22]}",
-       "${req.body.calDay[23]}",
-       "${req.body.calDay[24]}",
-       "${req.body.calDay[25]}")`
+      `insert into fh_calendar (createdat, userid, hr1, hr2, hr3, hr4, hr5, hr6, hr7, hr8, hr9, hr10, hr11, hr12, hr13, hr14, hr15, hr16, hr17, hr18, hr19, hr20, hr21, hr22, hr23)
+       values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        req.params.myDate,
+        req.params.currUser,
+        req.body.calDay[0],
+        req.body.calDay[1],
+        req.body.calDay[2],
+        req.body.calDay[3],
+        req.body.calDay[4],
+        req.body.calDay[5],
+        req.body.calDay[6],
+        req.body.calDay[7],
+        req.body.calDay[8],
+        req.body.calDay[9],
+        req.body.calDay[10],
+        req.body.calDay[11],
+        req.body.calDay[12],
+        req.body.calDay[13],
+        req.body.calDay[14],
+        req.body.calDay[15],
+        req.body.calDay[16],
+        req.body.calDay[17],
+        req.body.calDay[18],
+        req.body.calDay[19],
+        req.body.calDay[20],
+        req.body.calDay[21],
+        req.body.calDay[22],
+        req.body.calDay[23]
+      ]
     );
   } else {
+    console.log("Cal Req UPD ", req.body.calDay[0], req.body.calDay[1]);
     result = await db.query(
-      `update fh_calendar set hr1 = "${req.body.calDay[2]}", 
-      hr2 = "${req.body.calDay[3]}", 
-      hr3 = "${req.body.calDay[4]}", 
-      hr4 = "${req.body.calDay[5]}", 
-      hr5 = "${req.body.calDay[6]}", 
-      hr6 = "${req.body.calDay[7]}", 
-      hr7 = "${req.body.calDay[8]}", 
-      hr8 = "${req.body.calDay[9]}", 
-      hr9 = "${req.body.calDay[10]}", 
-      hr10 = "${req.body.calDay[11]}", 
-      hr11 = "${req.body.calDay[12]}", 
-      hr12 = "${req.body.calDay[13]}", 
-      hr13 = "${req.body.calDay[14]}", 
-      hr14 = "${req.body.calDay[15]}", 
-      hr15 = "${req.body.calDay[16]}", 
-      hr16 = "${req.body.calDay[17]}", 
-      hr17 = "${req.body.calDay[18]}", 
-      hr18 = "${req.body.calDay[19]}", 
-      hr19 = "${req.body.calDay[20]}", 
-      hr20 = "${req.body.calDay[21]}", 
-      hr21 = "${req.body.calDay[22]}", 
-      hr22 = "${req.body.calDay[23]}", 
-      hr23 = "${req.body.calDay[24]}", 
-      hr24 = "${req.body.calDay[25]}" 
+      `update fh_calendar set 
+      hr1 = ?, 
+      hr2 = ?, 
+      hr3 = ?,
+      hr4 = ?, 
+      hr5 = ?, 
+      hr6 = ?, 
+      hr7 = ?, 
+      hr8 = ?, 
+      hr9 = ?, 
+      hr10 = ?, 
+      hr11 = ?, 
+      hr12 = ?, 
+      hr13 = ?, 
+      hr14 = ?, 
+      hr15 = ?, 
+      hr16 = ?, 
+      hr17 = ?, 
+      hr18 = ?, 
+      hr19 = ?, 
+      hr20 = ?, 
+      hr21 = ?, 
+      hr22 = ?,
+      hr23 = ?
       where DATE(createdat) = DATE(?)
-      and   id = ?`,
-      [req.body.calDay[0], req.body.calDay[1]]
+      and   userid = ?`,
+      [
+        req.body.calDay[0],
+        req.body.calDay[1],
+        req.body.calDay[2],
+        req.body.calDay[3],
+        req.body.calDay[4],
+        req.body.calDay[5],
+        req.body.calDay[6],
+        req.body.calDay[7],
+        req.body.calDay[8],
+        req.body.calDay[9],
+        req.body.calDay[10],
+        req.body.calDay[11],
+        req.body.calDay[12],
+        req.body.calDay[13],
+        req.body.calDay[14],
+        req.body.calDay[15],
+        req.body.calDay[16],
+        req.body.calDay[17],
+        req.body.calDay[18],
+        req.body.calDay[19],
+        req.body.calDay[20],
+        req.body.calDay[21],
+        req.body.calDay[22],
+        req.body.calDay[23],
+        req.params.myDate,
+        req.params.currUser
+      ]
     );
   }
   res.send(result);
@@ -276,7 +308,7 @@ app.get(`/hubchat`, async function(rep, res) {
 // Messaging module section
 app.get(`/hubchat/chatter/messengers/:currUser`, async function(req, res) {
   let result = await db.query(
-    `select distinct chat.id, usr.username, usr.first_name, usr.last_name, chat.createdat
+    `select distinct chat.id, usr.username, usr.first_name, usr.last_name
        from
        (
         select sendtoid as id, createdat from fh_hubchat 

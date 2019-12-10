@@ -31,7 +31,7 @@ async function getStrangers() {
     type: "GET",
     cache: false,
     success: function(result) {
-      console.log("Loading strangers", result);
+      // console.log("Loading strangers", result);
       if (result.length > 0) {
         for (i = 0; i < result.length; i++) {
           $(
@@ -48,7 +48,7 @@ async function getStrangers() {
 }
 
 function setMessageJustify(currUser, correspondent) {
-  console.log(correspondent, 'currUser chatterbox 51');
+  console.log(correspondent, "currUser chatterbox 51");
   if (currUser == correspondent) {
     return "fromMe";
   } else {

@@ -74,7 +74,6 @@ async function showClientProfile(userId) {
 `
   ).appendTo("#bioscreen");
   $("#clientBio").empty();
-  console.log("Loading Bio ", currUser);
   $.ajax({
     url: `/api/trainer/clientinfo/${userId}`,
     type: "GET",
