@@ -117,7 +117,7 @@ async function saveMessage(msgTo) {
               }</div></div>`).appendTo("#comm_thread");
         $("#msg_editor").val("");
         myMessages();
-        showStrangers();
+        getStrangers();
       }
     });
   }
