@@ -147,7 +147,7 @@ body {
 }
 
 .catbar {
-  display: none;
+  display: flex;
   justify-content: center;
   width: 100%;
   height: 70px;
@@ -161,6 +161,7 @@ body {
 
 .wrap_findbar .catbar {
   margin-top: 46px;
+  display: none;
 }
 
 .wrap_catbox {
@@ -1072,4 +1073,15 @@ Routines Block
   cursor: pointer;
 
   /*border: 1px solid blue;*/
+}
+
+/* Styling for welcome page */
+#theBig3Button, #generalTipsButton, #volumeAndrepsButton {
+  border: 2px solid var(--green_main);
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.activeSplashNav {
+  background-color: var(--green_main);
 }

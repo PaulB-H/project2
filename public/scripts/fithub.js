@@ -1506,6 +1506,7 @@ fh.func.populateRoutineDetails = me => {
 };
 
 // Populate trainer list
+// UNUSED CURRENTLY
 fh.func.dbCall_trainers = () => {
   if (currUser != undefined) {
     let url = `/api/users/trainers`;
@@ -1604,15 +1605,19 @@ window.addEventListener("DOMContentLoaded", event => {
     .querySelector("#generalTipsButton")
     .addEventListener("click", function() {
       document.querySelector("#generalTipsContent").classList.remove("d-none");
+      document.querySelector("#generalTipsButton").classList.add("activeSplashNav");
+      document.querySelector("#volumeAndrepsButton").classList.remove("activeSplashNav");
+      document.querySelector("#theBig3Button").classList.remove("activeSplashNav");
       document.querySelector("#volumeAndrepsContent").classList.add("d-none");
       document.querySelector("#theBig3Content").classList.add("d-none");
     });
   document
     .querySelector("#volumeAndrepsButton")
     .addEventListener("click", function() {
-      document
-        .querySelector("#volumeAndrepsContent")
-        .classList.remove("d-none");
+      document.querySelector("#volumeAndrepsContent").classList.remove("d-none");
+      document.querySelector("#volumeAndrepsButton").classList.add("activeSplashNav");
+      document.querySelector("#generalTipsButton").classList.remove("activeSplashNav");
+      document.querySelector("#theBig3Button").classList.remove("activeSplashNav");
       document.querySelector("#generalTipsContent").classList.add("d-none");
       document.querySelector("#theBig3Content").classList.add("d-none");
     });
@@ -1620,6 +1625,9 @@ window.addEventListener("DOMContentLoaded", event => {
     .querySelector("#theBig3Button")
     .addEventListener("click", function() {
       document.querySelector("#theBig3Content").classList.remove("d-none");
+      document.querySelector("#theBig3Button").classList.add("activeSplashNav");
+      document.querySelector("#generalTipsButton").classList.remove("activeSplashNav");
+      document.querySelector("#volumeAndrepsButton").classList.remove("activeSplashNav");
       document.querySelector("#volumeAndrepsContent").classList.add("d-none");
       document.querySelector("#generalTipsContent").classList.add("d-none");
     });
