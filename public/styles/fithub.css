@@ -282,7 +282,8 @@ body {
   margin-left: 10%;
   border-radius: 4px;
   background-color: var(--green_main);
-  box-shadow: var(--shadow_opac10);
+  /*box-shadow: var(--shadow_opac10);*/
+  box-shadow: var(--shadow_harsh_1);
   cursor: pointer;
   color: white;
   line-height: 32px;
@@ -343,7 +344,10 @@ body {
 }
 
 .findable {
+  display: flex;
+  align-items: center;
   width: 80%;
+  min-height: 60px;
   margin-left: 10%;
   background-color: white;
   border-radius: 10px;
@@ -360,9 +364,7 @@ body {
   width: 80%;
   margin: 0 auto 0;
   text-align: center;
-  font-size: 12px;
-  padding-top: 5%;
-  padding-bottom: 5%;
+  font-size: 13px;
 
   /*border: 1px solid red;*/
 }
@@ -474,6 +476,7 @@ body {
   margin-top: 10px;
   background-color: var(--green_main);
   border-radius: 4px;
+  box-shadow: var(--shadow_harsh_1);
 }
 
 .logoutTile > div > p {

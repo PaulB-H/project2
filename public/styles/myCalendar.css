@@ -1,41 +1,73 @@
-/* body {
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
-  line-height: 1;
-} */
+.calendar_title {
+  position: relative;
+  top: 32px;
+  margin-left: 11.2%;
+  font-size: 32px;
+  font-weight: 500;
+}
 
-/* #event {
-  background: transparent;
-  border: none;
-  resize: none;
-  color: #000000;
-  border-left: 1px solid black;
-  padding: 10px;
-} */
-
-.jumbotron {
-  text-align: center;
-  background-color: transparent;
-  color: black;
-  border-radius: 0;
-  border-bottom: 10px solid black;
+.calendar_title > input {
+  font-size: 24px;
+  
+  /*border: 1px solid blue;*/
 }
 
 .description {
   white-space: pre-wrap;
 }
 
-.time-block {
-  /* text-align: center; */
-  border-radius: 15px;
+#time-block {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.inline_time {
+  margin-top: 10px;
+  margin-bottom: 2px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.fieldRow_calendar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 42px;
+}
+
+.timeField {
+  width: 65%;
+  border-radius: 5px;
+  border-bottom: 2px solid var(--blue_main);
+  box-shadow: var(--shadow_opac10);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 42px;
+  padding-left: 6%;
   resize: none;
 }
 
-/* .row {
-  white-space: pre-wrap;
-  height: 80px;
-  border-top: 1px solid white;
-} */
+button.saveBtn_calendar {
+  width: 12%;
+  min-width: 42px;
+  height: 38px;
+  position: relative;
+  left: 12px;
+  top: 2px;
+  border-radius: 5px;
+  background-color: var(--blue_main);
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: var(--shadow_harsh_1);
+}
+
+
+
+
 
 .hour {
   background-color: #ffffff;
@@ -63,25 +95,6 @@
   color: black;
 }
 
-.inline_time {
-  margin: auto;
-  width: 50px;
-}
-
-.saveBtn {
-  border-radius: 15px;
-  background-color: #4A90E2;
-  padding-left: 5px;
-  color: white;
-  top: 13px;
-  float: right;
-}
-
-.saveBtn i:hover {
-  font-size: 20px;
-  transition: all 0.3s ease-in-out;
-}
-
 #event {
   display: flex;
   flex-direction: row;
@@ -95,12 +108,12 @@
   padding: 10px;
 }
 
-.event_style {
+/*.event_style {
   height: auto;
   min-height: 30px;
-  height: auto !important; /* for IE as it does not support min-height */
+  height: auto !important;  for IE as it does not support min-height 
   height: 30px; /* for IE as it does not support min-height */
-}
+/*}*/
 
 #btn_frame {
   width: 25%;
@@ -111,16 +124,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-}
-
-#time-block {
-  width: 80%;
-  display: flex;
-  flex-grow: initial;
-  font: black;
-  font: bold;
-  justify-content: space-between;
-  padding: 0;
 }
 
 #calendar-header {

@@ -26,7 +26,7 @@ function today() {
     type: "GET",
     cache: false,
     success: function(result) {
-      console.log("Calendar success reached");
+      console.log(result, "Calendar success reached");
       $("#day-view").empty();
       let time_slots = new Date();
       if (result.length == 0) {
@@ -36,21 +36,13 @@ function today() {
             hour: "2-digit",
             minute: "2-digit"
           });
-          $(
-            `<div class="col-12 card" id="time-block"  style="width:100%">
-                      <div class="col" style="display:flex">
-                        <div class="col-sm-2">
-                          <p class="inline_time"> ${dspTime} </p>
-                        </div>
-                        <div class = "col-8 event_style">
-                          <textarea spellcheck="true" class="card time-block col" id="eventhr${i +
-                            1}" value="" placeholder="Free Time Slot"></textarea>
-                        </div>
-                        <div>
-                          <button id="save_btn" class="saveBtn col" value="${currUser}" onclick="save_event()">Save</button>
-                        </div>
-                      </div>
-              </div>`
+          $(`<div class="" id="time-block">
+              <p class="inline_time"> ${dspTime} </p>
+              <div class="fieldRow_calendar">
+                <textarea spellcheck="true" class="time-block timeField" id="eventhr${i +1}" value=""></textarea>
+                <button class="saveBtn_calendar" value="${currUser}" onclick="save_event()">Save</button>
+              </div>
+            </div>`
           ).appendTo("#day-view");
         }
       } else {
@@ -60,23 +52,13 @@ function today() {
             hour: "2-digit",
             minute: "2-digit"
           });
-          $(
-            `<div class="col-12 card" id="time-block"  style="width:100%">
-                      <div class="col" style="display:flex">
-                        <div class="col-sm-2">
-                          <p class="inline_time"> ${dspTime} </p>
-                        </div>
-                        <div class = "col-8 event_style">
-                          <textarea spellcheck="true" class="card time-block col" id="eventhr${i +
-                            1}" value="" placeholder="Free Time Slot">${
-              result[0][`hr${i + 1}`]
-            }</textarea>
-                        </div>
-                        <div>
-                          <button id="save_btn" class="saveBtn col" value="${currUser}" onclick="save_event()">Save</button>
-                        </div>
-                      </div>
-              </div>`
+          $(`<div class="" id="time-block">
+              <p class="inline_time"> ${dspTime} </p>
+              <div class="fieldRow_calendar">
+                <textarea spellcheck="true" class="time-block timeField" id="eventhr${i +1}" value="">${result[0][`hr${i + 1}`]}</textarea>
+                <button class="saveBtn_calendar" value="${currUser}" onclick="save_event()">Save</button>
+              </div>
+            </div>`
           ).appendTo("#day-view");
         }
       }

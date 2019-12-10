@@ -606,6 +606,7 @@ fh.func.addListener_click_loginButtonProper = function() {
   let loginButton = document.querySelector(".loginButton");
 
   loginButton.addEventListener("click", function() {
+
     let obj = {};
     obj.email = document.querySelector(".loginEmail").value;
     obj.user_password = document.querySelector(".loginPass").value;
