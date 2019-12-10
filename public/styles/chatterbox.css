@@ -57,6 +57,14 @@
 
 #msg_editor {
   border: 2px solid lightgray;
+  resize: none;
+}
+
+.chatPlate #save_btn {
+  background-color: var(--blue_main);
+  color: white;
+  border-radius: 5px;
+  box-shadow: var(--shadow_harsh_1);
 }
 
 #save_btn {

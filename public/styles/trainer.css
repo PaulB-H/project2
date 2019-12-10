@@ -21,31 +21,125 @@
 }
 
 .myBtn {
-  border-left: 1px solid black;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-  /* margin-left: 2vw;
-  margin-bottom: 1vw; */
-  background-color: #4a90e2;
+  width: 100px;
+  height: 40px;
+  margin-top: 32px;
+  margin-left: 10%;
+  border-radius: 4px;
   color: white;
-  /* width: 1vw; */
-  top: 0;
-  float: right;
+  background-color: var(--greyBlue);
+  box-shadow: var(--shadow_harsh_1);
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .trainerPanel {
+  width: 100%;
   background-color: white;
-  box-shadow: var(--shadow_opac10);
-  padding: 2px;
-  margin: 0 auto;
+  margin: 0 auto 0;
+  margin-bottom: 46px;
+  border-radius: 10px;
+  /*border: 1px solid violet;*/
 }
 
 #trainer {
-  background-color: white;
-  box-shadow: var(--shadow_opac10);
-  padding: 2px;
-  margin: 0 auto;
+  margin: 0 auto 0;
   height: 100vh;
   min-height: fit-content;
   /* background-color: lightsteelblue; */
 }
+
+#clientBio {
+  margin-top: 24px;
+}
+
+.bioForm {
+  display: flex;
+  flex-wrap: wrap;
+  
+  /*border: 1px solid green;*/
+}
+
+
+.bioForm > div {
+  width: 45%;
+  display: flex;
+  flex-flow: column;
+  margin-top: 8px;
+}
+
+.bioForm > div:nth-of-type(odd){
+  margin-left: 10%;
+}
+
+.bioLabel {
+  color: var(--greyBlue);
+  font-size: 16px;
+  font-weight: 600;
+
+  /*border: 1px solid red;*/
+}
+
+.bioLabel ~ input {
+  width: 80%;
+  height: 32px;
+  padding-left: 5%;
+  background-color: rgb(246, 247, 251);
+  border-radius: 4px;
+  border: 1px solid var(--green_main);
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+
+.hideBioLabel {
+  opacity: 0;
+}
+.hideBioLabel input {
+  display: none;
+}
+
+.bioForm  div.fullWidth {
+  width: 100%;
+  margin-left: 10%;
+  margin-top: 16px;
+
+  /*border: 1px solid blue;*/
+}
+
+.bioForm div.toggleMarginTop {
+  margin-top: 24px;
+}
+
+#fitness_goals,
+#trainer_bio {
+  width: 90%;
+  margin-top: 4px;
+  padding: 8px 14px;
+  border-radius: 5px;
+  border-bottom: 3px solid var(--blue_main);
+  border-top: 3px solid var(--green_main);
+  font-size: 15px;
+  resize: none;
+}
+
+.bioForm input[type="submit"] {
+  width: 150px;
+  height: 32px;
+  margin-top: 16px;
+  margin-bottom: 32px;
+  background-color: var(--blue_main);
+  color: white;
+  font-weight: 500;
+  border-radius: 4px;
+  box-shadow: var(--shadow_harsh_1);
+  
+  /*border: 1px solid red;*/
+}
+
+
+
+
+
+
+
+
